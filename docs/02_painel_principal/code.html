@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#6a7d90",
+                        "background-light": "#f7f7f7",
+                        "background-dark": "#17191b",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<title>BIM Concierge Dashboard</title>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased overflow-x-hidden">
+<div class="relative flex min-h-screen w-full flex-col">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between border-b border-primary/20 bg-background-light dark:bg-background-dark px-6 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-3">
+<div class="flex items-center justify-center p-2 rounded-lg bg-primary text-white">
+<span class="material-symbols-outlined">architecture</span>
+</div>
+<div>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight">BIM Concierge</h2>
+<p class="text-xs text-primary/80 font-medium uppercase tracking-wider">Intelligent Revit Assistant</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex items-center bg-primary/10 dark:bg-primary/20 rounded-lg px-3 py-1.5 border border-primary/20">
+<span class="material-symbols-outlined text-primary text-sm mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm p-0 placeholder:text-primary/60 w-48" placeholder="Search standards..." type="text"/>
+</div>
+<div class="flex gap-2">
+<button class="p-2 rounded-lg hover:bg-primary/10 text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 rounded-lg hover:bg-primary/10 text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+<div class="h-8 w-8 rounded-full bg-primary/30 border border-primary/50 overflow-hidden" data-alt="User profile avatar placeholder">
+<img alt="User" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBT6jX-Wi19QS89mGJtL6z5Klf6P54Pf57Ph-U6Qz-SW4CvZgUcgyNF1P8lP47ACth22Ir1kybKsmZyaxGYZQ07T7-2R7hl-7LaIhYMCoW2qAqYNH_UNR8GcpbtTEEhsUekz7QHsXrpviDv9FNjSLfdSpGd-7sp2DtF6au1i6Thqi98FkAPqGEA2u74Pw8MCOwkE7nwSVpzK-JkAtWpIewTOWutdm9kqSMN2aWwPLADSb2CYh-0AAPIUMKDSU7cBHzhZFF8ATU_CpU"/>
+</div>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<!-- Sidebar Navigation -->
+<nav class="w-20 lg:w-64 border-r border-primary/10 bg-background-light dark:bg-background-dark flex flex-col justify-between py-6">
+<div class="flex flex-col gap-2 px-3">
+<a class="flex items-center gap-3 px-3 py-3 rounded-xl bg-primary text-white shadow-lg shadow-primary/20 transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="hidden lg:block font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-primary/10 transition-all" href="#">
+<span class="material-symbols-outlined">rule</span>
+<span class="hidden lg:block font-medium">Standards</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-primary/10 transition-all" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="hidden lg:block font-medium">Guides</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-primary/10 transition-all" href="#">
+<span class="material-symbols-outlined">school</span>
+<span class="hidden lg:block font-medium">Training</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-primary/10 transition-all" href="#">
+<span class="material-symbols-outlined">support_agent</span>
+<span class="hidden lg:block font-medium">Support</span>
+</a>
+</div>
+<div class="px-4">
+<div class="bg-primary/10 dark:bg-primary/20 rounded-xl p-4 hidden lg:block border border-primary/10">
+<div class="flex items-center justify-between mb-2">
+<span class="text-xs font-bold text-primary">TRAINING LEVEL</span>
+<span class="text-xs font-bold text-slate-900 dark:text-slate-100">72%</span>
+</div>
+<div class="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[72%]"></div>
+</div>
+<p class="text-[10px] text-slate-500 dark:text-slate-400 mt-2 uppercase tracking-tighter">Next Milestone: BIM Lead</p>
+</div>
+<button class="w-full mt-4 flex items-center justify-center lg:justify-start gap-2 text-red-500 hover:bg-red-500/10 p-3 rounded-xl transition-all">
+<span class="material-symbols-outlined">logout</span>
+<span class="hidden lg:block font-medium">Log out</span>
+</button>
+</div>
+</nav>
+<!-- Main Dashboard Area -->
+<main class="flex-1 p-6 overflow-y-auto bg-slate-50 dark:bg-background-dark/50">
+<div class="max-w-6xl mx-auto space-y-6">
+<!-- Top Status Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Assistant Status -->
+<div class="col-span-1 md:col-span-2 flex flex-col items-start justify-between gap-4 rounded-xl border border-primary/20 bg-background-light dark:bg-background-dark p-6 shadow-sm">
+<div class="flex items-start justify-between w-full">
+<div class="flex items-center gap-3">
+<div class="p-3 bg-primary/20 rounded-full animate-pulse">
+<span class="material-symbols-outlined text-primary">sensors</span>
+</div>
+<div>
+<h3 class="text-slate-900 dark:text-slate-100 text-lg font-bold">Assistant Active</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm">Monitoring Revit session for real-time compliance.</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 dark:bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="flex gap-4 mt-2">
+<div class="flex items-center gap-1.5 text-xs font-medium text-emerald-500 bg-emerald-500/10 px-2 py-1 rounded">
+<span class="size-2 bg-emerald-500 rounded-full"></span>
+                                    Connected to Revit 2024
+                                </div>
+<div class="flex items-center gap-1.5 text-xs font-medium text-primary bg-primary/10 px-2 py-1 rounded">
+<span class="material-symbols-outlined text-[14px]">history</span>
+                                    Synced 2m ago
+                                </div>
+</div>
+</div>
+<!-- Progress Circle Card -->
+<div class="rounded-xl border border-primary/20 bg-background-light dark:bg-background-dark p-6 shadow-sm flex flex-col items-center justify-center text-center">
+<div class="relative flex items-center justify-center mb-3">
+<svg class="w-24 h-24 transform -rotate-90">
+<circle class="text-slate-200 dark:text-slate-800" cx="48" cy="48" fill="transparent" r="40" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-primary" cx="48" cy="48" fill="transparent" r="40" stroke="currentColor" stroke-dasharray="251.2" stroke-dashoffset="70.3" stroke-width="8"></circle>
+</svg>
+<span class="absolute text-xl font-bold text-slate-900 dark:text-slate-100">72%</span>
+</div>
+<h4 class="font-bold text-slate-900 dark:text-slate-100">User Proficiency</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400">Advanced Modeler Rank</p>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Current task: Step-by-Step Guide -->
+<div class="lg:col-span-2 space-y-6">
+<div class="rounded-xl border border-primary/20 bg-background-light dark:bg-background-dark overflow-hidden shadow-sm">
+<div class="bg-primary/10 px-6 py-4 border-b border-primary/10 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">auto_stories</span>
+<h3 class="text-slate-900 dark:text-slate-100 font-bold">Step-by-Step Guide: Modeling Walls</h3>
+</div>
+<span class="text-xs bg-primary text-white px-2 py-0.5 rounded-full font-bold">TASK 02/05</span>
+</div>
+<div class="p-6 space-y-4">
+<div class="flex gap-4">
+<div class="flex flex-col items-center">
+<div class="size-8 rounded-full bg-emerald-500 text-white flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">check</span>
+</div>
+<div class="w-0.5 h-8 bg-emerald-500/30"></div>
+</div>
+<div class="pb-2">
+<p class="font-semibold text-slate-900 dark:text-slate-100">Select Wall Type</p>
+<p class="text-sm text-slate-500 dark:text-slate-400">Ensure it matches project nomenclature (e.g., EXT_WALL_01)</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex flex-col items-center">
+<div class="size-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-xs ring-4 ring-primary/20">
+                                                2
+                                            </div>
+<div class="w-0.5 h-8 bg-slate-200 dark:bg-slate-700"></div>
+</div>
+<div class="pb-2">
+<p class="font-semibold text-slate-900 dark:text-slate-100">Set Constraints</p>
+<p class="text-sm text-slate-500 dark:text-slate-400">Verify Base Offset is 0.0 and Top Constraint is 'Level 02'</p>
+</div>
+</div>
+<div class="flex gap-4 opacity-50">
+<div class="flex flex-col items-center">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-500 flex items-center justify-center font-bold text-xs">
+                                                3
+                                            </div>
+<div class="w-0.5 h-8 bg-slate-200 dark:bg-slate-700"></div>
+</div>
+<div class="pb-2">
+<p class="font-semibold text-slate-900 dark:text-slate-100">Define Location Line</p>
+<p class="text-sm text-slate-500 dark:text-slate-400">Core Face: Exterior is recommended for this project.</p>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-primary/10 flex justify-between items-center">
+<button class="text-slate-500 hover:text-primary text-sm font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">chevron_left</span> Previous
+                                        </button>
+<button class="bg-primary text-white px-6 py-2 rounded-lg font-bold text-sm shadow-md hover:shadow-lg transition-all flex items-center gap-2">
+                                            Next Step <span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Side Column: Standards & Help -->
+<div class="space-y-6">
+<!-- Project Standards -->
+<div class="rounded-xl border border-primary/20 bg-background-light dark:bg-background-dark p-6 shadow-sm">
+<h3 class="text-slate-900 dark:text-slate-100 font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">assignment_turned_in</span>
+                                    Current Project Standards
+                                </h3>
+<ul class="space-y-3">
+<li class="flex items-center justify-between p-2 rounded-lg hover:bg-primary/5 border border-transparent hover:border-primary/10">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-sm text-primary">check_circle</span>
+<span class="text-sm font-medium">Naming Conventions</span>
+</div>
+<span class="material-symbols-outlined text-slate-400 text-sm">open_in_new</span>
+</li>
+<li class="flex items-center justify-between p-2 rounded-lg hover:bg-primary/5 border border-transparent hover:border-primary/10">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-sm text-primary">check_circle</span>
+<span class="text-sm font-medium">LOD Requirements (300)</span>
+</div>
+<span class="material-symbols-outlined text-slate-400 text-sm">open_in_new</span>
+</li>
+<li class="flex items-center justify-between p-2 rounded-lg hover:bg-primary/5 border border-transparent hover:border-primary/10">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-sm text-primary">check_circle</span>
+<span class="text-sm font-medium">Worksets Setup</span>
+</div>
+<span class="material-symbols-outlined text-slate-400 text-sm">open_in_new</span>
+</li>
+<li class="flex items-center justify-between p-2 rounded-lg hover:bg-primary/5 border border-transparent hover:border-primary/10">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-sm text-primary">check_circle</span>
+<span class="text-sm font-medium">Coordinate System</span>
+</div>
+<span class="material-symbols-outlined text-slate-400 text-sm">open_in_new</span>
+</li>
+</ul>
+<button class="w-full mt-4 py-2 border border-primary/30 text-primary font-bold text-xs uppercase tracking-widest rounded-lg hover:bg-primary hover:text-white transition-all">
+                                    View Full Manual
+                                </button>
+</div>
+<!-- Get Help Button -->
+<div class="rounded-xl bg-slate-900 dark:bg-primary/10 p-6 shadow-xl border border-primary/20 relative overflow-hidden">
+<!-- Abstract pattern background -->
+<div class="absolute inset-0 opacity-10 pointer-events-none" data-alt="Abstract tech circuit pattern">
+<div class="w-full h-full bg-gradient-to-br from-primary via-background-dark to-slate-900"></div>
+</div>
+<div class="relative z-10">
+<h4 class="text-white font-bold text-lg mb-2">Need a Hand?</h4>
+<p class="text-slate-300 text-sm mb-5">Connect with a BIM Coordinator instantly or ask our AI a complex question.</p>
+<button class="w-full bg-primary text-white py-3 rounded-lg font-bold flex items-center justify-center gap-2 hover:bg-primary/90 transition-all shadow-lg shadow-primary/40">
+<span class="material-symbols-outlined">live_help</span>
+                                        Get Help Now
+                                    </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Task History/Recent Activity -->
+<div class="rounded-xl border border-primary/20 bg-background-light dark:bg-background-dark p-6 shadow-sm overflow-hidden">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-slate-900 dark:text-slate-100 font-bold">Session Insights</h3>
+<select class="bg-transparent border-none text-xs text-primary font-bold focus:ring-0 cursor-pointer">
+<option>LAST 24 HOURS</option>
+<option>LAST 7 DAYS</option>
+</select>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+<div class="p-4 rounded-xl bg-primary/5 border border-primary/10">
+<p class="text-slate-500 dark:text-slate-400 text-xs uppercase font-bold tracking-wider mb-1">Items Modeled</p>
+<div class="flex items-end justify-between">
+<span class="text-2xl font-bold text-slate-900 dark:text-slate-100">142</span>
+<span class="text-emerald-500 text-xs font-bold">+12%</span>
+</div>
+</div>
+<div class="p-4 rounded-xl bg-primary/5 border border-primary/10">
+<p class="text-slate-500 dark:text-slate-400 text-xs uppercase font-bold tracking-wider mb-1">Compliant Ops</p>
+<div class="flex items-end justify-between">
+<span class="text-2xl font-bold text-slate-900 dark:text-slate-100">98%</span>
+<span class="text-emerald-500 text-xs font-bold">+2%</span>
+</div>
+</div>
+<div class="p-4 rounded-xl bg-primary/5 border border-primary/10">
+<p class="text-slate-500 dark:text-slate-400 text-xs uppercase font-bold tracking-wider mb-1">Warnings Fixed</p>
+<div class="flex items-end justify-between">
+<span class="text-2xl font-bold text-slate-900 dark:text-slate-100">12</span>
+<span class="text-emerald-500 text-xs font-bold">STABLE</span>
+</div>
+</div>
+<div class="p-4 rounded-xl bg-primary/5 border border-primary/10">
+<p class="text-slate-500 dark:text-slate-400 text-xs uppercase font-bold tracking-wider mb-1">Time Saved</p>
+<div class="flex items-end justify-between">
+<span class="text-2xl font-bold text-slate-900 dark:text-slate-100">45m</span>
+<span class="text-emerald-500 text-xs font-bold">+5m</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,53 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net8.0-windows</TargetFramework>
+        <UseWPF>true</UseWPF>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <AssemblyName>BIMConcierge</AssemblyName>
+        <RootNamespace>BIMConcierge.Plugin</RootNamespace>
+        <PlatformTarget>x64</PlatformTarget>
+        <Configurations>Debug;Release</Configurations>
+        <Platforms>x64</Platforms>
+        <OutputPath>bin\$(Configuration)\</OutputPath>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\BIMConcierge.UI\BIMConcierge.UI.csproj" />
+        <ProjectReference Include="..\BIMConcierge.Core\BIMConcierge.Core.csproj" />
+        <ProjectReference Include="..\BIMConcierge.Infrastructure\BIMConcierge.Infrastructure.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Reference Include="RevitAPI">
+            <HintPath>C:\Program Files\Autodesk\Revit 2026\RevitAPI.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="RevitAPIUI">
+            <HintPath>C:\Program Files\Autodesk\Revit 2026\RevitAPIUI.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
+        <PackageReference Include="Serilog" Version="4.0.2" />
+        <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="Resources\BIMConcierge.addin">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+
+    <Target Name="CopyToRevitAddins" AfterTargets="Build" Condition="'$(Configuration)' == 'Debug'">
+        <PropertyGroup>
+            <RevitAddinsPath>$(APPDATA)\Autodesk\Revit\Addins\2026</RevitAddinsPath>
+        </PropertyGroup>
+        <Copy SourceFiles="@(Content)" DestinationFolder="$(RevitAddinsPath)" SkipUnchangedFiles="true" />
+        <Copy SourceFiles="$(OutputPath)BIMConcierge.dll" DestinationFolder="$(RevitAddinsPath)" SkipUnchangedFiles="true" />
+    </Target>
+</Project>

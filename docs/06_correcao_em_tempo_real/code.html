@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BIM Concierge - Real-time Correction</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#6a7d90",
+                        "background-light": "#f7f7f7",
+                        "background-dark": "#17191b",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .sidebar-item-active {
+            background-color: rgba(106, 125, 144, 0.2);
+            border-left: 3px solid #6a7d90;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex h-screen w-full flex-col overflow-hidden">
+<!-- Header -->
+<header class="flex items-center justify-between border-b border-primary/20 bg-background-light dark:bg-background-dark px-6 py-3 shrink-0">
+<div class="flex items-center gap-4">
+<div class="flex items-center justify-center p-2 rounded-lg bg-primary/10">
+<span class="material-symbols-outlined text-primary">architecture</span>
+</div>
+<div>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-tight">BIM Concierge</h2>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium">Revit Add-in V2.4.0</p>
+</div>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-primary/10 hover:bg-primary/20 text-slate-700 dark:text-slate-300 transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-primary/10 hover:bg-primary/20 text-slate-700 dark:text-slate-300 transition-colors">
+<span class="material-symbols-outlined">help</span>
+</button>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="w-64 border-r border-primary/10 bg-background-light dark:bg-background-dark flex flex-col py-6 shrink-0">
+<nav class="flex-1 px-3 space-y-1">
+<div class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 hover:bg-primary/5 transition-colors cursor-pointer">
+<span class="material-symbols-outlined">view_in_ar</span>
+<p class="text-sm font-medium">Model Explorer</p>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 rounded-lg sidebar-item-active text-primary transition-colors cursor-pointer">
+<span class="material-symbols-outlined">warning</span>
+<p class="text-sm font-semibold">Live Issues</p>
+<span class="ml-auto bg-primary text-white text-[10px] px-1.5 py-0.5 rounded-full">3</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 hover:bg-primary/5 transition-colors cursor-pointer">
+<span class="material-symbols-outlined">rule</span>
+<p class="text-sm font-medium">Project Standards</p>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 hover:bg-primary/5 transition-colors cursor-pointer">
+<span class="material-symbols-outlined">analytics</span>
+<p class="text-sm font-medium">Model Health</p>
+</div>
+</nav>
+<div class="px-6 py-4 mt-auto">
+<div class="p-4 rounded-xl bg-primary/5 border border-primary/10">
+<div class="flex items-center justify-between mb-2">
+<span class="text-xs font-semibold text-primary">SYSTEM STATUS</span>
+<span class="h-2 w-2 rounded-full bg-green-500"></span>
+</div>
+<p class="text-[11px] text-slate-500 dark:text-slate-400">Monitoring 24,042 elements in real-time.</p>
+</div>
+</div>
+</aside>
+<!-- Main Workspace: Simulated BIM Model View -->
+<main class="relative flex-1 bg-slate-200 dark:bg-slate-800 overflow-hidden">
+<div class="absolute inset-0 z-0 bg-cover bg-center opacity-80" data-alt="Wireframe 3D architectural model of a modern building interior" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCmjr5XfD1f2LSysyjycUEgDQz95QLV1Urnng131bVG5vT5ShViqOEdeIGmOAi4sH6yRosnom5EpmVqKA91PhHOgvsB2FquAHjFPkzhYhntbM87omDkXpkGOoJJG55kEcMnI7VaoFSPQ4g1i405h8ZKFR0V9hDZyzpaq6dBtMAecmyVinnat_AEsVbsrvtgaDRfSH_FCxnI1ZvXJ3K-M3ZSvtM5ZHyViZGTau8rYx9sjztwkQnXnisBZRT7V_Yu8mkj5qLPiyLLTbQ')">
+<div class="absolute inset-0 bg-gradient-to-tr from-background-dark/80 via-transparent to-transparent"></div>
+</div>
+<!-- Floating Interface Elements -->
+<div class="absolute top-6 right-6 z-10 w-96 flex flex-col gap-4">
+<!-- Automatic Corrections Toggle -->
+<div class="bg-background-light/95 dark:bg-background-dark/95 backdrop-blur shadow-xl rounded-xl border border-primary/20 p-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-primary/10 rounded-lg">
+<span class="material-symbols-outlined text-primary text-sm">auto_fix</span>
+</div>
+<div>
+<p class="text-sm font-bold text-slate-900 dark:text-slate-100">Automatic Corrections</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">Auto-fix trivial standard violations</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-slate-300 dark:bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+<!-- Error Notification List -->
+<div class="space-y-3">
+<!-- Notification 1 -->
+<div class="bg-background-light/95 dark:bg-background-dark/95 backdrop-blur shadow-2xl rounded-xl border-l-4 border-l-red-500 border-primary/10 p-5 transform transition-all hover:scale-[1.02]">
+<div class="flex items-start gap-4">
+<div class="h-10 w-10 shrink-0 flex items-center justify-center rounded-full bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400">
+<span class="material-symbols-outlined">error</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between mb-1">
+<p class="text-sm font-bold text-slate-900 dark:text-slate-100">Error Detected</p>
+<span class="text-[10px] text-slate-400 font-medium">Just now</span>
+</div>
+<p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-3">
+                                        Wall type <code class="bg-primary/10 px-1 rounded text-primary font-mono text-[11px]">EXT_W2_CMU</code> doesn't match project standards for Exterior Shell.
+                                    </p>
+<div class="bg-primary/5 rounded-lg p-2.5 mb-4 border border-primary/10">
+<p class="text-[10px] uppercase tracking-wider text-slate-400 font-bold mb-1">Recommended Standard</p>
+<p class="text-[11px] font-medium text-primary">EXT_W1_Stone_Cladding</p>
+</div>
+<div class="flex items-center justify-between">
+<a class="text-xs font-semibold text-primary hover:underline flex items-center gap-1" href="#">
+                                            Learn Why <span class="material-symbols-outlined text-xs">open_in_new</span>
+</a>
+<div class="flex gap-2">
+<button class="px-3 py-1.5 text-xs font-bold text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors">Ignore</button>
+<button class="px-4 py-1.5 text-xs font-bold bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20 flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">magic_button</span>
+                                                Auto-Fix
+                                            </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Notification 2 (Secondary) -->
+<div class="bg-background-light/90 dark:bg-background-dark/90 backdrop-blur shadow-xl rounded-xl border-l-4 border-l-amber-500 border-primary/10 p-5 opacity-80">
+<div class="flex items-start gap-4">
+<div class="h-10 w-10 shrink-0 flex items-center justify-center rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400">
+<span class="material-symbols-outlined">warning</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between mb-1">
+<p class="text-sm font-bold text-slate-900 dark:text-slate-100">Naming Warning</p>
+<span class="text-[10px] text-slate-400 font-medium">2m ago</span>
+</div>
+<p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                                        Room "Storage_01" violates naming convention (Should be 00_STORAGE).
+                                    </p>
+<div class="mt-3 flex justify-end">
+<button class="px-4 py-1.5 text-xs font-bold bg-primary/20 text-primary rounded-lg hover:bg-primary/30 transition-colors">Rename All</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Viewport HUD -->
+<div class="absolute bottom-6 left-6 z-10 flex gap-2">
+<div class="bg-background-light/80 dark:bg-background-dark/80 backdrop-blur rounded-lg p-2 flex items-center gap-4 border border-primary/10 text-slate-600 dark:text-slate-400 shadow-lg">
+<div class="flex items-center gap-1 border-r border-primary/10 pr-4">
+<span class="material-symbols-outlined text-sm">visibility</span>
+<span class="text-[10px] font-bold">VIEW: 3D_COORDINATION</span>
+</div>
+<div class="flex gap-2">
+<button class="p-1 hover:bg-primary/10 rounded transition-colors"><span class="material-symbols-outlined text-base">zoom_in</span></button>
+<button class="p-1 hover:bg-primary/10 rounded transition-colors"><span class="material-symbols-outlined text-base">rotate_right</span></button>
+<button class="p-1 hover:bg-primary/10 rounded transition-colors"><span class="material-symbols-outlined text-base">measuring_tape</span></button>
+</div>
+</div>
+</div>
+<!-- Selection Inspector (Minimized) -->
+<div class="absolute bottom-6 right-6 z-10">
+<div class="bg-background-light/95 dark:bg-background-dark/95 backdrop-blur rounded-xl border border-primary/20 w-64 shadow-2xl overflow-hidden">
+<div class="bg-primary/10 px-4 py-2 border-b border-primary/10 flex items-center justify-between">
+<span class="text-[10px] font-bold text-primary tracking-widest uppercase">Selection (1)</span>
+<span class="material-symbols-outlined text-xs text-primary cursor-pointer">keyboard_arrow_down</span>
+</div>
+<div class="p-3">
+<p class="text-xs font-bold text-slate-900 dark:text-slate-100 truncate">Basic Wall : EXT_W2_CMU</p>
+<div class="mt-2 grid grid-cols-2 gap-2">
+<div class="bg-slate-100 dark:bg-slate-800 p-2 rounded">
+<p class="text-[9px] text-slate-400">Level</p>
+<p class="text-[10px] font-semibold">Level 01</p>
+</div>
+<div class="bg-slate-100 dark:bg-slate-800 p-2 rounded">
+<p class="text-[9px] text-slate-400">Length</p>
+<p class="text-[10px] font-semibold">4,200 mm</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</body></html>

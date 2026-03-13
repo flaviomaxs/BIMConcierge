@@ -1,0 +1,44 @@
+root = true
+
+[*]
+charset                  = utf-8
+end_of_line              = crlf
+indent_style             = space
+indent_size              = 4
+trim_trailing_whitespace = true
+insert_final_newline     = true
+
+[*.cs]
+# .NET / C# 13 code style
+dotnet_sort_system_directives_first        = true
+dotnet_separate_import_directive_groups    = false
+csharp_using_directive_placement           = outside_namespace
+
+# Naming
+dotnet_naming_style.pascal_case.capitalization          = pascal_case
+dotnet_naming_style.camel_case_underscore.capitalization = camel_case
+dotnet_naming_style.camel_case_underscore.required_prefix = _
+
+dotnet_naming_rule.private_fields_should_use_underscore.symbols  = private_fields
+dotnet_naming_rule.private_fields_should_use_underscore.style    = camel_case_underscore
+dotnet_naming_rule.private_fields_should_use_underscore.severity = suggestion
+
+dotnet_naming_symbols.private_fields.applicable_kinds           = field
+dotnet_naming_symbols.private_fields.applicable_accessibilities = private
+
+# Prefer expression body for single-liners
+csharp_style_expression_bodied_methods     = when_on_single_line:suggestion
+csharp_style_expression_bodied_properties  = true:suggestion
+
+# Prefer 'var' where type is apparent
+csharp_style_var_when_type_is_apparent     = true:suggestion
+csharp_style_var_elsewhere                 = false:suggestion
+
+[*.xaml]
+indent_size = 4
+
+[*.json]
+indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#6a7d90",
+                        "background-light": "#f7f7f7",
+                        "background-dark": "#17191b",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<title>BIM Concierge Login</title>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex items-center justify-center p-4">
+<div class="relative w-full max-w-[1000px] h-[650px] flex overflow-hidden rounded-xl border border-slate-200 dark:border-primary/20 shadow-2xl bg-white dark:bg-[#1c1f22]">
+<div class="hidden md:flex flex-1 relative bg-slate-100 dark:bg-[#141618] items-center justify-center overflow-hidden border-r border-slate-200 dark:border-primary/10">
+<div class="absolute inset-0 opacity-10 dark:opacity-20 pointer-events-none" data-alt="Subtle architectural blueprint and structural grid motif" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDlQuwrN1zS1BxtjGDcYH1sOwUfNeQHAt-m98_KN3KxVhacj2fMX_OaJ4mPcZ5dthtZarv13hACc2nLggNoBNjH_-L6Tq4VHFHMj3wdY3Ra-I_cnsx8ooL6VHmWgqLvAYMGyVKJp43C0TA4pLaCpoYVpmb0Siwc4y9Ha7kYIgURKpIiFRKBLkXw4OZj_Dlt2suSnEDMspC4yp1ZO0j6Gi5_mLyrOyqc8c48D0Fi9GYkmnAhFZVq0ycWnQU9FmyLOsnm58tYbL0H6HI"); background-size: cover; background-position: center;'>
+</div>
+<div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent"></div>
+<div class="relative z-10 p-12 text-center">
+<div class="mb-8 flex justify-center">
+<div class="size-20 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/40">
+<span class="material-symbols-outlined text-white text-5xl">architecture</span>
+</div>
+</div>
+<h1 class="text-3xl font-black tracking-tight mb-4 text-slate-900 dark:text-white">BIM Concierge</h1>
+<p class="text-slate-600 dark:text-slate-400 text-lg max-w-xs mx-auto">Precision-engineered for Revit 2026</p>
+</div>
+</div>
+<div class="flex-1 flex flex-col p-8 md:p-12 overflow-y-auto bg-white dark:bg-[#1c1f22]">
+<div class="mb-8">
+<h2 class="text-2xl font-bold mb-2">Welcome to your Intelligent BIM Assistant</h2>
+<p class="text-slate-500 dark:text-primary/70 text-sm">Please enter your credentials to access the Revit plugin tools.</p>
+</div>
+<form class="space-y-5">
+<div>
+<label class="block text-sm font-medium mb-1.5 text-slate-700 dark:text-slate-300">Email Address</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl">mail</span>
+<input class="w-full pl-10 pr-4 py-3 rounded-lg border border-slate-200 dark:border-primary/20 bg-slate-50 dark:bg-background-dark focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all outline-none" placeholder="name@company.com" type="email"/>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium mb-1.5 text-slate-700 dark:text-slate-300">Password</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl">lock</span>
+<input class="w-full pl-10 pr-12 py-3 rounded-lg border border-slate-200 dark:border-primary/20 bg-slate-50 dark:bg-background-dark focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all outline-none" placeholder="••••••••" type="password"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-primary" type="button">
+<span class="material-symbols-outlined text-xl">visibility</span>
+</button>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium mb-1.5 text-slate-700 dark:text-slate-300">License Key</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl">vpn_key</span>
+<input class="w-full pl-10 pr-4 py-3 rounded-lg border border-slate-200 dark:border-primary/20 bg-slate-50 dark:bg-background-dark focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all outline-none" placeholder="XXXX-XXXX-XXXX-XXXX" type="text"/>
+</div>
+</div>
+<div class="flex items-center justify-between py-2">
+<label class="flex items-center gap-2 cursor-pointer group">
+<div class="relative">
+<input class="peer sr-only" type="checkbox"/>
+<div class="w-10 h-5 bg-slate-300 dark:bg-primary/20 rounded-full peer-checked:bg-primary transition-colors"></div>
+<div class="absolute left-1 top-1 w-3 h-3 bg-white rounded-full peer-checked:translate-x-5 transition-transform"></div>
+</div>
+<span class="text-sm text-slate-600 dark:text-slate-400">Remember Me</span>
+</label>
+<a class="text-sm font-semibold text-primary hover:underline" href="#">Forgot?</a>
+</div>
+<button class="w-full py-3.5 bg-primary hover:bg-primary/90 text-white font-bold rounded-lg shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-2" type="submit">
+                    Login to Plugin
+                    <span class="material-symbols-outlined">login</span>
+</button>
+</form>
+<div class="mt-auto pt-8 text-center">
+<p class="text-sm text-slate-500 dark:text-slate-400">
+                    Don't have an active license? 
+                    <a class="text-primary font-bold hover:underline ml-1" href="#">Request Access</a>
+</p>
+</div>
+</div>
+</div>
+</body></html>

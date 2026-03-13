@@ -1,0 +1,21 @@
+<Project>
+  <PropertyGroup>
+    <!-- Shared properties across all projects in the solution -->
+    <LangVersion>13</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <AnalysisMode>Recommended</AnalysisMode>
+    <!-- Suppress missing XML doc comments (CS1591) em todos os projetos -->
+    <NoWarn>$(NoWarn);1591</NoWarn>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+
+    <!-- Product metadata -->
+    <Product>BIM Concierge</Product>
+    <Company>BIM Concierge</Company>
+    <Copyright>Copyright © BIM Concierge 2026</Copyright>
+    <Version>1.0.0</Version>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+  </PropertyGroup>
+</Project>

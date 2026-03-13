@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#6a7d90",
+                        "background-light": "#f7f7f7",
+                        "background-dark": "#17191b",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<title>BIM Concierge - Onboarding</title>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+<div class="relative flex h-auto min-h-screen w-full flex-col bg-background-light dark:bg-background-dark overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<div class="px-4 md:px-20 lg:px-40 flex flex-1 justify-center py-5 md:py-10">
+<div class="layout-content-container flex flex-col max-w-[960px] flex-1 bg-white dark:bg-slate-900/50 rounded-xl shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+<!-- Top Navigation / Header -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 px-6 py-4">
+<div class="flex items-center gap-3 text-slate-900 dark:text-slate-100">
+<div class="size-8 flex items-center justify-center bg-primary rounded-lg text-white">
+<span class="material-symbols-outlined">architecture</span>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-tight">BIM Concierge</h2>
+</div>
+<button class="flex items-center justify-center rounded-full h-10 w-10 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</header>
+<!-- Progress Section -->
+<div class="flex flex-col gap-3 p-6 bg-slate-50/50 dark:bg-slate-800/30">
+<div class="flex gap-6 justify-between items-center">
+<p class="text-slate-700 dark:text-slate-300 text-sm font-semibold uppercase tracking-wider">Onboarding Progress</p>
+<p class="text-primary text-sm font-bold">Step 1 of 4</p>
+</div>
+<div class="w-full h-2 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">
+<div class="h-full bg-primary rounded-full transition-all duration-500" style="width: 25%;"></div>
+</div>
+</div>
+<!-- Main Content -->
+<div class="flex flex-col flex-1 p-6 md:p-10">
+<h1 class="text-slate-900 dark:text-slate-100 tracking-tight text-3xl md:text-4xl font-extrabold text-center mb-2">Let's get started</h1>
+<p class="text-slate-500 dark:text-slate-400 text-center text-lg mb-8 max-w-2xl mx-auto">Welcome to the future of BIM management. We'll help you set up your first automated workflow in minutes.</p>
+<!-- Tool Integration Preview -->
+<div class="flex w-full bg-slate-100 dark:bg-slate-800 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 mb-8 shadow-inner">
+<div class="relative w-full aspect-video md:aspect-[21/9] flex items-center justify-center bg-gradient-to-br from-slate-200 to-slate-300 dark:from-slate-800 dark:to-slate-900">
+<div class="absolute inset-0 opacity-40 mix-blend-overlay bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
+<div class="z-10 w-4/5 h-4/5 bg-white dark:bg-slate-950 rounded shadow-2xl border border-slate-300 dark:border-slate-800 flex flex-col">
+<div class="h-8 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 flex items-center px-3 gap-2">
+<div class="size-2 rounded-full bg-red-400"></div>
+<div class="size-2 rounded-full bg-yellow-400"></div>
+<div class="size-2 rounded-full bg-green-400"></div>
+<div class="ml-4 h-4 w-32 bg-slate-200 dark:bg-slate-800 rounded-sm"></div>
+</div>
+<div class="flex flex-1">
+<div class="w-16 border-r border-slate-200 dark:border-slate-800 p-2 flex flex-col gap-2">
+<div class="h-8 w-full bg-primary/20 rounded"></div>
+<div class="h-8 w-full bg-slate-100 dark:bg-slate-800 rounded"></div>
+<div class="h-8 w-full bg-slate-100 dark:bg-slate-800 rounded"></div>
+</div>
+<div class="flex-1 p-4 flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div class="space-y-2">
+<div class="h-4 w-48 bg-slate-200 dark:bg-slate-800 rounded"></div>
+<div class="h-3 w-32 bg-slate-100 dark:bg-slate-700 rounded"></div>
+</div>
+<div class="px-3 py-1 bg-green-500/10 text-green-500 text-[10px] font-bold rounded border border-green-500/20">PASSED</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="h-20 bg-slate-50 dark:bg-slate-900/50 border border-dashed border-slate-300 dark:border-slate-700 rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-300 dark:text-slate-700 text-3xl">view_in_ar</span>
+</div>
+<div class="h-20 bg-slate-50 dark:bg-slate-900/50 border border-dashed border-slate-300 dark:border-slate-700 rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-300 dark:text-slate-700 text-3xl">analytics</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="absolute bottom-4 right-4 bg-primary text-white p-2 rounded shadow-lg flex items-center gap-2 text-xs font-bold animate-pulse">
+<span class="material-symbols-outlined text-sm">bolt</span>
+                                    BIM Concierge Active
+                                </div>
+</div>
+</div>
+<!-- Explanatory Text -->
+<div class="text-center space-y-3">
+<h2 class="text-slate-900 dark:text-slate-100 text-2xl font-bold leading-tight">Automatic Standard Checking</h2>
+<p class="text-slate-600 dark:text-slate-400 leading-relaxed max-w-xl mx-auto">
+                                Our Revit integration automatically scans your models against industry standards (ISO 19650) and your custom office protocols. Identify inconsistencies before they become costly errors.
+                            </p>
+</div>
+</div>
+<!-- Footer Actions -->
+<div class="mt-auto border-t border-slate-200 dark:border-slate-800 p-6 flex items-center justify-between bg-slate-50/50 dark:bg-slate-900/80">
+<button class="px-6 py-2 text-slate-500 dark:text-slate-400 font-semibold hover:text-slate-700 dark:hover:text-slate-200 transition-colors">
+                            Skip for now
+                        </button>
+<div class="flex gap-4">
+<button class="px-6 py-2.5 rounded-lg border border-slate-300 dark:border-slate-700 font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                                Previous
+                            </button>
+<button class="px-10 py-2.5 rounded-lg bg-primary text-white font-bold hover:brightness-110 shadow-lg shadow-primary/25 transition-all flex items-center gap-2">
+                                Next
+                                <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body></html>

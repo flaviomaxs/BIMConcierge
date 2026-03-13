@@ -1,0 +1,14 @@
+{
+  "version": "1.0",
+  "components": [
+    "Microsoft.VisualStudio.Workload.ManagedDesktop",
+    "Microsoft.Net.Component.8.0.SDK",
+    "Microsoft.VisualStudio.Component.NuGet",
+    "Microsoft.VisualStudio.Component.Roslyn.Compiler",
+    "Microsoft.VisualStudio.Component.Roslyn.LanguageServices",
+    "Microsoft.VisualStudio.Component.FSharp",
+    "Microsoft.VisualStudio.ComponentGroup.UWP.Support",
+    "Microsoft.VisualStudio.Component.MSODBC.SQL",
+    "Microsoft.VisualStudio.Component.SQLLocalDB"
+  ]
+}
