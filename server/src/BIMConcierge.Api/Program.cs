@@ -8,6 +8,12 @@ using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// ── JSON PascalCase (plugin usa Newtonsoft.Json que espera PascalCase) ───────
+builder.Services.ConfigureHttpJsonOptions(options =>
+{
+    options.SerializerOptions.PropertyNamingPolicy = null;
+});
+
 // ── EF Core + PostgreSQL ────────────────────────────────────────────────────
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -63,7 +69,7 @@ if (app.Environment.IsDevelopment())
 app.MapGroup("/v1/auth").MapAuthEndpoints();
 app.MapGroup("/v1/licenses").MapLicenseEndpoints().RequireAuthorization();
 app.MapGroup("/v1/tutorials").MapTutorialEndpoints().RequireAuthorization();
-app.MapGroup("/v1/progress").MapProgressEndpoints().RequireAuthorization();
+app.MapGroup("/v1").MapProgressEndpoints().RequireAuthorization();
 app.MapGroup("/v1/standards").MapStandardsEndpoints().RequireAuthorization();
 
 // ── Auto-migrate in development (skip for InMemory provider in tests) ───────
