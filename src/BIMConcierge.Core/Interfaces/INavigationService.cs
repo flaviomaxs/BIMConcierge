@@ -7,4 +7,5 @@ namespace BIMConcierge.Core.Interfaces;
 public interface INavigationService
 {
     void NavigateTo(string windowName);
+    void NavigateTo(string windowName, object? parameter);
 }

@@ -11,6 +11,7 @@ public partial class TutorialViewModel : ObservableObject, IDisposable
     private readonly ITutorialService       _service;
     private readonly IAuthService           _auth;
     private readonly IRevitEventDispatcher  _dispatcher;
+    private readonly INavigationService    _navigation;
 
     private CancellationTokenSource _cts = new();
 
@@ -21,11 +22,52 @@ public partial class TutorialViewModel : ObservableObject, IDisposable
     [ObservableProperty] private bool           isCompleted;
     [ObservableProperty] private bool           isBusy;
 
-    public TutorialViewModel(ITutorialService service, IAuthService auth, IRevitEventDispatcher dispatcher)
+    /// <summary>"Passo 2 de 8"</summary>
+    public string StepLabel => $"Passo {CurrentStepIndex + 1} de {Tutorial?.StepCount ?? 0}";
+
+    /// <summary>"35%"</summary>
+    public string ProgressLabel => $"{ProgressPercent:0}%";
+
+    /// <summary>Computed: "Categoria" badge text (e.g. "ARQUITETURA").</summary>
+    public string CategoryLabel => Tutorial?.Category?.ToUpperInvariant() ?? string.Empty;
+
+    /// <summary>Computed: "INTERMEDIÁRIO" difficulty badge.</summary>
+    public string DifficultyLabel => Tutorial?.Difficulty?.ToUpperInvariant() ?? string.Empty;
+
+    /// <summary>Computed: "45 MINUTOS".</summary>
+    public string DurationLabel => $"{Tutorial?.DurationMins ?? 0} MINUTOS";
+
+    /// <summary>Computed: "8 PASSOS".</summary>
+    public string StepCountLabel => $"{Tutorial?.StepCount ?? 0} PASSOS";
+
+    [ObservableProperty] private int     completedSteps;
+    [ObservableProperty] private double  savedProgressPercent;
+
+    public TutorialViewModel(ITutorialService service, IAuthService auth, IRevitEventDispatcher dispatcher, INavigationService navigation)
     {
         _service    = service;
         _auth       = auth;
         _dispatcher = dispatcher;
+        _navigation = navigation;
+    }
+
+    partial void OnCurrentStepIndexChanged(int value)
+    {
+        OnPropertyChanged(nameof(StepLabel));
+    }
+
+    partial void OnProgressPercentChanged(double value)
+    {
+        OnPropertyChanged(nameof(ProgressLabel));
+    }
+
+    partial void OnTutorialChanged(Tutorial? value)
+    {
+        OnPropertyChanged(nameof(StepLabel));
+        OnPropertyChanged(nameof(CategoryLabel));
+        OnPropertyChanged(nameof(DifficultyLabel));
+        OnPropertyChanged(nameof(DurationLabel));
+        OnPropertyChanged(nameof(StepCountLabel));
     }
 
     public async Task LoadTutorialAsync(string tutorialId)
@@ -41,7 +83,9 @@ public partial class TutorialViewModel : ObservableObject, IDisposable
         // Restore saved progress
         var userId   = _auth.CurrentUser?.Id ?? string.Empty;
         var progress = await _service.GetProgressAsync(userId, tutorialId);
-        CurrentStepIndex = progress?.CurrentStep ?? 0;
+        CompletedSteps       = progress?.CurrentStep ?? 0;
+        SavedProgressPercent = progress?.ProgressPercent ?? 0;
+        CurrentStepIndex     = CompletedSteps;
         GoToStep(CurrentStepIndex);
     }
 
@@ -93,6 +137,14 @@ public partial class TutorialViewModel : ObservableObject, IDisposable
             };
             concrete.ValidateElements(elements);
         }
+    }
+
+    /// <summary>Opens the GuidedTutorialWindow for the currently loaded tutorial.</summary>
+    [RelayCommand]
+    private void StartTutorial()
+    {
+        if (Tutorial is null) return;
+        _navigation.NavigateTo("GuidedTutorial", Tutorial.Id);
     }
 
     private void CancelPending()

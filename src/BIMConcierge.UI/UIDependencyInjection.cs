@@ -12,6 +12,9 @@ public static class UIDependencyInjection
         // Navigation
         services.AddSingleton<INavigationService, NavigationService>();
 
+        // Correction alert pop-ups (subscribes to RevitEventDispatcher.CorrectionRaised)
+        services.AddSingleton<CorrectionAlertService>();
+
         // ViewModels
         services.AddTransient<LoginViewModel>();
         services.AddTransient<DashboardViewModel>();
@@ -19,6 +22,7 @@ public static class UIDependencyInjection
         services.AddTransient<CompanyStandardsViewModel>();
         services.AddTransient<StudentProgressViewModel>();
         services.AddTransient<AchievementsViewModel>();
+        services.AddTransient<CorrectionAlertViewModel>();
         return services;
     }
 }

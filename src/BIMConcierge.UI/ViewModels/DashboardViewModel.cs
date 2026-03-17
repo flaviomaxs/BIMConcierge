@@ -93,7 +93,13 @@ public partial class DashboardViewModel : ObservableObject, IDisposable
     private void SelectTutorial(Tutorial t)
     {
         SelectedTutorial = t;
-        ActiveSection    = "TutorialDetail";
+        _navigation.NavigateTo("TutorialDetail", t.Id);
+    }
+
+    [RelayCommand]
+    private void OpenGuidedTutorial(Tutorial t)
+    {
+        _navigation.NavigateTo("GuidedTutorial", t.Id);
     }
 
     // ── Progress ─────────────────────────────────────────────────────────────

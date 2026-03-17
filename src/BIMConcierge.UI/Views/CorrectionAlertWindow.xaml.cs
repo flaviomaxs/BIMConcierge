@@ -1,17 +1,22 @@
-using System;
 using System.Windows;
 using System.Windows.Input;
-// using BIMConcierge.UI.ViewModels; // Descomente quando criar o ViewModel desta tela
+using BIMConcierge.Core.Models;
+using BIMConcierge.UI.ViewModels;
 
 namespace BIMConcierge.UI.Views;
 
 public partial class CorrectionAlertWindow : Window
 {
-    public CorrectionAlertWindow()
+    private readonly CorrectionAlertViewModel _vm;
+
+    public CorrectionAlertWindow(CorrectionAlertViewModel viewModel)
     {
         InitializeComponent();
+        _vm = viewModel;
+        DataContext = viewModel;
 
-        // Lógica para posicionar a notificação no canto INFERIOR DIREITO da tela
+        viewModel.OnDismiss = () => this.Close();
+
         this.Loaded += (s, e) =>
         {
             var desktopWorkingArea = SystemParameters.WorkArea;
@@ -20,16 +25,20 @@ public partial class CorrectionAlertWindow : Window
         };
     }
 
-    // Permite que o usuário arraste o alerta caso ele esteja cobrindo algo importante no Revit
+    /// <summary>
+    /// Called before Show() to populate the ViewModel with the correction event.
+    /// </summary>
+    public void Initialize(CorrectionEvent correction)
+    {
+        _vm.Initialize(correction);
+    }
+
     private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
         if (e.ButtonState == MouseButtonState.Pressed)
-        {
             this.DragMove();
-        }
     }
 
-    // Fecha o alerta (usado tanto no "X" quanto no botão "Ignorar")
     private void BtnClose_Click(object sender, RoutedEventArgs e)
     {
         this.Close();

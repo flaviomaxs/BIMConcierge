@@ -6,9 +6,12 @@ namespace BIMConcierge.UI.Views;
 
 public partial class GuidedTutorialWindow : Window
 {
+    private readonly TutorialViewModel _vm;
+
     public GuidedTutorialWindow(TutorialViewModel viewModel)
     {
         InitializeComponent();
+        _vm = viewModel;
         DataContext = viewModel;
 
         this.Loaded += (s, e) =>
@@ -17,6 +20,14 @@ public partial class GuidedTutorialWindow : Window
             this.Left = desktopWorkingArea.Right - this.Width - 50;
             this.Top = desktopWorkingArea.Top + 100;
         };
+    }
+
+    /// <summary>
+    /// Called by NavigationService to load a specific tutorial before showing the window.
+    /// </summary>
+    public async void InitializeTutorial(string tutorialId)
+    {
+        await _vm.LoadTutorialAsync(tutorialId);
     }
 
     private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

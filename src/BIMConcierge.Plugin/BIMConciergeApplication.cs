@@ -27,6 +27,9 @@ public class BIMConciergeApplication : IExternalApplication
             ServiceProvider = BuildServiceProvider();
             RibbonBuilder.Build(application);
 
+            // Eagerly resolve the correction alert service so it subscribes to events immediately
+            ServiceProvider.GetRequiredService<BIMConcierge.UI.Services.CorrectionAlertService>();
+
             Log.Information("BIMConcierge loaded successfully");
             return Result.Succeeded;
         }
@@ -62,6 +65,7 @@ public class BIMConciergeApplication : IExternalApplication
         services.AddTransient<BIMConcierge.UI.Views.CompanyStandardsWindow>();
         services.AddTransient<BIMConcierge.UI.Views.StudentProgressWindow>();
         services.AddTransient<BIMConcierge.UI.Views.AchievementsWindow>();
+        services.AddTransient<BIMConcierge.UI.Views.CorrectionAlertWindow>();
 
         return services.BuildServiceProvider();
     }
