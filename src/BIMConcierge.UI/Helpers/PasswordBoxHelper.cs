@@ -41,7 +41,7 @@ public static class PasswordBoxHelper
         if (sender is not PasswordBox pb) return;
 
         _updating = true;
-        SetBoundPassword(pb, pb.Password);
+        pb.SetCurrentValue(BoundPasswordProperty, pb.Password);
         _updating = false;
     }
 }

@@ -1,4 +1,5 @@
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using BIMConcierge.UI.ViewModels;
 
@@ -16,6 +17,12 @@ public partial class LoginWindow : Window
             this.DialogResult = true;
             this.Close();
         };
+    }
+
+    private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+    {
+        if (DataContext is LoginViewModel vm && sender is PasswordBox pb)
+            vm.Password = pb.Password;
     }
 
     private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

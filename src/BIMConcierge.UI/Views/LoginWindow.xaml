@@ -80,7 +80,7 @@
 
                     <TextBlock Text="Senha" Foreground="#94A3B8" FontSize="13" FontWeight="SemiBold" Margin="0,0,0,8"/>
                     <Border Background="#1E293B" CornerRadius="8" BorderBrush="#334155" BorderThickness="1" Margin="0,0,0,20" Height="45">
-                        <PasswordBox helpers:PasswordBoxHelper.BoundPassword="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        <PasswordBox PasswordChanged="PasswordBox_PasswordChanged"
                                      Background="Transparent" Foreground="White" BorderThickness="0"
                                      VerticalContentAlignment="Center" Padding="15,0" FontSize="14"/>
                     </Border>

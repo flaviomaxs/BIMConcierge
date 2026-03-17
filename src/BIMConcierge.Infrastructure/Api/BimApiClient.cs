@@ -20,7 +20,7 @@ public static class ApiSettings
     // Override via environment variable BIMCONCIERGE_API_URL for on-premise deployments
     public static string BaseUrl =>
         Environment.GetEnvironmentVariable("BIMCONCIERGE_API_URL")
-        ?? "https://api.bimconcierge.io/v1/";
+        ?? "https://bimconcierge.onrender.com/v1/";
 }
 
 public class BimApiClient : IBimApiClient
