@@ -1,0 +1,149 @@
+using System.Collections.ObjectModel;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using BIMConcierge.Core.Interfaces;
+using BIMConcierge.Core.Models;
+
+namespace BIMConcierge.UI.ViewModels;
+
+public partial class TutorialLibraryViewModel : ObservableObject, IDisposable
+{
+    private readonly ITutorialService   _tutorials;
+    private readonly IProgressService   _progress;
+    private readonly IAuthService       _auth;
+    private readonly INavigationService _navigation;
+
+    private CancellationTokenSource _cts = new();
+
+    [ObservableProperty] private bool   isBusy;
+    [ObservableProperty] private string errorMessage    = string.Empty;
+    [ObservableProperty] private string searchQuery     = string.Empty;
+    [ObservableProperty] private string selectedCategory = "Todos";
+
+    /// <summary>All tutorials loaded from the API (unfiltered).</summary>
+    private readonly List<Tutorial> _allTutorials = [];
+
+    /// <summary>Filtered tutorials bound to the UI card grid.</summary>
+    public ObservableCollection<Tutorial> Tutorials { get; } = [];
+
+    /// <summary>Progress keyed by TutorialId for card display.</summary>
+    public Dictionary<string, TutorialProgress> ProgressMap { get; } = [];
+
+    public TutorialLibraryViewModel(
+        ITutorialService tutorials,
+        IProgressService progress,
+        IAuthService auth,
+        INavigationService navigation)
+    {
+        _tutorials  = tutorials;
+        _progress   = progress;
+        _auth       = auth;
+        _navigation = navigation;
+    }
+
+    // ── Load ────────────────────────────────────────────────────────────────
+
+    [RelayCommand]
+    private async Task LoadAsync()
+    {
+        CancelPending();
+        var ct = _cts.Token;
+
+        IsBusy = true;
+        try
+        {
+            ErrorMessage = string.Empty;
+
+            var tutorialsTask = _tutorials.GetAllAsync();
+            var userId = _auth.CurrentUser?.Id ?? string.Empty;
+            var progressTask = string.IsNullOrEmpty(userId)
+                ? Task.FromResult(new List<TutorialProgress>())
+                : _progress.GetUserProgressAsync(userId);
+
+            await Task.WhenAll(tutorialsTask, progressTask);
+            ct.ThrowIfCancellationRequested();
+
+            _allTutorials.Clear();
+            _allTutorials.AddRange(tutorialsTask.Result);
+
+            ProgressMap.Clear();
+            foreach (var p in progressTask.Result)
+                ProgressMap[p.TutorialId] = p;
+
+            ApplyFilter();
+        }
+        catch (OperationCanceledException) { /* expected */ }
+        catch (Exception ex)
+        {
+            ErrorMessage = $"Erro ao carregar tutoriais: {ex.Message}";
+        }
+        finally { IsBusy = false; }
+    }
+
+    // ── Filter ──────────────────────────────────────────────────────────────
+
+    [RelayCommand]
+    private void SetFilter(string category)
+    {
+        SelectedCategory = category;
+        ApplyFilter();
+    }
+
+    partial void OnSearchQueryChanged(string value) => ApplyFilter();
+
+    private void ApplyFilter()
+    {
+        var filtered = _allTutorials.AsEnumerable();
+
+        if (!string.IsNullOrEmpty(SelectedCategory) && SelectedCategory != "Todos")
+        {
+            filtered = filtered.Where(t =>
+                t.Category.Contains(SelectedCategory, StringComparison.OrdinalIgnoreCase));
+        }
+
+        if (!string.IsNullOrWhiteSpace(SearchQuery))
+        {
+            var query = SearchQuery;
+            filtered = filtered.Where(t =>
+                t.Title.Contains(query, StringComparison.OrdinalIgnoreCase) ||
+                t.Description.Contains(query, StringComparison.OrdinalIgnoreCase));
+        }
+
+        Tutorials.Clear();
+        foreach (var t in filtered)
+            Tutorials.Add(t);
+    }
+
+    // ── Navigation ──────────────────────────────────────────────────────────
+
+    [RelayCommand]
+    private void OpenTutorial(Tutorial tutorial)
+    {
+        _navigation.NavigateTo("TutorialDetail", tutorial.Id);
+    }
+
+    [RelayCommand]
+    private void OpenWindow(string windowName) => _navigation.NavigateTo(windowName);
+
+    // ── Helpers ─────────────────────────────────────────────────────────────
+
+    public TutorialProgress? GetProgress(string tutorialId)
+    {
+        ProgressMap.TryGetValue(tutorialId, out var p);
+        return p;
+    }
+
+    private void CancelPending()
+    {
+        _cts.Cancel();
+        _cts.Dispose();
+        _cts = new CancellationTokenSource();
+    }
+
+    public void Dispose()
+    {
+        _cts.Cancel();
+        _cts.Dispose();
+        GC.SuppressFinalize(this);
+    }
+}

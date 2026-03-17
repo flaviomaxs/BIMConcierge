@@ -1,13 +1,16 @@
 using System.Windows;
 using System.Windows.Input;
+using BIMConcierge.UI.ViewModels;
 
 namespace BIMConcierge.UI.Views;
 
 public partial class TutorialLibraryWindow : Window
 {
-    public TutorialLibraryWindow()
+    public TutorialLibraryWindow(TutorialLibraryViewModel viewModel)
     {
         InitializeComponent();
+        DataContext = viewModel;
+        Loaded += (_, _) => viewModel.LoadCommand.Execute(null);
     }
 
     // Permite que o usuário arraste a janela clicando no fundo escuro

@@ -23,6 +23,7 @@ public static class UIDependencyInjection
         services.AddTransient<StudentProgressViewModel>();
         services.AddTransient<AchievementsViewModel>();
         services.AddTransient<CorrectionAlertViewModel>();
+        services.AddTransient<TutorialLibraryViewModel>();
         return services;
     }
 }

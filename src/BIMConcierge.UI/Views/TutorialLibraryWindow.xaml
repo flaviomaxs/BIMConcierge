@@ -5,7 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         mc:Ignorable="d"
         Title="BIMConcierge - Biblioteca de Tutoriais" Height="768" Width="1280"
-        WindowStartupLocation="CenterScreen" WindowStyle="None" 
+        WindowStartupLocation="CenterScreen" WindowStyle="None"
         AllowsTransparency="True" Background="Transparent" FontFamily="Segoe UI">
 
     <Border CornerRadius="16" Background="#17191B" BorderBrush="#1E293B" BorderThickness="1" MouseLeftButtonDown="Border_MouseLeftButtonDown">
@@ -15,6 +15,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
+            <!-- ══ Sidebar ══════════════════════════════════════════════════ -->
             <Border Grid.Column="0" Background="#0F172A" CornerRadius="16,0,0,16" BorderBrush="#1E293B" BorderThickness="0,0,1,0" Padding="24">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -31,31 +32,33 @@
                     </StackPanel>
 
                     <StackPanel Grid.Row="1">
-                        <Border Background="Transparent" CornerRadius="8" Padding="12,10" Margin="0,0,0,5" Cursor="Hand">
+                        <Border Background="Transparent" CornerRadius="8" Padding="12,10" Margin="0,0,0,5" Cursor="Hand"
+                                MouseLeftButtonDown="SidebarDashboard_Click">
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="⊞" Foreground="#94A3B8" FontSize="18" Margin="0,0,12,0" VerticalAlignment="Center"/>
+                                <TextBlock Text="&#x229E;" Foreground="#94A3B8" FontSize="18" Margin="0,0,12,0" VerticalAlignment="Center"/>
                                 <TextBlock Text="Painel Principal" Foreground="#94A3B8" FontWeight="Medium" FontSize="14" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Border>
 
                         <Border Background="#1E293B" CornerRadius="8" Padding="12,10" Margin="0,0,0,5" Cursor="Hand">
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="▶" Foreground="#6A7D90" FontSize="16" Margin="0,0,12,0" VerticalAlignment="Center"/>
+                                <TextBlock Text="&#x25B6;" Foreground="#6A7D90" FontSize="16" Margin="0,0,12,0" VerticalAlignment="Center"/>
                                 <TextBlock Text="Tutoriais" Foreground="White" FontWeight="SemiBold" FontSize="14" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Border>
 
-                        <Border Background="Transparent" CornerRadius="8" Padding="12,10" Margin="0,0,0,5" Cursor="Hand">
+                        <Border Background="Transparent" CornerRadius="8" Padding="12,10" Margin="0,0,0,5" Cursor="Hand"
+                                MouseLeftButtonDown="SidebarStandards_Click">
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="★" Foreground="#94A3B8" FontSize="18" Margin="0,0,12,0" VerticalAlignment="Center"/>
-                                <TextBlock Text="Padrões da Empresa" Foreground="#94A3B8" FontWeight="Medium" FontSize="14" VerticalAlignment="Center"/>
+                                <TextBlock Text="&#x2605;" Foreground="#94A3B8" FontSize="18" Margin="0,0,12,0" VerticalAlignment="Center"/>
+                                <TextBlock Text="Padr&#245;es da Empresa" Foreground="#94A3B8" FontWeight="Medium" FontSize="14" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Border>
 
                         <Border Background="Transparent" CornerRadius="8" Padding="12,10" Margin="0,0,0,5" Cursor="Hand">
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="⚙" Foreground="#94A3B8" FontSize="18" Margin="0,0,12,0" VerticalAlignment="Center"/>
-                                <TextBlock Text="Configurações" Foreground="#94A3B8" FontWeight="Medium" FontSize="14" VerticalAlignment="Center"/>
+                                <TextBlock Text="&#x2699;" Foreground="#94A3B8" FontSize="18" Margin="0,0,12,0" VerticalAlignment="Center"/>
+                                <TextBlock Text="Configura&#231;&#245;es" Foreground="#94A3B8" FontWeight="Medium" FontSize="14" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Border>
                     </StackPanel>
@@ -73,16 +76,17 @@
                             </Border>
 
                             <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                <TextBlock Text="Flávio Filho" Foreground="White" FontWeight="SemiBold" FontSize="13"/>
+                                <TextBlock Text="Fl&#225;vio Filho" Foreground="White" FontWeight="SemiBold" FontSize="13"/>
                                 <TextBlock Text="Arquiteto" Foreground="#94A3B8" FontSize="12"/>
                             </StackPanel>
 
-                            <TextBlock Grid.Column="2" Text="⋮" Foreground="#94A3B8" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" Cursor="Hand"/>
+                            <TextBlock Grid.Column="2" Text="&#x22EE;" Foreground="#94A3B8" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" Cursor="Hand"/>
                         </Grid>
                     </Border>
                 </Grid>
             </Border>
 
+            <!-- ══ Main Content ═════════════════════════════════════════════ -->
             <Grid Grid.Column="1" Margin="40">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -91,7 +95,7 @@
                 </Grid.RowDefinitions>
 
                 <Button Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-20,-20,0"
-                        Content="✕" FontSize="16" Foreground="#94A3B8" Background="Transparent" BorderThickness="0"
+                        Content="&#x2715;" FontSize="16" Foreground="#94A3B8" Background="Transparent" BorderThickness="0"
                         Cursor="Hand" Click="BtnClose_Click"/>
 
                 <StackPanel Grid.Row="0" Margin="0,0,0,30">
@@ -99,6 +103,7 @@
                     <TextBlock Text="Aprimore suas habilidades com tutoriais interativos guiados diretamente no Revit." FontSize="15" Foreground="#94A3B8"/>
                 </StackPanel>
 
+                <!-- ── Search + Filters ──────────────────────────────────── -->
                 <Grid Grid.Row="1" Margin="0,0,0,30">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="350"/>
@@ -107,146 +112,215 @@
 
                     <Border Grid.Column="0" Background="#121820" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="8" Height="45">
                         <Grid>
-                            <TextBlock Text="⌕" Foreground="#94A3B8" FontSize="20" VerticalAlignment="Center" Margin="15,0,0,0"/>
-                            <TextBox Background="Transparent" Foreground="White" BorderThickness="0" 
+                            <TextBlock Text="&#x2315;" Foreground="#94A3B8" FontSize="20" VerticalAlignment="Center" Margin="15,0,0,0" IsHitTestVisible="False"/>
+                            <TextBox x:Name="SearchBox" Background="Transparent" Foreground="White" BorderThickness="0"
                                      VerticalContentAlignment="Center" Padding="40,0,15,0" FontSize="14"
-                                     Text="Buscar tutoriais..."/>
+                                     Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}"/>
                         </Grid>
                     </Border>
 
                     <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
                         <Button Content="Todos" Height="40" Padding="20,0" Margin="0,0,10,0"
-                                Background="#6A7D90" Foreground="White" FontSize="13" FontWeight="SemiBold" BorderThickness="0" Cursor="Hand">
-                            <Button.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="20"/>
+                                FontSize="13" FontWeight="SemiBold" BorderThickness="0" Cursor="Hand"
+                                Command="{Binding SetFilterCommand}" CommandParameter="Todos">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="#1E293B"/>
+                                    <Setter Property="Foreground" Value="#94A3B8"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="{TemplateBinding Background}" CornerRadius="20" Padding="{TemplateBinding Padding}">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding SelectedCategory}" Value="Todos">
+                                            <Setter Property="Background" Value="#6A7D90"/>
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
                                 </Style>
-                            </Button.Resources>
+                            </Button.Style>
                         </Button>
 
                         <Button Content="Arquitetura" Height="40" Padding="20,0" Margin="0,0,10,0"
-                                Background="#1E293B" Foreground="#94A3B8" FontSize="13" FontWeight="SemiBold" BorderThickness="0" Cursor="Hand">
-                            <Button.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="20"/>
+                                FontSize="13" FontWeight="SemiBold" BorderThickness="0" Cursor="Hand"
+                                Command="{Binding SetFilterCommand}" CommandParameter="Arquitetura">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="#1E293B"/>
+                                    <Setter Property="Foreground" Value="#94A3B8"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="{TemplateBinding Background}" CornerRadius="20" Padding="{TemplateBinding Padding}">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding SelectedCategory}" Value="Arquitetura">
+                                            <Setter Property="Background" Value="#6A7D90"/>
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
                                 </Style>
-                            </Button.Resources>
+                            </Button.Style>
                         </Button>
 
                         <Button Content="Estrutura" Height="40" Padding="20,0" Margin="0,0,10,0"
-                                Background="#1E293B" Foreground="#94A3B8" FontSize="13" FontWeight="SemiBold" BorderThickness="0" Cursor="Hand">
-                            <Button.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="20"/>
+                                FontSize="13" FontWeight="SemiBold" BorderThickness="0" Cursor="Hand"
+                                Command="{Binding SetFilterCommand}" CommandParameter="Estrutura">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="#1E293B"/>
+                                    <Setter Property="Foreground" Value="#94A3B8"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="{TemplateBinding Background}" CornerRadius="20" Padding="{TemplateBinding Padding}">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding SelectedCategory}" Value="Estrutura">
+                                            <Setter Property="Background" Value="#6A7D90"/>
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
                                 </Style>
-                            </Button.Resources>
+                            </Button.Style>
                         </Button>
 
-                        <Button Content="Padrões" Height="40" Padding="20,0" Margin="0,0,0,0"
-                                Background="#1E293B" Foreground="#94A3B8" FontSize="13" FontWeight="SemiBold" BorderThickness="0" Cursor="Hand">
-                            <Button.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="20"/>
+                        <Button Content="Padr&#245;es" Height="40" Padding="20,0" Margin="0,0,0,0"
+                                FontSize="13" FontWeight="SemiBold" BorderThickness="0" Cursor="Hand"
+                                Command="{Binding SetFilterCommand}" CommandParameter="Padr&#245;es">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="#1E293B"/>
+                                    <Setter Property="Foreground" Value="#94A3B8"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="{TemplateBinding Background}" CornerRadius="20" Padding="{TemplateBinding Padding}">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding SelectedCategory}" Value="Padr&#245;es">
+                                            <Setter Property="Background" Value="#6A7D90"/>
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
                                 </Style>
-                            </Button.Resources>
+                            </Button.Style>
                         </Button>
                     </StackPanel>
                 </Grid>
 
+                <!-- ── Loading Indicator ─────────────────────────────────── -->
+                <TextBlock Grid.Row="2" Text="Carregando tutoriais..." FontSize="16" Foreground="#94A3B8"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"
+                           Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibility}}"/>
+
+                <!-- ── Error Message ─────────────────────────────────────── -->
+                <TextBlock Grid.Row="2" Text="{Binding ErrorMessage}" FontSize="14" Foreground="#EF4444"
+                           HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0"
+                           Visibility="{Binding ErrorMessage, Converter={StaticResource StringToVisibility}}"/>
+
+                <!-- ── Tutorial Cards Grid ───────────────────────────────── -->
                 <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                    <WrapPanel Margin="0,0,0,20">
+                    <ItemsControl ItemsSource="{Binding Tutorials}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Margin="0,0,0,20"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Background="#121820" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="20" Width="300" Margin="0,0,20,20">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
 
-                        <Border Background="#121820" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="20" Width="300" Margin="0,0,20,20">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
+                                        <!-- Preview area -->
+                                        <Border Grid.Row="0" Height="140" Background="#1E293B" CornerRadius="8" Margin="0,0,0,15">
+                                            <TextBlock Text="[Preview do Tutorial]" Foreground="#6A7D90" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
 
-                                <Border Grid.Row="0" Height="140" Background="#1E293B" CornerRadius="8" Margin="0,0,0,15">
-                                    <TextBlock Text="[Preview do Tutorial]" Foreground="#6A7D90" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
+                                        <!-- Category badge + Title -->
+                                        <StackPanel Grid.Row="1" Margin="0,0,0,10">
+                                            <Border Background="#0F172A" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="4" Padding="6,2" HorizontalAlignment="Left" Margin="0,0,0,10">
+                                                <TextBlock Text="{Binding Category}" Foreground="#6A7D90" FontSize="10" FontWeight="Bold">
+                                                    <TextBlock.Style>
+                                                        <Style TargetType="TextBlock">
+                                                            <Setter Property="Typography.Capitals" Value="AllSmallCaps"/>
+                                                        </Style>
+                                                    </TextBlock.Style>
+                                                </TextBlock>
+                                            </Border>
+                                            <TextBlock Text="{Binding Title}" FontSize="16" FontWeight="Bold" Foreground="White" TextWrapping="Wrap"/>
+                                        </StackPanel>
 
-                                <StackPanel Grid.Row="1" Margin="0,0,0,10">
-                                    <Border Background="#0F172A" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="4" Padding="6,2" HorizontalAlignment="Left" Margin="0,0,0,10">
-                                        <TextBlock Text="ARQUITETURA" Foreground="#6A7D90" FontSize="10" FontWeight="Bold"/>
-                                    </Border>
-                                    <TextBlock Text="Modelagem Avançada de Paredes" FontSize="16" FontWeight="Bold" Foreground="White" TextWrapping="Wrap"/>
-                                </StackPanel>
+                                        <!-- Description -->
+                                        <TextBlock Grid.Row="2" Text="{Binding Description}"
+                                                   Foreground="#94A3B8" FontSize="13" TextWrapping="Wrap" LineHeight="18" Margin="0,0,0,20"/>
 
-                                <TextBlock Grid.Row="2" Text="Aprenda fluxos de trabalho adequados para desenhar e modificar paredes multicamadas de acordo com o padrão do escritório." 
-                                           Foreground="#94A3B8" FontSize="13" TextWrapping="Wrap" LineHeight="18" Margin="0,0,0,20"/>
+                                        <!-- Progress + Button -->
+                                        <StackPanel Grid.Row="3">
+                                            <Grid Margin="0,0,0,8">
+                                                <TextBlock Foreground="#94A3B8" FontSize="11" FontWeight="Bold" HorizontalAlignment="Left">
+                                                    <TextBlock.Text>
+                                                        <MultiBinding StringFormat="{}{0} Passos">
+                                                            <Binding Path="StepCount"/>
+                                                        </MultiBinding>
+                                                    </TextBlock.Text>
+                                                </TextBlock>
+                                                <TextBlock Foreground="#94A3B8" FontSize="11" HorizontalAlignment="Right">
+                                                    <TextBlock.Text>
+                                                        <Binding Path="DurationMins" StringFormat="{}{0} min"/>
+                                                    </TextBlock.Text>
+                                                </TextBlock>
+                                            </Grid>
 
-                                <StackPanel Grid.Row="3">
-                                    <Grid Margin="0,0,0,8">
-                                        <TextBlock Text="2/8 Passos" Foreground="#94A3B8" FontSize="11" FontWeight="Bold" HorizontalAlignment="Left"/>
-                                        <TextBlock Text="45 min" Foreground="#94A3B8" FontSize="11" HorizontalAlignment="Right"/>
+                                            <Border Height="6" Background="#1E293B" CornerRadius="3" Margin="0,0,0,15">
+                                                <Border Background="#6A7D90" CornerRadius="3" HorizontalAlignment="Left">
+                                                    <Border.Style>
+                                                        <Style TargetType="Border">
+                                                            <Setter Property="Width" Value="0"/>
+                                                        </Style>
+                                                    </Border.Style>
+                                                </Border>
+                                            </Border>
+
+                                            <Button Content="INICIAR TRILHA" Height="35"
+                                                    Background="#1E293B" Foreground="White" FontSize="12" FontWeight="Bold" BorderThickness="0" Cursor="Hand"
+                                                    Command="{Binding DataContext.OpenTutorialCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                    CommandParameter="{Binding}">
+                                                <Button.Resources>
+                                                    <Style TargetType="Border">
+                                                        <Setter Property="CornerRadius" Value="6"/>
+                                                    </Style>
+                                                </Button.Resources>
+                                            </Button>
+                                        </StackPanel>
                                     </Grid>
-
-                                    <Border Height="6" Background="#1E293B" CornerRadius="3" Margin="0,0,0,15">
-                                        <Border Width="70" Background="#6A7D90" CornerRadius="3" HorizontalAlignment="Left"/>
-                                    </Border>
-
-                                    <Button Content="CONTINUAR TRILHA" Height="35" 
-                                            Background="#1E293B" Foreground="White" FontSize="12" FontWeight="Bold" BorderThickness="0" Cursor="Hand">
-                                        <Button.Resources>
-                                            <Style TargetType="Border">
-                                                <Setter Property="CornerRadius" Value="6"/>
-                                            </Style>
-                                        </Button.Resources>
-                                    </Button>
-                                </StackPanel>
-                            </Grid>
-                        </Border>
-
-                        <Border Background="#121820" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="20" Width="300" Margin="0,0,20,20">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-
-                                <Border Grid.Row="0" Height="140" Background="#1E293B" CornerRadius="8" Margin="0,0,0,15">
-                                    <TextBlock Text="[Preview do Tutorial]" Foreground="#6A7D90" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
-
-                                <StackPanel Grid.Row="1" Margin="0,0,0,10">
-                                    <Border Background="#0F172A" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="4" Padding="6,2" HorizontalAlignment="Left" Margin="0,0,0,10">
-                                        <TextBlock Text="PARAMÉTRICA" Foreground="#6A7D90" FontSize="10" FontWeight="Bold"/>
-                                    </Border>
-                                    <TextBlock Text="Fundamentos de Famílias" FontSize="16" FontWeight="Bold" Foreground="White" TextWrapping="Wrap"/>
-                                </StackPanel>
-
-                                <TextBlock Grid.Row="2" Text="Famílias aninhadas, tabelas de pesquisa e parametrização complexa sem quebrar a geometria." 
-                                           Foreground="#94A3B8" FontSize="13" TextWrapping="Wrap" LineHeight="18" Margin="0,0,0,20"/>
-
-                                <StackPanel Grid.Row="3">
-                                    <Grid Margin="0,0,0,8">
-                                        <TextBlock Text="0/6 Passos" Foreground="#94A3B8" FontSize="11" FontWeight="Bold" HorizontalAlignment="Left"/>
-                                        <TextBlock Text="3h 50m" Foreground="#94A3B8" FontSize="11" HorizontalAlignment="Right"/>
-                                    </Grid>
-
-                                    <Border Height="6" Background="#1E293B" CornerRadius="3" Margin="0,0,0,15">
-                                        <Border Width="0" Background="#6A7D90" CornerRadius="3" HorizontalAlignment="Left"/>
-                                    </Border>
-
-                                    <Button Content="INICIAR TRILHA" Height="35" 
-                                            Background="#1E293B" Foreground="White" FontSize="12" FontWeight="Bold" BorderThickness="0" Cursor="Hand">
-                                        <Button.Resources>
-                                            <Style TargetType="Border">
-                                                <Setter Property="CornerRadius" Value="6"/>
-                                            </Style>
-                                        </Button.Resources>
-                                    </Button>
-                                </StackPanel>
-                            </Grid>
-                        </Border>
-
-                    </WrapPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </ScrollViewer>
             </Grid>
         </Grid>

@@ -28,6 +28,7 @@ public sealed class NavigationService : INavigationService
             "StudentProgress"   => _serviceProvider.GetRequiredService<StudentProgressWindow>(),
             "Achievements"      => _serviceProvider.GetRequiredService<AchievementsWindow>(),
             "Tutorials"         => _serviceProvider.GetRequiredService<TutorialWindow>(),
+            "TutorialLibrary"   => _serviceProvider.GetRequiredService<TutorialLibraryWindow>(),
             "GuidedTutorial"    => CreateWindowWithTutorial<GuidedTutorialWindow>(parameter as string),
             "TutorialDetail"    => CreateWindowWithTutorial<TutorialDetailWindow>(parameter as string),
             _ => null

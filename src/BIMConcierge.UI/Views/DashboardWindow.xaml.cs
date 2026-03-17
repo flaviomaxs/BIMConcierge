@@ -24,7 +24,7 @@ public partial class DashboardWindow : Window
     private void BtnClose_Click(object sender, RoutedEventArgs e) => this.Close();
 
     private void SidebarTutorials_Click(object sender, MouseButtonEventArgs e) =>
-        _vm.NavigateToCommand.Execute("Tutorials");
+        _vm.OpenWindowCommand.Execute("TutorialLibrary");
 
     private void SidebarStandards_Click(object sender, MouseButtonEventArgs e) =>
         _vm.OpenWindowCommand.Execute("CompanyStandards");
