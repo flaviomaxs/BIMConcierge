@@ -32,7 +32,7 @@ public static class DependencyInjection
             .AddPolicyHandler(GetRetryPolicy())
             .AddPolicyHandler(GetCircuitBreakerPolicy());
         }
-
+        
         // Auth & License — transient so each resolution gets a fresh BimApiClient from the factory
         services.AddSingleton<ITokenStore, TokenStore>();
         services.AddTransient<IAuthService, AuthService>();
