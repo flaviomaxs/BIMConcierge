@@ -27,7 +27,7 @@ public static class DependencyInjection
             services.AddHttpClient<IBimApiClient, BimApiClient>(client =>
             {
                 client.BaseAddress = new Uri(ApiSettings.BaseUrl);
-                client.Timeout = TimeSpan.FromSeconds(30);
+                client.Timeout = TimeSpan.FromSeconds(90);
             })
             .AddPolicyHandler(GetRetryPolicy())
             .AddPolicyHandler(GetCircuitBreakerPolicy());
