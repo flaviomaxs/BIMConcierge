@@ -1,13 +1,14 @@
 {
   "$schema": "https://json.schemastore.org/launchsettings.json",
   "profiles": {
-    "BIM Concierge (Revit 2026)": {
+    "BIMConcierge (Revit 2026)": {
       "commandName": "Executable",
       "executablePath": "C:\\Program Files\\Autodesk\\Revit 2026\\Revit.exe",
       "workingDirectory": "$(ProjectDir)",
       "environmentVariables": {
         "REVIT_API_PATH": "C:\\Program Files\\Autodesk\\Revit 2026",
-        "BIMCONCIERGE_API_URL": "https://api.bimconcierge.io/v1/"
+        "BIMCONCIERGE_API_URL": "https://api.bimconcierge.io/v1/",
+        "BIMCONCIERGE_DEV_MODE": "true"
       },
       "nativeDebugging": false
     }

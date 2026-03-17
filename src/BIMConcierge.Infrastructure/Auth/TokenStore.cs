@@ -1,19 +1,12 @@
+using BIMConcierge.Core.Interfaces;
+using Serilog;
+using System.IO;
 using System.Runtime.Versioning;
 using System.Security.Cryptography;
 using System.Text;
 
 namespace BIMConcierge.Infrastructure.Auth;
 
-public interface ITokenStore
-{
-    string? AccessToken  { get; set; }
-    string? RefreshToken { get; set; }
-}
-
-/// <summary>
-/// Persists JWT tokens encrypted via Windows DPAPI (CurrentUser scope).
-/// Falls back to in-memory if DPAPI is unavailable.
-/// </summary>
 [SupportedOSPlatform("windows")]
 public class TokenStore : ITokenStore
 {
@@ -29,22 +22,36 @@ public class TokenStore : ITokenStore
     public string? AccessToken
     {
         get => _accessToken ??= Load("access.dat");
-        set { _accessToken = value; Save("access.dat", value); }
+        set { _accessToken = value; SaveAsync("access.dat", value); }
     }
 
     public string? RefreshToken
     {
         get => _refreshToken ??= Load("refresh.dat");
-        set { _refreshToken = value; Save("refresh.dat", value); }
+        set { _refreshToken = value; SaveAsync("refresh.dat", value); }
     }
 
-    private static void Save(string file, string? value)
+    /// <summary>
+    /// Persists the token to disk asynchronously via fire-and-forget to avoid blocking the UI thread.
+    /// </summary>
+    private static async void SaveAsync(string file, string? value)
     {
-        var path = Path.Combine(_tokenDir, file);
-        if (value is null) { if (File.Exists(path)) File.Delete(path); return; }
-        var data      = Encoding.UTF8.GetBytes(value);
-        var encrypted = ProtectedData.Protect(data, null, DataProtectionScope.CurrentUser);
-        File.WriteAllBytes(path, encrypted);
+        try
+        {
+            var path = Path.Combine(_tokenDir, file);
+            if (value is null)
+            {
+                if (File.Exists(path)) File.Delete(path);
+                return;
+            }
+            var data = Encoding.UTF8.GetBytes(value);
+            var encrypted = ProtectedData.Protect(data, null, DataProtectionScope.CurrentUser);
+            await File.WriteAllBytesAsync(path, encrypted).ConfigureAwait(false);
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "Failed to persist token file {File}", file);
+        }
     }
 
     private static string? Load(string file)
@@ -54,10 +61,19 @@ public class TokenStore : ITokenStore
         try
         {
             var encrypted = File.ReadAllBytes(path);
-            var data      = ProtectedData.Unprotect(encrypted, null, DataProtectionScope.CurrentUser);
+            var data = ProtectedData.Unprotect(encrypted, null, DataProtectionScope.CurrentUser);
             return Encoding.UTF8.GetString(data);
         }
-        catch { return null; }
+        catch (CryptographicException ex)
+        {
+            Log.Warning(ex, "Failed to decrypt token file {File} — it may be corrupted or from a different user", file);
+            return null;
+        }
+        catch (IOException ex)
+        {
+            Log.Warning(ex, "Failed to read token file {File}", file);
+            return null;
+        }
     }
 
     private static void EnsureDir() => Directory.CreateDirectory(_tokenDir);

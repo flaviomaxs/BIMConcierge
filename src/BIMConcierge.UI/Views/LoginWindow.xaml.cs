@@ -1,34 +1,31 @@
-using BIMConcierge.UI.ViewModels;
-using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
 using System.Windows.Input;
+using BIMConcierge.UI.ViewModels;
 
 namespace BIMConcierge.UI.Views;
 
 public partial class LoginWindow : Window
 {
-    private readonly IServiceProvider _sp;
-
-    public LoginWindow(IServiceProvider sp)
+    public LoginWindow(LoginViewModel viewModel)
     {
-        _sp = sp;
         InitializeComponent();
+        DataContext = viewModel;
 
-        var vm = sp.GetRequiredService<LoginViewModel>();
-        vm.LoginSucceeded += OnLoginSucceeded;
-        DataContext = vm;
+        viewModel.OnLoginSuccess = () =>
+        {
+            this.DialogResult = true;
+            this.Close();
+        };
     }
 
-    private void OnLoginSucceeded(object? sender, EventArgs e)
+    private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
-        var dashboard = new DashboardWindow(_sp);
-        dashboard.Show();
-        Close();
+        if (e.ButtonState == MouseButtonState.Pressed)
+            this.DragMove();
     }
 
-    private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) =>
-        DragMove();
-
-    private void CloseButton_Click(object sender, RoutedEventArgs e) =>
-        Close();
+    private void BtnClose_Click(object sender, RoutedEventArgs e)
+    {
+        this.Close();
+    }
 }

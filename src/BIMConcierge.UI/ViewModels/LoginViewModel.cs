@@ -1,56 +1,75 @@
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using BIMConcierge.Core.Interfaces;
 
 namespace BIMConcierge.UI.ViewModels;
 
-public partial class LoginViewModel : ObservableObject
+public partial class LoginViewModel : ObservableObject, IDisposable
 {
-    private readonly IAuthService    _auth;
-    private readonly ILicenseService _license;
+    private readonly IAuthService _authService;
+    public Action? OnLoginSuccess { get; set; }
 
-    [ObservableProperty] private string  email          = string.Empty;
-    [ObservableProperty] private string  password       = string.Empty;
-    [ObservableProperty] private string  licenseKey     = string.Empty;
-    [ObservableProperty] private bool    rememberMe;
-    [ObservableProperty] private bool    isBusy;
-    [ObservableProperty] private string? errorMessage;
-    [ObservableProperty] private bool    showPassword;
+    private CancellationTokenSource _cts = new();
 
-    public event EventHandler? LoginSucceeded;
+    [ObservableProperty] private string _email = string.Empty;
+    [ObservableProperty] private string _password = string.Empty;
+    [ObservableProperty] private string _licenseKey = string.Empty;
+    [ObservableProperty] private string _errorMessage = string.Empty;
+    [ObservableProperty] private bool _hasError;
+    [ObservableProperty] private bool _isBusy;
 
-    public LoginViewModel(IAuthService auth, ILicenseService license)
+    public LoginViewModel(IAuthService authService)
     {
-        _auth    = auth;
-        _license = license;
+        _authService = authService;
     }
 
-    [RelayCommand(CanExecute = nameof(CanLogin))]
+    [RelayCommand]
     private async Task LoginAsync()
     {
-        ErrorMessage = null;
-        IsBusy       = true;
+        HasError = false;
+        ErrorMessage = string.Empty;
+
+        if (string.IsNullOrWhiteSpace(Email) || string.IsNullOrWhiteSpace(Password) || string.IsNullOrWhiteSpace(LicenseKey))
+        {
+            ErrorMessage = "Preencha todos os campos.";
+            HasError = true;
+            return;
+        }
+
+        CancelPending();
+
+        IsBusy = true;
         try
         {
-            var result = await _auth.LoginAsync(Email, Password, LicenseKey);
+            var result = await _authService.LoginAsync(Email, Password, LicenseKey);
+
             if (result.Success)
-                LoginSucceeded?.Invoke(this, EventArgs.Empty);
+            {
+                OnLoginSuccess?.Invoke();
+            }
             else
-                ErrorMessage = result.ErrorMessage ?? "Falha ao autenticar.";
+            {
+                ErrorMessage = result.ErrorMessage ?? "Falha no login.";
+                HasError = true;
+            }
         }
         finally { IsBusy = false; }
     }
 
-    private bool CanLogin() =>
-        !IsBusy
-        && !string.IsNullOrWhiteSpace(Email)
-        && !string.IsNullOrWhiteSpace(Password)
-        && !string.IsNullOrWhiteSpace(LicenseKey);
+    private void CancelPending()
+    {
+        _cts.Cancel();
+        _cts.Dispose();
+        _cts = new CancellationTokenSource();
+    }
 
-    partial void OnEmailChanged(string value)       => LoginCommand.NotifyCanExecuteChanged();
-    partial void OnPasswordChanged(string value)    => LoginCommand.NotifyCanExecuteChanged();
-    partial void OnLicenseKeyChanged(string value)  => LoginCommand.NotifyCanExecuteChanged();
-
-    [RelayCommand]
-    private void TogglePassword() => ShowPassword = !ShowPassword;
+    public void Dispose()
+    {
+        _cts.Cancel();
+        _cts.Dispose();
+        GC.SuppressFinalize(this);
+    }
 }

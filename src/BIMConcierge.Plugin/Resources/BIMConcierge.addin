@@ -1,36 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  BIM Concierge — Revit 2026 Add-in Manifest
-  Place this file at: %APPDATA%\Autodesk\Revit\Addins\2026\
--->
 <RevitAddIns>
+    <AddIn Type="Application">
+        <Name>BIMConcierge</Name>
+        <Assembly>BIMConcierge\BIMConcierge.dll</Assembly>
+        <FullClassName>BIMConcierge.Plugin.BIMConciergeApplication</FullClassName>
+        <ClientId>a4f83e2c-1b77-4d8a-b6c5-e2a91f5d3c08</ClientId>
+        <VendorId>BIMCONCIERGE</VendorId>
+        <VendorDescription>BIMConcierge - Intelligent Revit Training Assistant</VendorDescription>
+    </AddIn>
 
-  <!-- External Application (loads on Revit startup, creates the Ribbon tab) -->
-  <AddIn Type="Application">
-    <Name>BIM Concierge</Name>
-    <Assembly>BIMConcierge.dll</Assembly>
-    <FullClassName>BIMConcierge.Plugin.BIMConciergeApplication</FullClassName>
-    <ClientId>a4f83e2c-1b77-4d8a-b6c5-e2a91f5d3c08</ClientId>
-    <VendorId>BIMCONCIERGE</VendorId>
-    <VendorDescription>BIM Concierge — Intelligent Revit Training Assistant</VendorDescription>
-  </AddIn>
+    <AddIn Type="Command">
+        <Name>Open BIMConcierge</Name>
+        <Assembly>BIMConcierge\BIMConcierge.dll</Assembly>
+        <FullClassName>BIMConcierge.Plugin.Commands.OpenDashboardCommand</FullClassName>
+        <ClientId>b5e94f3d-2c88-4e9b-c7d6-f3ba20e4d419</ClientId>
+        <VendorId>BIMCONCIERGE</VendorId>
+    </AddIn>
 
-  <!-- Open Dashboard command -->
-  <AddIn Type="Command">
-    <Name>Open BIM Concierge</Name>
-    <Assembly>BIMConcierge.dll</Assembly>
-    <FullClassName>BIMConcierge.Plugin.Commands.OpenDashboardCommand</FullClassName>
-    <ClientId>b5e94f3d-2c88-4e9b-c7d6-f3ba20e4d419</ClientId>
-    <VendorId>BIMCONCIERGE</VendorId>
-  </AddIn>
-
-  <!-- Start Tutorial command -->
-  <AddIn Type="Command">
-    <Name>Start Tutorial</Name>
-    <Assembly>BIMConcierge.dll</Assembly>
-    <FullClassName>BIMConcierge.Plugin.Commands.StartTutorialCommand</FullClassName>
-    <ClientId>c6fa5040-3d99-4fac-d8e7-04cb31f5e52a</ClientId>
-    <VendorId>BIMCONCIERGE</VendorId>
-  </AddIn>
-
+    <AddIn Type="Command">
+        <Name>Start Tutorial</Name>
+        <Assembly>BIMConcierge\BIMConcierge.dll</Assembly>
+        <FullClassName>BIMConcierge.Plugin.Commands.StartTutorialCommand</FullClassName>
+        <ClientId>c6fa5040-3d99-4fac-d8e7-04cb31f5e52a</ClientId>
+        <VendorId>BIMCONCIERGE</VendorId>
+    </AddIn>
 </RevitAddIns>

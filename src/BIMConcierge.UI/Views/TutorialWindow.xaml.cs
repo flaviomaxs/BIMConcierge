@@ -1,24 +1,25 @@
-using BIMConcierge.UI.ViewModels;
-using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
 using System.Windows.Input;
+using BIMConcierge.UI.ViewModels;
 
 namespace BIMConcierge.UI.Views;
 
-/// <summary>
-/// Step-by-step guided tutorial window.
-/// </summary>
 public partial class TutorialWindow : Window
 {
-    public TutorialWindow(IServiceProvider sp)
+    public TutorialWindow(TutorialViewModel viewModel)
     {
         InitializeComponent();
-        DataContext = sp.GetRequiredService<TutorialViewModel>();
+        DataContext = viewModel;
     }
 
-    private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) =>
-        DragMove();
+    private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    {
+        if (e.ButtonState == MouseButtonState.Pressed)
+            this.DragMove();
+    }
 
-    private void CloseButton_Click(object sender, RoutedEventArgs e) =>
-        Close();
+    private void BtnClose_Click(object sender, RoutedEventArgs e)
+    {
+        this.Close();
+    }
 }

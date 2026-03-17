@@ -1,6 +1,6 @@
 namespace BIMConcierge.Core.Models;
 
-/// <summary>Represents a software license for the BIM Concierge plugin.</summary>
+/// <summary>Represents a software license for the BIMConcierge plugin.</summary>
 public class License
 {
     public string Key        { get; set; } = string.Empty;

@@ -1,6 +1,9 @@
-using BIMConcierge.Infrastructure.Auth;
+using BIMConcierge.Core.Interfaces;
 using Newtonsoft.Json;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace BIMConcierge.Infrastructure.Api;
 
@@ -22,51 +25,55 @@ public static class ApiSettings
 
 public class BimApiClient : IBimApiClient
 {
-    private readonly HttpClient  _http;
+    private readonly HttpClient _http;
     private readonly ITokenStore _tokens;
 
     public BimApiClient(HttpClient http, ITokenStore tokens)
     {
-        _http   = http;
+        _http = http;
         _tokens = tokens;
     }
 
     public async Task<TResponse?> GetAsync<TResponse>(string endpoint)
     {
-        AttachAuthHeader();
-        var response = await _http.GetAsync(endpoint);
+        using var request = new HttpRequestMessage(HttpMethod.Get, endpoint);
+        AttachAuthHeader(request);
+        var response = await _http.SendAsync(request);
         return await Deserialize<TResponse>(response);
     }
 
     public async Task<TResponse?> PostAsync<TRequest, TResponse>(string endpoint, TRequest body)
     {
-        AttachAuthHeader();
-        var content  = Serialize(body);
-        var response = await _http.PostAsync(endpoint, content);
+        using var request = new HttpRequestMessage(HttpMethod.Post, endpoint);
+        AttachAuthHeader(request);
+        request.Content = Serialize(body);
+        var response = await _http.SendAsync(request);
         return await Deserialize<TResponse>(response);
     }
 
     public async Task<TResponse?> PutAsync<TRequest, TResponse>(string endpoint, TRequest body)
     {
-        AttachAuthHeader();
-        var content  = Serialize(body);
-        var response = await _http.PutAsync(endpoint, content);
+        using var request = new HttpRequestMessage(HttpMethod.Put, endpoint);
+        AttachAuthHeader(request);
+        request.Content = Serialize(body);
+        var response = await _http.SendAsync(request);
         return await Deserialize<TResponse>(response);
     }
 
     public async Task DeleteAsync(string endpoint)
     {
-        AttachAuthHeader();
-        await _http.DeleteAsync(endpoint);
+        using var request = new HttpRequestMessage(HttpMethod.Delete, endpoint);
+        AttachAuthHeader(request);
+        await _http.SendAsync(request);
     }
 
     // ── Helpers ──────────────────────────────────────────────────────────────
 
-    private void AttachAuthHeader()
+    private void AttachAuthHeader(HttpRequestMessage request)
     {
-        _http.DefaultRequestHeaders.Remove("Authorization");
-        if (!string.IsNullOrEmpty(_tokens.AccessToken))
-            _http.DefaultRequestHeaders.Add("Authorization", $"Bearer {_tokens.AccessToken}");
+        var token = _tokens.AccessToken;
+        if (!string.IsNullOrEmpty(token))
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
     }
 
     private static StringContent Serialize<T>(T obj) =>

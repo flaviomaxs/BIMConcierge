@@ -66,3 +66,27 @@ public class PercentToGridLengthConverter : IValueConverter
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) =>
         throw new NotSupportedException();
 }
+
+/// <summary>
+/// Converts a percentage (0–100) to a pixel width.
+/// Pass the max width as ConverterParameter (e.g. "300").
+/// </summary>
+public class PercentToWidthConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        double percent = value switch
+        {
+            double d => d,
+            int i    => i,
+            _        => 0
+        };
+        double maxWidth = 300;
+        if (parameter is string s && double.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out double parsed))
+            maxWidth = parsed;
+        return Math.Clamp(percent / 100.0 * maxWidth, 0, maxWidth);
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) =>
+        throw new NotSupportedException();
+}

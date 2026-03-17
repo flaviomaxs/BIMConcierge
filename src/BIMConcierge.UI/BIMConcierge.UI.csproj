@@ -1,23 +1,30 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>net8.0-windows</TargetFramework>
-    <UseWPF>true</UseWPF>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <AssemblyName>BIMConcierge.UI</AssemblyName>
-    <RootNamespace>BIMConcierge.UI</RootNamespace>
-    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
-  </PropertyGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BIMConcierge.Core\BIMConcierge.Core.csproj" />
-    <ProjectReference Include="..\BIMConcierge.Infrastructure\BIMConcierge.Infrastructure.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
-    <PackageReference Include="MaterialDesignThemes" Version="5.1.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\**\*" />
-  </ItemGroup>
+    <PropertyGroup>
+        <TargetFramework>net8.0-windows</TargetFramework>
+        <UseWPF>true</UseWPF>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <AssemblyName>BIMConcierge.UI</AssemblyName>
+        <RootNamespace>BIMConcierge.UI</RootNamespace>
+        <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\BIMConcierge.Core\BIMConcierge.Core.csproj" />
+        <ProjectReference Include="..\BIMConcierge.Infrastructure\BIMConcierge.Infrastructure.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+
+        <PackageReference Include="MaterialDesignThemes" Version="5.3.1" />
+        <PackageReference Include="Serilog" Version="4.3.1" />
+        <PackageReference Include="Serilog.Sinks.File" Version="4.1.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Resource Include="Assets\**\*" />
+    </ItemGroup>
 </Project>

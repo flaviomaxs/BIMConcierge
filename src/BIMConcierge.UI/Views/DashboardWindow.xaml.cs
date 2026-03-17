@@ -1,28 +1,37 @@
-using BIMConcierge.UI.ViewModels;
-using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
 using System.Windows.Input;
+using BIMConcierge.UI.ViewModels;
 
 namespace BIMConcierge.UI.Views;
 
 public partial class DashboardWindow : Window
 {
-    private readonly IServiceProvider _sp;
+    private readonly DashboardViewModel _vm;
 
-    public DashboardWindow(IServiceProvider sp)
+    public DashboardWindow(DashboardViewModel viewModel)
     {
-        _sp = sp;
         InitializeComponent();
-
-        var vm = sp.GetRequiredService<DashboardViewModel>();
-        DataContext = vm;
-
-        Loaded += async (_, _) => await vm.LoadCommand.ExecuteAsync(null);
+        _vm = viewModel;
+        DataContext = viewModel;
     }
 
-    private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) =>
-        DragMove();
+    private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    {
+        if (e.ButtonState == MouseButtonState.Pressed)
+            this.DragMove();
+    }
 
-    private void CloseButton_Click(object sender, RoutedEventArgs e) =>
-        Close();
+    private void BtnClose_Click(object sender, RoutedEventArgs e) => this.Close();
+
+    private void SidebarTutorials_Click(object sender, MouseButtonEventArgs e) =>
+        _vm.NavigateToCommand.Execute("Tutorials");
+
+    private void SidebarStandards_Click(object sender, MouseButtonEventArgs e) =>
+        _vm.OpenWindowCommand.Execute("CompanyStandards");
+
+    private void SidebarProgress_Click(object sender, MouseButtonEventArgs e) =>
+        _vm.OpenWindowCommand.Execute("StudentProgress");
+
+    private void SidebarAchievements_Click(object sender, MouseButtonEventArgs e) =>
+        _vm.OpenWindowCommand.Execute("Achievements");
 }

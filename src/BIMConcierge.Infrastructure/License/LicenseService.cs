@@ -1,8 +1,9 @@
 using BIMConcierge.Core.Interfaces;
 using BIMConcierge.Core.Models;
 using BIMConcierge.Infrastructure.Api;
+using Serilog;
 
-namespace BIMConcierge.Infrastructure.License;
+namespace BIMConcierge.Infrastructure.Licensing;
 
 public class LicenseService : ILicenseService
 {
@@ -10,13 +11,17 @@ public class LicenseService : ILicenseService
 
     public LicenseService(IBimApiClient api) => _api = api;
 
-    public async Task<Core.Models.License?> ValidateAsync(string licenseKey)
+    public async Task<License?> ValidateAsync(string licenseKey)
     {
         try
         {
-            return await _api.GetAsync<Core.Models.License>($"licenses/validate/{licenseKey}");
+            return await _api.GetAsync<License>($"licenses/validate/{licenseKey}");
         }
-        catch { return null; }
+        catch (Exception ex)
+        {
+            Log.Warning(ex, "License validation failed for key {Key}", licenseKey[..Math.Min(8, licenseKey.Length)] + "***");
+            return null;
+        }
     }
 
     public async Task<bool> ActivateAsync(string licenseKey, string userId)
@@ -28,7 +33,11 @@ public class LicenseService : ILicenseService
                 new ActivateRequest(licenseKey, userId));
             return result?.Success ?? false;
         }
-        catch { return false; }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "License activation failed");
+            return false;
+        }
     }
 }
 

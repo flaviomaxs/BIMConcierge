@@ -1,6 +1,7 @@
 using BIMConcierge.Core.Models;
 using FluentAssertions;
 using Xunit;
+using License = BIMConcierge.Core.Models.License;
 
 namespace BIMConcierge.Core.Tests;
 

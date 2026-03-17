@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace BIMConcierge.Plugin.Commands;
 
 /// <summary>
-/// Opens the BIM Concierge main window (Login → Dashboard).
+/// Opens the BIMConcierge main window (Login → Dashboard).
 /// Registered as an ExternalCommand in the .addin manifest.
 /// </summary>
 [Transaction(TransactionMode.Manual)]
@@ -24,14 +24,25 @@ public class OpenDashboardCommand : IExternalCommand
 
             var authService = sp.GetRequiredService<IAuthService>();
 
+            // Revalidate session (token expiry + license) before showing dashboard
+            if (authService.IsAuthenticated)
+            {
+                var valid = authService.EnsureValidSessionAsync().GetAwaiter().GetResult();
+                if (!valid)
+                    authService.LogoutAsync().GetAwaiter().GetResult();
+            }
+
             if (!authService.IsAuthenticated)
             {
-                var loginWindow = new LoginWindow(sp);
-                loginWindow.ShowDialog();
+                var loginWindow = sp.GetRequiredService<LoginWindow>();
+                var result = loginWindow.ShowDialog();
+                if (result != true)
+                    return Result.Succeeded;
             }
-            else
+
+            if (authService.IsAuthenticated)
             {
-                var dashboard = new DashboardWindow(sp);
+                var dashboard = sp.GetRequiredService<DashboardWindow>();
                 dashboard.Show();
             }
 

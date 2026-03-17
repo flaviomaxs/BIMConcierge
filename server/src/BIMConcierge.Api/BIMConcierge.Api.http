@@ -1,0 +1,6 @@
+@BIMConcierge.Api_HostAddress = http://localhost:5043
+
+GET {{BIMConcierge.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using BIMConcierge.Core.Interfaces;
@@ -5,12 +6,15 @@ using BIMConcierge.Core.Models;
 
 namespace BIMConcierge.UI.ViewModels;
 
-public partial class DashboardViewModel : ObservableObject
+public partial class DashboardViewModel : ObservableObject, IDisposable
 {
-    private readonly IAuthService      _auth;
-    private readonly ITutorialService  _tutorials;
-    private readonly IProgressService  _progress;
-    private readonly IStandardsService _standards;
+    private readonly IAuthService        _auth;
+    private readonly ITutorialService    _tutorials;
+    private readonly IProgressService    _progress;
+    private readonly IStandardsService   _standards;
+    private readonly INavigationService  _navigation;
+
+    private CancellationTokenSource _cts = new();
 
     // ── Bound Properties ─────────────────────────────────────────────────────
     [ObservableProperty] private User?   currentUser;
@@ -24,30 +28,25 @@ public partial class DashboardViewModel : ObservableObject
     [ObservableProperty] private int  xpPoints;
 
     // Tutorial library
-    [ObservableProperty] private List<Tutorial>         tutorialList  = [];
-    [ObservableProperty] private Tutorial?              selectedTutorial;
-    [ObservableProperty] private string                 searchQuery   = string.Empty;
+    [ObservableProperty] private Tutorial?  selectedTutorial;
+    [ObservableProperty] private string     searchQuery = string.Empty;
 
-    // Corrections
-    [ObservableProperty] private List<CorrectionEvent>  corrections   = [];
-
-    // Standards
-    [ObservableProperty] private List<CompanyStandard>  standards     = [];
-
-    // Progress
-    [ObservableProperty] private List<TutorialProgress> progressList  = [];
-
-    // Achievements
-    [ObservableProperty] private List<Achievement>      achievements  = [];
+    public ObservableCollection<Tutorial>         TutorialList  { get; } = [];
+    public ObservableCollection<CorrectionEvent>  Corrections   { get; } = [];
+    public ObservableCollection<CompanyStandard>  Standards     { get; } = [];
+    public ObservableCollection<TutorialProgress> ProgressList  { get; } = [];
+    public ObservableCollection<Achievement>      Achievements  { get; } = [];
 
     public DashboardViewModel(
         IAuthService auth, ITutorialService tutorials,
-        IProgressService progress, IStandardsService standards)
+        IProgressService progress, IStandardsService standards,
+        INavigationService navigation)
     {
         _auth       = auth;
         _tutorials  = tutorials;
         _progress   = progress;
         _standards  = standards;
+        _navigation = navigation;
         CurrentUser = auth.CurrentUser;
     }
 
@@ -56,10 +55,16 @@ public partial class DashboardViewModel : ObservableObject
     [RelayCommand]
     private async Task LoadAsync()
     {
+        CancelPending();
+        var ct = _cts.Token;
+
         IsBusy = true;
         try
         {
-            await Task.WhenAll(LoadTutorialsAsync(), LoadProgressAsync(), LoadAchievementsAsync());
+            await Task.WhenAll(
+                LoadTutorialsAsync(ct),
+                LoadProgressAsync(ct),
+                LoadAchievementsAsync(ct));
         }
         finally { IsBusy = false; }
     }
@@ -68,12 +73,20 @@ public partial class DashboardViewModel : ObservableObject
 
     [RelayCommand] private void NavigateTo(string section) => ActiveSection = section;
 
+    /// <summary>Opens a window via the navigation service. Called from sidebar buttons.</summary>
+    [RelayCommand]
+    private void OpenWindow(string windowName) => _navigation.NavigateTo(windowName);
+
     // ── Tutorial Library ─────────────────────────────────────────────────────
 
-    private async Task LoadTutorialsAsync()
+    private async Task LoadTutorialsAsync(CancellationToken ct)
     {
-        TutorialList     = await _tutorials.GetAllAsync();
-        TotalTutorials   = TutorialList.Count;
+        var list = await _tutorials.GetAllAsync();
+        ct.ThrowIfCancellationRequested();
+
+        TutorialList.Clear();
+        foreach (var t in list) TutorialList.Add(t);
+        TotalTutorials = TutorialList.Count;
     }
 
     [RelayCommand]
@@ -85,20 +98,28 @@ public partial class DashboardViewModel : ObservableObject
 
     // ── Progress ─────────────────────────────────────────────────────────────
 
-    private async Task LoadProgressAsync()
+    private async Task LoadProgressAsync(CancellationToken ct)
     {
         if (CurrentUser is null) return;
-        ProgressList         = await _progress.GetUserProgressAsync(CurrentUser.Id);
-        CompletedTutorials   = ProgressList.Count(p => p.IsCompleted);
+        var list = await _progress.GetUserProgressAsync(CurrentUser.Id);
+        ct.ThrowIfCancellationRequested();
+
+        ProgressList.Clear();
+        foreach (var p in list) ProgressList.Add(p);
+        CompletedTutorials = ProgressList.Count(p => p.IsCompleted);
     }
 
     // ── Achievements ─────────────────────────────────────────────────────────
 
-    private async Task LoadAchievementsAsync()
+    private async Task LoadAchievementsAsync(CancellationToken ct)
     {
         if (CurrentUser is null) return;
-        Achievements = await _progress.GetAchievementsAsync(CurrentUser.Id);
-        XpPoints     = CurrentUser.XpPoints;
+        var list = await _progress.GetAchievementsAsync(CurrentUser.Id);
+        ct.ThrowIfCancellationRequested();
+
+        Achievements.Clear();
+        foreach (var a in list) Achievements.Add(a);
+        XpPoints = CurrentUser.XpPoints;
     }
 
     // ── Standards ────────────────────────────────────────────────────────────
@@ -107,16 +128,22 @@ public partial class DashboardViewModel : ObservableObject
     private async Task LoadStandardsAsync()
     {
         if (CurrentUser is null) return;
-        Standards = await _standards.GetStandardsAsync(CurrentUser.CompanyId);
+        var list = await _standards.GetStandardsAsync(CurrentUser.CompanyId);
+
+        Standards.Clear();
+        foreach (var s in list) Standards.Add(s);
     }
 
     [RelayCommand]
     private async Task RunValidationAsync()
     {
-        IsBusy      = true;
-        Corrections = await _standards.ValidateModelAsync();
+        IsBusy = true;
+        var list = await _standards.ValidateModelAsync();
+
+        Corrections.Clear();
+        foreach (var c in list) Corrections.Add(c);
         ActiveCorrections = Corrections.Count(c => !c.IsFixed);
-        IsBusy      = false;
+        IsBusy = false;
     }
 
     [RelayCommand]
@@ -129,5 +156,25 @@ public partial class DashboardViewModel : ObservableObject
     // ── Logout ───────────────────────────────────────────────────────────────
 
     [RelayCommand]
-    private async Task LogoutAsync() => await _auth.LogoutAsync();
+    private async Task LogoutAsync()
+    {
+        CancelPending();
+        await _auth.LogoutAsync();
+    }
+
+    // ── Helpers ──────────────────────────────────────────────────────────────
+
+    private void CancelPending()
+    {
+        _cts.Cancel();
+        _cts.Dispose();
+        _cts = new CancellationTokenSource();
+    }
+
+    public void Dispose()
+    {
+        _cts.Cancel();
+        _cts.Dispose();
+        GC.SuppressFinalize(this);
+    }
 }

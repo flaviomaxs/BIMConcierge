@@ -1,6 +1,6 @@
 namespace BIMConcierge.Core.Models;
 
-/// <summary>Represents an authenticated BIM Concierge user.</summary>
+/// <summary>Represents an authenticated BIMConcierge user.</summary>
 public class User
 {
     public string Id          { get; set; } = string.Empty;

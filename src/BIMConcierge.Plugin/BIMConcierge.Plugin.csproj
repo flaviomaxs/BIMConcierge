@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <TargetFramework>net8.0-windows</TargetFramework>
         <UseWPF>true</UseWPF>
@@ -11,6 +11,8 @@
         <Platforms>x64</Platforms>
         <OutputPath>bin\$(Configuration)\</OutputPath>
         <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+
+        <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     </PropertyGroup>
 
     <ItemGroup>
@@ -33,8 +35,9 @@
     <ItemGroup>
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
         <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
-        <PackageReference Include="Serilog" Version="4.0.2" />
-        <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
+
+        <PackageReference Include="Serilog" Version="4.3.1" />
+        <PackageReference Include="Serilog.Sinks.File" Version="4.1.0" />
     </ItemGroup>
 
     <ItemGroup>
@@ -43,11 +46,17 @@
         </Content>
     </ItemGroup>
 
-    <Target Name="CopyToRevitAddins" AfterTargets="Build" Condition="'$(Configuration)' == 'Debug'">
+    <Target Name="CopyToRevitAddins" AfterTargets="Build">
         <PropertyGroup>
             <RevitAddinsPath>$(APPDATA)\Autodesk\Revit\Addins\2026</RevitAddinsPath>
+            <PluginFolder>$(RevitAddinsPath)\BIMConcierge</PluginFolder>
         </PropertyGroup>
-        <Copy SourceFiles="@(Content)" DestinationFolder="$(RevitAddinsPath)" SkipUnchangedFiles="true" />
-        <Copy SourceFiles="$(OutputPath)BIMConcierge.dll" DestinationFolder="$(RevitAddinsPath)" SkipUnchangedFiles="true" />
+
+        <Copy SourceFiles="Resources\BIMConcierge.addin" DestinationFolder="$(RevitAddinsPath)" SkipUnchangedFiles="true" />
+
+        <ItemGroup>
+            <AllOutputFiles Include="$(OutputPath)\**\*.*" />
+        </ItemGroup>
+        <Copy SourceFiles="@(AllOutputFiles)" DestinationFolder="$(PluginFolder)\%(RecursiveDir)" SkipUnchangedFiles="true" />
     </Target>
 </Project>

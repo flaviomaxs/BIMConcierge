@@ -26,13 +26,13 @@ public class StartTutorialCommand : IExternalCommand
 
             if (!authService.IsAuthenticated)
             {
-                TaskDialog.Show("BIM Concierge",
+                TaskDialog.Show("BIMConcierge",
                     "Você precisa fazer login antes de iniciar um tutorial.\n" +
                     "Clique em 'Abrir Concierge' para acessar a tela de login.");
                 return Result.Cancelled;
             }
 
-            var tutorialWindow = new TutorialWindow(sp);
+            var tutorialWindow = sp.GetRequiredService<TutorialWindow>();
             tutorialWindow.Show();
             return Result.Succeeded;
         }
