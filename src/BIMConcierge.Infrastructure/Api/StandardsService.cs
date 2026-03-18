@@ -33,11 +33,17 @@ public class StandardsService : IStandardsService
         }
     }
 
-    public async Task SaveStandardAsync(CompanyStandard standard) =>
+    public async Task SaveStandardAsync(CompanyStandard standard)
+    {
         await _api.PutAsync<CompanyStandard, object>($"standards/{standard.Id}", standard);
+        await _db.SaveStandardAsync(standard);
+    }
 
-    public async Task DeleteStandardAsync(string id) =>
+    public async Task DeleteStandardAsync(string id)
+    {
         await _api.DeleteAsync($"standards/{id}");
+        await _db.DeleteStandardAsync(id);
+    }
 
     public Task<List<CorrectionEvent>> ValidateModelAsync()
     {
