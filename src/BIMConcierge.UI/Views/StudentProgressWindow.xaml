@@ -5,8 +5,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:vm="clr-namespace:BIMConcierge.UI.ViewModels"
         xmlns:conv="clr-namespace:BIMConcierge.UI.Converters"
+        xmlns:loc="clr-namespace:BIMConcierge.UI.Localization"
         mc:Ignorable="d"
-        Title="BIMConcierge - Progresso do Aluno" Height="768" Width="1280"
+        Title="{loc:Loc ProgressTitle}" Height="768" Width="1280"
         WindowStartupLocation="CenterScreen" WindowStyle="None"
         AllowsTransparency="True" Background="Transparent" FontFamily="Segoe UI">
 
@@ -53,33 +54,33 @@
                                 MouseLeftButtonUp="SidebarDashboard_Click">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="⊞" Foreground="#94A3B8" FontSize="16" Margin="0,0,12,0" VerticalAlignment="Center"/>
-                                <TextBlock Text="Dashboard" Foreground="#94A3B8" FontWeight="Medium" FontSize="13" VerticalAlignment="Center"/>
+                                <TextBlock Text="{loc:Loc NavDashboard}" Foreground="#94A3B8" FontWeight="Medium" FontSize="13" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Border>
                         <Border Background="Transparent" CornerRadius="8" Padding="12,10" Margin="0,0,0,4" Cursor="Hand">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="▶" Foreground="#94A3B8" FontSize="14" Margin="0,0,12,0" VerticalAlignment="Center"/>
-                                <TextBlock Text="Tutoriais" Foreground="#94A3B8" FontWeight="Medium" FontSize="13" VerticalAlignment="Center"/>
+                                <TextBlock Text="{loc:Loc NavTutorials}" Foreground="#94A3B8" FontWeight="Medium" FontSize="13" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Border>
                         <Border Background="Transparent" CornerRadius="8" Padding="12,10" Margin="0,0,0,4" Cursor="Hand"
                                 MouseLeftButtonUp="SidebarStandards_Click">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="★" Foreground="#94A3B8" FontSize="16" Margin="0,0,12,0" VerticalAlignment="Center"/>
-                                <TextBlock Text="Padrões" Foreground="#94A3B8" FontWeight="Medium" FontSize="13" VerticalAlignment="Center"/>
+                                <TextBlock Text="{loc:Loc NavStandards}" Foreground="#94A3B8" FontWeight="Medium" FontSize="13" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Border>
                         <Border Background="#1E293B" CornerRadius="8" Padding="12,10" Margin="0,0,0,4" Cursor="Hand">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="📊" Foreground="White" FontSize="14" Margin="0,0,12,0" VerticalAlignment="Center"/>
-                                <TextBlock Text="Progresso" Foreground="White" FontWeight="SemiBold" FontSize="13" VerticalAlignment="Center"/>
+                                <TextBlock Text="{loc:Loc NavProgress}" Foreground="White" FontWeight="SemiBold" FontSize="13" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Border>
                         <Border Background="Transparent" CornerRadius="8" Padding="12,10" Margin="0,0,0,4" Cursor="Hand"
                                 MouseLeftButtonUp="SidebarAchievements_Click">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="🏆" Foreground="#94A3B8" FontSize="14" Margin="0,0,12,0" VerticalAlignment="Center"/>
-                                <TextBlock Text="Conquistas" Foreground="#94A3B8" FontWeight="Medium" FontSize="13" VerticalAlignment="Center"/>
+                                <TextBlock Text="{loc:Loc NavAchievements}" Foreground="#94A3B8" FontWeight="Medium" FontSize="13" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Border>
                     </StackPanel>
@@ -88,7 +89,7 @@
                     <StackPanel Grid.Row="2">
                         <Border Background="#17191B" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="16" Margin="0,0,0,12">
                             <StackPanel>
-                                <TextBlock Text="PRÓXIMO MARCO" Foreground="#6A7D90" FontSize="10" FontWeight="Bold" Margin="0,0,0,8"/>
+                                <TextBlock Text="{loc:Loc ProgressNextMilestone}" Foreground="#6A7D90" FontSize="10" FontWeight="Bold" Margin="0,0,0,8"/>
                                 <TextBlock Text="Coordenador BIM I" Foreground="White" FontSize="13" FontWeight="Bold" Margin="0,0,0,8"/>
                                 <Grid Margin="0,0,0,4">
                                     <Border Height="6" Background="#1E293B" CornerRadius="3">
@@ -104,7 +105,7 @@
                             </StackPanel>
                         </Border>
 
-                        <Button Content="Retomar Aprendizado" Height="40" Background="#6A7D90" Foreground="White"
+                        <Button Content="{loc:Loc ProgressResumeLearning}" Height="40" Background="#6A7D90" Foreground="White"
                                 FontSize="13" FontWeight="Bold" BorderThickness="0" Cursor="Hand">
                             <Button.Resources>
                                 <Style TargetType="Border"><Setter Property="CornerRadius" Value="8"/></Style>
@@ -130,7 +131,7 @@
                         <Border Width="48" Height="48" Background="#1E293B" CornerRadius="24" Margin="0,0,0,12">
                             <TextBlock Text="⟳" Foreground="#6A7D90" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
-                        <TextBlock Text="Carregando..." Foreground="#94A3B8" FontSize="14" FontWeight="Medium" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{loc:Loc Loading}" Foreground="#94A3B8" FontSize="14" FontWeight="Medium" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </Border>
 
@@ -151,8 +152,8 @@
 
                     <!-- Header -->
                     <StackPanel Grid.Row="0" Margin="0,0,0,20">
-                        <TextBlock Text="Painel do Aluno" FontSize="28" FontWeight="Bold" Foreground="White" Margin="0,0,0,6"/>
-                        <TextBlock Text="Bem-vindo de volta! Você está progredindo muito bem esta semana." FontSize="14" Foreground="#94A3B8"/>
+                        <TextBlock Text="{loc:Loc ProgressStudentPanel}" FontSize="28" FontWeight="Bold" Foreground="White" Margin="0,0,0,6"/>
+                        <TextBlock Text="{loc:Loc ProgressWelcomeBack}" FontSize="14" Foreground="#94A3B8"/>
                     </StackPanel>
 
                     <!-- Quick Stats Cards -->
@@ -170,7 +171,7 @@
                         <Border Grid.Column="0" Background="#232629" BorderBrush="#323639" BorderThickness="1" CornerRadius="12" Padding="20">
                             <StackPanel>
                                 <TextBlock Text="✓" Foreground="#6A7D90" FontSize="20" Margin="0,0,0,12"/>
-                                <TextBlock Text="CONCLUÍDOS" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" Margin="0,0,0,6"/>
+                                <TextBlock Text="{loc:Loc ProgressCompleted}" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" Margin="0,0,0,6"/>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="{Binding CompletedCount, FallbackValue='24'}" FontSize="28" FontWeight="Bold" Foreground="White"/>
                                     <TextBlock Text=" / 50" FontSize="13" Foreground="#94A3B8" VerticalAlignment="Bottom" Margin="0,0,0,4"/>
@@ -181,7 +182,7 @@
                         <Border Grid.Column="2" Background="#232629" BorderBrush="#323639" BorderThickness="1" CornerRadius="12" Padding="20">
                             <StackPanel>
                                 <TextBlock Text="⚡" Foreground="#6A7D90" FontSize="20" Margin="0,0,0,12"/>
-                                <TextBlock Text="PONTOS XP" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" Margin="0,0,0,6"/>
+                                <TextBlock Text="{loc:Loc ProgressXpPoints}" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" Margin="0,0,0,6"/>
                                 <TextBlock Text="{Binding XpPoints, FallbackValue='12.450', StringFormat=N0}" FontSize="28" FontWeight="Bold" Foreground="White"/>
                             </StackPanel>
                         </Border>
@@ -189,7 +190,7 @@
                         <Border Grid.Column="4" Background="#232629" BorderBrush="#323639" BorderThickness="1" CornerRadius="12" Padding="20">
                             <StackPanel>
                                 <TextBlock Text="⏱" Foreground="#6A7D90" FontSize="20" Margin="0,0,0,12"/>
-                                <TextBlock Text="HORAS DE ESTUDO" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" Margin="0,0,0,6"/>
+                                <TextBlock Text="{loc:Loc ProgressStudyHours}" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" Margin="0,0,0,6"/>
                                 <TextBlock Text="{Binding LearningHours, FallbackValue='86', StringFormat={}{0}h}" FontSize="28" FontWeight="Bold" Foreground="White"/>
                             </StackPanel>
                         </Border>
@@ -197,7 +198,7 @@
                         <Border Grid.Column="6" Background="#232629" BorderBrush="#323639" BorderThickness="1" CornerRadius="12" Padding="20">
                             <StackPanel>
                                 <TextBlock Text="🏆" Foreground="#6A7D90" FontSize="20" Margin="0,0,0,12"/>
-                                <TextBlock Text="CERTIFICADOS" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" Margin="0,0,0,6"/>
+                                <TextBlock Text="{loc:Loc ProgressCertificates}" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" Margin="0,0,0,6"/>
                                 <TextBlock Text="{Binding CertificateCount, FallbackValue='3'}" FontSize="28" FontWeight="Bold" Foreground="White"/>
                             </StackPanel>
                         </Border>
@@ -215,14 +216,14 @@
                         <Border Grid.Column="0" Background="#232629" BorderBrush="#323639" BorderThickness="1" CornerRadius="12" Padding="24">
                             <StackPanel>
                                 <Grid Margin="0,0,0,20">
-                                    <TextBlock Text="Proficiência em Habilidades" FontSize="16" FontWeight="Bold" Foreground="White" HorizontalAlignment="Left"/>
+                                    <TextBlock Text="{loc:Loc ProgressSkillProficiency}" FontSize="16" FontWeight="Bold" Foreground="White" HorizontalAlignment="Left"/>
                                     <TextBlock Text="+12% este mês" FontSize="11" FontWeight="Bold" Foreground="#10B981" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                                 </Grid>
 
                                 <!-- Modeling -->
                                 <StackPanel Margin="0,0,0,18">
                                     <Grid Margin="0,0,0,6">
-                                        <TextBlock Text="MODELAGEM" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" HorizontalAlignment="Left"/>
+                                        <TextBlock Text="{loc:Loc ProgressModeling}" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" HorizontalAlignment="Left"/>
                                         <TextBlock Text="80%" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" HorizontalAlignment="Right"/>
                                     </Grid>
                                     <Border Height="8" Background="#1E293B" CornerRadius="4">
@@ -233,7 +234,7 @@
                                 <!-- Documentation -->
                                 <StackPanel Margin="0,0,0,18">
                                     <Grid Margin="0,0,0,6">
-                                        <TextBlock Text="DOCUMENTAÇÃO" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" HorizontalAlignment="Left"/>
+                                        <TextBlock Text="{loc:Loc ProgressDocumentation}" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" HorizontalAlignment="Left"/>
                                         <TextBlock Text="40%" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" HorizontalAlignment="Right"/>
                                     </Grid>
                                     <Border Height="8" Background="#1E293B" CornerRadius="4">
@@ -244,7 +245,7 @@
                                 <!-- Coordination -->
                                 <StackPanel Margin="0,0,0,18">
                                     <Grid Margin="0,0,0,6">
-                                        <TextBlock Text="COORDENAÇÃO" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" HorizontalAlignment="Left"/>
+                                        <TextBlock Text="{loc:Loc ProgressCoordination}" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" HorizontalAlignment="Left"/>
                                         <TextBlock Text="80%" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" HorizontalAlignment="Right"/>
                                     </Grid>
                                     <Border Height="8" Background="#1E293B" CornerRadius="4">
@@ -255,7 +256,7 @@
                                 <!-- Family Creation -->
                                 <StackPanel Margin="0,0,0,18">
                                     <Grid Margin="0,0,0,6">
-                                        <TextBlock Text="CRIAÇÃO DE FAMÍLIAS" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" HorizontalAlignment="Left"/>
+                                        <TextBlock Text="{loc:Loc ProgressFamilyCreation}" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" HorizontalAlignment="Left"/>
                                         <TextBlock Text="70%" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" HorizontalAlignment="Right"/>
                                     </Grid>
                                     <Border Height="8" Background="#1E293B" CornerRadius="4">
@@ -266,7 +267,7 @@
                                 <!-- Data Management -->
                                 <StackPanel>
                                     <Grid Margin="0,0,0,6">
-                                        <TextBlock Text="GESTÃO DE DADOS" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" HorizontalAlignment="Left"/>
+                                        <TextBlock Text="{loc:Loc ProgressDataManagement}" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" HorizontalAlignment="Left"/>
                                         <TextBlock Text="100%" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" HorizontalAlignment="Right"/>
                                     </Grid>
                                     <Border Height="8" Background="#1E293B" CornerRadius="4">
@@ -280,7 +281,7 @@
                         <StackPanel Grid.Column="2">
                             <Border Background="#232629" BorderBrush="#323639" BorderThickness="1" CornerRadius="12" Padding="24" Margin="0,0,0,20">
                                 <StackPanel>
-                                    <TextBlock Text="Tutoriais em Andamento" FontSize="16" FontWeight="Bold" Foreground="White" Margin="0,0,0,16"/>
+                                    <TextBlock Text="{loc:Loc ProgressInProgress}" FontSize="16" FontWeight="Bold" Foreground="White" Margin="0,0,0,16"/>
 
                                     <!-- Tutorial 1 -->
                                     <Border Background="#FFFFFF0A" BorderBrush="#FFFFFF0A" BorderThickness="1" CornerRadius="8" Padding="16" Margin="0,0,0,12">
@@ -347,7 +348,7 @@
                             <!-- Next Recommended Lessons -->
                             <Border Background="#232629" BorderBrush="#323639" BorderThickness="1" CornerRadius="12" Padding="24">
                                 <StackPanel>
-                                    <TextBlock Text="Próximas Lições Recomendadas" FontSize="16" FontWeight="Bold" Foreground="White" Margin="0,0,0,16"/>
+                                    <TextBlock Text="{loc:Loc ProgressNextLessons}" FontSize="16" FontWeight="Bold" Foreground="White" Margin="0,0,0,16"/>
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"/>
@@ -390,8 +391,8 @@
                     <Border Grid.Row="3" Background="#232629" BorderBrush="#323639" BorderThickness="1" CornerRadius="12" Padding="24">
                         <StackPanel>
                             <Grid Margin="0,0,0,20">
-                                <TextBlock Text="Conquistas Recentes" FontSize="16" FontWeight="Bold" Foreground="White" HorizontalAlignment="Left"/>
-                                <TextBlock Text="Ver Todas as Medalhas" FontSize="11" FontWeight="Bold" Foreground="#6A7D90" HorizontalAlignment="Right"
+                                <TextBlock Text="{loc:Loc ProgressRecentAchievements}" FontSize="16" FontWeight="Bold" Foreground="White" HorizontalAlignment="Left"/>
+                                <TextBlock Text="{loc:Loc ProgressViewAllBadges}" FontSize="11" FontWeight="Bold" Foreground="#6A7D90" HorizontalAlignment="Right"
                                            VerticalAlignment="Center" Cursor="Hand"/>
                             </Grid>
 

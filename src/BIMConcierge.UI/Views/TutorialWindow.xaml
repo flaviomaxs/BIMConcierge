@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:BIMConcierge.UI.ViewModels"
+        xmlns:loc="clr-namespace:BIMConcierge.UI.Localization"
         mc:Ignorable="d"
-        Title="BIMConcierge - Tutorial" 
+        Title="{loc:Loc TutorialsTitle}" 
         Height="650" Width="1000"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None" 
@@ -49,7 +50,7 @@
                     </Grid.RowDefinitions>
 
                     <Grid Grid.Row="0" Margin="0,0,0,20">
-                        <TextBlock Text="Progresso" FontSize="20" FontWeight="SemiBold" Foreground="White"/>
+                        <TextBlock Text="{loc:Loc TutorialProgress}" FontSize="20" FontWeight="SemiBold" Foreground="White"/>
                         <Button x:Name="BtnClose" Content="✕" HorizontalAlignment="Right" VerticalAlignment="Top" 
                                 Width="30" Height="30" Background="Transparent" Foreground="#A0A0A5" 
                                 BorderThickness="0" FontSize="16" Cursor="Hand" Click="BtnClose_Click"/>
@@ -72,7 +73,7 @@
                     </StackPanel>
 
                     <StackPanel Grid.Row="2">
-                        <Button Command="{Binding ApplyAutoFixCommand}" Content="⚡ APLICAR AUTO-FIX" Height="40" Margin="0,0,0,10"
+                        <Button Command="{Binding ApplyAutoFixCommand}" Content="{loc:Loc TutorialApplyAutoFix}" Height="40" Margin="0,0,0,10"
                                 Background="#F39C12" Foreground="White" FontWeight="Bold" BorderThickness="0" Cursor="Hand">
                             <Button.Resources>
                                 <Style TargetType="Border">
@@ -88,7 +89,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <Button Grid.Column="0" Command="{Binding PreviousStepCommand}" Content="VOLTAR" Height="45" 
+                            <Button Grid.Column="0" Command="{Binding PreviousStepCommand}" Content="{loc:Loc Back}" Height="45" 
                                     Background="#2D2D35" Foreground="White" FontWeight="Bold" BorderThickness="0" Cursor="Hand">
                                 <Button.Resources>
                                     <Style TargetType="Border">
@@ -97,7 +98,7 @@
                                 </Button.Resources>
                             </Button>
 
-                            <Button Grid.Column="2" Command="{Binding NextStepCommand}" Content="PRÓXIMO" Height="45" 
+                            <Button Grid.Column="2" Command="{Binding NextStepCommand}" Content="{loc:Loc Next}" Height="45" 
                                     Background="#6A7D90" Foreground="White" FontWeight="Bold" BorderThickness="0" Cursor="Hand">
                                 <Button.Resources>
                                     <Style TargetType="Border">

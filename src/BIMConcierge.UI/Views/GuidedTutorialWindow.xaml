@@ -4,8 +4,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:conv="clr-namespace:BIMConcierge.UI.Converters"
+        xmlns:loc="clr-namespace:BIMConcierge.UI.Localization"
         mc:Ignorable="d"
-        Title="BIMConcierge - Tutorial Guiado"
+        Title="{loc:Loc TutorialsTitle}"
         Width="380" SizeToContent="Height"
         WindowStartupLocation="Manual" WindowStyle="None"
         AllowsTransparency="True" Background="Transparent" FontFamily="Segoe UI"
@@ -94,8 +95,8 @@
                         Visibility="{Binding IsCompleted, Converter={StaticResource BoolToVis}, FallbackValue=Collapsed}">
                     <StackPanel HorizontalAlignment="Center">
                         <TextBlock Text="🎉" FontSize="48" HorizontalAlignment="Center" Margin="0,0,0,15"/>
-                        <TextBlock Text="Tutorial Concluído!" FontSize="22" FontWeight="Bold" Foreground="#10B981" HorizontalAlignment="Center" Margin="0,0,0,8"/>
-                        <TextBlock Text="Parabéns! Você completou todas as etapas." Foreground="#94A3B8" FontSize="14" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{loc:Loc GuidedTutorialCompleted}" FontSize="22" FontWeight="Bold" Foreground="#10B981" HorizontalAlignment="Center" Margin="0,0,0,8"/>
+                        <TextBlock Text="{loc:Loc GuidedCongratulations}" Foreground="#94A3B8" FontSize="14" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </Border>
             </StackPanel>
@@ -119,7 +120,7 @@
                         </Button.Resources>
                     </Button>
 
-                    <Button Grid.Column="1" Content="APLICAR AUTO-FIX" Height="40" Margin="10,0"
+                    <Button Grid.Column="1" Content="{loc:Loc GuidedApplyAutoFix}" Height="40" Margin="10,0"
                             Command="{Binding ApplyAutoFixCommand}"
                             Background="#6A7D90" Foreground="White" FontSize="12" FontWeight="Bold" BorderThickness="0" Cursor="Hand">
                         <Button.Resources>

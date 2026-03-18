@@ -5,8 +5,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:vm="clr-namespace:BIMConcierge.UI.ViewModels"
         xmlns:conv="clr-namespace:BIMConcierge.UI.Converters"
+        xmlns:loc="clr-namespace:BIMConcierge.UI.Localization"
         mc:Ignorable="d"
-        Title="BIMConcierge - Padrões da Empresa" Height="768" Width="1280"
+        Title="{loc:Loc StandardsTitle}" Height="768" Width="1280"
         WindowStartupLocation="CenterScreen" WindowStyle="None"
         AllowsTransparency="True" Background="Transparent" FontFamily="Segoe UI">
 
@@ -46,33 +47,33 @@
                                 MouseLeftButtonUp="SidebarDashboard_Click">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="⊞" Foreground="#94A3B8" FontSize="16" Margin="0,0,12,0" VerticalAlignment="Center"/>
-                                <TextBlock Text="Dashboard" Foreground="#94A3B8" FontWeight="Medium" FontSize="13" VerticalAlignment="Center"/>
+                                <TextBlock Text="{loc:Loc NavDashboard}" Foreground="#94A3B8" FontWeight="Medium" FontSize="13" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Border>
                         <Border Background="#1E293B" CornerRadius="8" Padding="12,10" Margin="0,0,0,4" Cursor="Hand">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="★" Foreground="White" FontSize="16" Margin="0,0,12,0" VerticalAlignment="Center"/>
-                                <TextBlock Text="Padrões da Empresa" Foreground="White" FontWeight="SemiBold" FontSize="13" VerticalAlignment="Center"/>
+                                <TextBlock Text="{loc:Loc NavStandards}" Foreground="White" FontWeight="SemiBold" FontSize="13" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Border>
                         <Border Background="Transparent" CornerRadius="8" Padding="12,10" Margin="0,0,0,4" Cursor="Hand"
                                 MouseLeftButtonUp="SidebarProgress_Click">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="📊" Foreground="#94A3B8" FontSize="14" Margin="0,0,12,0" VerticalAlignment="Center"/>
-                                <TextBlock Text="Progresso" Foreground="#94A3B8" FontWeight="Medium" FontSize="13" VerticalAlignment="Center"/>
+                                <TextBlock Text="{loc:Loc NavProgress}" Foreground="#94A3B8" FontWeight="Medium" FontSize="13" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Border>
                         <Border Background="Transparent" CornerRadius="8" Padding="12,10" Margin="0,0,0,4" Cursor="Hand"
                                 MouseLeftButtonUp="SidebarAchievements_Click">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="🏆" Foreground="#94A3B8" FontSize="14" Margin="0,0,12,0" VerticalAlignment="Center"/>
-                                <TextBlock Text="Conquistas" Foreground="#94A3B8" FontWeight="Medium" FontSize="13" VerticalAlignment="Center"/>
+                                <TextBlock Text="{loc:Loc NavAchievements}" Foreground="#94A3B8" FontWeight="Medium" FontSize="13" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Border>
 
                         <Border Height="1" Background="#1E293B" Margin="0,8,0,8"/>
 
-                        <TextBlock Text="CONFIGURAÇÕES" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" Margin="4,0,0,8" Opacity="0.6"/>
+                        <TextBlock Text="{loc:Loc NavSettings}" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" Margin="4,0,0,8" Opacity="0.6"/>
                     </StackPanel>
 
                     <!-- Category Navigation -->
@@ -102,7 +103,7 @@
                                         </Style>
                                     </TextBlock.Style>
                                 </TextBlock>
-                                <TextBlock Text="Conven&#231;&#245;es de Nomenclatura" FontSize="13" VerticalAlignment="Center">
+                                <TextBlock Text="{loc:Loc StandardsNaming}" FontSize="13" VerticalAlignment="Center">
                                     <TextBlock.Style>
                                         <Style TargetType="TextBlock">
                                             <Setter Property="Foreground" Value="#94A3B8"/>
@@ -144,7 +145,7 @@
                                         </Style>
                                     </TextBlock.Style>
                                 </TextBlock>
-                                <TextBlock Text="Requisitos de LOD" FontSize="13" VerticalAlignment="Center">
+                                <TextBlock Text="{loc:Loc StandardsLOD}" FontSize="13" VerticalAlignment="Center">
                                     <TextBlock.Style>
                                         <Style TargetType="TextBlock">
                                             <Setter Property="Foreground" Value="#94A3B8"/>
@@ -186,7 +187,7 @@
                                         </Style>
                                     </TextBlock.Style>
                                 </TextBlock>
-                                <TextBlock Text="Regras de Workset" FontSize="13" VerticalAlignment="Center">
+                                <TextBlock Text="{loc:Loc StandardsWorkset}" FontSize="13" VerticalAlignment="Center">
                                     <TextBlock.Style>
                                         <Style TargetType="TextBlock">
                                             <Setter Property="Foreground" Value="#94A3B8"/>
@@ -228,7 +229,7 @@
                                         </Style>
                                     </TextBlock.Style>
                                 </TextBlock>
-                                <TextBlock Text="Boas Pr&#225;ticas" FontSize="13" VerticalAlignment="Center">
+                                <TextBlock Text="{loc:Loc StandardsBestPractices}" FontSize="13" VerticalAlignment="Center">
                                     <TextBlock.Style>
                                         <Style TargetType="TextBlock">
                                             <Setter Property="Foreground" Value="#94A3B8"/>
@@ -250,10 +251,10 @@
                     <Border Grid.Row="3" Background="#17191B" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="16">
                         <StackPanel>
                             <Grid Margin="0,0,0,8">
-                                <TextBlock Text="Auto-Correção" Foreground="#94A3B8" FontSize="12" FontWeight="SemiBold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                <TextBlock Text="{loc:Loc StandardsAutoCorrection}" Foreground="#94A3B8" FontSize="12" FontWeight="SemiBold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                                 <CheckBox IsChecked="{Binding IsAutoCorrectionEnabled}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                             </Grid>
-                            <TextBlock Text="Aplicar padrões de nomenclatura automaticamente durante a criação de elementos."
+                            <TextBlock Text="{loc:Loc StandardsAutoCorrectDesc}"
                                        Foreground="#64748B" FontSize="10" TextWrapping="Wrap" LineHeight="16"/>
                         </StackPanel>
                     </Border>
@@ -281,7 +282,7 @@
                                 </TextBlock.RenderTransform>
                             </TextBlock>
                         </Border>
-                        <TextBlock Text="Carregando..." Foreground="#94A3B8" FontSize="14" FontWeight="Medium" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{loc:Loc Loading}" Foreground="#94A3B8" FontSize="14" FontWeight="Medium" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </Border>
 
@@ -303,18 +304,18 @@
                     <!-- Header -->
                     <Grid Grid.Row="0" Margin="0,0,0,30">
                         <StackPanel HorizontalAlignment="Left">
-                            <TextBlock Text="Convenções de Nomenclatura" FontSize="24" FontWeight="Bold" Foreground="White" Margin="0,0,0,6"/>
-                            <TextBlock Text="Defina regras estruturais e padrões regex para categorias de elementos Revit." FontSize="13" Foreground="#94A3B8"/>
+                            <TextBlock Text="{loc:Loc StandardsNaming}" FontSize="24" FontWeight="Bold" Foreground="White" Margin="0,0,0,6"/>
+                            <TextBlock Text="{loc:Loc StandardsNamingSubtitle}" FontSize="13" Foreground="#94A3B8"/>
                         </StackPanel>
                         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" VerticalAlignment="Center">
-                            <Button Content="Exportar JSON" Height="36" Padding="16,0" Margin="0,0,10,0"
+                            <Button Content="{loc:Loc StandardsExportJson}" Height="36" Padding="16,0" Margin="0,0,10,0"
                                     Background="Transparent" Foreground="#6A7D90" FontSize="12" FontWeight="SemiBold"
                                     BorderBrush="#6A7D90" BorderThickness="1" Cursor="Hand">
                                 <Button.Resources>
                                     <Style TargetType="Border"><Setter Property="CornerRadius" Value="8"/></Style>
                                 </Button.Resources>
                             </Button>
-                            <Button Content="Salvar Altera&#231;&#245;es" Height="36" Padding="20,0"
+                            <Button Content="{loc:Loc StandardsSaveChanges}" Height="36" Padding="20,0"
                                     Background="#6A7D90" Foreground="White" FontSize="12" FontWeight="SemiBold"
                                     BorderThickness="0" Cursor="Hand"
                                     Command="{Binding RunValidationCommand}">
@@ -331,7 +332,7 @@
                             <Border Background="#0F172A" CornerRadius="12,12,0,0" Padding="16,12" BorderBrush="#1E293B" BorderThickness="0,0,0,1">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="▦" Foreground="#6A7D90" FontSize="16" Margin="0,0,10,0" VerticalAlignment="Center"/>
-                                    <TextBlock Text="Categorias de Parede" Foreground="White" FontSize="13" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{loc:Loc StandardsWallCategories}" Foreground="White" FontSize="13" FontWeight="Bold" VerticalAlignment="Center"/>
                                 </StackPanel>
                             </Border>
                             <Grid Margin="20">
@@ -343,7 +344,7 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Grid.Column="0">
-                                    <TextBlock Text="REGRA DE PREFIXO" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" Margin="0,0,0,8"/>
+                                    <TextBlock Text="{loc:Loc StandardsPrefixRule}" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" Margin="0,0,0,8"/>
                                     <TextBox Text="EXT_" Background="#0F172A" Foreground="White" FontSize="13" Padding="12,8"
                                              BorderBrush="#1E293B" BorderThickness="1">
                                         <TextBox.Resources>
@@ -352,7 +353,7 @@
                                     </TextBox>
                                 </StackPanel>
                                 <StackPanel Grid.Column="2">
-                                    <TextBlock Text="REGRA DE SUFIXO" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" Margin="0,0,0,8"/>
+                                    <TextBlock Text="{loc:Loc StandardsSuffixRule}" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" Margin="0,0,0,8"/>
                                     <TextBox Text="_WALL" Background="#0F172A" Foreground="White" FontSize="13" Padding="12,8"
                                              BorderBrush="#1E293B" BorderThickness="1">
                                         <TextBox.Resources>
@@ -361,7 +362,7 @@
                                     </TextBox>
                                 </StackPanel>
                                 <StackPanel Grid.Column="4">
-                                    <TextBlock Text="PADRÃO REGEX" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" Margin="0,0,0,8"/>
+                                    <TextBlock Text="{loc:Loc StandardsRegexPattern}" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" Margin="0,0,0,8"/>
                                     <TextBox Text="^[A-Z]{3}_.*" Background="#0F172A" Foreground="White" FontSize="13" FontFamily="Consolas" Padding="12,8"
                                              BorderBrush="#1E293B" BorderThickness="1">
                                         <TextBox.Resources>
@@ -379,7 +380,7 @@
                             <Border Background="#0F172A" CornerRadius="12,12,0,0" Padding="16,12" BorderBrush="#1E293B" BorderThickness="0,0,0,1">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="☐" Foreground="#6A7D90" FontSize="16" Margin="0,0,10,0" VerticalAlignment="Center"/>
-                                    <TextBlock Text="Categorias de Portas e Janelas" Foreground="White" FontSize="13" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{loc:Loc StandardsDoorWindowCategories}" Foreground="White" FontSize="13" FontWeight="Bold" VerticalAlignment="Center"/>
                                 </StackPanel>
                             </Border>
                             <Grid Margin="20">
@@ -391,7 +392,7 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Grid.Column="0">
-                                    <TextBlock Text="REGRA DE PREFIXO" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" Margin="0,0,0,8"/>
+                                    <TextBlock Text="{loc:Loc StandardsPrefixRule}" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" Margin="0,0,0,8"/>
                                     <TextBox Text="DR_" Background="#0F172A" Foreground="White" FontSize="13" Padding="12,8"
                                              BorderBrush="#1E293B" BorderThickness="1">
                                         <TextBox.Resources>
@@ -400,7 +401,7 @@
                                     </TextBox>
                                 </StackPanel>
                                 <StackPanel Grid.Column="2">
-                                    <TextBlock Text="REGRA DE SUFIXO" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" Margin="0,0,0,8"/>
+                                    <TextBlock Text="{loc:Loc StandardsSuffixRule}" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" Margin="0,0,0,8"/>
                                     <TextBox Text="(Size)" Background="#0F172A" Foreground="White" FontSize="13" Padding="12,8"
                                              BorderBrush="#1E293B" BorderThickness="1">
                                         <TextBox.Resources>
@@ -409,7 +410,7 @@
                                     </TextBox>
                                 </StackPanel>
                                 <StackPanel Grid.Column="4">
-                                    <TextBlock Text="PADRÃO REGEX" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" Margin="0,0,0,8"/>
+                                    <TextBlock Text="{loc:Loc StandardsRegexPattern}" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" Margin="0,0,0,8"/>
                                     <TextBox Text="DR-[0-9]{2}-.*" Background="#0F172A" Foreground="White" FontSize="13" FontFamily="Consolas" Padding="12,8"
                                              BorderBrush="#1E293B" BorderThickness="1">
                                         <TextBox.Resources>
@@ -424,8 +425,8 @@
                     <!-- LOD Requirements Matrix -->
                     <StackPanel Grid.Row="3" Margin="0,0,0,30">
                         <Grid Margin="0,0,0,16">
-                            <TextBlock Text="Matriz de Requisitos de LOD" FontSize="20" FontWeight="Bold" Foreground="White" HorizontalAlignment="Left"/>
-                            <TextBlock Text="+ Adicionar Categoria" FontSize="11" FontWeight="Bold" Foreground="#6A7D90" HorizontalAlignment="Right"
+                            <TextBlock Text="{loc:Loc StandardsLODMatrix}" FontSize="20" FontWeight="Bold" Foreground="White" HorizontalAlignment="Left"/>
+                            <TextBlock Text="{loc:Loc StandardsAddCategory}" FontSize="11" FontWeight="Bold" Foreground="#6A7D90" HorizontalAlignment="Right"
                                        VerticalAlignment="Center" Cursor="Hand"/>
                         </Grid>
 
@@ -440,10 +441,10 @@
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="60"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" Text="CATEGORIA" Foreground="#94A3B8" FontSize="10" FontWeight="Bold"/>
-                                        <TextBlock Grid.Column="1" Text="FASE" Foreground="#94A3B8" FontSize="10" FontWeight="Bold"/>
+                                        <TextBlock Grid.Column="0" Text="{loc:Loc StandardsColumnCategory}" Foreground="#94A3B8" FontSize="10" FontWeight="Bold"/>
+                                        <TextBlock Grid.Column="1" Text="{loc:Loc StandardsColumnPhase}" Foreground="#94A3B8" FontSize="10" FontWeight="Bold"/>
                                         <TextBlock Grid.Column="2" Text="LOD" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center"/>
-                                        <TextBlock Grid.Column="3" Text="AÇÃO" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center"/>
+                                        <TextBlock Grid.Column="3" Text="{loc:Loc StandardsColumnAction}" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center"/>
                                     </Grid>
                                 </Border>
 
@@ -541,8 +542,8 @@
                                     <TextBlock Text="⚠" Foreground="#F59E0B" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
                                 <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                    <TextBlock Text="Modo Auditoria: Ativado" Foreground="White" FontSize="13" FontWeight="Bold" Margin="0,0,0,4"/>
-                                    <TextBlock Text="O sistema sinalizará componentes que excedam 5MB ou contenham mais de 20.000 polígonos."
+                                    <TextBlock Text="{loc:Loc StandardsAuditMode}" Foreground="White" FontSize="13" FontWeight="Bold" Margin="0,0,0,4"/>
+                                    <TextBlock Text="{loc:Loc StandardsAuditModeDesc}"
                                                Foreground="#94A3B8" FontSize="11" TextWrapping="Wrap" LineHeight="18"/>
                                 </StackPanel>
                             </Grid>
@@ -559,8 +560,8 @@
                                     <TextBlock Text="✓" Foreground="#10B981" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
                                 <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                    <TextBlock Text="Aplicação de Padrões" Foreground="White" FontSize="13" FontWeight="Bold" Margin="0,0,0,4"/>
-                                    <TextBlock Text="Monitoramento ativo garantindo que todos os Revit Links estejam como 'Overlay' ao invés de 'Attachment'."
+                                    <TextBlock Text="{loc:Loc StandardsEnforcement}" Foreground="White" FontSize="13" FontWeight="Bold" Margin="0,0,0,4"/>
+                                    <TextBlock Text="{loc:Loc StandardsEnforcementDesc}"
                                                Foreground="#94A3B8" FontSize="11" TextWrapping="Wrap" LineHeight="18"/>
                                 </StackPanel>
                             </Grid>

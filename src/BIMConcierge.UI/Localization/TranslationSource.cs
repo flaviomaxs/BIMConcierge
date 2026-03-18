@@ -37,7 +37,7 @@ public sealed class TranslationSource : INotifyPropertyChanged
     /// Gets a formatted string with arguments.
     /// </summary>
     public static string Format(string key, params object[] args) =>
-        string.Format(GetString(key), args);
+        string.Format(Instance._currentCulture, GetString(key), args);
 
     public CultureInfo CurrentCulture
     {

@@ -5,8 +5,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:vm="clr-namespace:BIMConcierge.UI.ViewModels"
         xmlns:conv="clr-namespace:BIMConcierge.UI.Converters"
+        xmlns:loc="clr-namespace:BIMConcierge.UI.Localization"
         mc:Ignorable="d"
-        Title="BIMConcierge - Conquistas e Gamificação" Height="768" Width="1280"
+        Title="{loc:Loc AchievementsTitle}" Height="768" Width="1280"
         WindowStartupLocation="CenterScreen" WindowStyle="None"
         AllowsTransparency="True" Background="Transparent" FontFamily="Segoe UI">
 
@@ -46,33 +47,33 @@
                                 MouseLeftButtonUp="SidebarDashboard_Click">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="⊞" Foreground="#94A3B8" FontSize="16" Margin="0,0,12,0" VerticalAlignment="Center"/>
-                                <TextBlock Text="Dashboard" Foreground="#94A3B8" FontWeight="Medium" FontSize="13" VerticalAlignment="Center"/>
+                                <TextBlock Text="{loc:Loc NavDashboard}" Foreground="#94A3B8" FontWeight="Medium" FontSize="13" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Border>
                         <Border Background="Transparent" CornerRadius="8" Padding="12,10" Margin="0,0,0,4" Cursor="Hand">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="▶" Foreground="#94A3B8" FontSize="14" Margin="0,0,12,0" VerticalAlignment="Center"/>
-                                <TextBlock Text="Tutoriais" Foreground="#94A3B8" FontWeight="Medium" FontSize="13" VerticalAlignment="Center"/>
+                                <TextBlock Text="{loc:Loc NavTutorials}" Foreground="#94A3B8" FontWeight="Medium" FontSize="13" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Border>
                         <Border Background="Transparent" CornerRadius="8" Padding="12,10" Margin="0,0,0,4" Cursor="Hand"
                                 MouseLeftButtonUp="SidebarStandards_Click">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="★" Foreground="#94A3B8" FontSize="16" Margin="0,0,12,0" VerticalAlignment="Center"/>
-                                <TextBlock Text="Padrões" Foreground="#94A3B8" FontWeight="Medium" FontSize="13" VerticalAlignment="Center"/>
+                                <TextBlock Text="{loc:Loc NavStandards}" Foreground="#94A3B8" FontWeight="Medium" FontSize="13" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Border>
                         <Border Background="Transparent" CornerRadius="8" Padding="12,10" Margin="0,0,0,4" Cursor="Hand"
                                 MouseLeftButtonUp="SidebarProgress_Click">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="📊" Foreground="#94A3B8" FontSize="14" Margin="0,0,12,0" VerticalAlignment="Center"/>
-                                <TextBlock Text="Progresso" Foreground="#94A3B8" FontWeight="Medium" FontSize="13" VerticalAlignment="Center"/>
+                                <TextBlock Text="{loc:Loc NavProgress}" Foreground="#94A3B8" FontWeight="Medium" FontSize="13" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Border>
                         <Border Background="#6A7D90" CornerRadius="8" Padding="12,10" Margin="0,0,0,4" Cursor="Hand">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="🏆" Foreground="White" FontSize="14" Margin="0,0,12,0" VerticalAlignment="Center"/>
-                                <TextBlock Text="Conquistas" Foreground="White" FontWeight="SemiBold" FontSize="13" VerticalAlignment="Center"/>
+                                <TextBlock Text="{loc:Loc NavAchievements}" Foreground="White" FontWeight="SemiBold" FontSize="13" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Border>
                     </StackPanel>
@@ -81,9 +82,9 @@
                     <Border Grid.Row="2" Background="#17191B" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="16">
                         <StackPanel>
                             <Grid Margin="0,0,0,6">
-                                <TextBlock Text="STATUS PRO" Foreground="#6A7D90" FontSize="10" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                <TextBlock Text="{loc:Loc AchievementsProStatus}" Foreground="#6A7D90" FontSize="10" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                                 <Border Background="#6A7D9033" CornerRadius="4" Padding="6,2" HorizontalAlignment="Right">
-                                    <TextBlock Text="Ativo" Foreground="#6A7D90" FontSize="10" FontWeight="Bold"/>
+                                    <TextBlock Text="{loc:Loc AchievementsActive}" Foreground="#6A7D90" FontSize="10" FontWeight="Bold"/>
                                 </Border>
                             </Grid>
                             <TextBlock Text="Próxima Renovação: Out 2024" Foreground="#94A3B8" FontSize="11"/>
@@ -113,7 +114,7 @@
                         <Border Width="48" Height="48" Background="#1E293B" CornerRadius="24" Margin="0,0,0,12">
                             <TextBlock Text="⟳" Foreground="#6A7D90" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
-                        <TextBlock Text="Carregando..." Foreground="#94A3B8" FontSize="14" FontWeight="Medium" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{loc:Loc Loading}" Foreground="#94A3B8" FontSize="14" FontWeight="Medium" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </Border>
 
@@ -128,7 +129,7 @@
                         <!-- Search -->
                         <Border Grid.Column="0" Background="#232629" CornerRadius="8" Padding="12,8" MaxWidth="400" HorizontalAlignment="Left">
                             <Grid>
-                                <TextBlock Text="🔍  Buscar conquistas, missões ou padrões..." Foreground="#64748B" FontSize="12"
+                                <TextBlock Text="{loc:Loc AchievementsSearch}" Foreground="#64748B" FontSize="12"
                                            VerticalAlignment="Center" IsHitTestVisible="False"/>
                             </Grid>
                         </Border>
@@ -210,7 +211,7 @@
                                     <StackPanel>
                                         <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
                                             <TextBlock Text="📋" FontSize="14" Margin="0,0,8,0" VerticalAlignment="Center"/>
-                                            <TextBlock Text="Missões Ativas" FontSize="14" FontWeight="Bold" Foreground="White"/>
+                                            <TextBlock Text="{loc:Loc AchievementsDailyQuests}" FontSize="14" FontWeight="Bold" Foreground="White"/>
                                         </StackPanel>
 
                                         <!-- Quest 1 -->
@@ -251,7 +252,7 @@
                                         <Grid Margin="0,0,0,16">
                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                                                 <TextBlock Text="📊" FontSize="14" Margin="0,0,8,0" VerticalAlignment="Center"/>
-                                                <TextBlock Text="Ranking" FontSize="14" FontWeight="Bold" Foreground="White"/>
+                                                <TextBlock Text="{loc:Loc AchievementsLeaderboard}" FontSize="14" FontWeight="Bold" Foreground="White"/>
                                             </StackPanel>
                                             <TextBlock Text="VER TODOS" FontSize="9" FontWeight="Bold" Foreground="#6A7D90" HorizontalAlignment="Right" VerticalAlignment="Center" Cursor="Hand"/>
                                         </Grid>
@@ -350,7 +351,7 @@
                                         <Grid Margin="0,0,0,20">
                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                                                 <TextBlock Text="🏆" FontSize="16" Margin="0,0,8,0" VerticalAlignment="Center"/>
-                                                <TextBlock Text="Galeria de Conquistas" FontSize="18" FontWeight="Bold" Foreground="White"/>
+                                                <TextBlock Text="{loc:Loc AchievementsGallery}" FontSize="18" FontWeight="Bold" Foreground="White"/>
                                             </StackPanel>
                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                                                 <Border Background="#6A7D90" CornerRadius="4" Padding="8,4" Margin="0,0,6,0" Cursor="Hand">
