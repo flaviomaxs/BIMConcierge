@@ -47,11 +47,11 @@ public class StandardsService : IStandardsService
         return Task.FromResult(new List<CorrectionEvent>());
     }
 
-    public Task<bool> AutoFixAsync(string correctionEventId)
+    public async Task<bool> AutoFixAsync(string correctionEventId)
     {
         if (_dispatcher is RevitEventDispatcher dispatcher)
-            return Task.FromResult(dispatcher.TryAutoFix(correctionEventId));
+            return await dispatcher.TryAutoFixAsync(correctionEventId);
 
-        return Task.FromResult(false);
+        return false;
     }
 }

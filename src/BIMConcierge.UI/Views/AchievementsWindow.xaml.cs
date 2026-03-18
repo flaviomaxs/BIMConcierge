@@ -13,6 +13,7 @@ public partial class AchievementsWindow : Window
         InitializeComponent();
         _vm = viewModel;
         DataContext = viewModel;
+        Loaded += (_, _) => viewModel.LoadCommand.Execute(null);
     }
 
     private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

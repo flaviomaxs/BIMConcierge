@@ -2,6 +2,7 @@ using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using BIMConcierge.Core.Interfaces;
+using BIMConcierge.Infrastructure.Revit;
 using BIMConcierge.UI.Views;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -42,6 +43,19 @@ public class OpenDashboardCommand : IExternalCommand
 
             if (authService.IsAuthenticated)
             {
+                // Attach bridge on first command execution (needs UIApplication)
+                var bridge = sp.GetRequiredService<RevitEventBridge>();
+                bridge.AttachIfNeeded(commandData.Application);
+
+                // Load company standards into the rule engine
+                var dispatcher = sp.GetRequiredService<IRevitEventDispatcher>();
+                if (dispatcher is RevitEventDispatcher revitDispatcher && !revitDispatcher.StandardsLoaded)
+                {
+                    var companyId = authService.CurrentUser?.CompanyId ?? string.Empty;
+                    if (!string.IsNullOrEmpty(companyId))
+                        revitDispatcher.LoadStandardsAsync(companyId).GetAwaiter().GetResult();
+                }
+
                 var dashboard = sp.GetRequiredService<DashboardWindow>();
                 dashboard.Show();
             }

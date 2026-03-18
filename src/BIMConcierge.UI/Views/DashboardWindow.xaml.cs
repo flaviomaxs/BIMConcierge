@@ -26,6 +26,9 @@ public partial class DashboardWindow : Window
     private void SidebarTutorials_Click(object sender, MouseButtonEventArgs e) =>
         _vm.OpenWindowCommand.Execute("TutorialLibrary");
 
+    private void SidebarCorrections_Click(object sender, MouseButtonEventArgs e) =>
+        _vm.OpenWindowCommand.Execute("Corrections");
+
     private void SidebarStandards_Click(object sender, MouseButtonEventArgs e) =>
         _vm.OpenWindowCommand.Execute("CompanyStandards");
 

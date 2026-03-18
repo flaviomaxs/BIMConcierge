@@ -49,10 +49,18 @@
                         </Border>
 
                         <Border Background="Transparent" CornerRadius="8" Padding="12,10" Margin="0,0,0,5" Cursor="Hand"
+                                MouseLeftButtonUp="SidebarCorrections_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="&#x26A0;" Foreground="#94A3B8" FontSize="18" Margin="0,0,12,0" VerticalAlignment="Center"/>
+                                <TextBlock Text="Corre&#231;&#245;es" Foreground="#94A3B8" FontWeight="Medium" FontSize="14" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Background="Transparent" CornerRadius="8" Padding="12,10" Margin="0,0,0,5" Cursor="Hand"
                                 MouseLeftButtonUp="SidebarStandards_Click">
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="★" Foreground="#94A3B8" FontSize="18" Margin="0,0,12,0" VerticalAlignment="Center"/>
-                                <TextBlock Text="Padrões da Empresa" Foreground="#94A3B8" FontWeight="Medium" FontSize="14" VerticalAlignment="Center"/>
+                                <TextBlock Text="&#x2605;" Foreground="#94A3B8" FontSize="18" Margin="0,0,12,0" VerticalAlignment="Center"/>
+                                <TextBlock Text="Padr&#245;es da Empresa" Foreground="#94A3B8" FontWeight="Medium" FontSize="14" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Border>
 

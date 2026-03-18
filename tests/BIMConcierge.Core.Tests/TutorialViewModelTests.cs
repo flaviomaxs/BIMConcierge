@@ -13,13 +13,14 @@ public class TutorialViewModelTests
     private readonly Mock<ITutorialService> _tutorialMock = new();
     private readonly Mock<IAuthService> _authMock = new();
     private readonly Mock<IRevitEventDispatcher> _dispatcherMock = new();
+    private readonly Mock<INavigationService> _navigationMock = new();
 
     private static readonly User TestUser = new() { Id = "u1", Name = "Test User" };
 
     private TutorialViewModel CreateSut()
     {
         _authMock.SetupGet(a => a.CurrentUser).Returns(TestUser);
-        return new TutorialViewModel(_tutorialMock.Object, _authMock.Object, _dispatcherMock.Object);
+        return new TutorialViewModel(_tutorialMock.Object, _authMock.Object, _dispatcherMock.Object, _navigationMock.Object);
     }
 
     private static Tutorial CreateTestTutorial(int stepCount = 3) => new()

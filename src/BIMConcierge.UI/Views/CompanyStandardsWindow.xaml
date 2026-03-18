@@ -77,31 +77,171 @@
 
                     <!-- Category Navigation -->
                     <StackPanel Grid.Row="2">
-                        <Border Background="#1E293B" CornerRadius="8" Padding="12,10" Margin="0,0,0,4" Cursor="Hand">
+                        <Border CornerRadius="8" Padding="12,10" Margin="0,0,0,4" Cursor="Hand"
+                                MouseLeftButtonUp="CategoryNaming_Click">
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding SelectedCategory}" Value="Naming Conventions">
+                                            <Setter Property="Background" Value="#1E293B"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="✎" Foreground="White" FontSize="16" Margin="0,0,12,0" VerticalAlignment="Center"/>
-                                <TextBlock Text="Convenções de Nomenclatura" Foreground="White" FontWeight="SemiBold" FontSize="13" VerticalAlignment="Center"/>
+                                <TextBlock Text="&#x270E;" FontSize="16" Margin="0,0,12,0" VerticalAlignment="Center">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Foreground" Value="#94A3B8"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding SelectedCategory}" Value="Naming Conventions">
+                                                    <Setter Property="Foreground" Value="White"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <TextBlock Text="Conven&#231;&#245;es de Nomenclatura" FontSize="13" VerticalAlignment="Center">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Foreground" Value="#94A3B8"/>
+                                            <Setter Property="FontWeight" Value="Medium"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding SelectedCategory}" Value="Naming Conventions">
+                                                    <Setter Property="Foreground" Value="White"/>
+                                                    <Setter Property="FontWeight" Value="SemiBold"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
                             </StackPanel>
                         </Border>
 
-                        <Border Background="Transparent" CornerRadius="8" Padding="12,10" Margin="0,0,0,4" Cursor="Hand">
+                        <Border CornerRadius="8" Padding="12,10" Margin="0,0,0,4" Cursor="Hand"
+                                MouseLeftButtonUp="CategoryLOD_Click">
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding SelectedCategory}" Value="LOD Requirements">
+                                            <Setter Property="Background" Value="#1E293B"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="▧" Foreground="#94A3B8" FontSize="16" Margin="0,0,12,0" VerticalAlignment="Center"/>
-                                <TextBlock Text="Requisitos de LOD" Foreground="#94A3B8" FontWeight="Medium" FontSize="13" VerticalAlignment="Center"/>
+                                <TextBlock Text="&#x25A7;" FontSize="16" Margin="0,0,12,0" VerticalAlignment="Center">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Foreground" Value="#94A3B8"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding SelectedCategory}" Value="LOD Requirements">
+                                                    <Setter Property="Foreground" Value="White"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <TextBlock Text="Requisitos de LOD" FontSize="13" VerticalAlignment="Center">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Foreground" Value="#94A3B8"/>
+                                            <Setter Property="FontWeight" Value="Medium"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding SelectedCategory}" Value="LOD Requirements">
+                                                    <Setter Property="Foreground" Value="White"/>
+                                                    <Setter Property="FontWeight" Value="SemiBold"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
                             </StackPanel>
                         </Border>
 
-                        <Border Background="Transparent" CornerRadius="8" Padding="12,10" Margin="0,0,0,4" Cursor="Hand">
+                        <Border CornerRadius="8" Padding="12,10" Margin="0,0,0,4" Cursor="Hand"
+                                MouseLeftButtonUp="CategoryWorkset_Click">
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding SelectedCategory}" Value="Workset Rules">
+                                            <Setter Property="Background" Value="#1E293B"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="▣" Foreground="#94A3B8" FontSize="16" Margin="0,0,12,0" VerticalAlignment="Center"/>
-                                <TextBlock Text="Regras de Workset" Foreground="#94A3B8" FontWeight="Medium" FontSize="13" VerticalAlignment="Center"/>
+                                <TextBlock Text="&#x25A3;" FontSize="16" Margin="0,0,12,0" VerticalAlignment="Center">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Foreground" Value="#94A3B8"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding SelectedCategory}" Value="Workset Rules">
+                                                    <Setter Property="Foreground" Value="White"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <TextBlock Text="Regras de Workset" FontSize="13" VerticalAlignment="Center">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Foreground" Value="#94A3B8"/>
+                                            <Setter Property="FontWeight" Value="Medium"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding SelectedCategory}" Value="Workset Rules">
+                                                    <Setter Property="Foreground" Value="White"/>
+                                                    <Setter Property="FontWeight" Value="SemiBold"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
                             </StackPanel>
                         </Border>
 
-                        <Border Background="Transparent" CornerRadius="8" Padding="12,10" Margin="0,0,0,4" Cursor="Hand">
+                        <Border CornerRadius="8" Padding="12,10" Margin="0,0,0,4" Cursor="Hand"
+                                MouseLeftButtonUp="CategoryBestPractices_Click">
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding SelectedCategory}" Value="Best Practices">
+                                            <Setter Property="Background" Value="#1E293B"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="✓" Foreground="#94A3B8" FontSize="16" Margin="0,0,12,0" VerticalAlignment="Center"/>
-                                <TextBlock Text="Boas Práticas" Foreground="#94A3B8" FontWeight="Medium" FontSize="13" VerticalAlignment="Center"/>
+                                <TextBlock Text="&#x2713;" FontSize="16" Margin="0,0,12,0" VerticalAlignment="Center">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Foreground" Value="#94A3B8"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding SelectedCategory}" Value="Best Practices">
+                                                    <Setter Property="Foreground" Value="White"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <TextBlock Text="Boas Pr&#225;ticas" FontSize="13" VerticalAlignment="Center">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Foreground" Value="#94A3B8"/>
+                                            <Setter Property="FontWeight" Value="Medium"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding SelectedCategory}" Value="Best Practices">
+                                                    <Setter Property="Foreground" Value="White"/>
+                                                    <Setter Property="FontWeight" Value="SemiBold"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
                             </StackPanel>
                         </Border>
                     </StackPanel>
@@ -111,7 +251,7 @@
                         <StackPanel>
                             <Grid Margin="0,0,0,8">
                                 <TextBlock Text="Auto-Correção" Foreground="#94A3B8" FontSize="12" FontWeight="SemiBold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                                <CheckBox x:Name="ChkAutoCorrection" IsChecked="True" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                <CheckBox IsChecked="{Binding IsAutoCorrectionEnabled}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                             </Grid>
                             <TextBlock Text="Aplicar padrões de nomenclatura automaticamente durante a criação de elementos."
                                        Foreground="#64748B" FontSize="10" TextWrapping="Wrap" LineHeight="16"/>
@@ -174,9 +314,10 @@
                                     <Style TargetType="Border"><Setter Property="CornerRadius" Value="8"/></Style>
                                 </Button.Resources>
                             </Button>
-                            <Button Content="Salvar Alterações" Height="36" Padding="20,0"
+                            <Button Content="Salvar Altera&#231;&#245;es" Height="36" Padding="20,0"
                                     Background="#6A7D90" Foreground="White" FontSize="12" FontWeight="SemiBold"
-                                    BorderThickness="0" Cursor="Hand">
+                                    BorderThickness="0" Cursor="Hand"
+                                    Command="{Binding RunValidationCommand}">
                                 <Button.Resources>
                                     <Style TargetType="Border"><Setter Property="CornerRadius" Value="8"/></Style>
                                 </Button.Resources>

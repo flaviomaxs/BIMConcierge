@@ -13,6 +13,7 @@ public partial class CompanyStandardsWindow : Window
         InitializeComponent();
         _vm = viewModel;
         DataContext = viewModel;
+        Loaded += (_, _) => viewModel.LoadCommand.Execute(null);
     }
 
     private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -40,4 +41,16 @@ public partial class CompanyStandardsWindow : Window
         _vm.OpenWindowCommand.Execute("Achievements");
         this.Close();
     }
+
+    private void CategoryNaming_Click(object sender, MouseButtonEventArgs e) =>
+        _vm.SelectCategoryCommand.Execute("Naming Conventions");
+
+    private void CategoryLOD_Click(object sender, MouseButtonEventArgs e) =>
+        _vm.SelectCategoryCommand.Execute("LOD Requirements");
+
+    private void CategoryWorkset_Click(object sender, MouseButtonEventArgs e) =>
+        _vm.SelectCategoryCommand.Execute("Workset Rules");
+
+    private void CategoryBestPractices_Click(object sender, MouseButtonEventArgs e) =>
+        _vm.SelectCategoryCommand.Execute("Best Practices");
 }
