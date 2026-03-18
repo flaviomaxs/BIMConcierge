@@ -3,8 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:loc="clr-namespace:BIMConcierge.UI.Localization"
         mc:Ignorable="d"
-        Title="BIMConcierge - Biblioteca de Tutoriais" Height="768" Width="1280"
+        Title="{loc:Loc TutorialsTitle}" Height="768" Width="1280"
         WindowStartupLocation="CenterScreen" WindowStyle="None"
         AllowsTransparency="True" Background="Transparent" FontFamily="Segoe UI">
 
@@ -36,14 +37,14 @@
                                 MouseLeftButtonDown="SidebarDashboard_Click">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="&#x229E;" Foreground="#94A3B8" FontSize="18" Margin="0,0,12,0" VerticalAlignment="Center"/>
-                                <TextBlock Text="Painel Principal" Foreground="#94A3B8" FontWeight="Medium" FontSize="14" VerticalAlignment="Center"/>
+                                <TextBlock Text="{loc:Loc NavDashboard}" Foreground="#94A3B8" FontWeight="Medium" FontSize="14" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Border>
 
                         <Border Background="#1E293B" CornerRadius="8" Padding="12,10" Margin="0,0,0,5" Cursor="Hand">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="&#x25B6;" Foreground="#6A7D90" FontSize="16" Margin="0,0,12,0" VerticalAlignment="Center"/>
-                                <TextBlock Text="Tutoriais" Foreground="White" FontWeight="SemiBold" FontSize="14" VerticalAlignment="Center"/>
+                                <TextBlock Text="{loc:Loc NavTutorials}" Foreground="White" FontWeight="SemiBold" FontSize="14" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Border>
 
@@ -51,14 +52,14 @@
                                 MouseLeftButtonDown="SidebarStandards_Click">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="&#x2605;" Foreground="#94A3B8" FontSize="18" Margin="0,0,12,0" VerticalAlignment="Center"/>
-                                <TextBlock Text="Padr&#245;es da Empresa" Foreground="#94A3B8" FontWeight="Medium" FontSize="14" VerticalAlignment="Center"/>
+                                <TextBlock Text="{loc:Loc NavStandards}" Foreground="#94A3B8" FontWeight="Medium" FontSize="14" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Border>
 
                         <Border Background="Transparent" CornerRadius="8" Padding="12,10" Margin="0,0,0,5" Cursor="Hand">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="&#x2699;" Foreground="#94A3B8" FontSize="18" Margin="0,0,12,0" VerticalAlignment="Center"/>
-                                <TextBlock Text="Configura&#231;&#245;es" Foreground="#94A3B8" FontWeight="Medium" FontSize="14" VerticalAlignment="Center"/>
+                                <TextBlock Text="{loc:Loc NavSettings}" Foreground="#94A3B8" FontWeight="Medium" FontSize="14" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Border>
                     </StackPanel>
@@ -99,8 +100,8 @@
                         Cursor="Hand" Click="BtnClose_Click"/>
 
                 <StackPanel Grid.Row="0" Margin="0,0,0,30">
-                    <TextBlock Text="Biblioteca de Treinamentos" FontSize="28" FontWeight="Bold" Foreground="White" Margin="0,0,0,8"/>
-                    <TextBlock Text="Aprimore suas habilidades com tutoriais interativos guiados diretamente no Revit." FontSize="15" Foreground="#94A3B8"/>
+                    <TextBlock Text="{loc:Loc TutorialsHeading}" FontSize="28" FontWeight="Bold" Foreground="White" Margin="0,0,0,8"/>
+                    <TextBlock Text="{loc:Loc TutorialsSubtitle}" FontSize="15" Foreground="#94A3B8"/>
                 </StackPanel>
 
                 <!-- ── Search + Filters ──────────────────────────────────── -->
@@ -120,7 +121,7 @@
                     </Border>
 
                     <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button Content="Todos" Height="40" Padding="20,0" Margin="0,0,10,0"
+                        <Button Content="{loc:Loc TutorialsFilterAll}" Height="40" Padding="20,0" Margin="0,0,10,0"
                                 FontSize="13" FontWeight="SemiBold" BorderThickness="0" Cursor="Hand"
                                 Command="{Binding SetFilterCommand}" CommandParameter="Todos">
                             <Button.Style>
@@ -146,7 +147,7 @@
                             </Button.Style>
                         </Button>
 
-                        <Button Content="Arquitetura" Height="40" Padding="20,0" Margin="0,0,10,0"
+                        <Button Content="{loc:Loc TutorialsFilterArchitecture}" Height="40" Padding="20,0" Margin="0,0,10,0"
                                 FontSize="13" FontWeight="SemiBold" BorderThickness="0" Cursor="Hand"
                                 Command="{Binding SetFilterCommand}" CommandParameter="Arquitetura">
                             <Button.Style>
@@ -172,7 +173,7 @@
                             </Button.Style>
                         </Button>
 
-                        <Button Content="Estrutura" Height="40" Padding="20,0" Margin="0,0,10,0"
+                        <Button Content="{loc:Loc TutorialsFilterStructure}" Height="40" Padding="20,0" Margin="0,0,10,0"
                                 FontSize="13" FontWeight="SemiBold" BorderThickness="0" Cursor="Hand"
                                 Command="{Binding SetFilterCommand}" CommandParameter="Estrutura">
                             <Button.Style>
@@ -198,7 +199,7 @@
                             </Button.Style>
                         </Button>
 
-                        <Button Content="Padr&#245;es" Height="40" Padding="20,0" Margin="0,0,0,0"
+                        <Button Content="{loc:Loc TutorialsFilterStandards}" Height="40" Padding="20,0" Margin="0,0,0,0"
                                 FontSize="13" FontWeight="SemiBold" BorderThickness="0" Cursor="Hand"
                                 Command="{Binding SetFilterCommand}" CommandParameter="Padr&#245;es">
                             <Button.Style>
@@ -227,7 +228,7 @@
                 </Grid>
 
                 <!-- ── Loading Indicator ─────────────────────────────────── -->
-                <TextBlock Grid.Row="2" Text="Carregando tutoriais..." FontSize="16" Foreground="#94A3B8"
+                <TextBlock Grid.Row="2" Text="{loc:Loc TutorialsLoading}" FontSize="16" Foreground="#94A3B8"
                            HorizontalAlignment="Center" VerticalAlignment="Center"
                            Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibility}}"/>
 
@@ -257,7 +258,7 @@
 
                                         <!-- Preview area -->
                                         <Border Grid.Row="0" Height="140" Background="#1E293B" CornerRadius="8" Margin="0,0,0,15">
-                                            <TextBlock Text="[Preview do Tutorial]" Foreground="#6A7D90" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            <TextBlock Text="{loc:Loc TutorialsPreview}" Foreground="#6A7D90" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                         </Border>
 
                                         <!-- Category badge + Title -->
@@ -305,7 +306,7 @@
                                                 </Border>
                                             </Border>
 
-                                            <Button Content="INICIAR TRILHA" Height="35"
+                                            <Button Content="{loc:Loc TutorialsStartTrack}" Height="35"
                                                     Background="#1E293B" Foreground="White" FontSize="12" FontWeight="Bold" BorderThickness="0" Cursor="Hand"
                                                     Command="{Binding DataContext.OpenTutorialCommand, RelativeSource={RelativeSource AncestorType=Window}}"
                                                     CommandParameter="{Binding}">

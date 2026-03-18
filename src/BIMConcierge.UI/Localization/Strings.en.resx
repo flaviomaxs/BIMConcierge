@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute name="xml:space" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+
+  <!-- ══ Login ═══════════════════════════════════════════════════════════ -->
+  <data name="LoginTitle" xml:space="preserve"><value>BIMConcierge - Login</value></data>
+  <data name="LoginHeroTitle" xml:space="preserve"><value>Your BIM Journey Starts Here</value></data>
+  <data name="LoginHeroSubtitle" xml:space="preserve"><value>Welcome to the intelligent assistant that transforms the way your office designs in Revit.</value></data>
+  <data name="LoginFeature1" xml:space="preserve"><value>Integrated gamified training</value></data>
+  <data name="LoginFeature2" xml:space="preserve"><value>Real-time modeling correction</value></data>
+  <data name="LoginFeature3" xml:space="preserve"><value>Automated company standardization</value></data>
+  <data name="LoginWelcome" xml:space="preserve"><value>Welcome back</value></data>
+  <data name="LoginCredentials" xml:space="preserve"><value>Enter your credentials to access your account.</value></data>
+  <data name="LoginEmail" xml:space="preserve"><value>Corporate Email</value></data>
+  <data name="LoginPassword" xml:space="preserve"><value>Password</value></data>
+  <data name="LoginLicenseKey" xml:space="preserve"><value>License Key</value></data>
+  <data name="LoginRememberMe" xml:space="preserve"><value>Remember me</value></data>
+  <data name="LoginForgotPassword" xml:space="preserve"><value>Forgot password?</value></data>
+  <data name="LoginButton" xml:space="preserve"><value>Sign In</value></data>
+  <data name="LoginNeedHelp" xml:space="preserve"><value>Need help?</value></data>
+  <data name="LoginContactSupport" xml:space="preserve"><value>Contact support</value></data>
+  <data name="LoginAllFieldsRequired" xml:space="preserve"><value>Please fill in all fields.</value></data>
+  <data name="LoginFailed" xml:space="preserve"><value>Login failed.</value></data>
+
+  <!-- ══ Sidebar Navigation ══════════════════════════════════════════════ -->
+  <data name="NavDashboard" xml:space="preserve"><value>Dashboard</value></data>
+  <data name="NavTutorials" xml:space="preserve"><value>Tutorials</value></data>
+  <data name="NavCorrections" xml:space="preserve"><value>Corrections</value></data>
+  <data name="NavStandards" xml:space="preserve"><value>Company Standards</value></data>
+  <data name="NavProgress" xml:space="preserve"><value>Student Progress</value></data>
+  <data name="NavAchievements" xml:space="preserve"><value>Achievements</value></data>
+  <data name="NavSettings" xml:space="preserve"><value>Settings</value></data>
+
+  <!-- ══ Dashboard ═══════════════════════════════════════════════════════ -->
+  <data name="DashboardTitle" xml:space="preserve"><value>BIMConcierge - Dashboard</value></data>
+  <data name="DashboardWelcome" xml:space="preserve"><value>Welcome back, {0}!</value></data>
+  <data name="DashboardSubtitle" xml:space="preserve"><value>Here's what's happening with your models today.</value></data>
+  <data name="DashboardItemsModeled" xml:space="preserve"><value>ITEMS MODELED</value></data>
+  <data name="DashboardOperationsOnStandard" xml:space="preserve"><value>OPERATIONS ON STANDARD</value></data>
+  <data name="DashboardWarningsCorrected" xml:space="preserve"><value>WARNINGS CORRECTED</value></data>
+  <data name="DashboardStable" xml:space="preserve"><value>STABLE</value></data>
+  <data name="DashboardRecentActivity" xml:space="preserve"><value>Recent Activity</value></data>
+  <data name="DashboardModeledBasicWall" xml:space="preserve"><value>Modeled Basic Wall</value></data>
+  <data name="DashboardFixedOverlapping" xml:space="preserve"><value>Fixed overlapping elements</value></data>
+  <data name="DashboardStartedTutorial" xml:space="preserve"><value>Started Tutorial: Curtain Walls</value></data>
+  <data name="DashboardTimeAgo2Min" xml:space="preserve"><value>2 min ago</value></data>
+  <data name="DashboardTimeAgo15Min" xml:space="preserve"><value>15 min ago</value></data>
+  <data name="DashboardTimeAgo1Hour" xml:space="preserve"><value>1 hour ago</value></data>
+  <data name="DashboardStandardInFocus" xml:space="preserve"><value>Standard in Focus</value></data>
+  <data name="DashboardNamingConvention" xml:space="preserve"><value>Naming Convention</value></data>
+  <data name="DashboardNamingDescription" xml:space="preserve"><value>Your compliance rate for level and structural view naming.</value></data>
+  <data name="DashboardCompleted" xml:space="preserve"><value>{0}% Complete</value></data>
+  <data name="DashboardViewDetails" xml:space="preserve"><value>View Details</value></data>
+
+  <!-- ══ Corrections ═════════════════════════════════════════════════════ -->
+  <data name="CorrectionsTitle" xml:space="preserve"><value>BIMConcierge - Real-Time Correction</value></data>
+  <data name="CorrectionsHeading" xml:space="preserve"><value>Real-Time Correction</value></data>
+  <data name="CorrectionsSubtitle" xml:space="preserve"><value>Monitor and fix BIM standard violations automatically detected in the model.</value></data>
+  <data name="CorrectionsAutoFix" xml:space="preserve"><value>Auto Corrections</value></data>
+  <data name="CorrectionsAutoFixDesc" xml:space="preserve"><value>Automatically fix trivial violations</value></data>
+  <data name="CorrectionsFilterAll" xml:space="preserve"><value>All</value></data>
+  <data name="CorrectionsFilterError" xml:space="preserve"><value>Error</value></data>
+  <data name="CorrectionsFilterWarning" xml:space="preserve"><value>Warning</value></data>
+  <data name="CorrectionsFilterInfo" xml:space="preserve"><value>Info</value></data>
+  <data name="CorrectionsActive" xml:space="preserve"><value>Active: </value></data>
+  <data name="CorrectionsCorrected" xml:space="preserve"><value>Fixed: </value></data>
+  <data name="CorrectionsLoading" xml:space="preserve"><value>Loading corrections...</value></data>
+  <data name="CorrectionsDismiss" xml:space="preserve"><value>Dismiss</value></data>
+  <data name="CorrectionsElement" xml:space="preserve"><value>Element: </value></data>
+  <data name="CorrectionsViolatedRule" xml:space="preserve"><value>VIOLATED RULE</value></data>
+  <data name="CorrectionsEmptyTitle" xml:space="preserve"><value>No violations found</value></data>
+  <data name="CorrectionsEmptyDesc" xml:space="preserve"><value>The model complies with company standards.</value></data>
+  <data name="CorrectionsSystemStatus" xml:space="preserve"><value>SYSTEM STATUS</value></data>
+  <data name="CorrectionsMonitoringActive" xml:space="preserve"><value>Real-time monitoring active.</value></data>
+  <data name="CorrectionsLoadError" xml:space="preserve"><value>Error loading corrections: {0}</value></data>
+  <data name="CorrectionsFixError" xml:space="preserve"><value>Error fixing: {0}</value></data>
+
+  <!-- ══ Tutorial Library ════════════════════════════════════════════════ -->
+  <data name="TutorialsTitle" xml:space="preserve"><value>BIMConcierge - Tutorial Library</value></data>
+  <data name="TutorialsHeading" xml:space="preserve"><value>Training Library</value></data>
+  <data name="TutorialsSubtitle" xml:space="preserve"><value>Improve your skills with interactive tutorials guided directly in Revit.</value></data>
+  <data name="TutorialsFilterAll" xml:space="preserve"><value>All</value></data>
+  <data name="TutorialsFilterArchitecture" xml:space="preserve"><value>Architecture</value></data>
+  <data name="TutorialsFilterStructure" xml:space="preserve"><value>Structure</value></data>
+  <data name="TutorialsFilterStandards" xml:space="preserve"><value>Standards</value></data>
+  <data name="TutorialsLoading" xml:space="preserve"><value>Loading tutorials...</value></data>
+  <data name="TutorialsSteps" xml:space="preserve"><value>{0} Steps</value></data>
+  <data name="TutorialsMinutes" xml:space="preserve"><value>{0} min</value></data>
+  <data name="TutorialsStartTrack" xml:space="preserve"><value>START TRACK</value></data>
+  <data name="TutorialsPreview" xml:space="preserve"><value>[Tutorial Preview]</value></data>
+  <data name="TutorialsLoadError" xml:space="preserve"><value>Error loading tutorials: {0}</value></data>
+
+  <!-- ══ Company Standards ═══════════════════════════════════════════════ -->
+  <data name="StandardsTitle" xml:space="preserve"><value>BIMConcierge - Company Standards</value></data>
+  <data name="StandardsHeading" xml:space="preserve"><value>Company Standards</value></data>
+  <data name="StandardsSubtitle" xml:space="preserve"><value>Manage naming rules, LOD and best practices for your office.</value></data>
+  <data name="StandardsNaming" xml:space="preserve"><value>Naming Conventions</value></data>
+  <data name="StandardsLOD" xml:space="preserve"><value>LOD Requirements</value></data>
+  <data name="StandardsWorkset" xml:space="preserve"><value>Workset Rules</value></data>
+  <data name="StandardsBestPractices" xml:space="preserve"><value>Best Practices</value></data>
+  <data name="StandardsAutoCorrection" xml:space="preserve"><value>Auto-correction enabled</value></data>
+  <data name="StandardsSaveChanges" xml:space="preserve"><value>Save Changes</value></data>
+  <data name="StandardsLoadError" xml:space="preserve"><value>Error loading standards: {0}</value></data>
+
+  <!-- ══ Student Progress ════════════════════════════════════════════════ -->
+  <data name="ProgressTitle" xml:space="preserve"><value>BIMConcierge - Student Progress</value></data>
+  <data name="ProgressHeading" xml:space="preserve"><value>Student Progress</value></data>
+  <data name="ProgressSubtitle" xml:space="preserve"><value>Track your progress through BIM tutorials and training.</value></data>
+  <data name="ProgressTutorialsCompleted" xml:space="preserve"><value>TUTORIALS COMPLETED</value></data>
+  <data name="ProgressHoursLearning" xml:space="preserve"><value>HOURS OF LEARNING</value></data>
+  <data name="ProgressAverageScore" xml:space="preserve"><value>AVERAGE SCORE</value></data>
+  <data name="ProgressCurrentLevel" xml:space="preserve"><value>CURRENT LEVEL</value></data>
+  <data name="ProgressLoadError" xml:space="preserve"><value>Error loading progress: {0}</value></data>
+
+  <!-- ══ Achievements ════════════════════════════════════════════════════ -->
+  <data name="AchievementsTitle" xml:space="preserve"><value>BIMConcierge - Achievements</value></data>
+  <data name="AchievementsHeading" xml:space="preserve"><value>Achievements</value></data>
+  <data name="AchievementsSubtitle" xml:space="preserve"><value>Track your progress and unlock rewards.</value></data>
+  <data name="AchievementsLoadError" xml:space="preserve"><value>Error loading achievements: {0}</value></data>
+
+  <!-- ══ Auth Errors ═════════════════════════════════════════════════════ -->
+  <data name="AuthInvalidCredentials" xml:space="preserve"><value>Invalid credentials.</value></data>
+  <data name="AuthNoConnectionNoUser" xml:space="preserve"><value>No connection and no cached user.</value></data>
+  <data name="AuthNoConnectionNoLicense" xml:space="preserve"><value>No connection and no cached license.</value></data>
+  <data name="AuthLicenseExpiredRenew" xml:space="preserve"><value>License expired. Connect to the internet to renew.</value></data>
+  <data name="AuthSeatLimitReached" xml:space="preserve"><value>Seat limit reached. Contact your administrator.</value></data>
+  <data name="AuthInvalidLicenseKey" xml:space="preserve"><value>Invalid license key.</value></data>
+  <data name="AuthLicenseExpired" xml:space="preserve"><value>License expired. Contact your administrator.</value></data>
+  <data name="AuthOfflineMode" xml:space="preserve"><value>Offline mode — cached data.</value></data>
+
+  <!-- ══ Company Standards (extras) ══════════════════════════════════════ -->
+  <data name="StandardsNamingSubtitle" xml:space="preserve"><value>Define structural rules and regex patterns for Revit element categories.</value></data>
+  <data name="StandardsExportJson" xml:space="preserve"><value>Export JSON</value></data>
+  <data name="StandardsPrefixRule" xml:space="preserve"><value>PREFIX RULE</value></data>
+  <data name="StandardsSuffixRule" xml:space="preserve"><value>SUFFIX RULE</value></data>
+  <data name="StandardsRegexPattern" xml:space="preserve"><value>REGEX PATTERN</value></data>
+  <data name="StandardsWallCategories" xml:space="preserve"><value>Wall Categories</value></data>
+  <data name="StandardsDoorWindowCategories" xml:space="preserve"><value>Door &amp; Window Categories</value></data>
+  <data name="StandardsLODMatrix" xml:space="preserve"><value>LOD Requirements Matrix</value></data>
+  <data name="StandardsAddCategory" xml:space="preserve"><value>+ Add Category</value></data>
+  <data name="StandardsColumnCategory" xml:space="preserve"><value>CATEGORY</value></data>
+  <data name="StandardsColumnPhase" xml:space="preserve"><value>PHASE</value></data>
+  <data name="StandardsColumnAction" xml:space="preserve"><value>ACTION</value></data>
+  <data name="StandardsAutoCorrectDesc" xml:space="preserve"><value>Automatically apply naming standards during element creation.</value></data>
+  <data name="StandardsAuditMode" xml:space="preserve"><value>Audit Mode: Enabled</value></data>
+  <data name="StandardsAuditModeDesc" xml:space="preserve"><value>The system will flag components exceeding 5MB or containing more than 20,000 polygons.</value></data>
+  <data name="StandardsEnforcement" xml:space="preserve"><value>Standard Enforcement</value></data>
+  <data name="StandardsEnforcementDesc" xml:space="preserve"><value>Active monitoring ensuring all Revit Links are set to 'Overlay' instead of 'Attachment'.</value></data>
+
+  <!-- ══ Student Progress (extras) ═════════════════════════════════════ -->
+  <data name="ProgressStudentPanel" xml:space="preserve"><value>Student Panel</value></data>
+  <data name="ProgressWelcomeBack" xml:space="preserve"><value>Welcome back! You're making great progress this week.</value></data>
+  <data name="ProgressCompleted" xml:space="preserve"><value>COMPLETED</value></data>
+  <data name="ProgressXpPoints" xml:space="preserve"><value>XP POINTS</value></data>
+  <data name="ProgressStudyHours" xml:space="preserve"><value>STUDY HOURS</value></data>
+  <data name="ProgressCertificates" xml:space="preserve"><value>CERTIFICATES</value></data>
+  <data name="ProgressSkillProficiency" xml:space="preserve"><value>Skill Proficiency</value></data>
+  <data name="ProgressModeling" xml:space="preserve"><value>MODELING</value></data>
+  <data name="ProgressDocumentation" xml:space="preserve"><value>DOCUMENTATION</value></data>
+  <data name="ProgressCoordination" xml:space="preserve"><value>COORDINATION</value></data>
+  <data name="ProgressFamilyCreation" xml:space="preserve"><value>FAMILY CREATION</value></data>
+  <data name="ProgressDataManagement" xml:space="preserve"><value>DATA MANAGEMENT</value></data>
+  <data name="ProgressInProgress" xml:space="preserve"><value>Tutorials In Progress</value></data>
+  <data name="ProgressNextLessons" xml:space="preserve"><value>Next Recommended Lessons</value></data>
+  <data name="ProgressRecentAchievements" xml:space="preserve"><value>Recent Achievements</value></data>
+  <data name="ProgressViewAllBadges" xml:space="preserve"><value>View All Badges</value></data>
+  <data name="ProgressNextMilestone" xml:space="preserve"><value>NEXT MILESTONE</value></data>
+  <data name="ProgressResumeLearning" xml:space="preserve"><value>Resume Learning</value></data>
+
+  <!-- ══ Achievements (extras) ═════════════════════════════════════════ -->
+  <data name="AchievementsSearch" xml:space="preserve"><value>Search achievements, quests, or standards...</value></data>
+  <data name="AchievementsProStatus" xml:space="preserve"><value>PRO STATUS</value></data>
+  <data name="AchievementsActive" xml:space="preserve"><value>Active</value></data>
+  <data name="AchievementsProgressToLevel" xml:space="preserve"><value>PROGRESS TO LEVEL {0}</value></data>
+  <data name="AchievementsXpForNextRank" xml:space="preserve"><value>{0} XP TO NEXT RANK: {1}</value></data>
+  <data name="AchievementsDailyQuests" xml:space="preserve"><value>Daily Quests</value></data>
+  <data name="AchievementsWeeklyChallenge" xml:space="preserve"><value>Weekly Challenge</value></data>
+  <data name="AchievementsLeaderboard" xml:space="preserve"><value>Company Leaderboard</value></data>
+  <data name="AchievementsGallery" xml:space="preserve"><value>Achievement Gallery</value></data>
+  <data name="AchievementsUnlocked" xml:space="preserve"><value>Unlocked</value></data>
+  <data name="AchievementsLocked" xml:space="preserve"><value>Locked</value></data>
+  <data name="AchievementsViewAll" xml:space="preserve"><value>View All</value></data>
+
+  <!-- ══ Tutorial Window ═══════════════════════════════════════════════ -->
+  <data name="TutorialProgress" xml:space="preserve"><value>Progress</value></data>
+  <data name="TutorialApplyAutoFix" xml:space="preserve"><value>APPLY AUTO-FIX</value></data>
+
+  <!-- ══ Tutorial Detail ═══════════════════════════════════════════════ -->
+  <data name="TutorialDetailLibrary" xml:space="preserve"><value>Library</value></data>
+  <data name="TutorialDetailWhatYouLearn" xml:space="preserve"><value>What You'll Learn</value></data>
+  <data name="TutorialDetailTrackContent" xml:space="preserve"><value>Track Content</value></data>
+  <data name="TutorialDetailStepsCompleted" xml:space="preserve"><value>Steps Completed</value></data>
+  <data name="TutorialDetailStartTrack" xml:space="preserve"><value>START TRACK IN REVIT</value></data>
+
+  <!-- ══ Guided Tutorial ═══════════════════════════════════════════════ -->
+  <data name="GuidedApplyAutoFix" xml:space="preserve"><value>APPLY AUTO-FIX</value></data>
+  <data name="GuidedTutorialCompleted" xml:space="preserve"><value>Tutorial Completed!</value></data>
+  <data name="GuidedCongratulations" xml:space="preserve"><value>Congratulations! You completed all steps.</value></data>
+
+  <!-- ══ Correction Alert ══════════════════════════════════════════════ -->
+  <data name="AlertNonCompliance" xml:space="preserve"><value>Non-Compliance Warning</value></data>
+  <data name="AlertViolatedRule" xml:space="preserve"><value>VIOLATED RULE</value></data>
+  <data name="AlertDismiss" xml:space="preserve"><value>DISMISS</value></data>
+  <data name="AlertAutoFix" xml:space="preserve"><value>AUTO-FIX</value></data>
+  <data name="AlertElementId" xml:space="preserve"><value>Element ID: </value></data>
+
+  <!-- ══ Common ══════════════════════════════════════════════════════════ -->
+  <data name="Loading" xml:space="preserve"><value>Loading...</value></data>
+  <data name="Close" xml:space="preserve"><value>Close</value></data>
+  <data name="Cancel" xml:space="preserve"><value>Cancel</value></data>
+  <data name="Save" xml:space="preserve"><value>Save</value></data>
+  <data name="Delete" xml:space="preserve"><value>Delete</value></data>
+  <data name="Next" xml:space="preserve"><value>Next</value></data>
+  <data name="Previous" xml:space="preserve"><value>Previous</value></data>
+  <data name="Back" xml:space="preserve"><value>Back</value></data>
+  <data name="Architect" xml:space="preserve"><value>Architect</value></data>
+</root>

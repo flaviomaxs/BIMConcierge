@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using BIMConcierge.Core.Interfaces;
 using BIMConcierge.Core.Models;
+using BIMConcierge.UI.Localization;
 
 namespace BIMConcierge.UI.ViewModels;
 
@@ -75,7 +76,7 @@ public partial class TutorialLibraryViewModel : ObservableObject, IDisposable
         catch (OperationCanceledException) { /* expected */ }
         catch (Exception ex)
         {
-            ErrorMessage = $"Erro ao carregar tutoriais: {ex.Message}";
+            ErrorMessage = TranslationSource.Format("TutorialsLoadError", ex.Message);
         }
         finally { IsBusy = false; }
     }

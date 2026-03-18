@@ -4,8 +4,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:conv="clr-namespace:BIMConcierge.UI.Converters"
+        xmlns:loc="clr-namespace:BIMConcierge.UI.Localization"
         mc:Ignorable="d"
-        Title="BIMConcierge - Correção em Tempo Real" Height="768" Width="1280"
+        Title="{loc:Loc CorrectionsTitle}" Height="768" Width="1280"
         WindowStartupLocation="CenterScreen" WindowStyle="None"
         AllowsTransparency="True" Background="Transparent" FontFamily="Segoe UI">
 
@@ -43,7 +44,7 @@
                                 MouseLeftButtonUp="SidebarDashboard_Click">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="&#x229E;" Foreground="#94A3B8" FontSize="18" Margin="0,0,12,0" VerticalAlignment="Center"/>
-                                <TextBlock Text="Painel Principal" Foreground="#94A3B8" FontWeight="Medium" FontSize="14" VerticalAlignment="Center"/>
+                                <TextBlock Text="{loc:Loc NavDashboard}" Foreground="#94A3B8" FontWeight="Medium" FontSize="14" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Border>
 
@@ -51,7 +52,7 @@
                                 MouseLeftButtonUp="SidebarTutorials_Click">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="&#x25B6;" Foreground="#94A3B8" FontSize="16" Margin="0,0,12,0" VerticalAlignment="Center"/>
-                                <TextBlock Text="Tutoriais" Foreground="#94A3B8" FontWeight="Medium" FontSize="14" VerticalAlignment="Center"/>
+                                <TextBlock Text="{loc:Loc NavTutorials}" Foreground="#94A3B8" FontWeight="Medium" FontSize="14" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Border>
 
@@ -64,7 +65,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" Text="&#x26A0;" Foreground="#6A7D90" FontSize="16" Margin="0,0,12,0" VerticalAlignment="Center"/>
-                                <TextBlock Grid.Column="1" Text="Corre&#231;&#245;es" Foreground="White" FontWeight="SemiBold" FontSize="14" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Column="1" Text="{loc:Loc NavCorrections}" Foreground="White" FontWeight="SemiBold" FontSize="14" VerticalAlignment="Center"/>
                                 <Border Grid.Column="2" Background="#6A7D90" CornerRadius="10" Padding="7,2" MinWidth="22">
                                     <TextBlock Text="{Binding ActiveCount}" Foreground="White" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center"/>
                                 </Border>
@@ -75,7 +76,7 @@
                                 MouseLeftButtonUp="SidebarStandards_Click">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="&#x2605;" Foreground="#94A3B8" FontSize="18" Margin="0,0,12,0" VerticalAlignment="Center"/>
-                                <TextBlock Text="Padr&#245;es da Empresa" Foreground="#94A3B8" FontWeight="Medium" FontSize="14" VerticalAlignment="Center"/>
+                                <TextBlock Text="{loc:Loc NavStandards}" Foreground="#94A3B8" FontWeight="Medium" FontSize="14" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Border>
 
@@ -83,7 +84,7 @@
                                 MouseLeftButtonUp="SidebarProgress_Click">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="&#x1F4CA;" Foreground="#94A3B8" FontSize="18" Margin="0,0,12,0" VerticalAlignment="Center"/>
-                                <TextBlock Text="Progresso do Aluno" Foreground="#94A3B8" FontWeight="Medium" FontSize="14" VerticalAlignment="Center"/>
+                                <TextBlock Text="{loc:Loc NavProgress}" Foreground="#94A3B8" FontWeight="Medium" FontSize="14" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Border>
 
@@ -91,7 +92,7 @@
                                 MouseLeftButtonUp="SidebarAchievements_Click">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="&#x1F3C6;" Foreground="#94A3B8" FontSize="18" Margin="0,0,12,0" VerticalAlignment="Center"/>
-                                <TextBlock Text="Conquistas" Foreground="#94A3B8" FontWeight="Medium" FontSize="14" VerticalAlignment="Center"/>
+                                <TextBlock Text="{loc:Loc NavAchievements}" Foreground="#94A3B8" FontWeight="Medium" FontSize="14" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Border>
                     </StackPanel>
@@ -100,12 +101,10 @@
                     <Border Grid.Row="2" Background="#121820" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="15">
                         <StackPanel>
                             <Grid Margin="0,0,0,6">
-                                <TextBlock Text="STATUS DO SISTEMA" Foreground="#6A7D90" FontSize="10" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                <TextBlock Text="{loc:Loc CorrectionsSystemStatus}" Foreground="#6A7D90" FontSize="10" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                                 <Ellipse Width="8" Height="8" Fill="#22C55E" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                             </Grid>
-                            <TextBlock Foreground="#94A3B8" FontSize="11" TextWrapping="Wrap">
-                                <Run Text="Monitoramento em tempo real ativo."/>
-                            </TextBlock>
+                            <TextBlock Text="{loc:Loc CorrectionsMonitoringActive}" Foreground="#94A3B8" FontSize="11" TextWrapping="Wrap"/>
                         </StackPanel>
                     </Border>
                 </Grid>
@@ -127,8 +126,8 @@
 
                 <!-- Header -->
                 <StackPanel Grid.Row="0" Margin="0,0,0,25">
-                    <TextBlock Text="Corre&#231;&#227;o em Tempo Real" FontSize="28" FontWeight="Bold" Foreground="White" Margin="0,0,0,8"/>
-                    <TextBlock Text="Monitore e corrija viola&#231;&#245;es de padr&#245;es BIM detectadas automaticamente no modelo." FontSize="15" Foreground="#94A3B8"/>
+                    <TextBlock Text="{loc:Loc CorrectionsHeading}" FontSize="28" FontWeight="Bold" Foreground="White" Margin="0,0,0,8"/>
+                    <TextBlock Text="{loc:Loc CorrectionsSubtitle}" FontSize="15" Foreground="#94A3B8"/>
                 </StackPanel>
 
                 <!-- Auto-fix toggle + severity filters -->
@@ -143,8 +142,8 @@
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="&#x26A1;" FontSize="16" Margin="0,0,10,0" VerticalAlignment="Center"/>
                             <StackPanel VerticalAlignment="Center" Margin="0,0,15,0">
-                                <TextBlock Text="Corre&#231;&#245;es Autom&#225;ticas" Foreground="White" FontSize="13" FontWeight="SemiBold"/>
-                                <TextBlock Text="Corrigir viola&#231;&#245;es triviais automaticamente" Foreground="#94A3B8" FontSize="11"/>
+                                <TextBlock Text="{loc:Loc CorrectionsAutoFix}" Foreground="White" FontSize="13" FontWeight="SemiBold"/>
+                                <TextBlock Text="{loc:Loc CorrectionsAutoFixDesc}" Foreground="#94A3B8" FontSize="11"/>
                             </StackPanel>
                             <CheckBox IsChecked="{Binding IsAutoFixEnabled}" VerticalAlignment="Center"/>
                         </StackPanel>
@@ -152,7 +151,7 @@
 
                     <!-- Severity filter buttons -->
                     <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
-                        <Button Content="Todos" Height="36" Padding="18,0" Margin="0,0,8,0"
+                        <Button Content="{loc:Loc CorrectionsFilterAll}" Height="36" Padding="18,0" Margin="0,0,8,0"
                                 FontSize="12" FontWeight="SemiBold" BorderThickness="0" Cursor="Hand"
                                 Command="{Binding SetFilterCommand}" CommandParameter="Todos">
                             <Button.Style>
@@ -280,7 +279,7 @@
                 </Border>
 
                 <!-- Loading Indicator -->
-                <TextBlock Grid.Row="3" Text="Carregando corre&#231;&#245;es..." FontSize="16" Foreground="#94A3B8"
+                <TextBlock Grid.Row="3" Text="{loc:Loc CorrectionsLoading}" FontSize="16" Foreground="#94A3B8"
                            HorizontalAlignment="Center" VerticalAlignment="Center"
                            Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibility}}"/>
 
@@ -364,7 +363,7 @@
                                             <Border Background="#0F172A" CornerRadius="6" Padding="12,8" Margin="0,0,0,12"
                                                     BorderBrush="#1E293B" BorderThickness="1">
                                                 <StackPanel>
-                                                    <TextBlock Text="REGRA VIOLADA" Foreground="#64748B" FontSize="9" FontWeight="Bold" Margin="0,0,0,4"/>
+                                                    <TextBlock Text="{loc:Loc CorrectionsViolatedRule}" Foreground="#64748B" FontSize="9" FontWeight="Bold" Margin="0,0,0,4"/>
                                                     <TextBlock Text="{Binding Title}" Foreground="#6A7D90" FontSize="12" FontWeight="SemiBold"/>
                                                 </StackPanel>
                                             </Border>
@@ -372,7 +371,7 @@
 
                                         <!-- Action buttons -->
                                         <StackPanel Grid.Column="2" VerticalAlignment="Center" Margin="15,0,0,0">
-                                            <Button Content="Ignorar" Height="32" Padding="15,0" Margin="0,0,0,8"
+                                            <Button Content="{loc:Loc CorrectionsDismiss}" Height="32" Padding="15,0" Margin="0,0,0,8"
                                                     Background="#1E293B" Foreground="#94A3B8" FontSize="12" FontWeight="Bold" BorderThickness="0" Cursor="Hand"
                                                     Command="{Binding DataContext.DismissCommand, RelativeSource={RelativeSource AncestorType=Window}}"
                                                     CommandParameter="{Binding}">
@@ -433,8 +432,8 @@
                         </Style>
                     </StackPanel.Style>
                     <TextBlock Text="&#x2705;" FontSize="48" HorizontalAlignment="Center" Margin="0,0,0,15"/>
-                    <TextBlock Text="Nenhuma viola&#231;&#227;o encontrada" FontSize="18" FontWeight="SemiBold" Foreground="#94A3B8" HorizontalAlignment="Center" Margin="0,0,0,5"/>
-                    <TextBlock Text="O modelo est&#225; em conformidade com os padr&#245;es da empresa." FontSize="13" Foreground="#64748B" HorizontalAlignment="Center"/>
+                    <TextBlock Text="{loc:Loc CorrectionsEmptyTitle}" FontSize="18" FontWeight="SemiBold" Foreground="#94A3B8" HorizontalAlignment="Center" Margin="0,0,0,5"/>
+                    <TextBlock Text="{loc:Loc CorrectionsEmptyDesc}" FontSize="13" Foreground="#64748B" HorizontalAlignment="Center"/>
                 </StackPanel>
             </Grid>
         </Grid>

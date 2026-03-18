@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute name="xml:space" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+
+  <!-- ══ Login ═══════════════════════════════════════════════════════════ -->
+  <data name="LoginTitle" xml:space="preserve"><value>BIMConcierge - Login</value></data>
+  <data name="LoginHeroTitle" xml:space="preserve"><value>Sua Jornada BIM Começa Aqui</value></data>
+  <data name="LoginHeroSubtitle" xml:space="preserve"><value>Bem-vindo ao assistente inteligente que transforma a maneira como seu escritório projeta no Revit.</value></data>
+  <data name="LoginFeature1" xml:space="preserve"><value>Treinamento gamificado integrado</value></data>
+  <data name="LoginFeature2" xml:space="preserve"><value>Correção de modelagem em tempo real</value></data>
+  <data name="LoginFeature3" xml:space="preserve"><value>Padronização automatizada da empresa</value></data>
+  <data name="LoginWelcome" xml:space="preserve"><value>Bem-vindo de volta</value></data>
+  <data name="LoginCredentials" xml:space="preserve"><value>Insira suas credenciais para acessar sua conta.</value></data>
+  <data name="LoginEmail" xml:space="preserve"><value>E-mail Corporativo</value></data>
+  <data name="LoginPassword" xml:space="preserve"><value>Senha</value></data>
+  <data name="LoginLicenseKey" xml:space="preserve"><value>Chave de Licença</value></data>
+  <data name="LoginRememberMe" xml:space="preserve"><value>Lembrar de mim</value></data>
+  <data name="LoginForgotPassword" xml:space="preserve"><value>Esqueceu a senha?</value></data>
+  <data name="LoginButton" xml:space="preserve"><value>Entrar</value></data>
+  <data name="LoginNeedHelp" xml:space="preserve"><value>Precisa de ajuda?</value></data>
+  <data name="LoginContactSupport" xml:space="preserve"><value>Fale com o suporte</value></data>
+  <data name="LoginAllFieldsRequired" xml:space="preserve"><value>Preencha todos os campos.</value></data>
+  <data name="LoginFailed" xml:space="preserve"><value>Falha no login.</value></data>
+
+  <!-- ══ Sidebar Navigation ══════════════════════════════════════════════ -->
+  <data name="NavDashboard" xml:space="preserve"><value>Painel Principal</value></data>
+  <data name="NavTutorials" xml:space="preserve"><value>Tutoriais</value></data>
+  <data name="NavCorrections" xml:space="preserve"><value>Correções</value></data>
+  <data name="NavStandards" xml:space="preserve"><value>Padrões da Empresa</value></data>
+  <data name="NavProgress" xml:space="preserve"><value>Progresso do Aluno</value></data>
+  <data name="NavAchievements" xml:space="preserve"><value>Conquistas</value></data>
+  <data name="NavSettings" xml:space="preserve"><value>Configurações</value></data>
+
+  <!-- ══ Dashboard ═══════════════════════════════════════════════════════ -->
+  <data name="DashboardTitle" xml:space="preserve"><value>BIMConcierge - Dashboard</value></data>
+  <data name="DashboardWelcome" xml:space="preserve"><value>Bem-vindo(a) de volta, {0}!</value></data>
+  <data name="DashboardSubtitle" xml:space="preserve"><value>Aqui está o que está acontecendo com seus modelos hoje.</value></data>
+  <data name="DashboardItemsModeled" xml:space="preserve"><value>ITENS MODELADOS</value></data>
+  <data name="DashboardOperationsOnStandard" xml:space="preserve"><value>OPERAÇÕES NO PADRÃO</value></data>
+  <data name="DashboardWarningsCorrected" xml:space="preserve"><value>AVISOS CORRIGIDOS</value></data>
+  <data name="DashboardStable" xml:space="preserve"><value>ESTÁVEL</value></data>
+  <data name="DashboardRecentActivity" xml:space="preserve"><value>Atividade Recente</value></data>
+  <data name="DashboardModeledBasicWall" xml:space="preserve"><value>Modelou Parede Básica</value></data>
+  <data name="DashboardFixedOverlapping" xml:space="preserve"><value>Corrigiu elementos sobrepostos</value></data>
+  <data name="DashboardStartedTutorial" xml:space="preserve"><value>Iniciou Tutorial: Paredes Cortina</value></data>
+  <data name="DashboardTimeAgo2Min" xml:space="preserve"><value>Há 2 min</value></data>
+  <data name="DashboardTimeAgo15Min" xml:space="preserve"><value>Há 15 min</value></data>
+  <data name="DashboardTimeAgo1Hour" xml:space="preserve"><value>Há 1 hora</value></data>
+  <data name="DashboardStandardInFocus" xml:space="preserve"><value>Padrão em Foco</value></data>
+  <data name="DashboardNamingConvention" xml:space="preserve"><value>Convenção de Nomenclatura</value></data>
+  <data name="DashboardNamingDescription" xml:space="preserve"><value>Sua taxa de conformidade para nomenclatura de níveis e vistas estruturais.</value></data>
+  <data name="DashboardCompleted" xml:space="preserve"><value>{0}% Concluído</value></data>
+  <data name="DashboardViewDetails" xml:space="preserve"><value>Ver Detalhes</value></data>
+
+  <!-- ══ Corrections ═════════════════════════════════════════════════════ -->
+  <data name="CorrectionsTitle" xml:space="preserve"><value>BIMConcierge - Correção em Tempo Real</value></data>
+  <data name="CorrectionsHeading" xml:space="preserve"><value>Correção em Tempo Real</value></data>
+  <data name="CorrectionsSubtitle" xml:space="preserve"><value>Monitore e corrija violações de padrões BIM detectadas automaticamente no modelo.</value></data>
+  <data name="CorrectionsAutoFix" xml:space="preserve"><value>Correções Automáticas</value></data>
+  <data name="CorrectionsAutoFixDesc" xml:space="preserve"><value>Corrigir violações triviais automaticamente</value></data>
+  <data name="CorrectionsFilterAll" xml:space="preserve"><value>Todos</value></data>
+  <data name="CorrectionsFilterError" xml:space="preserve"><value>Erro</value></data>
+  <data name="CorrectionsFilterWarning" xml:space="preserve"><value>Aviso</value></data>
+  <data name="CorrectionsFilterInfo" xml:space="preserve"><value>Info</value></data>
+  <data name="CorrectionsActive" xml:space="preserve"><value>Ativas: </value></data>
+  <data name="CorrectionsCorrected" xml:space="preserve"><value>Corrigidas: </value></data>
+  <data name="CorrectionsLoading" xml:space="preserve"><value>Carregando correções...</value></data>
+  <data name="CorrectionsDismiss" xml:space="preserve"><value>Ignorar</value></data>
+  <data name="CorrectionsElement" xml:space="preserve"><value>Elemento: </value></data>
+  <data name="CorrectionsViolatedRule" xml:space="preserve"><value>REGRA VIOLADA</value></data>
+  <data name="CorrectionsEmptyTitle" xml:space="preserve"><value>Nenhuma violação encontrada</value></data>
+  <data name="CorrectionsEmptyDesc" xml:space="preserve"><value>O modelo está em conformidade com os padrões da empresa.</value></data>
+  <data name="CorrectionsSystemStatus" xml:space="preserve"><value>STATUS DO SISTEMA</value></data>
+  <data name="CorrectionsMonitoringActive" xml:space="preserve"><value>Monitoramento em tempo real ativo.</value></data>
+  <data name="CorrectionsLoadError" xml:space="preserve"><value>Erro ao carregar correções: {0}</value></data>
+  <data name="CorrectionsFixError" xml:space="preserve"><value>Erro ao corrigir: {0}</value></data>
+
+  <!-- ══ Tutorial Library ════════════════════════════════════════════════ -->
+  <data name="TutorialsTitle" xml:space="preserve"><value>BIMConcierge - Biblioteca de Tutoriais</value></data>
+  <data name="TutorialsHeading" xml:space="preserve"><value>Biblioteca de Treinamentos</value></data>
+  <data name="TutorialsSubtitle" xml:space="preserve"><value>Aprimore suas habilidades com tutoriais interativos guiados diretamente no Revit.</value></data>
+  <data name="TutorialsFilterAll" xml:space="preserve"><value>Todos</value></data>
+  <data name="TutorialsFilterArchitecture" xml:space="preserve"><value>Arquitetura</value></data>
+  <data name="TutorialsFilterStructure" xml:space="preserve"><value>Estrutura</value></data>
+  <data name="TutorialsFilterStandards" xml:space="preserve"><value>Padrões</value></data>
+  <data name="TutorialsLoading" xml:space="preserve"><value>Carregando tutoriais...</value></data>
+  <data name="TutorialsSteps" xml:space="preserve"><value>{0} Passos</value></data>
+  <data name="TutorialsMinutes" xml:space="preserve"><value>{0} min</value></data>
+  <data name="TutorialsStartTrack" xml:space="preserve"><value>INICIAR TRILHA</value></data>
+  <data name="TutorialsPreview" xml:space="preserve"><value>[Preview do Tutorial]</value></data>
+  <data name="TutorialsLoadError" xml:space="preserve"><value>Erro ao carregar tutoriais: {0}</value></data>
+
+  <!-- ══ Company Standards ═══════════════════════════════════════════════ -->
+  <data name="StandardsTitle" xml:space="preserve"><value>BIMConcierge - Padrões da Empresa</value></data>
+  <data name="StandardsHeading" xml:space="preserve"><value>Padrões da Empresa</value></data>
+  <data name="StandardsSubtitle" xml:space="preserve"><value>Gerencie as regras de nomenclatura, LOD e boas práticas do escritório.</value></data>
+  <data name="StandardsNaming" xml:space="preserve"><value>Convenções de Nomenclatura</value></data>
+  <data name="StandardsLOD" xml:space="preserve"><value>Requisitos de LOD</value></data>
+  <data name="StandardsWorkset" xml:space="preserve"><value>Regras de Workset</value></data>
+  <data name="StandardsBestPractices" xml:space="preserve"><value>Boas Práticas</value></data>
+  <data name="StandardsAutoCorrection" xml:space="preserve"><value>Correção automática ativada</value></data>
+  <data name="StandardsSaveChanges" xml:space="preserve"><value>Salvar Alterações</value></data>
+  <data name="StandardsLoadError" xml:space="preserve"><value>Erro ao carregar padrões: {0}</value></data>
+
+  <!-- ══ Student Progress ════════════════════════════════════════════════ -->
+  <data name="ProgressTitle" xml:space="preserve"><value>BIMConcierge - Progresso do Aluno</value></data>
+  <data name="ProgressHeading" xml:space="preserve"><value>Progresso do Aluno</value></data>
+  <data name="ProgressSubtitle" xml:space="preserve"><value>Acompanhe sua evolução nos tutoriais e treinamentos BIM.</value></data>
+  <data name="ProgressTutorialsCompleted" xml:space="preserve"><value>TUTORIAIS CONCLUÍDOS</value></data>
+  <data name="ProgressHoursLearning" xml:space="preserve"><value>HORAS DE APRENDIZADO</value></data>
+  <data name="ProgressAverageScore" xml:space="preserve"><value>NOTA MÉDIA</value></data>
+  <data name="ProgressCurrentLevel" xml:space="preserve"><value>NÍVEL ATUAL</value></data>
+  <data name="ProgressLoadError" xml:space="preserve"><value>Erro ao carregar progresso: {0}</value></data>
+
+  <!-- ══ Achievements ════════════════════════════════════════════════════ -->
+  <data name="AchievementsTitle" xml:space="preserve"><value>BIMConcierge - Conquistas</value></data>
+  <data name="AchievementsHeading" xml:space="preserve"><value>Conquistas</value></data>
+  <data name="AchievementsSubtitle" xml:space="preserve"><value>Acompanhe seu progresso e desbloqueie recompensas.</value></data>
+  <data name="AchievementsLoadError" xml:space="preserve"><value>Erro ao carregar conquistas: {0}</value></data>
+
+  <!-- ══ Auth Errors ═════════════════════════════════════════════════════ -->
+  <data name="AuthInvalidCredentials" xml:space="preserve"><value>Credenciais inválidas.</value></data>
+  <data name="AuthNoConnectionNoUser" xml:space="preserve"><value>Sem conexão e nenhum usuário em cache.</value></data>
+  <data name="AuthNoConnectionNoLicense" xml:space="preserve"><value>Sem conexão e nenhuma licença em cache.</value></data>
+  <data name="AuthLicenseExpiredRenew" xml:space="preserve"><value>Licença expirada. Conecte-se à internet para renovar.</value></data>
+  <data name="AuthSeatLimitReached" xml:space="preserve"><value>Limite de seats atingido. Contate o administrador.</value></data>
+  <data name="AuthInvalidLicenseKey" xml:space="preserve"><value>Chave de licença inválida.</value></data>
+  <data name="AuthLicenseExpired" xml:space="preserve"><value>Licença expirada. Contate o administrador.</value></data>
+  <data name="AuthOfflineMode" xml:space="preserve"><value>Modo offline — dados em cache.</value></data>
+
+  <!-- ══ Company Standards (extras) ══════════════════════════════════════ -->
+  <data name="StandardsNamingSubtitle" xml:space="preserve"><value>Defina regras estruturais e padrões regex para categorias de elementos Revit.</value></data>
+  <data name="StandardsExportJson" xml:space="preserve"><value>Exportar JSON</value></data>
+  <data name="StandardsPrefixRule" xml:space="preserve"><value>REGRA DE PREFIXO</value></data>
+  <data name="StandardsSuffixRule" xml:space="preserve"><value>REGRA DE SUFIXO</value></data>
+  <data name="StandardsRegexPattern" xml:space="preserve"><value>PADRÃO REGEX</value></data>
+  <data name="StandardsWallCategories" xml:space="preserve"><value>Categorias de Parede</value></data>
+  <data name="StandardsDoorWindowCategories" xml:space="preserve"><value>Categorias de Portas e Janelas</value></data>
+  <data name="StandardsLODMatrix" xml:space="preserve"><value>Matriz de Requisitos de LOD</value></data>
+  <data name="StandardsAddCategory" xml:space="preserve"><value>+ Adicionar Categoria</value></data>
+  <data name="StandardsColumnCategory" xml:space="preserve"><value>CATEGORIA</value></data>
+  <data name="StandardsColumnPhase" xml:space="preserve"><value>FASE</value></data>
+  <data name="StandardsColumnAction" xml:space="preserve"><value>AÇÃO</value></data>
+  <data name="StandardsAutoCorrectDesc" xml:space="preserve"><value>Aplicar padrões de nomenclatura automaticamente durante a criação de elementos.</value></data>
+  <data name="StandardsAuditMode" xml:space="preserve"><value>Modo Auditoria: Ativado</value></data>
+  <data name="StandardsAuditModeDesc" xml:space="preserve"><value>O sistema sinalizará componentes que excedam 5MB ou contenham mais de 20.000 polígonos.</value></data>
+  <data name="StandardsEnforcement" xml:space="preserve"><value>Aplicação de Padrões</value></data>
+  <data name="StandardsEnforcementDesc" xml:space="preserve"><value>Monitoramento ativo garantindo que todos os Revit Links estejam como 'Overlay' ao invés de 'Attachment'.</value></data>
+
+  <!-- ══ Student Progress (extras) ═════════════════════════════════════ -->
+  <data name="ProgressStudentPanel" xml:space="preserve"><value>Painel do Aluno</value></data>
+  <data name="ProgressWelcomeBack" xml:space="preserve"><value>Bem-vindo de volta! Você está progredindo muito bem esta semana.</value></data>
+  <data name="ProgressCompleted" xml:space="preserve"><value>CONCLUÍDOS</value></data>
+  <data name="ProgressXpPoints" xml:space="preserve"><value>PONTOS XP</value></data>
+  <data name="ProgressStudyHours" xml:space="preserve"><value>HORAS DE ESTUDO</value></data>
+  <data name="ProgressCertificates" xml:space="preserve"><value>CERTIFICADOS</value></data>
+  <data name="ProgressSkillProficiency" xml:space="preserve"><value>Proficiência em Habilidades</value></data>
+  <data name="ProgressModeling" xml:space="preserve"><value>MODELAGEM</value></data>
+  <data name="ProgressDocumentation" xml:space="preserve"><value>DOCUMENTAÇÃO</value></data>
+  <data name="ProgressCoordination" xml:space="preserve"><value>COORDENAÇÃO</value></data>
+  <data name="ProgressFamilyCreation" xml:space="preserve"><value>CRIAÇÃO DE FAMÍLIAS</value></data>
+  <data name="ProgressDataManagement" xml:space="preserve"><value>GESTÃO DE DADOS</value></data>
+  <data name="ProgressInProgress" xml:space="preserve"><value>Tutoriais em Andamento</value></data>
+  <data name="ProgressNextLessons" xml:space="preserve"><value>Próximas Lições Recomendadas</value></data>
+  <data name="ProgressRecentAchievements" xml:space="preserve"><value>Conquistas Recentes</value></data>
+  <data name="ProgressViewAllBadges" xml:space="preserve"><value>Ver Todas as Medalhas</value></data>
+  <data name="ProgressNextMilestone" xml:space="preserve"><value>PRÓXIMO MARCO</value></data>
+  <data name="ProgressResumeLearning" xml:space="preserve"><value>Retomar Aprendizado</value></data>
+
+  <!-- ══ Achievements (extras) ═════════════════════════════════════════ -->
+  <data name="AchievementsSearch" xml:space="preserve"><value>Buscar conquistas, missões ou padrões...</value></data>
+  <data name="AchievementsProStatus" xml:space="preserve"><value>STATUS PRO</value></data>
+  <data name="AchievementsActive" xml:space="preserve"><value>Ativo</value></data>
+  <data name="AchievementsProgressToLevel" xml:space="preserve"><value>PROGRESSO PARA NÍVEL {0}</value></data>
+  <data name="AchievementsXpForNextRank" xml:space="preserve"><value>{0} XP PARA PRÓXIMO RANK: {1}</value></data>
+  <data name="AchievementsDailyQuests" xml:space="preserve"><value>Missões Diárias</value></data>
+  <data name="AchievementsWeeklyChallenge" xml:space="preserve"><value>Desafio Semanal</value></data>
+  <data name="AchievementsLeaderboard" xml:space="preserve"><value>Ranking da Empresa</value></data>
+  <data name="AchievementsGallery" xml:space="preserve"><value>Galeria de Conquistas</value></data>
+  <data name="AchievementsUnlocked" xml:space="preserve"><value>Desbloqueada</value></data>
+  <data name="AchievementsLocked" xml:space="preserve"><value>Bloqueada</value></data>
+  <data name="AchievementsViewAll" xml:space="preserve"><value>Ver Todas</value></data>
+
+  <!-- ══ Tutorial Window ═══════════════════════════════════════════════ -->
+  <data name="TutorialProgress" xml:space="preserve"><value>Progresso</value></data>
+  <data name="TutorialApplyAutoFix" xml:space="preserve"><value>APLICAR AUTO-FIX</value></data>
+
+  <!-- ══ Tutorial Detail ═══════════════════════════════════════════════ -->
+  <data name="TutorialDetailLibrary" xml:space="preserve"><value>Biblioteca</value></data>
+  <data name="TutorialDetailWhatYouLearn" xml:space="preserve"><value>O que você vai aprender</value></data>
+  <data name="TutorialDetailTrackContent" xml:space="preserve"><value>Conteúdo da Trilha</value></data>
+  <data name="TutorialDetailStepsCompleted" xml:space="preserve"><value>Passos Concluídos</value></data>
+  <data name="TutorialDetailStartTrack" xml:space="preserve"><value>INICIAR TRILHA NO REVIT</value></data>
+
+  <!-- ══ Guided Tutorial ═══════════════════════════════════════════════ -->
+  <data name="GuidedApplyAutoFix" xml:space="preserve"><value>APLICAR AUTO-FIX</value></data>
+  <data name="GuidedTutorialCompleted" xml:space="preserve"><value>Tutorial Concluído!</value></data>
+  <data name="GuidedCongratulations" xml:space="preserve"><value>Parabéns! Você completou todas as etapas.</value></data>
+
+  <!-- ══ Correction Alert ══════════════════════════════════════════════ -->
+  <data name="AlertNonCompliance" xml:space="preserve"><value>Aviso de Não Conformidade</value></data>
+  <data name="AlertViolatedRule" xml:space="preserve"><value>REGRA VIOLADA</value></data>
+  <data name="AlertDismiss" xml:space="preserve"><value>IGNORAR</value></data>
+  <data name="AlertAutoFix" xml:space="preserve"><value>CORRIGIR AUTOMATICAMENTE</value></data>
+  <data name="AlertElementId" xml:space="preserve"><value>Elemento ID: </value></data>
+
+  <!-- ══ Common ══════════════════════════════════════════════════════════ -->
+  <data name="Loading" xml:space="preserve"><value>Carregando...</value></data>
+  <data name="Close" xml:space="preserve"><value>Fechar</value></data>
+  <data name="Cancel" xml:space="preserve"><value>Cancelar</value></data>
+  <data name="Save" xml:space="preserve"><value>Salvar</value></data>
+  <data name="Delete" xml:space="preserve"><value>Excluir</value></data>
+  <data name="Next" xml:space="preserve"><value>Próximo</value></data>
+  <data name="Previous" xml:space="preserve"><value>Anterior</value></data>
+  <data name="Back" xml:space="preserve"><value>Voltar</value></data>
+  <data name="Architect" xml:space="preserve"><value>Arquiteto</value></data>
+</root>

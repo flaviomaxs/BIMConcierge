@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.Input;
 using BIMConcierge.Core.Interfaces;
 using BIMConcierge.Core.Models;
 using BIMConcierge.Infrastructure.Revit;
+using BIMConcierge.UI.Localization;
 
 namespace BIMConcierge.UI.ViewModels;
 
@@ -77,7 +78,7 @@ public partial class CorrectionViewModel : ObservableObject, IDisposable
         catch (OperationCanceledException) { /* expected */ }
         catch (Exception ex)
         {
-            ErrorMessage = $"Erro ao carregar correções: {ex.Message}";
+            ErrorMessage = TranslationSource.Format("CorrectionsLoadError", ex.Message);
         }
         finally { IsBusy = false; }
     }
@@ -125,7 +126,7 @@ public partial class CorrectionViewModel : ObservableObject, IDisposable
         }
         catch (Exception ex)
         {
-            ErrorMessage = $"Erro ao corrigir: {ex.Message}";
+            ErrorMessage = TranslationSource.Format("CorrectionsFixError", ex.Message);
         }
         finally { IsBusy = false; }
     }

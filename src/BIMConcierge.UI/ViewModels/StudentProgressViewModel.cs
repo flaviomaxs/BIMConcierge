@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using BIMConcierge.Core.Interfaces;
 using BIMConcierge.Core.Models;
+using BIMConcierge.UI.Localization;
 
 namespace BIMConcierge.UI.ViewModels;
 
@@ -97,7 +98,7 @@ public partial class StudentProgressViewModel : ObservableObject, IDisposable
         }
         catch (Exception ex)
         {
-            ErrorMessage = $"Erro ao carregar progresso: {ex.Message}";
+            ErrorMessage = TranslationSource.Format("ProgressLoadError", ex.Message);
         }
         finally { IsBusy = false; }
     }

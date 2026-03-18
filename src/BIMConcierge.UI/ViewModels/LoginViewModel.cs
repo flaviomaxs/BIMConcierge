@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using BIMConcierge.Core.Interfaces;
+using BIMConcierge.UI.Localization;
 
 namespace BIMConcierge.UI.ViewModels;
 
@@ -34,7 +35,7 @@ public partial class LoginViewModel : ObservableObject, IDisposable
 
         if (string.IsNullOrWhiteSpace(Email) || string.IsNullOrWhiteSpace(Password) || string.IsNullOrWhiteSpace(LicenseKey))
         {
-            ErrorMessage = "Preencha todos os campos.";
+            ErrorMessage = TranslationSource.GetString("LoginAllFieldsRequired");
             HasError = true;
             return;
         }
@@ -52,7 +53,7 @@ public partial class LoginViewModel : ObservableObject, IDisposable
             }
             else
             {
-                ErrorMessage = result.ErrorMessage ?? "Falha no login.";
+                ErrorMessage = result.ErrorMessage ?? TranslationSource.GetString("LoginFailed");
                 HasError = true;
             }
         }
