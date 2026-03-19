@@ -1,4 +1,5 @@
 using BIMConcierge.Core.Interfaces;
+using BIMConcierge.UI.Localization;
 using BIMConcierge.UI.Services;
 using BIMConcierge.UI.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,6 +10,9 @@ public static class UIDependencyInjection
 {
     public static IServiceCollection AddUIServices(this IServiceCollection services)
     {
+        // Localization
+        services.AddSingleton<IStringLocalizer, AppStringLocalizer>();
+
         // Navigation
         services.AddSingleton<INavigationService, NavigationService>();
 

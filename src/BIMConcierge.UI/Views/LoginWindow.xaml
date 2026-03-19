@@ -113,7 +113,7 @@
                 </StackPanel>
 
                 <TextBlock Grid.Row="2" HorizontalAlignment="Center" Foreground="#94A3B8" FontSize="13">
-                    Precisa de ajuda? <Run Text="Fale com o suporte" Foreground="#6A7D90" FontWeight="SemiBold" Cursor="Hand"/>
+                    <Run Text="{loc:Loc LoginNeedHelp}"/> <Run Text="{loc:Loc LoginContactSupport}" Foreground="#6A7D90" FontWeight="SemiBold" Cursor="Hand"/>
                 </TextBlock>
             </Grid>
         </Grid>

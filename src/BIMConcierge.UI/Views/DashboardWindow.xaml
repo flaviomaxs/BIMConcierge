@@ -11,6 +11,10 @@
         WindowStartupLocation="CenterScreen" WindowStyle="None" 
         AllowsTransparency="True" Background="Transparent" FontFamily="Segoe UI">
 
+    <Window.Resources>
+        <conv:LocalizedStringFormatConverter x:Key="LocalizedStepsFormat"/>
+    </Window.Resources>
+
     <Border CornerRadius="16" Background="#17191B" BorderBrush="#1E293B" BorderThickness="1" MouseLeftButtonDown="Border_MouseLeftButtonDown">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -112,9 +116,23 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <Button Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-20,-20,0"
-                        Content="✕" FontSize="16" Foreground="#94A3B8" Background="Transparent" BorderThickness="0"
-                        Cursor="Hand" Click="BtnClose_Click"/>
+                <StackPanel Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-20,-20,0" Orientation="Horizontal">
+                    <!-- Language selector -->
+                    <Border Background="#1E293B" CornerRadius="6" Padding="2" Margin="0,0,12,0" VerticalAlignment="Center">
+                        <StackPanel Orientation="Horizontal">
+                            <Button Content="PT" FontSize="11" FontWeight="Bold" Padding="8,4" BorderThickness="0" Cursor="Hand"
+                                    Click="BtnLangPt_Click" x:Name="BtnLangPt" Background="#6A7D90" Foreground="White">
+                                <Button.Resources><Style TargetType="Border"><Setter Property="CornerRadius" Value="4"/></Style></Button.Resources>
+                            </Button>
+                            <Button Content="EN" FontSize="11" FontWeight="Bold" Padding="8,4" BorderThickness="0" Cursor="Hand"
+                                    Click="BtnLangEn_Click" x:Name="BtnLangEn" Background="Transparent" Foreground="#94A3B8">
+                                <Button.Resources><Style TargetType="Border"><Setter Property="CornerRadius" Value="4"/></Style></Button.Resources>
+                            </Button>
+                        </StackPanel>
+                    </Border>
+                    <Button Content="&#x2715;" FontSize="16" Foreground="#94A3B8" Background="Transparent" BorderThickness="0"
+                            Cursor="Hand" Click="BtnClose_Click"/>
+                </StackPanel>
 
                 <StackPanel Grid.Row="0" Margin="0,0,0,30">
                     <TextBlock Text="{loc:Loc DashboardWelcome}" FontSize="28" FontWeight="Bold" Foreground="White" Margin="0,0,0,8"/>
@@ -232,7 +250,11 @@
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
-                                    <TextBlock Grid.Row="0" Text="98% Concluído" Foreground="#10B981" FontSize="12" FontWeight="Bold" Margin="0,0,0,5"/>
+                                    <TextBlock Grid.Row="0" Foreground="#10B981" FontSize="12" FontWeight="Bold" Margin="0,0,0,5">
+                                        <TextBlock.Text>
+                                            <Binding Source="98" Converter="{StaticResource LocalizedStepsFormat}" ConverterParameter="DashboardCompleted"/>
+                                        </TextBlock.Text>
+                                    </TextBlock>
                                     <Border Grid.Row="1" Height="6" Background="#1E293B" CornerRadius="3">
                                         <Border Width="180" Background="#10B981" CornerRadius="3" HorizontalAlignment="Left"/>
                                     </Border>

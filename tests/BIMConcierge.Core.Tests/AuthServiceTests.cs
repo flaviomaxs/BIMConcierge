@@ -49,16 +49,20 @@ public class AuthServiceTests
     private readonly Mock<ITokenStore> _tokenMock = new();
     private readonly Mock<ILocalDatabase> _dbMock = new();
     private readonly Mock<ILicenseService> _licenseMock = new();
+    private readonly Mock<IStringLocalizer> _locMock = new();
 
     public AuthServiceTests()
     {
+        // Mock localizer returns the key itself (sufficient for testing)
+        _locMock.Setup(l => l.GetString(It.IsAny<string>())).Returns((string key) => key);
+
         // Reset static state that persists between tests
         var sut = CreateSut();
         sut.LogoutAsync().GetAwaiter().GetResult();
     }
 
     private AuthService CreateSut() =>
-        new(_fakeApi, _tokenMock.Object, _dbMock.Object, _licenseMock.Object);
+        new(_fakeApi, _tokenMock.Object, _dbMock.Object, _licenseMock.Object, _locMock.Object);
 
     private static License ValidLicense() => new()
     {
@@ -137,7 +141,7 @@ public class AuthServiceTests
         var result = await sut.LoginAsync("ana@empresa.com", "pass", "key");
 
         result.Success.Should().BeFalse();
-        result.ErrorMessage.Should().Contain("expirada");
+        result.ErrorMessage.Should().Be("AuthLicenseExpired");
     }
 
     // ── Login — seats exhausted ──────────────────────────────────────────
@@ -154,7 +158,7 @@ public class AuthServiceTests
         var result = await sut.LoginAsync("ana@empresa.com", "pass", "key");
 
         result.Success.Should().BeFalse();
-        result.ErrorMessage.Should().Contain("seats");
+        result.ErrorMessage.Should().Be("AuthSeatLimitReached");
     }
 
     // ── Login — invalid license key ──────────────────────────────────────
@@ -171,7 +175,7 @@ public class AuthServiceTests
         var result = await sut.LoginAsync("ana@empresa.com", "pass", "bad-key");
 
         result.Success.Should().BeFalse();
-        result.ErrorMessage.Should().Contain("licença");
+        result.ErrorMessage.Should().Be("AuthInvalidLicenseKey");
     }
 
     // ── Login — network failure with cached user + license (offline) ─────
@@ -192,7 +196,7 @@ public class AuthServiceTests
         result.Success.Should().BeTrue();
         result.User.Should().Be(cachedUser);
         result.License.Should().Be(cachedLicense);
-        result.ErrorMessage.Should().Contain("offline");
+        result.ErrorMessage.Should().Be("AuthOfflineMode");
     }
 
     // ── Login — network failure with cached expired license ──────────────
@@ -210,7 +214,7 @@ public class AuthServiceTests
         var result = await sut.LoginAsync("carlos@empresa.com", "pass", "key");
 
         result.Success.Should().BeFalse();
-        result.ErrorMessage.Should().Contain("expirada");
+        result.ErrorMessage.Should().Be("AuthLicenseExpiredRenew");
     }
 
     // ── Login — network failure without cached user ──────────────────────
@@ -225,7 +229,7 @@ public class AuthServiceTests
         var result = await sut.LoginAsync("a@b.com", "pass", "key");
 
         result.Success.Should().BeFalse();
-        result.ErrorMessage.Should().Contain("Sem conexão");
+        result.ErrorMessage.Should().Be("AuthNoConnectionNoUser");
     }
 
     // ── Login — unexpected exception ─────────────────────────────────────

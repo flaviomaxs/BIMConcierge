@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net8.0-windows</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <IsPackable>false</IsPackable>
+        <UseWPF>true</UseWPF>
+        <NoWarn>$(NoWarn);CA1707</NoWarn>
+    </PropertyGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\BIMConcierge.Core\BIMConcierge.Core.csproj" />
+        <ProjectReference Include="..\..\src\BIMConcierge.Infrastructure\BIMConcierge.Infrastructure.csproj" />
+        <ProjectReference Include="..\..\src\BIMConcierge.Plugin\BIMConcierge.Plugin.csproj" />
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.3.0" />
+        <PackageReference Include="Serilog" Version="4.3.1" />
+        <PackageReference Include="xunit" Version="2.9.3" />
+        <PackageReference Include="xunit.runner.visualstudio" Version="3.1.5">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Moq" Version="4.20.72" />
+        <PackageReference Include="FluentAssertions" Version="8.8.0" />
+    </ItemGroup>
+</Project>

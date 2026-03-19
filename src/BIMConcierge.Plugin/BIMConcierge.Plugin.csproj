@@ -16,6 +16,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <InternalsVisibleTo Include="BIMConcierge.Integration.Tests" />
+    </ItemGroup>
+
+    <ItemGroup>
         <ProjectReference Include="..\BIMConcierge.UI\BIMConcierge.UI.csproj" />
         <ProjectReference Include="..\BIMConcierge.Core\BIMConcierge.Core.csproj" />
         <ProjectReference Include="..\BIMConcierge.Infrastructure\BIMConcierge.Infrastructure.csproj" />

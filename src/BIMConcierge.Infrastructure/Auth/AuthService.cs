@@ -20,6 +20,7 @@ public class AuthService : IAuthService
     private readonly ITokenStore _tokenStore;
     private readonly ILocalDatabase _db;
     private readonly ILicenseService _licenseService;
+    private readonly IStringLocalizer _loc;
 
     // Static so state survives across transient resolutions
     private static User? _currentUser;
@@ -43,12 +44,13 @@ public class AuthService : IAuthService
         private set { lock (_lock) _currentLicense = value; }
     }
 
-    public AuthService(IBimApiClient api, ITokenStore tokenStore, ILocalDatabase db, ILicenseService licenseService)
+    public AuthService(IBimApiClient api, ITokenStore tokenStore, ILocalDatabase db, ILicenseService licenseService, IStringLocalizer loc)
     {
         _api = api;
         _tokenStore = tokenStore;
         _db = db;
         _licenseService = licenseService;
+        _loc = loc;
     }
 
     public async Task<AuthResult> LoginAsync(string email, string password, string licenseKey)
@@ -68,7 +70,7 @@ public class AuthService : IAuthService
                 new LoginRequest(email, password, licenseKey));
 
             if (response is null || !response.Success)
-                return new AuthResult(false, null, response?.Message ?? "Credenciais inválidas.");
+                return new AuthResult(false, null, response?.Message ?? _loc.GetString("AuthInvalidCredentials"));
 
             _tokenStore.AccessToken = response.AccessToken;
             _tokenStore.RefreshToken = response.RefreshToken;
@@ -230,35 +232,35 @@ public class AuthService : IAuthService
     {
         var cached = await _db.GetLastUserAsync();
         if (cached is null)
-            return new AuthResult(false, null, "Sem conexão e nenhum usuário em cache.");
+            return new AuthResult(false, null, _loc.GetString("AuthNoConnectionNoUser"));
 
         var cachedLicense = await _db.GetCachedLicenseAsync(cached.CompanyId);
         if (cachedLicense is null)
-            return new AuthResult(false, null, "Sem conexão e nenhuma licença em cache.");
+            return new AuthResult(false, null, _loc.GetString("AuthNoConnectionNoLicense"));
 
         if (!cachedLicense.IsValid)
             return new AuthResult(false, null, cachedLicense.ExpiresAt <= DateTime.UtcNow
-                ? "Licença expirada. Conecte-se à internet para renovar."
-                : "Limite de seats atingido. Contate o administrador.");
+                ? _loc.GetString("AuthLicenseExpiredRenew")
+                : _loc.GetString("AuthSeatLimitReached"));
 
         CurrentUser = cached;
         CurrentLicense = cachedLicense;
-        return new AuthResult(true, _tokenStore.AccessToken, "Modo offline — dados em cache.", cached, cachedLicense);
+        return new AuthResult(true, _tokenStore.AccessToken, _loc.GetString("AuthOfflineMode"), cached, cachedLicense);
     }
 
     /// <summary>
     /// Returns an error AuthResult if the license is invalid, or null if valid.
     /// </summary>
-    private static AuthResult? EnforceLicense(License? license)
+    private AuthResult? EnforceLicense(License? license)
     {
         if (license is null)
-            return new AuthResult(false, null, "Chave de licença inválida.");
+            return new AuthResult(false, null, _loc.GetString("AuthInvalidLicenseKey"));
 
         if (license.ExpiresAt <= DateTime.UtcNow)
-            return new AuthResult(false, null, "Licença expirada. Contate o administrador.");
+            return new AuthResult(false, null, _loc.GetString("AuthLicenseExpired"));
 
         if (license.UsedSeats >= license.MaxSeats)
-            return new AuthResult(false, null, "Limite de seats atingido. Contate o administrador.");
+            return new AuthResult(false, null, _loc.GetString("AuthSeatLimitReached"));
 
         return null;
     }

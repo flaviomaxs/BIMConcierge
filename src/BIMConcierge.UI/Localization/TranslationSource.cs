@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using System.Globalization;
+using System.IO;
 using System.Resources;
 
 namespace BIMConcierge.UI.Localization;
@@ -16,9 +17,16 @@ public sealed class TranslationSource : INotifyPropertyChanged
         new("BIMConcierge.UI.Localization.Strings",
             typeof(TranslationSource).Assembly);
 
-    private CultureInfo _currentCulture = CultureInfo.CurrentUICulture;
+    private static readonly string PrefsPath = Path.Combine(
+        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+        "BIMConcierge", "language.txt");
 
-    private TranslationSource() { }
+    private CultureInfo _currentCulture;
+
+    private TranslationSource()
+    {
+        _currentCulture = LoadSavedCulture() ?? CultureInfo.CurrentUICulture;
+    }
 
     /// <summary>
     /// Indexer used by XAML bindings:
@@ -53,11 +61,12 @@ public sealed class TranslationSource : INotifyPropertyChanged
     }
 
     /// <summary>
-    /// Switches to the given culture code (e.g., "pt-BR", "en").
+    /// Switches to the given culture code (e.g., "pt-BR", "en") and persists the choice.
     /// </summary>
     public void SetCulture(string cultureCode)
     {
         CurrentCulture = new CultureInfo(cultureCode);
+        SaveCulture(cultureCode);
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
@@ -66,4 +75,29 @@ public sealed class TranslationSource : INotifyPropertyChanged
     /// Raised after culture changes, so ViewModels can refresh formatted strings.
     /// </summary>
     public static event EventHandler<CultureInfo>? CultureChanged;
+
+    private static void SaveCulture(string cultureCode)
+    {
+        try
+        {
+            Directory.CreateDirectory(Path.GetDirectoryName(PrefsPath)!);
+            File.WriteAllText(PrefsPath, cultureCode);
+        }
+        catch { /* best-effort persistence */ }
+    }
+
+    private static CultureInfo? LoadSavedCulture()
+    {
+        try
+        {
+            if (File.Exists(PrefsPath))
+            {
+                string code = File.ReadAllText(PrefsPath).Trim();
+                if (!string.IsNullOrEmpty(code))
+                    return new CultureInfo(code);
+            }
+        }
+        catch { /* fall back to system culture */ }
+        return null;
+    }
 }

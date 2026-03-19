@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{A1B2C3D4
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BIMConcierge.Core.Tests", "tests\BIMConcierge.Core.Tests\BIMConcierge.Core.Tests.csproj", "{A1B2C3D4-0006-0006-0006-000000000006}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BIMConcierge.Integration.Tests", "tests\BIMConcierge.Integration.Tests\BIMConcierge.Integration.Tests.csproj", "{A1B2C3D4-0007-0007-0007-000000000007}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,11 +64,20 @@ Global
 		{A1B2C3D4-0006-0006-0006-000000000006}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A1B2C3D4-0006-0006-0006-000000000006}.Release|x64.ActiveCfg = Release|Any CPU
 		{A1B2C3D4-0006-0006-0006-000000000006}.Release|x64.Build.0 = Release|Any CPU
+		{A1B2C3D4-0007-0007-0007-000000000007}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1B2C3D4-0007-0007-0007-000000000007}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1B2C3D4-0007-0007-0007-000000000007}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A1B2C3D4-0007-0007-0007-000000000007}.Debug|x64.Build.0 = Debug|Any CPU
+		{A1B2C3D4-0007-0007-0007-000000000007}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1B2C3D4-0007-0007-0007-000000000007}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1B2C3D4-0007-0007-0007-000000000007}.Release|x64.ActiveCfg = Release|Any CPU
+		{A1B2C3D4-0007-0007-0007-000000000007}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A1B2C3D4-0006-0006-0006-000000000006} = {A1B2C3D4-0005-0005-0005-000000000005}
+		{A1B2C3D4-0007-0007-0007-000000000007} = {A1B2C3D4-0005-0005-0005-000000000005}
 	EndGlobalSection
 EndGlobal
