@@ -314,7 +314,8 @@
                         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" VerticalAlignment="Center">
                             <Button Content="{loc:Loc StandardsExportJson}" Height="36" Padding="16,0" Margin="0,0,10,0"
                                     Background="Transparent" Foreground="#6A7D90" FontSize="12" FontWeight="SemiBold"
-                                    BorderBrush="#6A7D90" BorderThickness="1" Cursor="Hand">
+                                    BorderBrush="#6A7D90" BorderThickness="1" Cursor="Hand"
+                                    Click="BtnExportJson_Click">
                                 <Button.Resources>
                                     <Style TargetType="Border"><Setter Property="CornerRadius" Value="8"/></Style>
                                 </Button.Resources>
@@ -431,7 +432,7 @@
                         <Grid Margin="0,0,0,16">
                             <TextBlock Text="{loc:Loc StandardsLODMatrix}" FontSize="20" FontWeight="Bold" Foreground="White" HorizontalAlignment="Left"/>
                             <TextBlock Text="{loc:Loc StandardsAddCategory}" FontSize="11" FontWeight="Bold" Foreground="#6A7D90" HorizontalAlignment="Right"
-                                       VerticalAlignment="Center" Cursor="Hand"/>
+                                       VerticalAlignment="Center" Cursor="Hand" MouseLeftButtonUp="AddCategory_Click"/>
                         </Grid>
 
                         <Border Background="#121820" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12">

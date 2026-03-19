@@ -47,6 +47,7 @@
   <data name="LoginLicenseKey" xml:space="preserve"><value>Chave de Licença</value></data>
   <data name="LoginRememberMe" xml:space="preserve"><value>Lembrar de mim</value></data>
   <data name="LoginForgotPassword" xml:space="preserve"><value>Esqueceu a senha?</value></data>
+  <data name="ForgotPasswordMessage" xml:space="preserve"><value>Para redefinir sua senha, entre em contato com o suporte em contato@bimconcierge.io informando seu e-mail corporativo.</value></data>
   <data name="LoginButton" xml:space="preserve"><value>Entrar</value></data>
   <data name="LoginNeedHelp" xml:space="preserve"><value>Precisa de ajuda?</value></data>
   <data name="LoginContactSupport" xml:space="preserve"><value>Fale com o suporte</value></data>
@@ -162,6 +163,7 @@
   <!-- ══ Company Standards (extras) ══════════════════════════════════════ -->
   <data name="StandardsNamingSubtitle" xml:space="preserve"><value>Defina regras estruturais e padrões regex para categorias de elementos Revit.</value></data>
   <data name="StandardsExportJson" xml:space="preserve"><value>Exportar JSON</value></data>
+  <data name="StandardsExportSuccess" xml:space="preserve"><value>Padrões exportados com sucesso!</value></data>
   <data name="StandardsPrefixRule" xml:space="preserve"><value>REGRA DE PREFIXO</value></data>
   <data name="StandardsSuffixRule" xml:space="preserve"><value>REGRA DE SUFIXO</value></data>
   <data name="StandardsRegexPattern" xml:space="preserve"><value>PADRÃO REGEX</value></data>
@@ -169,6 +171,7 @@
   <data name="StandardsDoorWindowCategories" xml:space="preserve"><value>Categorias de Portas e Janelas</value></data>
   <data name="StandardsLODMatrix" xml:space="preserve"><value>Matriz de Requisitos de LOD</value></data>
   <data name="StandardsAddCategory" xml:space="preserve"><value>+ Adicionar Categoria</value></data>
+  <data name="StandardsAddCategoryMessage" xml:space="preserve"><value>Esta funcionalidade estará disponível em breve. Novas categorias poderão ser adicionadas diretamente pelo painel.</value></data>
   <data name="StandardsColumnCategory" xml:space="preserve"><value>CATEGORIA</value></data>
   <data name="StandardsColumnPhase" xml:space="preserve"><value>FASE</value></data>
   <data name="StandardsColumnAction" xml:space="preserve"><value>AÇÃO</value></data>

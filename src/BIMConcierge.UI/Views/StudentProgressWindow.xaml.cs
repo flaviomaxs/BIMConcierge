@@ -47,4 +47,22 @@ public partial class StudentProgressWindow : Window
         _vm.OpenWindowCommand.Execute("Achievements");
         this.Close();
     }
+
+    private void BtnResumeLearning_Click(object sender, RoutedEventArgs e)
+    {
+        _vm.OpenWindowCommand.Execute("TutorialLibrary");
+        this.Close();
+    }
+
+    private void PlayTutorial_Click(object sender, MouseButtonEventArgs e)
+    {
+        _vm.OpenWindowCommand.Execute("TutorialLibrary");
+        this.Close();
+    }
+
+    private void ViewAllBadges_Click(object sender, MouseButtonEventArgs e)
+    {
+        _vm.OpenWindowCommand.Execute("Achievements");
+        this.Close();
+    }
 }

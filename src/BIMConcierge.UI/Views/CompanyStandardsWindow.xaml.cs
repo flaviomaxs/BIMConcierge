@@ -1,11 +1,16 @@
+using System.IO;
+using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
+using BIMConcierge.UI.Localization;
 using BIMConcierge.UI.ViewModels;
+using Microsoft.Win32;
 
 namespace BIMConcierge.UI.Views;
 
 public partial class CompanyStandardsWindow : Window
 {
+    private static readonly JsonSerializerOptions s_jsonOptions = new() { WriteIndented = true };
     private readonly CompanyStandardsViewModel _vm;
 
     public CompanyStandardsWindow(CompanyStandardsViewModel viewModel)
@@ -53,4 +58,33 @@ public partial class CompanyStandardsWindow : Window
 
     private void CategoryBestPractices_Click(object sender, MouseButtonEventArgs e) =>
         _vm.SelectCategoryCommand.Execute("Best Practices");
+
+    private void BtnExportJson_Click(object sender, RoutedEventArgs e)
+    {
+        var dialog = new SaveFileDialog
+        {
+            Filter = "JSON|*.json",
+            FileName = "bimconcierge-standards.json"
+        };
+
+        if (dialog.ShowDialog() == true)
+        {
+            var json = JsonSerializer.Serialize(_vm.Standards, s_jsonOptions);
+            File.WriteAllText(dialog.FileName, json);
+            MessageBox.Show(
+                TranslationSource.GetString("StandardsExportSuccess"),
+                TranslationSource.GetString("StandardsExportJson"),
+                MessageBoxButton.OK,
+                MessageBoxImage.Information);
+        }
+    }
+
+    private void AddCategory_Click(object sender, MouseButtonEventArgs e)
+    {
+        MessageBox.Show(
+            TranslationSource.GetString("StandardsAddCategoryMessage"),
+            TranslationSource.GetString("StandardsAddCategory"),
+            MessageBoxButton.OK,
+            MessageBoxImage.Information);
+    }
 }

@@ -30,7 +30,7 @@ function renderPlanCard(plan) {
 
     const buttonText = isFree ? 'Começar Grátis' : 'Assinar Agora';
     const buttonAction = isFree
-        ? `onclick="alert('Entre em contato para ativar o Trial: contato@bimconcierge.io')"`
+        ? `onclick="openTrialModal()"`
         : `onclick="openCheckout('${plan.Plan}', ${plan.Price})"`;
 
     const features = plan.Features.map(f => `<li>${f}</li>`).join('');
@@ -132,6 +132,57 @@ function toggleFaq(button) {
 
     // Toggle current
     if (!wasOpen) item.classList.add('open');
+}
+
+// ── Trial Modal ────────────────────────────────────────────────────────────
+function openTrialModal() {
+    document.getElementById('trial-name').value = '';
+    document.getElementById('trial-email').value = '';
+    document.getElementById('trial-modal').style.display = 'flex';
+    document.getElementById('trial-name').focus();
+}
+
+function closeTrialModal() {
+    document.getElementById('trial-modal').style.display = 'none';
+}
+
+// Close trial modal on overlay click
+document.addEventListener('click', (e) => {
+    if (e.target.id === 'trial-modal') closeTrialModal();
+});
+
+async function handleTrial(e) {
+    e.preventDefault();
+    const email = document.getElementById('trial-email').value.trim();
+    const name = document.getElementById('trial-name').value.trim();
+    const btn = document.getElementById('trial-btn');
+
+    if (!email) return;
+
+    btn.textContent = 'Ativando...';
+    btn.disabled = true;
+
+    try {
+        const response = await fetch('/v1/public/trial', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ Email: email, Name: name || null })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || 'Erro ao ativar Trial');
+        }
+
+        // Show success page
+        closeTrialModal();
+        document.getElementById('success-page').style.display = 'flex';
+    } catch (err) {
+        alert(err.message || 'Erro ao processar. Tente novamente.');
+        btn.textContent = 'Ativar Trial';
+        btn.disabled = false;
+    }
 }
 
 // ── Nav Scroll Effect ───────────────────────────────────────────────────────

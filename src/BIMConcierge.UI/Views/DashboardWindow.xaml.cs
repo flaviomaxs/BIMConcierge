@@ -41,6 +41,9 @@ public partial class DashboardWindow : Window
     private void SidebarAchievements_Click(object sender, MouseButtonEventArgs e) =>
         _vm.OpenWindowCommand.Execute("Achievements");
 
+    private void BtnViewDetails_Click(object sender, RoutedEventArgs e) =>
+        _vm.OpenWindowCommand.Execute("CompanyStandards");
+
     private void BtnLangPt_Click(object sender, RoutedEventArgs e)
     {
         TranslationSource.Instance.SetCulture("pt-BR");

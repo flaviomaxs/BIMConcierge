@@ -1,5 +1,8 @@
 using System.Net.Http.Headers;
 using System.Text;
+using BIMConcierge.Api.Data;
+using BIMConcierge.Api.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace BIMConcierge.Api.Endpoints;
 
@@ -10,6 +13,7 @@ public static class PublicEndpoints
         group.MapGet("/plans", GetPlans);
         group.MapGet("/config", GetConfig);
         group.MapPost("/checkout", CreateCheckout);
+        group.MapPost("/trial", CreateTrial);
         return group;
     }
 
@@ -114,9 +118,44 @@ public static class PublicEndpoints
         var json = await response.Content.ReadFromJsonAsync<StripeCheckoutResponse>();
         return Results.Ok(new { CheckoutUrl = json?.Url ?? "" });
     }
+
+    private static async Task<IResult> CreateTrial(
+        TrialRequest request,
+        AppDbContext db,
+        ProvisioningService provisioning)
+    {
+        if (string.IsNullOrWhiteSpace(request.Email))
+            return Results.BadRequest(new { error = "Email é obrigatório" });
+
+        var email = request.Email.Trim().ToLowerInvariant();
+
+        // Check if this email already has an active Trial license
+        var hasActiveTrial = await db.Users
+            .Where(u => u.Email == email)
+            .SelectMany(u => db.Licenses.Where(l => l.CompanyId == u.CompanyId))
+            .AnyAsync(l => l.Type == "Trial" && l.ExpiresAt > DateTime.UtcNow);
+
+        if (hasActiveTrial)
+            return Results.BadRequest(new { error = "Já existe um Trial ativo para este email" });
+
+        var name = string.IsNullOrWhiteSpace(request.Name)
+            ? email.Split('@')[0]
+            : request.Name.Trim();
+
+        var result = await provisioning.ProvisionAsync(email, name, "Trial", 1, Guid.NewGuid().ToString());
+
+        return Results.Ok(new
+        {
+            message = "Trial ativado com sucesso",
+            licenseKey = result.LicenseKey,
+            userId = result.UserId,
+            companyId = result.CompanyId
+        });
+    }
 }
 
 public record PlanInfo(string Plan, decimal Price, string Currency, int Seats, int DurationDays, string[] Features);
 public record CheckoutRequest(string Plan, string Email);
+public record TrialRequest(string Email, string? Name);
 
 internal record StripeCheckoutResponse(string? Id, string? Url);

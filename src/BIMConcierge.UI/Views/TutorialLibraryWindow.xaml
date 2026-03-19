@@ -39,7 +39,7 @@
 
                     <StackPanel Grid.Row="1">
                         <Border Background="Transparent" CornerRadius="8" Padding="12,10" Margin="0,0,0,5" Cursor="Hand"
-                                MouseLeftButtonDown="SidebarDashboard_Click">
+                                MouseLeftButtonUp="SidebarDashboard_Click">
                             <StackPanel Orientation="Horizontal">
                                 <Path Data="M2,2 H7 V7 H2Z M9,2 H14 V7 H9Z M2,9 H7 V14 H2Z M9,9 H14 V14 H9Z"
                                       Fill="#94A3B8" Width="16" Height="16" Stretch="Uniform" Margin="0,0,12,0" VerticalAlignment="Center"/>
@@ -56,7 +56,7 @@
                         </Border>
 
                         <Border Background="Transparent" CornerRadius="8" Padding="12,10" Margin="0,0,0,5" Cursor="Hand"
-                                MouseLeftButtonDown="SidebarStandards_Click">
+                                MouseLeftButtonUp="SidebarStandards_Click">
                             <StackPanel Orientation="Horizontal">
                                 <Path Data="M8,1 L14,3.5 V8 C14,11.5 8,15 8,15 C8,15 2,11.5 2,8 V3.5Z"
                                       Fill="#94A3B8" Width="16" Height="16" Stretch="Uniform" Margin="0,0,12,0" VerticalAlignment="Center"/>

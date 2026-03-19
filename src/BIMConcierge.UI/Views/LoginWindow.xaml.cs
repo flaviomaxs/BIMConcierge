@@ -1,6 +1,8 @@
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using BIMConcierge.UI.Localization;
 using BIMConcierge.UI.ViewModels;
 
 namespace BIMConcierge.UI.Views;
@@ -34,5 +36,19 @@ public partial class LoginWindow : Window
     private void BtnClose_Click(object sender, RoutedEventArgs e)
     {
         this.Close();
+    }
+
+    private void ForgotPassword_Click(object sender, MouseButtonEventArgs e)
+    {
+        MessageBox.Show(
+            TranslationSource.GetString("ForgotPasswordMessage"),
+            TranslationSource.GetString("LoginForgotPassword"),
+            MessageBoxButton.OK,
+            MessageBoxImage.Information);
+    }
+
+    private void ContactSupport_Click(object sender, MouseButtonEventArgs e)
+    {
+        Process.Start(new ProcessStartInfo("mailto:contato@bimconcierge.io") { UseShellExecute = true });
     }
 }
