@@ -41,14 +41,16 @@
                         <Border Background="Transparent" CornerRadius="8" Padding="12,10" Margin="0,0,0,5" Cursor="Hand"
                                 MouseLeftButtonDown="SidebarDashboard_Click">
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="&#x229E;" Foreground="#94A3B8" FontSize="18" Margin="0,0,12,0" VerticalAlignment="Center"/>
+                                <Path Data="M2,2 H7 V7 H2Z M9,2 H14 V7 H9Z M2,9 H7 V14 H2Z M9,9 H14 V14 H9Z"
+                                      Fill="#94A3B8" Width="16" Height="16" Stretch="Uniform" Margin="0,0,12,0" VerticalAlignment="Center"/>
                                 <TextBlock Text="{loc:Loc NavDashboard}" Foreground="#94A3B8" FontWeight="Medium" FontSize="14" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Border>
 
                         <Border Background="#1E293B" CornerRadius="8" Padding="12,10" Margin="0,0,0,5" Cursor="Hand">
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="&#x25B6;" Foreground="#6A7D90" FontSize="16" Margin="0,0,12,0" VerticalAlignment="Center"/>
+                                <Path Data="M2,3 H10 V5 H2Z M2,7 H14 V9 H2Z M2,11 H12 V13 H2Z"
+                                      Fill="#6A7D90" Width="16" Height="16" Stretch="Uniform" Margin="0,0,12,0" VerticalAlignment="Center"/>
                                 <TextBlock Text="{loc:Loc NavTutorials}" Foreground="White" FontWeight="SemiBold" FontSize="14" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Border>
@@ -56,14 +58,16 @@
                         <Border Background="Transparent" CornerRadius="8" Padding="12,10" Margin="0,0,0,5" Cursor="Hand"
                                 MouseLeftButtonDown="SidebarStandards_Click">
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="&#x2605;" Foreground="#94A3B8" FontSize="18" Margin="0,0,12,0" VerticalAlignment="Center"/>
+                                <Path Data="M8,1 L14,3.5 V8 C14,11.5 8,15 8,15 C8,15 2,11.5 2,8 V3.5Z"
+                                      Fill="#94A3B8" Width="16" Height="16" Stretch="Uniform" Margin="0,0,12,0" VerticalAlignment="Center"/>
                                 <TextBlock Text="{loc:Loc NavStandards}" Foreground="#94A3B8" FontWeight="Medium" FontSize="14" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Border>
 
                         <Border Background="Transparent" CornerRadius="8" Padding="12,10" Margin="0,0,0,5" Cursor="Hand">
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="&#x2699;" Foreground="#94A3B8" FontSize="18" Margin="0,0,12,0" VerticalAlignment="Center"/>
+                                <Path Data="M7,0 H9 V2.5 L10.5,3 L12.5,1.5 L14,3 L12.5,5 L13,6.5 H15.5 V8.5 H13 L12.5,10.5 L14,12.5 L12.5,14 L10.5,12.5 L9,13 V15.5 H7 V13 L5,12.5 L3,14 L1.5,12.5 L3,10.5 L2.5,8.5 H0 V6.5 H2.5 L3,5 L1.5,3 L3,1.5 L5,3 L7,2.5Z M8,5.5 A2.5,2.5 0 1,0 8,10.5 A2.5,2.5 0 1,0 8,5.5Z"
+                                      Fill="#94A3B8" Width="16" Height="16" Stretch="Uniform" Margin="0,0,12,0" VerticalAlignment="Center"/>
                                 <TextBlock Text="{loc:Loc NavSettings}" Foreground="#94A3B8" FontWeight="Medium" FontSize="14" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Border>

@@ -53,33 +53,38 @@
                         <Border Background="Transparent" CornerRadius="8" Padding="12,10" Margin="0,0,0,4" Cursor="Hand"
                                 MouseLeftButtonUp="SidebarDashboard_Click">
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="⊞" Foreground="#94A3B8" FontSize="16" Margin="0,0,12,0" VerticalAlignment="Center"/>
+                                <Path Data="M2,2 H7 V7 H2Z M9,2 H14 V7 H9Z M2,9 H7 V14 H2Z M9,9 H14 V14 H9Z"
+                                      Fill="#94A3B8" Width="16" Height="16" Stretch="Uniform" Margin="0,0,12,0" VerticalAlignment="Center"/>
                                 <TextBlock Text="{loc:Loc NavDashboard}" Foreground="#94A3B8" FontWeight="Medium" FontSize="13" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Border>
                         <Border Background="Transparent" CornerRadius="8" Padding="12,10" Margin="0,0,0,4" Cursor="Hand">
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="▶" Foreground="#94A3B8" FontSize="14" Margin="0,0,12,0" VerticalAlignment="Center"/>
+                                <Path Data="M2,3 H10 V5 H2Z M2,7 H14 V9 H2Z M2,11 H12 V13 H2Z"
+                                      Fill="#94A3B8" Width="16" Height="16" Stretch="Uniform" Margin="0,0,12,0" VerticalAlignment="Center"/>
                                 <TextBlock Text="{loc:Loc NavTutorials}" Foreground="#94A3B8" FontWeight="Medium" FontSize="13" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Border>
                         <Border Background="Transparent" CornerRadius="8" Padding="12,10" Margin="0,0,0,4" Cursor="Hand"
                                 MouseLeftButtonUp="SidebarStandards_Click">
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="★" Foreground="#94A3B8" FontSize="16" Margin="0,0,12,0" VerticalAlignment="Center"/>
+                                <Path Data="M8,1 L14,3.5 V8 C14,11.5 8,15 8,15 C8,15 2,11.5 2,8 V3.5Z"
+                                      Fill="#94A3B8" Width="16" Height="16" Stretch="Uniform" Margin="0,0,12,0" VerticalAlignment="Center"/>
                                 <TextBlock Text="{loc:Loc NavStandards}" Foreground="#94A3B8" FontWeight="Medium" FontSize="13" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Border>
                         <Border Background="#1E293B" CornerRadius="8" Padding="12,10" Margin="0,0,0,4" Cursor="Hand">
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="📊" Foreground="White" FontSize="14" Margin="0,0,12,0" VerticalAlignment="Center"/>
+                                <Path Data="M2,14 V9 H5 V14Z M6.5,14 V6 H9.5 V14Z M11,14 V2 H14 V14Z"
+                                      Fill="White" Width="16" Height="16" Stretch="Uniform" Margin="0,0,12,0" VerticalAlignment="Center"/>
                                 <TextBlock Text="{loc:Loc NavProgress}" Foreground="White" FontWeight="SemiBold" FontSize="13" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Border>
                         <Border Background="Transparent" CornerRadius="8" Padding="12,10" Margin="0,0,0,4" Cursor="Hand"
                                 MouseLeftButtonUp="SidebarAchievements_Click">
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="🏆" Foreground="#94A3B8" FontSize="14" Margin="0,0,12,0" VerticalAlignment="Center"/>
+                                <Path Data="M5,1 H11 L12,5 L8,8 L4,5Z M6,9 H10 V11 H6Z M4,11.5 H12 V13 H4Z"
+                                      Fill="#94A3B8" Width="16" Height="16" Stretch="Uniform" Margin="0,0,12,0" VerticalAlignment="Center"/>
                                 <TextBlock Text="{loc:Loc NavAchievements}" Foreground="#94A3B8" FontWeight="Medium" FontSize="13" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Border>

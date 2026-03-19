@@ -25,6 +25,8 @@ internal static class RibbonBuilder
         {
             ToolTip        = "Abre o painel principal do BIMConcierge",
             LongDescription = "Acesse tutoriais guiados, correção em tempo real e os padrões da empresa.",
+            LargeImage      = RibbonIcons.Dashboard(32),
+            Image            = RibbonIcons.Dashboard(16),
         };
 
         // ── Tutorial quick-start button ──────────────────────────────────────
@@ -34,7 +36,9 @@ internal static class RibbonBuilder
             typeof(StartTutorialCommand).Assembly.Location,
             typeof(StartTutorialCommand).FullName!)
         {
-            ToolTip = "Inicia o tutorial guiado diretamente no Revit",
+            ToolTip    = "Inicia o tutorial guiado diretamente no Revit",
+            LargeImage = RibbonIcons.Tutorial(32),
+            Image      = RibbonIcons.Tutorial(16),
         };
 
         // ── Company Standards button ───────────────────────────────────────
@@ -44,8 +48,10 @@ internal static class RibbonBuilder
             typeof(OpenCompanyStandardsCommand).Assembly.Location,
             typeof(OpenCompanyStandardsCommand).FullName!)
         {
-            ToolTip = "Abre a tela de padrões BIM da empresa",
+            ToolTip        = "Abre a tela de padrões BIM da empresa",
             LongDescription = "Gerencie regras de nomenclatura, LOD, worksets e boas práticas do seu projeto.",
+            LargeImage      = RibbonIcons.Standards(32),
+            Image            = RibbonIcons.Standards(16),
         };
 
         // ── Student Progress button ────────────────────────────────────────
@@ -55,8 +61,10 @@ internal static class RibbonBuilder
             typeof(OpenStudentProgressCommand).Assembly.Location,
             typeof(OpenStudentProgressCommand).FullName!)
         {
-            ToolTip = "Abre a tela de progresso e habilidades do aluno",
+            ToolTip        = "Abre a tela de progresso e habilidades do aluno",
             LongDescription = "Acompanhe tutoriais em andamento, conquistas recentes e proficiência por categoria.",
+            LargeImage      = RibbonIcons.Progress(32),
+            Image            = RibbonIcons.Progress(16),
         };
 
         panel.AddItem(dashboardData);
