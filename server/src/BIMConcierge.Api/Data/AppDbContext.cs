@@ -17,6 +17,7 @@ public class AppDbContext : DbContext
     public DbSet<AchievementEntity> Achievements => Set<AchievementEntity>();
     public DbSet<UserAchievement> UserAchievements => Set<UserAchievement>();
     public DbSet<CompanyStandardEntity> CompanyStandards => Set<CompanyStandardEntity>();
+    public DbSet<OrderEntity> Orders => Set<OrderEntity>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -65,6 +66,13 @@ public class AppDbContext : DbContext
         {
             e.HasKey(s => s.Id);
             e.HasOne(s => s.Company).WithMany(c => c.Standards).HasForeignKey(s => s.CompanyId);
+        });
+
+        modelBuilder.Entity<OrderEntity>(e =>
+        {
+            e.HasKey(o => o.Id);
+            e.HasIndex(o => o.PaymentId).IsUnique();
+            e.HasOne(o => o.License).WithMany().HasForeignKey(o => o.LicenseId);
         });
 
         // ── Seed Data ───────────────────────────────────────────────────────

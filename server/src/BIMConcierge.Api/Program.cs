@@ -40,6 +40,8 @@ builder.Services.AddAuthorization();
 
 // ── Services ────────────────────────────────────────────────────────────────
 builder.Services.AddSingleton<AuthTokenService>();
+builder.Services.AddScoped<ProvisioningService>();
+builder.Services.AddSingleton<IEmailSender, SmtpEmailSender>();
 
 // ── Swagger ─────────────────────────────────────────────────────────────────
 builder.Services.AddEndpointsApiExplorer();
@@ -56,6 +58,7 @@ var app = builder.Build();
 
 // ── Middleware ───────────────────────────────────────────────────────────────
 app.UseCors();
+app.UseStaticFiles();
 app.UseAuthentication();
 app.UseAuthorization();
 
@@ -71,6 +74,11 @@ app.MapGroup("/v1/licenses").MapLicenseEndpoints().RequireAuthorization();
 app.MapGroup("/v1/tutorials").MapTutorialEndpoints().RequireAuthorization();
 app.MapGroup("/v1").MapProgressEndpoints().RequireAuthorization();
 app.MapGroup("/v1/standards").MapStandardsEndpoints().RequireAuthorization();
+app.MapGroup("/v1/webhooks").MapWebhookEndpoints();
+app.MapGroup("/v1/public").MapPublicEndpoints();
+
+// ── Fallback to index.html for SPA ───────────────────────────────────────────
+app.MapFallbackToFile("index.html");
 
 // ── Auto-migrate in development (skip for InMemory provider in tests) ───────
 if (app.Environment.IsDevelopment())
