@@ -51,4 +51,9 @@ public partial class LoginWindow : Window
     {
         Process.Start(new ProcessStartInfo("mailto:contato@bimconcierge.io") { UseShellExecute = true });
     }
+
+    private void SignUp_Click(object sender, MouseButtonEventArgs e)
+    {
+        Process.Start(new ProcessStartInfo("https://bimconcierge.onrender.com/#planos") { UseShellExecute = true });
+    }
 }

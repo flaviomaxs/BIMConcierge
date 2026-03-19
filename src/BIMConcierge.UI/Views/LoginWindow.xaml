@@ -113,10 +113,17 @@
                     </Button>
                 </StackPanel>
 
-                <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
-                    <TextBlock Text="{loc:Loc LoginNeedHelp}" Foreground="#94A3B8" FontSize="13" Margin="0,0,4,0"/>
-                    <TextBlock Text="{loc:Loc LoginContactSupport}" Foreground="#6A7D90" FontSize="13" FontWeight="SemiBold"
-                               Cursor="Hand" MouseLeftButtonUp="ContactSupport_Click"/>
+                <StackPanel Grid.Row="2" HorizontalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,8">
+                        <TextBlock Text="{loc:Loc LoginNoAccount}" Foreground="#94A3B8" FontSize="13" Margin="0,0,4,0"/>
+                        <TextBlock Text="{loc:Loc LoginSignUp}" Foreground="#6A7D90" FontSize="13" FontWeight="SemiBold"
+                                   Cursor="Hand" MouseLeftButtonUp="SignUp_Click"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock Text="{loc:Loc LoginNeedHelp}" Foreground="#94A3B8" FontSize="13" Margin="0,0,4,0"/>
+                        <TextBlock Text="{loc:Loc LoginContactSupport}" Foreground="#6A7D90" FontSize="13" FontWeight="SemiBold"
+                                   Cursor="Hand" MouseLeftButtonUp="ContactSupport_Click"/>
+                    </StackPanel>
                 </StackPanel>
             </Grid>
         </Grid>

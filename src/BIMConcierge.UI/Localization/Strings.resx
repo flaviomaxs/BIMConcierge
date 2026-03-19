@@ -51,6 +51,8 @@
   <data name="LoginButton" xml:space="preserve"><value>Entrar</value></data>
   <data name="LoginNeedHelp" xml:space="preserve"><value>Precisa de ajuda?</value></data>
   <data name="LoginContactSupport" xml:space="preserve"><value>Fale com o suporte</value></data>
+  <data name="LoginNoAccount" xml:space="preserve"><value>Ainda não tem conta?</value></data>
+  <data name="LoginSignUp" xml:space="preserve"><value>Assine aqui</value></data>
   <data name="LoginAllFieldsRequired" xml:space="preserve"><value>Preencha todos os campos.</value></data>
   <data name="LoginFailed" xml:space="preserve"><value>Falha no login.</value></data>
 
