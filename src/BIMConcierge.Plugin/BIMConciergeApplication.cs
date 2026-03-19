@@ -71,6 +71,7 @@ public class BIMConciergeApplication : IExternalApplication
         services.AddTransient<BIMConcierge.UI.Views.CorrectionAlertWindow>();
         services.AddTransient<BIMConcierge.UI.Views.CorrectionWindow>();
         services.AddTransient<BIMConcierge.UI.Views.TutorialLibraryWindow>();
+        services.AddTransient<BIMConcierge.UI.Views.SettingsWindow>();
 
         return services.BuildServiceProvider();
     }

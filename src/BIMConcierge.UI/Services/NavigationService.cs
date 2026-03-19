@@ -30,6 +30,7 @@ public sealed class NavigationService : INavigationService
             "Corrections"       => _serviceProvider.GetRequiredService<CorrectionWindow>(),
             "Tutorials"         => _serviceProvider.GetRequiredService<TutorialWindow>(),
             "TutorialLibrary"   => _serviceProvider.GetRequiredService<TutorialLibraryWindow>(),
+            "Settings"          => _serviceProvider.GetRequiredService<SettingsWindow>(),
             "GuidedTutorial"    => CreateWindowWithTutorial<GuidedTutorialWindow>(parameter as string),
             "TutorialDetail"    => CreateWindowWithTutorial<TutorialDetailWindow>(parameter as string),
             _ => null

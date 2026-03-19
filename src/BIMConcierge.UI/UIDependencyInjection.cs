@@ -29,6 +29,7 @@ public static class UIDependencyInjection
         services.AddTransient<CorrectionAlertViewModel>();
         services.AddTransient<CorrectionViewModel>();
         services.AddTransient<TutorialLibraryViewModel>();
+        services.AddTransient<SettingsViewModel>();
         return services;
     }
 }

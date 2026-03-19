@@ -4,11 +4,11 @@ using BIMConcierge.UI.ViewModels;
 
 namespace BIMConcierge.UI.Views;
 
-public partial class StudentProgressWindow : Window
+public partial class SettingsWindow : Window
 {
-    private readonly StudentProgressViewModel _vm;
+    private readonly SettingsViewModel _vm;
 
-    public StudentProgressWindow(StudentProgressViewModel viewModel)
+    public SettingsWindow(SettingsViewModel viewModel)
     {
         InitializeComponent();
         _vm = viewModel;
@@ -30,15 +30,21 @@ public partial class StudentProgressWindow : Window
         this.Close();
     }
 
+    private void SidebarTutorials_Click(object sender, MouseButtonEventArgs e)
+    {
+        _vm.OpenWindowCommand.Execute("TutorialLibrary");
+        this.Close();
+    }
+
     private void SidebarStandards_Click(object sender, MouseButtonEventArgs e)
     {
         _vm.OpenWindowCommand.Execute("CompanyStandards");
         this.Close();
     }
 
-    private void SidebarTutorials_Click(object sender, MouseButtonEventArgs e)
+    private void SidebarProgress_Click(object sender, MouseButtonEventArgs e)
     {
-        _vm.OpenWindowCommand.Execute("TutorialLibrary");
+        _vm.OpenWindowCommand.Execute("StudentProgress");
         this.Close();
     }
 
@@ -47,4 +53,10 @@ public partial class StudentProgressWindow : Window
         _vm.OpenWindowCommand.Execute("Achievements");
         this.Close();
     }
+
+    private void LangPtBr_Click(object sender, MouseButtonEventArgs e) =>
+        _vm.ChangeLanguageCommand.Execute("pt-BR");
+
+    private void LangEn_Click(object sender, MouseButtonEventArgs e) =>
+        _vm.ChangeLanguageCommand.Execute("en");
 }

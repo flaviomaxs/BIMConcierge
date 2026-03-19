@@ -245,4 +245,17 @@
   <data name="Previous" xml:space="preserve"><value>Previous</value></data>
   <data name="Back" xml:space="preserve"><value>Back</value></data>
   <data name="Architect" xml:space="preserve"><value>Architect</value></data>
+
+  <!-- ══ Settings ══════════════════════════════════════════════════════════ -->
+  <data name="SettingsSubtitle" xml:space="preserve"><value>Manage language, theme and account information</value></data>
+  <data name="SettingsLanguage" xml:space="preserve"><value>Language</value></data>
+  <data name="SettingsLanguageDesc" xml:space="preserve"><value>Select the BIMConcierge interface language</value></data>
+  <data name="SettingsTheme" xml:space="preserve"><value>Theme</value></data>
+  <data name="SettingsAccount" xml:space="preserve"><value>Account</value></data>
+  <data name="SettingsName" xml:space="preserve"><value>Name</value></data>
+  <data name="SettingsRole" xml:space="preserve"><value>Role</value></data>
+  <data name="SettingsPlan" xml:space="preserve"><value>Plan</value></data>
+  <data name="SettingsAbout" xml:space="preserve"><value>About</value></data>
+  <data name="SettingsVersion" xml:space="preserve"><value>Version</value></data>
+  <data name="SettingsSupport" xml:space="preserve"><value>Support</value></data>
 </root>

@@ -58,7 +58,8 @@
                                 <TextBlock Text="{loc:Loc NavDashboard}" Foreground="#94A3B8" FontWeight="Medium" FontSize="13" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Border>
-                        <Border Background="Transparent" CornerRadius="8" Padding="12,10" Margin="0,0,0,4" Cursor="Hand">
+                        <Border Background="Transparent" CornerRadius="8" Padding="12,10" Margin="0,0,0,4" Cursor="Hand"
+                                MouseLeftButtonUp="SidebarTutorials_Click">
                             <StackPanel Orientation="Horizontal">
                                 <Path Data="M2,3 H10 V5 H2Z M2,7 H14 V9 H2Z M2,11 H12 V13 H2Z"
                                       Fill="#94A3B8" Width="16" Height="16" Stretch="Uniform" Margin="0,0,12,0" VerticalAlignment="Center"/>

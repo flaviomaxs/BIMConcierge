@@ -29,4 +29,10 @@ public partial class TutorialLibraryWindow : Window
 
     private void SidebarStandards_Click(object sender, MouseButtonEventArgs e) =>
         _vm.OpenWindowCommand.Execute("CompanyStandards");
+
+    private void SidebarSettings_Click(object sender, MouseButtonEventArgs e)
+    {
+        _vm.OpenWindowCommand.Execute("Settings");
+        this.Close();
+    }
 }
