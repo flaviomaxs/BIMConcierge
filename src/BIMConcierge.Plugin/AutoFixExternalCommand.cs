@@ -9,7 +9,7 @@ namespace BIMConcierge.Plugin;
 /// IExternalEventHandler that processes auto-fix requests on the Revit main thread.
 /// Queued requests are executed during Revit's idle time via ExternalEvent.Raise().
 /// </summary>
-public sealed class AutoFixExternalEventHandler : IExternalEventHandler
+public sealed class AutoFixExternalCommand : IExternalEventHandler
 {
     private readonly ConcurrentQueue<AutoFixRequest> _queue = new();
 

@@ -15,7 +15,7 @@ public sealed class RevitEventBridge : IDisposable
 {
     private readonly RevitEventDispatcher _dispatcher;
     private UIApplication?               _uiApp;
-    private AutoFixExternalEventHandler?  _autoFixHandler;
+    private AutoFixExternalCommand?  _autoFixHandler;
     private ExternalEvent?                _autoFixEvent;
 
     public RevitEventBridge(RevitEventDispatcher dispatcher)
@@ -39,7 +39,7 @@ public sealed class RevitEventBridge : IDisposable
         _dispatcher.RegisterDetach(() => Detach());
 
         // Create ExternalEvent for thread-safe auto-fix
-        _autoFixHandler = new AutoFixExternalEventHandler();
+        _autoFixHandler = new AutoFixExternalCommand();
         _autoFixEvent = ExternalEvent.Create(_autoFixHandler);
 
         // Register async auto-fix handler that enqueues via ExternalEvent
