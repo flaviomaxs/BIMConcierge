@@ -125,7 +125,7 @@ internal static class RibbonIcons
         });
     }
 
-    private static BitmapSource Render(int size, Action<DrawingContext, double> draw)
+    private static RenderTargetBitmap Render(int size, Action<DrawingContext, double> draw)
     {
         var dv = new DrawingVisual();
         using (var dc = dv.RenderOpen())
