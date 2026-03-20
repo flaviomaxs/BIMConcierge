@@ -1,4 +1,5 @@
 using Autodesk.Revit.UI;
+using BIMConcierge.Core.Interfaces;
 using BIMConcierge.Infrastructure;
 using BIMConcierge.UI;
 using BIMConcierge.Plugin.Ribbon;
@@ -22,10 +23,15 @@ public class BIMConciergeApplication : IExternalApplication
         try
         {
             ConfigureLogger();
-            Log.Information("BIMConcierge starting up — Revit 2026");
+            string revitVersion = application.ControlledApplication.VersionNumber;
+            Log.Information("BIMConcierge starting up — Revit {RevitVersion}", revitVersion);
 
             ServiceProvider = BuildServiceProvider();
             RibbonBuilder.Build(application);
+
+            // Enable/disable ribbon buttons based on auth state
+            var authService = ServiceProvider.GetRequiredService<IAuthService>();
+            authService.AuthStateChanged += isAuth => RibbonBuilder.SetButtonsEnabled(isAuth);
 
             // Eagerly resolve the correction alert service so it subscribes to events immediately
             ServiceProvider.GetRequiredService<BIMConcierge.UI.Services.CorrectionAlertService>();

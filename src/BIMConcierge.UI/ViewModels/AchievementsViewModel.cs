@@ -67,7 +67,7 @@ public partial class AchievementsViewModel : ObservableObject, IDisposable
 
             ApplyFilter();
             LoadQuests(achievements);
-            LoadLeaderboard();
+            await LoadLeaderboardAsync();
             LoadRewards();
         }
         catch (Exception ex)
@@ -104,24 +104,28 @@ public partial class AchievementsViewModel : ObservableObject, IDisposable
         });
     }
 
-    private void LoadLeaderboard()
+    private async Task LoadLeaderboardAsync()
     {
         Leaderboard.Clear();
 
-        // Seed with sample entries — in production this would come from the API
-        Leaderboard.Add(new LeaderboardEntry { Rank = 1, Name = "Sarah Jenkins", Title = "LOD Master", XpPoints = 2480 });
-        Leaderboard.Add(new LeaderboardEntry { Rank = 2, Name = "Michael Chen", Title = "Regex Guru", XpPoints = 2150 });
-        Leaderboard.Add(new LeaderboardEntry { Rank = 3, Name = "Emma Watts", Title = "Wall Wizard", XpPoints = 1920 });
+        string companyId = _auth.CurrentUser?.CompanyId ?? string.Empty;
+        var entries = await _progress.GetLeaderboardAsync(companyId);
 
-        // Current user
-        Leaderboard.Add(new LeaderboardEntry
+        foreach (var entry in entries)
+            Leaderboard.Add(entry);
+
+        // Ensure current user appears in the leaderboard
+        if (!Leaderboard.Any(e => e.IsCurrentUser))
         {
-            Rank = 12,
-            Name = UserName,
-            Title = LevelTitle,
-            XpPoints = CurrentXp,
-            IsCurrentUser = true
-        });
+            Leaderboard.Add(new LeaderboardEntry
+            {
+                Rank = entries.Count + 1,
+                Name = UserName,
+                Title = LevelTitle,
+                XpPoints = CurrentXp,
+                IsCurrentUser = true
+            });
+        }
     }
 
     private void LoadRewards()
@@ -187,16 +191,6 @@ public class QuestItem
     public int    Current     { get; set; }
     public int    Target      { get; set; }
     public double ProgressPercent => Target == 0 ? 0 : (double)Current / Target * 100;
-}
-
-/// <summary>Represents a leaderboard entry.</summary>
-public class LeaderboardEntry
-{
-    public int    Rank     { get; set; }
-    public string Name     { get; set; } = string.Empty;
-    public string Title    { get; set; } = string.Empty;
-    public int    XpPoints { get; set; }
-    public bool   IsCurrentUser { get; set; }
 }
 
 /// <summary>Represents an unlockable reward.</summary>

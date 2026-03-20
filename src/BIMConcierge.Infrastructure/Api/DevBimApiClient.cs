@@ -18,7 +18,7 @@ public sealed class DevBimApiClient : IBimApiClient
         Task.FromResult(Route<TResponse>(endpoint));
 
     public Task<TResponse?> PutAsync<TRequest, TResponse>(string endpoint, TRequest body) =>
-        Task.FromResult(default(TResponse));
+        Task.FromResult(Route<TResponse>(endpoint));
 
     public Task DeleteAsync(string endpoint) =>
         Task.CompletedTask;
@@ -32,6 +32,7 @@ public sealed class DevBimApiClient : IBimApiClient
             _ when endpoint.StartsWith("progress/", StringComparison.Ordinal) => DevData.Progress,
             _ when endpoint.StartsWith("achievements/", StringComparison.Ordinal) => DevData.Achievements,
             _ when endpoint.StartsWith("standards/", StringComparison.Ordinal) => DevData.Standards,
+            _ when endpoint.StartsWith("leaderboard/", StringComparison.Ordinal) => DevData.Leaderboard,
             "auth/login" => new LoginResponse(true, null, "dev-token", "dev-refresh", new User
             {
                 Id = "dev-001", Name = "Dev User", Email = "dev@bimconcierge.com",
@@ -124,6 +125,15 @@ internal static class DevData
         new() { Id = "a3", Title = "Standard Guardian", Description = "Corrija 20 violações de padrão.", Icon = "shield", XpReward = 150, IsUnlocked = false },
         new() { Id = "a4", Title = "Mestre de Famílias", Description = "Complete todos os tutoriais de Famílias.", Icon = "star", XpReward = 200, IsUnlocked = false },
         new() { Id = "a5", Title = "Coordenador BIM", Description = "Execute 5 verificações de interferência.", Icon = "engineering", XpReward = 250, IsUnlocked = false }
+    ];
+
+    public static readonly List<LeaderboardEntry> Leaderboard =
+    [
+        new() { Rank = 1, Name = "Sarah Jenkins", Title = "LOD Master", XpPoints = 2480 },
+        new() { Rank = 2, Name = "Michael Chen", Title = "Regex Guru", XpPoints = 2150 },
+        new() { Rank = 3, Name = "Emma Watts", Title = "Wall Wizard", XpPoints = 1920 },
+        new() { Rank = 4, Name = "Carlos Silva", Title = "Family Expert", XpPoints = 1750 },
+        new() { Rank = 5, Name = "Ana Costa", Title = "Standard Guardian", XpPoints = 1620 }
     ];
 
     public static readonly List<CompanyStandard> Standards =

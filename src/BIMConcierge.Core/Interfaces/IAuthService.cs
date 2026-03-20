@@ -7,6 +7,7 @@ public interface IAuthService
     bool IsAuthenticated { get; }
     User? CurrentUser { get; }
     License? CurrentLicense { get; }
+    event Action<bool>? AuthStateChanged;
     Task<AuthResult> LoginAsync(string email, string password, string licenseKey);
     Task LogoutAsync();
     Task<bool> RefreshTokenAsync();

@@ -45,13 +45,8 @@ public sealed class AutoFixExternalCommand : IExternalEventHandler
 
     private static bool ApplyFix(Document doc, string elementIdStr, string? rule)
     {
-        if (!int.TryParse(elementIdStr, out int idValue))
-        {
-            // Revit 2026 uses ElementId with long
-            if (!long.TryParse(elementIdStr, out long longId))
-                return false;
-            idValue = (int)longId;
-        }
+        if (!long.TryParse(elementIdStr, out long idValue))
+            return false;
 
         var elementId = new ElementId(idValue);
         Element? element = doc.GetElement(elementId);

@@ -332,7 +332,7 @@
                     </Grid>
 
                     <!-- Wall Categories Card -->
-                    <Border Grid.Row="1" Background="#121820" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Margin="0,0,0,20">
+                    <Border Grid.Row="1" Background="#232629" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Margin="0,0,0,20">
                         <StackPanel>
                             <Border Background="#0F172A" CornerRadius="12,12,0,0" Padding="16,12" BorderBrush="#1E293B" BorderThickness="0,0,0,1">
                                 <StackPanel Orientation="Horizontal">
@@ -380,7 +380,7 @@
                     </Border>
 
                     <!-- Door & Window Categories Card -->
-                    <Border Grid.Row="2" Background="#121820" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Margin="0,0,0,30">
+                    <Border Grid.Row="2" Background="#232629" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Margin="0,0,0,30">
                         <StackPanel>
                             <Border Background="#0F172A" CornerRadius="12,12,0,0" Padding="16,12" BorderBrush="#1E293B" BorderThickness="0,0,0,1">
                                 <StackPanel Orientation="Horizontal">
@@ -435,7 +435,7 @@
                                        VerticalAlignment="Center" Cursor="Hand" MouseLeftButtonUp="AddCategory_Click"/>
                         </Grid>
 
-                        <Border Background="#121820" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12">
+                        <Border Background="#232629" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12">
                             <StackPanel>
                                 <!-- Table Header -->
                                 <Border Background="#0F172A" CornerRadius="12,12,0,0" Padding="20,14" BorderBrush="#1E293B" BorderThickness="0,0,0,1">
@@ -537,7 +537,7 @@
                         </Grid.ColumnDefinitions>
 
                         <!-- Audit Mode Card -->
-                        <Border Grid.Column="0" Background="#121820" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="20">
+                        <Border Grid.Column="0" Background="#232629" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="20">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -555,7 +555,7 @@
                         </Border>
 
                         <!-- Standard Enforcement Card -->
-                        <Border Grid.Column="2" Background="#121820" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="20">
+                        <Border Grid.Column="2" Background="#232629" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="20">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>

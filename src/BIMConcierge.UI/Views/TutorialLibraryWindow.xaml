@@ -121,7 +121,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Border Grid.Column="0" Background="#121820" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="8" Height="45">
+                    <Border Grid.Column="0" Background="#232629" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="8" Height="45">
                         <Grid>
                             <TextBlock Text="&#x2315;" Foreground="#94A3B8" FontSize="20" VerticalAlignment="Center" Margin="15,0,0,0" IsHitTestVisible="False"/>
                             <TextBox x:Name="SearchBox" Background="Transparent" Foreground="White" BorderThickness="0"
@@ -257,7 +257,7 @@
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Border Background="#121820" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="20" Width="300" Margin="0,0,20,20">
+                                <Border Background="#232629" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="20" Width="300" Margin="0,0,20,20">
                                     <Grid>
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto"/>

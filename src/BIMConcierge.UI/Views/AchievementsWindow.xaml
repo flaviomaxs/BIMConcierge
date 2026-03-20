@@ -213,7 +213,7 @@
 
                             <StackPanel Grid.Column="0">
                                 <!-- Active Quests -->
-                                <Border Background="#121820" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="20" Margin="0,0,0,20">
+                                <Border Background="#232629" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="20" Margin="0,0,0,20">
                                     <StackPanel>
                                         <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
                                             <Path Data="M5,1 H13 V15 H3 V3Z M5,1 V3 H3 M6,7 H11 M6,9.5 H11 M6,12 H9" Stroke="#6A7D90" StrokeThickness="1.2" Fill="Transparent"
@@ -254,7 +254,7 @@
                                 </Border>
 
                                 <!-- Leaderboard -->
-                                <Border Background="#121820" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="20">
+                                <Border Background="#232629" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="20">
                                     <StackPanel>
                                         <Grid Margin="0,0,0,16">
                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
@@ -354,7 +354,7 @@
 
                             <!-- Achievement Gallery -->
                             <StackPanel Grid.Column="2">
-                                <Border Background="#121820" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="24" Margin="0,0,0,20">
+                                <Border Background="#232629" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="24" Margin="0,0,0,20">
                                     <StackPanel>
                                         <Grid Margin="0,0,0,20">
                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
@@ -499,7 +499,7 @@
                                 </Border>
 
                                 <!-- Unlocks & Rewards -->
-                                <Border Background="#121820" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="24">
+                                <Border Background="#232629" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="24">
                                     <StackPanel>
                                         <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
                                             <Path Data="M1,6 H15 V14 H1Z M8,6 V14 M2,6 V3 H14 V6 M5,3 L8,0 L11,3" Stroke="#6A7D90" StrokeThickness="1.5" Fill="Transparent"

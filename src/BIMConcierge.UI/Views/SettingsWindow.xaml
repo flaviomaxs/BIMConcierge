@@ -130,7 +130,7 @@
                     </StackPanel>
 
                     <!-- Language Section -->
-                    <Border Grid.Row="1" Background="#121820" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="24" Margin="0,0,0,20">
+                    <Border Grid.Row="1" Background="#232629" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="24" Margin="0,0,0,20">
                         <StackPanel>
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
                                 <Path Data="M8,1 A7,7 0 1,0 8,15 A7,7 0 1,0 8,1Z M1,8 H15 M8,1 C5,4 5,12 8,15 M8,1 C11,4 11,12 8,15"
@@ -195,7 +195,7 @@
                     </Border>
 
                     <!-- Theme Section -->
-                    <Border Grid.Row="2" Background="#121820" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="24" Margin="0,0,0,20">
+                    <Border Grid.Row="2" Background="#232629" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="24" Margin="0,0,0,20">
                         <StackPanel>
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
                                 <Path Data="M8,1 A7,7 0 0,0 8,15 A4,4 0 0,1 8,1Z"
@@ -217,7 +217,7 @@
                     </Border>
 
                     <!-- Account Section -->
-                    <Border Grid.Row="3" Background="#121820" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="24" Margin="0,0,0,20">
+                    <Border Grid.Row="3" Background="#232629" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="24" Margin="0,0,0,20">
                         <StackPanel>
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
                                 <Path Data="M8,1 A3,3 0 1,0 8,7 A3,3 0 1,0 8,1Z M2,14 C2,11 5,9 8,9 C11,9 14,11 14,14"
@@ -263,7 +263,7 @@
                     </Border>
 
                     <!-- About Section -->
-                    <Border Grid.Row="4" Background="#121820" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="24">
+                    <Border Grid.Row="4" Background="#232629" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="24">
                         <StackPanel>
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
                                 <Path Data="M8,1 A7,7 0 1,0 8,15 A7,7 0 1,0 8,1Z M7.5,6 H8.5 V7 H7.5Z M7.5,8.5 H8.5 V12 H7.5Z"

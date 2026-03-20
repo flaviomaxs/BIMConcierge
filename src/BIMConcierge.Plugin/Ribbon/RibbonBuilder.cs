@@ -11,6 +11,10 @@ internal static class RibbonBuilder
     private const string TabName   = "BIMConcierge";
     private const string PanelName = "Assistente";
 
+    private static PushButton? _tutorialButton;
+    private static PushButton? _standardsButton;
+    private static PushButton? _progressButton;
+
     public static void Build(UIControlledApplication app)
     {
         app.CreateRibbonTab(TabName);
@@ -69,9 +73,23 @@ internal static class RibbonBuilder
 
         panel.AddItem(dashboardData);
         panel.AddSeparator();
-        panel.AddItem(tutorialData);
+        _tutorialButton = panel.AddItem(tutorialData) as PushButton;
         panel.AddSeparator();
-        panel.AddItem(standardsData);
-        panel.AddItem(progressData);
+        _standardsButton = panel.AddItem(standardsData) as PushButton;
+        _progressButton = panel.AddItem(progressData) as PushButton;
+
+        // Disable feature buttons until user logs in
+        SetButtonsEnabled(false);
+    }
+
+    /// <summary>
+    /// Enables or disables the feature ribbon buttons (Tutorial, Standards, Progress).
+    /// Called by AuthStateChanged event after login/logout.
+    /// </summary>
+    public static void SetButtonsEnabled(bool enabled)
+    {
+        if (_tutorialButton is not null) _tutorialButton.Enabled = enabled;
+        if (_standardsButton is not null) _standardsButton.Enabled = enabled;
+        if (_progressButton is not null) _progressButton.Enabled = enabled;
     }
 }

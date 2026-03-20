@@ -226,65 +226,28 @@
                         <!-- Skill Proficiency -->
                         <Border Grid.Column="0" Background="#232629" BorderBrush="#323639" BorderThickness="1" CornerRadius="12" Padding="24">
                             <StackPanel>
-                                <Grid Margin="0,0,0,20">
-                                    <TextBlock Text="{loc:Loc ProgressSkillProficiency}" FontSize="16" FontWeight="Bold" Foreground="White" HorizontalAlignment="Left"/>
-                                    <TextBlock Text="+12% este mês" FontSize="11" FontWeight="Bold" Foreground="#10B981" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                                </Grid>
+                                <TextBlock Text="{loc:Loc ProgressSkillProficiency}" FontSize="16" FontWeight="Bold" Foreground="White" Margin="0,0,0,20"/>
 
-                                <!-- Modeling -->
-                                <StackPanel Margin="0,0,0,18">
-                                    <Grid Margin="0,0,0,6">
-                                        <TextBlock Text="{loc:Loc ProgressModeling}" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" HorizontalAlignment="Left"/>
-                                        <TextBlock Text="80%" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" HorizontalAlignment="Right"/>
-                                    </Grid>
-                                    <Border Height="8" Background="#1E293B" CornerRadius="4">
-                                        <Border Width="240" Background="#6A7D90" CornerRadius="4" HorizontalAlignment="Left"/>
-                                    </Border>
-                                </StackPanel>
-
-                                <!-- Documentation -->
-                                <StackPanel Margin="0,0,0,18">
-                                    <Grid Margin="0,0,0,6">
-                                        <TextBlock Text="{loc:Loc ProgressDocumentation}" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" HorizontalAlignment="Left"/>
-                                        <TextBlock Text="40%" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" HorizontalAlignment="Right"/>
-                                    </Grid>
-                                    <Border Height="8" Background="#1E293B" CornerRadius="4">
-                                        <Border Width="120" Background="#6A7D90" CornerRadius="4" HorizontalAlignment="Left" Opacity="0.6"/>
-                                    </Border>
-                                </StackPanel>
-
-                                <!-- Coordination -->
-                                <StackPanel Margin="0,0,0,18">
-                                    <Grid Margin="0,0,0,6">
-                                        <TextBlock Text="{loc:Loc ProgressCoordination}" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" HorizontalAlignment="Left"/>
-                                        <TextBlock Text="80%" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" HorizontalAlignment="Right"/>
-                                    </Grid>
-                                    <Border Height="8" Background="#1E293B" CornerRadius="4">
-                                        <Border Width="240" Background="#6A7D90" CornerRadius="4" HorizontalAlignment="Left"/>
-                                    </Border>
-                                </StackPanel>
-
-                                <!-- Family Creation -->
-                                <StackPanel Margin="0,0,0,18">
-                                    <Grid Margin="0,0,0,6">
-                                        <TextBlock Text="{loc:Loc ProgressFamilyCreation}" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" HorizontalAlignment="Left"/>
-                                        <TextBlock Text="70%" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" HorizontalAlignment="Right"/>
-                                    </Grid>
-                                    <Border Height="8" Background="#1E293B" CornerRadius="4">
-                                        <Border Width="210" Background="#6A7D90" CornerRadius="4" HorizontalAlignment="Left" Opacity="0.8"/>
-                                    </Border>
-                                </StackPanel>
-
-                                <!-- Data Management -->
-                                <StackPanel>
-                                    <Grid Margin="0,0,0,6">
-                                        <TextBlock Text="{loc:Loc ProgressDataManagement}" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" HorizontalAlignment="Left"/>
-                                        <TextBlock Text="100%" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" HorizontalAlignment="Right"/>
-                                    </Grid>
-                                    <Border Height="8" Background="#1E293B" CornerRadius="4">
-                                        <Border Background="#6A7D90" CornerRadius="4" HorizontalAlignment="Stretch"/>
-                                    </Border>
-                                </StackPanel>
+                                <ItemsControl ItemsSource="{Binding Skills}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Margin="0,0,0,18">
+                                                <Grid Margin="0,0,0,6">
+                                                    <TextBlock Text="{Binding Name}" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" HorizontalAlignment="Left"/>
+                                                    <TextBlock Foreground="#94A3B8" FontSize="10" FontWeight="Bold" HorizontalAlignment="Right">
+                                                        <TextBlock.Text>
+                                                            <Binding Path="Percent" StringFormat="{}{0}%"/>
+                                                        </TextBlock.Text>
+                                                    </TextBlock>
+                                                </Grid>
+                                                <Border Height="8" Background="#1E293B" CornerRadius="4">
+                                                    <Border Background="#6A7D90" CornerRadius="4" HorizontalAlignment="Left"
+                                                            Width="{Binding Percent, Converter={StaticResource PctToWidth}, ConverterParameter=300}"/>
+                                                </Border>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
                             </StackPanel>
                         </Border>
 

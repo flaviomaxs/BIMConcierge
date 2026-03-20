@@ -27,6 +27,13 @@ public class AuthService : IAuthService
     private static License? _currentLicense;
     private static string? _lastLicenseKey;
     private static readonly object _lock = new();
+    private static event Action<bool>? _authStateChanged;
+
+    public event Action<bool>? AuthStateChanged
+    {
+        add => _authStateChanged += value;
+        remove => _authStateChanged -= value;
+    }
 
     public bool IsAuthenticated => CurrentUser is not null
         && CurrentLicense is not null
@@ -88,6 +95,7 @@ public class AuthService : IAuthService
             await _db.SaveUserAsync(CurrentUser);
             await _db.SaveLicenseAsync(license!);
 
+            _authStateChanged?.Invoke(true);
             return new AuthResult(true, response.AccessToken, null, CurrentUser, CurrentLicense);
         }
         catch (HttpRequestException ex)
@@ -162,6 +170,7 @@ public class AuthService : IAuthService
         _lastLicenseKey = null;
         _tokenStore.AccessToken = null;
         _tokenStore.RefreshToken = null;
+        _authStateChanged?.Invoke(false);
         await Task.CompletedTask;
     }
 
@@ -225,6 +234,7 @@ public class AuthService : IAuthService
         catch (Exception ex) { Log.Warning(ex, "Failed to cache dev data — continuing"); }
 
         Log.Information("Dev login activated — bypassing API");
+        _authStateChanged?.Invoke(true);
         return new AuthResult(true, "dev-token", null, devUser, devLicense);
     }
 
@@ -245,6 +255,7 @@ public class AuthService : IAuthService
 
         CurrentUser = cached;
         CurrentLicense = cachedLicense;
+        _authStateChanged?.Invoke(true);
         return new AuthResult(true, _tokenStore.AccessToken, _loc.GetString("AuthOfflineMode"), cached, cachedLicense);
     }
 

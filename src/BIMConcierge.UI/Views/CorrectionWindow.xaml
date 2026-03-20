@@ -98,7 +98,7 @@
                     </StackPanel>
 
                     <!-- System status card -->
-                    <Border Grid.Row="2" Background="#121820" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="15">
+                    <Border Grid.Row="2" Background="#232629" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="15">
                         <StackPanel>
                             <Grid Margin="0,0,0,6">
                                 <TextBlock Text="{loc:Loc CorrectionsSystemStatus}" Foreground="#6A7D90" FontSize="10" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
@@ -138,7 +138,7 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- Auto-fix toggle -->
-                    <Border Grid.Column="0" Background="#121820" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="10" Padding="15,10">
+                    <Border Grid.Column="0" Background="#232629" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="10" Padding="15,10">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="&#x26A1;" FontSize="16" Margin="0,0,10,0" VerticalAlignment="Center"/>
                             <StackPanel VerticalAlignment="Center" Margin="0,0,15,0">
@@ -267,7 +267,7 @@
                 </Grid>
 
                 <!-- Summary bar -->
-                <Border Grid.Row="2" Background="#121820" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="8" Padding="20,12" Margin="0,0,0,20">
+                <Border Grid.Row="2" Background="#232629" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="8" Padding="20,12" Margin="0,0,0,20">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Foreground="#94A3B8" FontSize="13" VerticalAlignment="Center" Margin="0,0,20,0">
                             <Run Text="{loc:Loc CorrectionsActive}"/><Run Text="{Binding ActiveCount, Mode=OneWay}" Foreground="#EF4444" FontWeight="Bold"/>
@@ -293,7 +293,7 @@
                     <ItemsControl ItemsSource="{Binding Corrections}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Border Background="#121820" CornerRadius="12" Margin="0,0,0,12"
+                                <Border Background="#232629" CornerRadius="12" Margin="0,0,0,12"
                                         BorderBrush="{Binding Severity, Converter={StaticResource SeverityToBrush}}"
                                         BorderThickness="4,0,0,0" Padding="20">
                                     <Grid>

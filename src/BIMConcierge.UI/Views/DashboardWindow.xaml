@@ -163,7 +163,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Border Grid.Column="0" Background="#121820" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="20">
+                    <Border Grid.Column="0" Background="#232629" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="20">
                         <StackPanel>
                             <TextBlock Text="{loc:Loc DashboardItemsModeled}" Foreground="#94A3B8" FontSize="11" FontWeight="Bold" Margin="0,0,0,8"/>
                             <Grid>
@@ -173,7 +173,7 @@
                         </StackPanel>
                     </Border>
 
-                    <Border Grid.Column="2" Background="#121820" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="20">
+                    <Border Grid.Column="2" Background="#232629" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="20">
                         <StackPanel>
                             <TextBlock Text="{loc:Loc DashboardOperationsOnStandard}" Foreground="#94A3B8" FontSize="11" FontWeight="Bold" Margin="0,0,0,8"/>
                             <Grid>
@@ -183,7 +183,7 @@
                         </StackPanel>
                     </Border>
 
-                    <Border Grid.Column="4" Background="#121820" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="20">
+                    <Border Grid.Column="4" Background="#232629" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="20">
                         <StackPanel>
                             <TextBlock Text="{loc:Loc DashboardWarningsCorrected}" Foreground="#94A3B8" FontSize="11" FontWeight="Bold" Margin="0,0,0,8"/>
                             <Grid>

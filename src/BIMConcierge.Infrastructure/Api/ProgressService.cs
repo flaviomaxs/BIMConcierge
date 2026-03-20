@@ -30,7 +30,17 @@ public class ProgressService : IProgressService
         try   { return await _api.GetAsync<List<Achievement>>($"achievements/{userId}") ?? []; }
         catch (Exception ex)
         {
-            Log.Warning(ex, "API call failed for achievements");
+            Log.Warning(ex, "API call failed for achievements — falling back to local cache");
+            return await _db.GetAchievementsAsync(userId);
+        }
+    }
+
+    public async Task<List<LeaderboardEntry>> GetLeaderboardAsync(string companyId)
+    {
+        try   { return await _api.GetAsync<List<LeaderboardEntry>>($"leaderboard/{companyId}") ?? []; }
+        catch (Exception ex)
+        {
+            Log.Warning(ex, "API call failed for leaderboard");
             return [];
         }
     }

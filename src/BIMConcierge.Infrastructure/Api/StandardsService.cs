@@ -50,6 +50,7 @@ public class StandardsService : IStandardsService
         if (_dispatcher is RevitEventDispatcher dispatcher)
             return Task.FromResult(dispatcher.RunValidation());
 
+        Log.Warning("ValidateModelAsync: dispatcher is not RevitEventDispatcher — validation skipped");
         return Task.FromResult(new List<CorrectionEvent>());
     }
 
@@ -58,6 +59,7 @@ public class StandardsService : IStandardsService
         if (_dispatcher is RevitEventDispatcher dispatcher)
             return await dispatcher.TryAutoFixAsync(correctionEventId);
 
+        Log.Warning("AutoFixAsync: dispatcher is not RevitEventDispatcher — auto-fix skipped");
         return false;
     }
 }

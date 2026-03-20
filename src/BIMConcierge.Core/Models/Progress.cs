@@ -41,3 +41,13 @@ public class CorrectionEvent
 }
 
 public enum Severity { Info, Warning, Error }
+
+/// <summary>Represents a leaderboard entry for company ranking.</summary>
+public class LeaderboardEntry
+{
+    public int    Rank          { get; set; }
+    public string Name          { get; set; } = string.Empty;
+    public string Title         { get; set; } = string.Empty;
+    public int    XpPoints      { get; set; }
+    public bool   IsCurrentUser { get; set; }
+}
