@@ -80,8 +80,7 @@ app.MapGroup("/v1/public").MapPublicEndpoints();
 // ── Fallback to index.html for SPA ───────────────────────────────────────────
 app.MapFallbackToFile("index.html");
 
-// ── Auto-migrate in development (skip for InMemory provider in tests) ───────
-if (app.Environment.IsDevelopment())
+// ── Auto-migrate on startup (skip for InMemory provider in tests) ────────────
 {
     using var scope = app.Services.CreateScope();
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
