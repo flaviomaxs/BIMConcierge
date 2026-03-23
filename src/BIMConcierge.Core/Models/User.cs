@@ -12,4 +12,10 @@ public class User
     public int    XpPoints    { get; set; }
     public int    Level       { get; set; } = 1;
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+    /// <summary>Computed initials from the user's name (e.g. "FF" for "Flávio Filho").</summary>
+    public string Initials => string.IsNullOrWhiteSpace(Name)
+        ? "?"
+        : string.Concat(Name.Split(' ', StringSplitOptions.RemoveEmptyEntries)
+            .Take(2).Select(w => char.ToUpperInvariant(w[0])));
 }

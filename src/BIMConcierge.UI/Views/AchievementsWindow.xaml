@@ -15,6 +15,11 @@
         <conv:BoolToVisibilityConverter x:Key="BoolToVis"/>
         <conv:NullToVisibilityConverter x:Key="NullToVis"/>
         <conv:PercentToWidthConverter x:Key="PctToWidth"/>
+        <conv:BoolToBackgroundConverter x:Key="BoolToBackground"/>
+        <conv:BoolToOpacityConverter x:Key="BoolToOpacity"/>
+        <conv:BoolToBadgeBgConverter x:Key="BoolToBadgeBg"/>
+        <conv:BoolToBadgeFillConverter x:Key="BoolToBadgeFill"/>
+        <conv:BoolToUnlockLabelConverter x:Key="BoolToUnlockLabel"/>
     </Window.Resources>
 
     <Border CornerRadius="16" Background="#17191B" BorderBrush="#1E293B" BorderThickness="1" MouseLeftButtonDown="Border_MouseLeftButtonDown">
@@ -92,7 +97,7 @@
                                     <TextBlock Text="{loc:Loc AchievementsActive}" Foreground="#6A7D90" FontSize="10" FontWeight="Bold"/>
                                 </Border>
                             </Grid>
-                            <TextBlock Text="Próxima Renovação: Out 2024" Foreground="#94A3B8" FontSize="11"/>
+                            <TextBlock Text="{loc:Loc AchievementsProRenewal}" Foreground="#94A3B8" FontSize="11"/>
                         </StackPanel>
                     </Border>
                 </Grid>
@@ -155,7 +160,7 @@
                                     <TextBlock Text="{Binding LevelTitle, FallbackValue='COORDENADOR BIM I'}" Foreground="#94A3B8" FontSize="9" FontWeight="Bold" HorizontalAlignment="Right"/>
                                 </StackPanel>
                                 <Border Width="36" Height="36" Background="#6A7D90" CornerRadius="18" BorderBrush="#6A7D90" BorderThickness="2">
-                                    <TextBlock Text="FF" Foreground="White" FontWeight="Bold" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding UserInitials, FallbackValue='?'}" Foreground="White" FontWeight="Bold" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
                             </StackPanel>
 
@@ -175,17 +180,20 @@
                                 <Grid Margin="0,0,0,16">
                                     <StackPanel HorizontalAlignment="Left">
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="Nível 15" FontSize="28" FontWeight="Bold" Foreground="White"/>
+                                            <TextBlock Text="{Binding UserLevel, StringFormat='Nível {0}'}" FontSize="28" FontWeight="Bold" Foreground="White"/>
                                             <TextBlock Text=" • " FontSize="28" Foreground="#6A7D90" Margin="4,0"/>
-                                            <TextBlock Text="Coordenador BIM I" FontSize="28" FontWeight="Bold" Foreground="White"/>
+                                            <TextBlock Text="{Binding LevelTitle}" FontSize="28" FontWeight="Bold" Foreground="White"/>
                                         </StackPanel>
-                                        <TextBlock Text="Você está entre os 5% melhores modeladores este mês. Continue assim!" Foreground="#94A3B8" FontSize="13" Margin="0,6,0,0"/>
                                     </StackPanel>
                                     <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center">
-                                        <TextBlock Text="PROGRESSO PARA NÍVEL 16" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" HorizontalAlignment="Right"/>
+                                        <TextBlock Text="{Binding UserLevel, StringFormat='PROGRESSO PARA NÍVEL {0}'}" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" HorizontalAlignment="Right"/>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                            <TextBlock Text="750" FontSize="24" FontWeight="Bold" Foreground="White"/>
-                                            <TextBlock Text=" / 1.000 XP" FontSize="16" Foreground="#94A3B8" VerticalAlignment="Bottom" Margin="0,0,0,2"/>
+                                            <TextBlock Text="{Binding CurrentXp, StringFormat=N0}" FontSize="24" FontWeight="Bold" Foreground="White"/>
+                                            <TextBlock Foreground="#94A3B8" FontSize="16" VerticalAlignment="Bottom" Margin="0,0,0,2">
+                                                <TextBlock.Text>
+                                                    <Binding Path="XpForNextLevel" StringFormat=" / {0:N0} XP"/>
+                                                </TextBlock.Text>
+                                            </TextBlock>
                                         </StackPanel>
                                     </StackPanel>
                                 </Grid>
@@ -196,9 +204,8 @@
                                             Width="{Binding LevelProgressPercent, Converter={StaticResource PctToWidth}, ConverterParameter=700}"/>
                                 </Border>
                                 <Grid Margin="0,8,0,0">
-                                    <TextBlock Text="NÍVEL 15" Foreground="#64748B" FontSize="10" FontWeight="Bold" HorizontalAlignment="Left"/>
-                                    <TextBlock Text="250 XP PARA PRÓXIMO RANK: COORDENADOR BIM II" Foreground="#64748B" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center"/>
-                                    <TextBlock Text="NÍVEL 16" Foreground="#64748B" FontSize="10" FontWeight="Bold" HorizontalAlignment="Right"/>
+                                    <TextBlock Text="{Binding UserLevel, StringFormat='NÍVEL {0}'}" Foreground="#64748B" FontSize="10" FontWeight="Bold" HorizontalAlignment="Left"/>
+                                    <TextBlock Text="{Binding NextLevel, StringFormat='NÍVEL {0}'}" Foreground="#64748B" FontSize="10" FontWeight="Bold" HorizontalAlignment="Right"/>
                                 </Grid>
                             </StackPanel>
                         </Border>
@@ -221,35 +228,37 @@
                                             <TextBlock Text="{loc:Loc AchievementsDailyQuests}" FontSize="14" FontWeight="Bold" Foreground="White"/>
                                         </StackPanel>
 
-                                        <!-- Quest 1 -->
-                                        <Border Background="#0F172A" CornerRadius="8" Padding="14" Margin="0,0,0,10">
-                                            <StackPanel>
-                                                <Grid Margin="0,0,0,6">
-                                                    <TextBlock Text="Guardião de Padrões" Foreground="White" FontSize="12" FontWeight="Bold" HorizontalAlignment="Left"/>
-                                                    <TextBlock Text="+50 XP" Foreground="#6A7D90" FontSize="10" FontWeight="Bold" HorizontalAlignment="Right"/>
-                                                </Grid>
-                                                <TextBlock Text="Corrija 10 erros de nomenclatura no projeto Revit ativo." Foreground="#94A3B8" FontSize="11" TextWrapping="Wrap" Margin="0,0,0,10"/>
-                                                <Border Height="6" Background="#1E293B" CornerRadius="3">
-                                                    <Border Background="#6A7D90" CornerRadius="3" HorizontalAlignment="Left" Width="160"/>
-                                                </Border>
-                                                <TextBlock Text="6/10 concluídos" Foreground="#94A3B8" FontSize="10" HorizontalAlignment="Right" Margin="0,4,0,0"/>
-                                            </StackPanel>
-                                        </Border>
-
-                                        <!-- Quest 2 -->
-                                        <Border Background="#0F172A" CornerRadius="8" Padding="14">
-                                            <StackPanel>
-                                                <Grid Margin="0,0,0,6">
-                                                    <TextBlock Text="Aprendiz Veloz" Foreground="White" FontSize="12" FontWeight="Bold" HorizontalAlignment="Left"/>
-                                                    <TextBlock Text="+100 XP" Foreground="#6A7D90" FontSize="10" FontWeight="Bold" HorizontalAlignment="Right"/>
-                                                </Grid>
-                                                <TextBlock Text="Conclua 1 tutorial avançado 'Regex Ninja'." Foreground="#94A3B8" FontSize="11" TextWrapping="Wrap" Margin="0,0,0,10"/>
-                                                <Border Height="6" Background="#1E293B" CornerRadius="3">
-                                                    <Border Background="#6A7D9050" CornerRadius="3" HorizontalAlignment="Left" Width="0"/>
-                                                </Border>
-                                                <TextBlock Text="0/1 concluídos" Foreground="#94A3B8" FontSize="10" HorizontalAlignment="Right" Margin="0,4,0,0"/>
-                                            </StackPanel>
-                                        </Border>
+                                        <ItemsControl ItemsSource="{Binding ActiveQuests}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Border Background="#0F172A" CornerRadius="8" Padding="14" Margin="0,0,0,10">
+                                                        <StackPanel>
+                                                            <Grid Margin="0,0,0,6">
+                                                                <TextBlock Text="{Binding Title}" Foreground="White" FontSize="12" FontWeight="Bold" HorizontalAlignment="Left"/>
+                                                                <TextBlock Foreground="#6A7D90" FontSize="10" FontWeight="Bold" HorizontalAlignment="Right">
+                                                                    <TextBlock.Text>
+                                                                        <Binding Path="XpReward" StringFormat="+{0} XP"/>
+                                                                    </TextBlock.Text>
+                                                                </TextBlock>
+                                                            </Grid>
+                                                            <TextBlock Text="{Binding Description}" Foreground="#94A3B8" FontSize="11" TextWrapping="Wrap" Margin="0,0,0,10"/>
+                                                            <Border Height="6" Background="#1E293B" CornerRadius="3">
+                                                                <Border Background="#6A7D90" CornerRadius="3" HorizontalAlignment="Left"
+                                                                        Width="{Binding ProgressPercent, Converter={StaticResource PctToWidth}, ConverterParameter=260}"/>
+                                                            </Border>
+                                                            <TextBlock Foreground="#94A3B8" FontSize="10" HorizontalAlignment="Right" Margin="0,4,0,0">
+                                                                <TextBlock.Text>
+                                                                    <MultiBinding StringFormat="{}{0}/{1} concluídos">
+                                                                        <Binding Path="Current"/>
+                                                                        <Binding Path="Target"/>
+                                                                    </MultiBinding>
+                                                                </TextBlock.Text>
+                                                            </TextBlock>
+                                                        </StackPanel>
+                                                    </Border>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
                                     </StackPanel>
                                 </Border>
 
@@ -265,89 +274,35 @@
                                             <TextBlock Text="VER TODOS" FontSize="9" FontWeight="Bold" Foreground="#6A7D90" HorizontalAlignment="Right" VerticalAlignment="Center" Cursor="Hand"/>
                                         </Grid>
 
-                                        <!-- 1st Place -->
-                                        <Border Background="#6A7D901A" BorderBrush="#6A7D9033" BorderThickness="1" CornerRadius="8" Padding="10" Margin="0,0,0,6">
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="20"/>
-                                                    <ColumnDefinition Width="Auto"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                    <ColumnDefinition Width="Auto"/>
-                                                </Grid.ColumnDefinitions>
-                                                <TextBlock Grid.Column="0" Text="1" Foreground="#6A7D90" FontSize="11" FontWeight="Bold" VerticalAlignment="Center"/>
-                                                <Border Grid.Column="1" Width="28" Height="28" Background="#334155" CornerRadius="14" Margin="0,0,8,0">
-                                                    <TextBlock Text="SJ" Foreground="White" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                                </Border>
-                                                <StackPanel Grid.Column="2" VerticalAlignment="Center">
-                                                    <TextBlock Text="Sarah Jenkins" Foreground="White" FontSize="11" FontWeight="Bold"/>
-                                                    <TextBlock Text="LOD Master" Foreground="#94A3B8" FontSize="9"/>
-                                                </StackPanel>
-                                                <TextBlock Grid.Column="3" Text="2.480 XP" Foreground="#E2E8F0" FontSize="11" FontWeight="Bold" VerticalAlignment="Center"/>
-                                            </Grid>
-                                        </Border>
-
-                                        <!-- 2nd Place -->
-                                        <Border Padding="10" Margin="0,0,0,6">
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="20"/>
-                                                    <ColumnDefinition Width="Auto"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                    <ColumnDefinition Width="Auto"/>
-                                                </Grid.ColumnDefinitions>
-                                                <TextBlock Grid.Column="0" Text="2" Foreground="#64748B" FontSize="11" FontWeight="Bold" VerticalAlignment="Center"/>
-                                                <Border Grid.Column="1" Width="28" Height="28" Background="#334155" CornerRadius="14" Margin="0,0,8,0">
-                                                    <TextBlock Text="MC" Foreground="White" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                                </Border>
-                                                <StackPanel Grid.Column="2" VerticalAlignment="Center">
-                                                    <TextBlock Text="Michael Chen" Foreground="White" FontSize="11" FontWeight="Bold"/>
-                                                    <TextBlock Text="Regex Guru" Foreground="#94A3B8" FontSize="9"/>
-                                                </StackPanel>
-                                                <TextBlock Grid.Column="3" Text="2.150 XP" Foreground="#E2E8F0" FontSize="11" FontWeight="Bold" VerticalAlignment="Center"/>
-                                            </Grid>
-                                        </Border>
-
-                                        <!-- 3rd Place -->
-                                        <Border Padding="10" Margin="0,0,0,6">
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="20"/>
-                                                    <ColumnDefinition Width="Auto"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                    <ColumnDefinition Width="Auto"/>
-                                                </Grid.ColumnDefinitions>
-                                                <TextBlock Grid.Column="0" Text="3" Foreground="#64748B" FontSize="11" FontWeight="Bold" VerticalAlignment="Center"/>
-                                                <Border Grid.Column="1" Width="28" Height="28" Background="#334155" CornerRadius="14" Margin="0,0,8,0">
-                                                    <TextBlock Text="EW" Foreground="White" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                                </Border>
-                                                <StackPanel Grid.Column="2" VerticalAlignment="Center">
-                                                    <TextBlock Text="Emma Watts" Foreground="White" FontSize="11" FontWeight="Bold"/>
-                                                    <TextBlock Text="Wall Wizard" Foreground="#94A3B8" FontSize="9"/>
-                                                </StackPanel>
-                                                <TextBlock Grid.Column="3" Text="1.920 XP" Foreground="#E2E8F0" FontSize="11" FontWeight="Bold" VerticalAlignment="Center"/>
-                                            </Grid>
-                                        </Border>
-
-                                        <!-- Current User -->
-                                        <Border BorderBrush="#1E293B" BorderThickness="0,1,0,0" Padding="10,12,10,0" Margin="0,6,0,0" Opacity="0.6">
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="20"/>
-                                                    <ColumnDefinition Width="Auto"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                    <ColumnDefinition Width="Auto"/>
-                                                </Grid.ColumnDefinitions>
-                                                <TextBlock Grid.Column="0" Text="12" Foreground="#64748B" FontSize="11" FontWeight="Bold" VerticalAlignment="Center"/>
-                                                <Border Grid.Column="1" Width="28" Height="28" Background="#334155" CornerRadius="14" Margin="0,0,8,0">
-                                                    <TextBlock Text="FF" Foreground="White" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                                </Border>
-                                                <StackPanel Grid.Column="2" VerticalAlignment="Center">
-                                                    <TextBlock Text="Você (Flávio)" Foreground="White" FontSize="11" FontWeight="Bold" FontStyle="Italic"/>
-                                                    <TextBlock Text="Coordenador BIM I" Foreground="#94A3B8" FontSize="9"/>
-                                                </StackPanel>
-                                                <TextBlock Grid.Column="3" Text="1.250 XP" Foreground="#E2E8F0" FontSize="11" FontWeight="Bold" VerticalAlignment="Center"/>
-                                            </Grid>
-                                        </Border>
+                                        <ItemsControl ItemsSource="{Binding Leaderboard}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Border Padding="10" Margin="0,0,0,6">
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="20"/>
+                                                                <ColumnDefinition Width="Auto"/>
+                                                                <ColumnDefinition Width="*"/>
+                                                                <ColumnDefinition Width="Auto"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <TextBlock Grid.Column="0" Text="{Binding Rank}" Foreground="#64748B" FontSize="11" FontWeight="Bold" VerticalAlignment="Center"/>
+                                                            <Border Grid.Column="1" Width="28" Height="28" Background="#334155" CornerRadius="14" Margin="0,0,8,0">
+                                                                <TextBlock Text="{Binding Initials}" Foreground="White" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                            </Border>
+                                                            <StackPanel Grid.Column="2" VerticalAlignment="Center">
+                                                                <TextBlock Text="{Binding Name}" Foreground="White" FontSize="11" FontWeight="Bold"/>
+                                                                <TextBlock Text="{Binding Title}" Foreground="#94A3B8" FontSize="9"/>
+                                                            </StackPanel>
+                                                            <TextBlock Grid.Column="3" Foreground="#E2E8F0" FontSize="11" FontWeight="Bold" VerticalAlignment="Center">
+                                                                <TextBlock.Text>
+                                                                    <Binding Path="XpPoints" StringFormat="{}{0:N0} XP"/>
+                                                                </TextBlock.Text>
+                                                            </TextBlock>
+                                                        </Grid>
+                                                    </Border>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
                                     </StackPanel>
                                 </Border>
                             </StackPanel>
@@ -375,126 +330,36 @@
                                             </StackPanel>
                                         </Grid>
 
-                                        <!-- Badge Grid - Row 1 -->
-                                        <Grid Margin="0,0,0,12">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="12"/>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="12"/>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="12"/>
-                                                <ColumnDefinition Width="*"/>
-                                            </Grid.ColumnDefinitions>
-
-                                            <!-- Unlocked: Wall Master -->
-                                            <Border Grid.Column="0" Background="#0F172A" BorderBrush="#6A7D9033" BorderThickness="1" CornerRadius="12" Padding="16" Cursor="Hand">
-                                                <StackPanel HorizontalAlignment="Center">
-                                                    <Border Width="56" Height="56" Background="#6A7D9033" CornerRadius="28" HorizontalAlignment="Center" Margin="0,0,0,10">
-                                                        <Path Data="M2,2 H7 V7 H2Z M9,2 H14 V7 H9Z M2,9 H7 V14 H2Z M9,9 H14 V14 H9Z" Fill="#6A7D90"
-                                                          Width="28" Height="28" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        <ItemsControl ItemsSource="{Binding FilteredAchievements}">
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <UniformGrid Columns="4"/>
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Border CornerRadius="12" Padding="16" Margin="0,0,6,12" Cursor="Hand"
+                                                            Background="{Binding IsUnlocked, Converter={StaticResource BoolToBackground}}"
+                                                            BorderThickness="1"
+                                                            Opacity="{Binding IsUnlocked, Converter={StaticResource BoolToOpacity}}">
+                                                        <StackPanel HorizontalAlignment="Center">
+                                                            <Border Width="56" Height="56" CornerRadius="28" HorizontalAlignment="Center" Margin="0,0,0,10"
+                                                                    Background="{Binding IsUnlocked, Converter={StaticResource BoolToBadgeBg}}">
+                                                                <Path Data="M5,1 H11 L12,5 L8,8 L4,5Z M6,9 H10 V11 H6Z M4,11.5 H12 V13 H4Z"
+                                                                      Fill="{Binding IsUnlocked, Converter={StaticResource BoolToBadgeFill}}"
+                                                                      Width="24" Height="24" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                            </Border>
+                                                            <TextBlock Text="{Binding Title}" Foreground="White" FontSize="12" FontWeight="Bold" HorizontalAlignment="Center" TextAlignment="Center"/>
+                                                            <TextBlock Foreground="#94A3B8" FontSize="9" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,2,0,0">
+                                                                <TextBlock.Text>
+                                                                    <Binding Path="IsUnlocked" Converter="{StaticResource BoolToUnlockLabel}"/>
+                                                                </TextBlock.Text>
+                                                            </TextBlock>
+                                                        </StackPanel>
                                                     </Border>
-                                                    <TextBlock Text="Wall Master" Foreground="White" FontSize="12" FontWeight="Bold" HorizontalAlignment="Center"/>
-                                                    <TextBlock Text="OURO" Foreground="#94A3B8" FontSize="9" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,2,0,0"/>
-                                                </StackPanel>
-                                            </Border>
-
-                                            <!-- Unlocked: Regex Ninja -->
-                                            <Border Grid.Column="2" Background="#0F172A" BorderBrush="#6A7D9033" BorderThickness="1" CornerRadius="12" Padding="16" Cursor="Hand">
-                                                <StackPanel HorizontalAlignment="Center">
-                                                    <Border Width="56" Height="56" Background="#6A7D9033" CornerRadius="28" HorizontalAlignment="Center" Margin="0,0,0,10">
-                                                        <TextBlock Text="&lt;/&gt;" Foreground="#6A7D90" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                                    </Border>
-                                                    <TextBlock Text="Regex Ninja" Foreground="White" FontSize="12" FontWeight="Bold" HorizontalAlignment="Center"/>
-                                                    <TextBlock Text="PRATA" Foreground="#94A3B8" FontSize="9" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,2,0,0"/>
-                                                </StackPanel>
-                                            </Border>
-
-                                            <!-- Locked: LOD Expert -->
-                                            <Border Grid.Column="4" Background="#17191B" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="16" Opacity="0.5" Cursor="Hand">
-                                                <StackPanel HorizontalAlignment="Center">
-                                                    <Border Width="56" Height="56" Background="#334155" CornerRadius="28" HorizontalAlignment="Center" Margin="0,0,0,10">
-                                                        <Path Data="M7,0 H9 V2.5 L10.5,3 L12.5,1.5 L14,3 L12.5,5 L13,6.5 H15.5 V8.5 H13 L12.5,10.5 L14,12.5 L12.5,14 L10.5,12.5 L9,13 V15.5 H7 V13 L5,12.5 L3,14 L1.5,12.5 L3,10.5 L2.5,8.5 H0 V6.5 H2.5 L3,5 L1.5,3 L3,1.5 L5,3 L7,2.5Z M8,5.5 A2.5,2.5 0 1,0 8,10.5 A2.5,2.5 0 1,0 8,5.5Z" Fill="#64748B"
-                                                          Width="24" Height="24" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                                    </Border>
-                                                    <TextBlock Text="LOD Expert" Foreground="White" FontSize="12" FontWeight="Bold" HorizontalAlignment="Center"/>
-                                                    <TextBlock Text="BLOQUEADO" Foreground="#64748B" FontSize="9" FontWeight="Bold" FontStyle="Italic" HorizontalAlignment="Center" Margin="0,2,0,0"/>
-                                                </StackPanel>
-                                            </Border>
-
-                                            <!-- Unlocked: Standard Keeper -->
-                                            <Border Grid.Column="6" Background="#0F172A" BorderBrush="#6A7D9033" BorderThickness="1" CornerRadius="12" Padding="16" Cursor="Hand">
-                                                <StackPanel HorizontalAlignment="Center">
-                                                    <Border Width="56" Height="56" Background="#6A7D9033" CornerRadius="28" HorizontalAlignment="Center" Margin="0,0,0,10">
-                                                        <Path Data="M3,8 L6.5,11.5 L13,4" Stroke="#6A7D90" StrokeThickness="2.5" StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeLineJoin="Round"
-                                                          Width="28" Height="28" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                                    </Border>
-                                                    <TextBlock Text="Standard Keeper" Foreground="White" FontSize="12" FontWeight="Bold" HorizontalAlignment="Center"/>
-                                                    <TextBlock Text="BRONZE" Foreground="#94A3B8" FontSize="9" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,2,0,0"/>
-                                                </StackPanel>
-                                            </Border>
-                                        </Grid>
-
-                                        <!-- Badge Grid - Row 2 -->
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="12"/>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="12"/>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="12"/>
-                                                <ColumnDefinition Width="*"/>
-                                            </Grid.ColumnDefinitions>
-
-                                            <!-- Locked: Flash Auditor -->
-                                            <Border Grid.Column="0" Background="#17191B" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="16" Opacity="0.5" Cursor="Hand">
-                                                <StackPanel HorizontalAlignment="Center">
-                                                    <Border Width="56" Height="56" Background="#334155" CornerRadius="28" HorizontalAlignment="Center" Margin="0,0,0,10">
-                                                        <Path Data="M9,1 L4,9 H8 L7,15 L12,7 H8Z" Fill="#64748B"
-                                                          Width="24" Height="24" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                                    </Border>
-                                                    <TextBlock Text="Flash Auditor" Foreground="White" FontSize="12" FontWeight="Bold" HorizontalAlignment="Center"/>
-                                                    <TextBlock Text="BLOQUEADO" Foreground="#64748B" FontSize="9" FontWeight="Bold" FontStyle="Italic" HorizontalAlignment="Center" Margin="0,2,0,0"/>
-                                                </StackPanel>
-                                            </Border>
-
-                                            <!-- Locked: Family Liaison -->
-                                            <Border Grid.Column="2" Background="#17191B" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="16" Opacity="0.5" Cursor="Hand">
-                                                <StackPanel HorizontalAlignment="Center">
-                                                    <Border Width="56" Height="56" Background="#334155" CornerRadius="28" HorizontalAlignment="Center" Margin="0,0,0,10">
-                                                        <Path Data="M6,10 L10,6 M5,7 L3,9 A3,3 0 0,0 7,13 L9,11 M11,9 L13,7 A3,3 0 0,0 9,3 L7,5" Stroke="#64748B" StrokeThickness="1.5" Fill="Transparent"
-                                                          Width="24" Height="24" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                                    </Border>
-                                                    <TextBlock Text="Family Liaison" Foreground="White" FontSize="12" FontWeight="Bold" HorizontalAlignment="Center"/>
-                                                    <TextBlock Text="BLOQUEADO" Foreground="#64748B" FontSize="9" FontWeight="Bold" FontStyle="Italic" HorizontalAlignment="Center" Margin="0,2,0,0"/>
-                                                </StackPanel>
-                                            </Border>
-
-                                            <!-- Locked: Data Alchemist -->
-                                            <Border Grid.Column="4" Background="#17191B" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="16" Opacity="0.5" Cursor="Hand">
-                                                <StackPanel HorizontalAlignment="Center">
-                                                    <Border Width="56" Height="56" Background="#334155" CornerRadius="28" HorizontalAlignment="Center" Margin="0,0,0,10">
-                                                        <Path Data="M2,14 L6,8 L9,11 L14,3" Stroke="#64748B" StrokeThickness="2" StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeLineJoin="Round" Fill="Transparent"
-                                                          Width="24" Height="24" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                                    </Border>
-                                                    <TextBlock Text="Data Alchemist" Foreground="White" FontSize="12" FontWeight="Bold" HorizontalAlignment="Center"/>
-                                                    <TextBlock Text="BLOQUEADO" Foreground="#64748B" FontSize="9" FontWeight="Bold" FontStyle="Italic" HorizontalAlignment="Center" Margin="0,2,0,0"/>
-                                                </StackPanel>
-                                            </Border>
-
-                                            <!-- Locked: Cloud Sync Pro -->
-                                            <Border Grid.Column="6" Background="#17191B" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="16" Opacity="0.5" Cursor="Hand">
-                                                <StackPanel HorizontalAlignment="Center">
-                                                    <Border Width="56" Height="56" Background="#334155" CornerRadius="28" HorizontalAlignment="Center" Margin="0,0,0,10">
-                                                        <Path Data="M4,12 A4,4 0 0,1 4,4 A5,5 0 0,1 13,5 A3,3 0 0,1 14,11Z" Fill="#64748B"
-                                                          Width="24" Height="24" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                                    </Border>
-                                                    <TextBlock Text="Cloud Sync Pro" Foreground="White" FontSize="12" FontWeight="Bold" HorizontalAlignment="Center"/>
-                                                    <TextBlock Text="BLOQUEADO" Foreground="#64748B" FontSize="9" FontWeight="Bold" FontStyle="Italic" HorizontalAlignment="Center" Margin="0,2,0,0"/>
-                                                </StackPanel>
-                                            </Border>
-                                        </Grid>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
                                     </StackPanel>
                                 </Border>
 
@@ -507,101 +372,44 @@
                                             <TextBlock Text="Desbloqueios e Recompensas" FontSize="18" FontWeight="Bold" Foreground="White"/>
                                         </StackPanel>
 
-                                        <Grid Margin="0,0,0,12">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="12"/>
-                                                <ColumnDefinition Width="*"/>
-                                            </Grid.ColumnDefinitions>
-
-                                            <!-- Locked: Official Certification -->
-                                            <Border Grid.Column="0" Background="#0F172A" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="16">
-                                                <Grid>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                        <ColumnDefinition Width="*"/>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                    </Grid.ColumnDefinitions>
-                                                    <Border Grid.Column="0" Width="44" Height="44" Background="#334155" CornerRadius="8" Margin="0,0,12,0">
-                                                        <Path Data="M8,2 L9.8,5.6 L13.8,6.2 L10.9,9 L11.6,13 L8,11.1 L4.4,13 L5.1,9 L2.2,6.2 L6.2,5.6Z" Fill="#F59E0B"
-                                                          Width="20" Height="20" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        <ItemsControl ItemsSource="{Binding Rewards}">
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <UniformGrid Columns="2"/>
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Border Background="{Binding IsUnlocked, Converter={StaticResource BoolToBackground}}"
+                                                            BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="16" Margin="0,0,6,12"
+                                                            Opacity="{Binding IsUnlocked, Converter={StaticResource BoolToOpacity}}">
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="Auto"/>
+                                                                <ColumnDefinition Width="*"/>
+                                                                <ColumnDefinition Width="Auto"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <Border Grid.Column="0" Width="44" Height="44" CornerRadius="8" Margin="0,0,12,0"
+                                                                    Background="{Binding IsUnlocked, Converter={StaticResource BoolToBadgeBg}}">
+                                                                <Path Data="M8,1 L9,5 L13,5 L10,8 L11,12 L8,10 L5,12 L6,8 L3,5 L7,5Z"
+                                                                      Fill="{Binding IsUnlocked, Converter={StaticResource BoolToBadgeFill}}"
+                                                                      Width="20" Height="20" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                            </Border>
+                                                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                                                <TextBlock Text="{Binding Title}" Foreground="White" FontSize="12" FontWeight="Bold"/>
+                                                                <TextBlock Text="{Binding Description}" Foreground="#94A3B8" FontSize="10"/>
+                                                            </StackPanel>
+                                                            <TextBlock Grid.Column="2" FontSize="16" VerticalAlignment="Center">
+                                                                <TextBlock.Text>
+                                                                    <Binding Path="IsUnlocked" Converter="{StaticResource BoolToUnlockLabel}"
+                                                                             ConverterParameter="emoji"/>
+                                                                </TextBlock.Text>
+                                                            </TextBlock>
+                                                        </Grid>
                                                     </Border>
-                                                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                                        <TextBlock Text="Certificação Oficial" Foreground="White" FontSize="12" FontWeight="Bold"/>
-                                                        <TextBlock Text="Alcance Nível 20 para desbloquear." Foreground="#94A3B8" FontSize="10"/>
-                                                    </StackPanel>
-                                                    <TextBlock Grid.Column="2" Text="🔒" FontSize="16" VerticalAlignment="Center"/>
-                                                </Grid>
-                                            </Border>
-
-                                            <!-- Unlocked: Midnight Theme -->
-                                            <Border Grid.Column="2" Background="#6A7D901A" BorderBrush="#6A7D9033" BorderThickness="1" CornerRadius="12" Padding="16">
-                                                <Grid>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                        <ColumnDefinition Width="*"/>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                    </Grid.ColumnDefinitions>
-                                                    <Border Grid.Column="0" Width="44" Height="44" Background="#6A7D904D" CornerRadius="8" Margin="0,0,12,0">
-                                                        <Path Data="M3,13 A3,3 0 0,0 9,13 L13,4 L11,2 L7,11" Stroke="#6A7D90" StrokeThickness="1.5" Fill="Transparent"
-                                                          Width="20" Height="20" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                                    </Border>
-                                                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                                        <TextBlock Text="Tema Midnight" Foreground="White" FontSize="12" FontWeight="Bold"/>
-                                                        <TextBlock Text="Desbloqueado no Nível 10" Foreground="#6A7D90" FontSize="10" FontWeight="Bold"/>
-                                                    </StackPanel>
-                                                    <TextBlock Grid.Column="2" Text="✅" FontSize="16" VerticalAlignment="Center"/>
-                                                </Grid>
-                                            </Border>
-                                        </Grid>
-
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="12"/>
-                                                <ColumnDefinition Width="*"/>
-                                            </Grid.ColumnDefinitions>
-
-                                            <!-- Locked: Custom API Scripts -->
-                                            <Border Grid.Column="0" Background="#0F172A" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="16" Opacity="0.6">
-                                                <Grid>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                        <ColumnDefinition Width="*"/>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                    </Grid.ColumnDefinitions>
-                                                    <Border Grid.Column="0" Width="44" Height="44" Background="#334155" CornerRadius="8" Margin="0,0,12,0">
-                                                        <Path Data="M7,0 H9 V2.5 L10.5,3 L12.5,1.5 L14,3 L12.5,5 L13,6.5 H15.5 V8.5 H13 L12.5,10.5 L14,12.5 L12.5,14 L10.5,12.5 L9,13 V15.5 H7 V13 L5,12.5 L3,14 L1.5,12.5 L3,10.5 L2.5,8.5 H0 V6.5 H2.5 L3,5 L1.5,3 L3,1.5 L5,3 L7,2.5Z M8,5.5 A2.5,2.5 0 1,0 8,10.5 A2.5,2.5 0 1,0 8,5.5Z" Fill="#94A3B8"
-                                                          Width="20" Height="20" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                                    </Border>
-                                                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                                        <TextBlock Text="Scripts API Personalizados" Foreground="White" FontSize="12" FontWeight="Bold"/>
-                                                        <TextBlock Text="Alcance Nível 25 para desbloquear." Foreground="#94A3B8" FontSize="10"/>
-                                                    </StackPanel>
-                                                    <TextBlock Grid.Column="2" Text="🔒" FontSize="16" VerticalAlignment="Center"/>
-                                                </Grid>
-                                            </Border>
-
-                                            <!-- Locked: AI Helper Pro -->
-                                            <Border Grid.Column="2" Background="#0F172A" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="16" Opacity="0.6">
-                                                <Grid>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                        <ColumnDefinition Width="*"/>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                    </Grid.ColumnDefinitions>
-                                                    <Border Grid.Column="0" Width="44" Height="44" Background="#334155" CornerRadius="8" Margin="0,0,12,0">
-                                                        <Path Data="M8,1 L9,5 L13,5 L10,8 L11,12 L8,10 L5,12 L6,8 L3,5 L7,5Z" Fill="#94A3B8"
-                                                          Width="20" Height="20" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                                    </Border>
-                                                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                                        <TextBlock Text="AI Helper Pro" Foreground="White" FontSize="12" FontWeight="Bold"/>
-                                                        <TextBlock Text="Alcance Nível 30 para desbloquear." Foreground="#94A3B8" FontSize="10"/>
-                                                    </StackPanel>
-                                                    <TextBlock Grid.Column="2" Text="🔒" FontSize="16" VerticalAlignment="Center"/>
-                                                </Grid>
-                                            </Border>
-                                        </Grid>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
                                     </StackPanel>
                                 </Border>
                             </StackPanel>

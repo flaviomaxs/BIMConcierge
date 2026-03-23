@@ -21,11 +21,17 @@ public partial class DashboardViewModel : ObservableObject, IDisposable
     [ObservableProperty] private string  _activeSection = "Dashboard";
     [ObservableProperty] private bool    _isBusy;
 
+    // User profile
+    [ObservableProperty] private string _userInitials = string.Empty;
+    [ObservableProperty] private string _userName     = string.Empty;
+    [ObservableProperty] private string _userRole     = string.Empty;
+
     // Dashboard summary
     [ObservableProperty] private int  _completedTutorials;
     [ObservableProperty] private int  _totalTutorials;
     [ObservableProperty] private int  _activeCorrections;
     [ObservableProperty] private int  _xpPoints;
+    [ObservableProperty] private int  _compliancePercent;
 
     // Tutorial library
     [ObservableProperty] private Tutorial?  _selectedTutorial;
@@ -47,7 +53,10 @@ public partial class DashboardViewModel : ObservableObject, IDisposable
         _progress   = progress;
         _standards  = standards;
         _navigation = navigation;
-        CurrentUser = auth.CurrentUser;
+        CurrentUser  = auth.CurrentUser;
+        UserInitials = auth.CurrentUser?.Initials ?? string.Empty;
+        UserName     = auth.CurrentUser?.Name ?? string.Empty;
+        UserRole     = auth.CurrentUser?.Role ?? string.Empty;
     }
 
     // ── Startup ──────────────────────────────────────────────────────────────

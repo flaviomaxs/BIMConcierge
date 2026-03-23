@@ -207,6 +207,7 @@
   <data name="AchievementsSearch" xml:space="preserve"><value>Search achievements, quests, or standards...</value></data>
   <data name="AchievementsProStatus" xml:space="preserve"><value>PRO STATUS</value></data>
   <data name="AchievementsActive" xml:space="preserve"><value>Active</value></data>
+  <data name="AchievementsProRenewal" xml:space="preserve"><value>Next Renewal: check your license</value></data>
   <data name="AchievementsProgressToLevel" xml:space="preserve"><value>PROGRESS TO LEVEL {0}</value></data>
   <data name="AchievementsXpForNextRank" xml:space="preserve"><value>{0} XP TO NEXT RANK: {1}</value></data>
   <data name="AchievementsDailyQuests" xml:space="preserve"><value>Daily Quests</value></data>

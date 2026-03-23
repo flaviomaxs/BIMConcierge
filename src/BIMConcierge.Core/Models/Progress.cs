@@ -11,6 +11,7 @@ public class TutorialProgress
     public int      ScorePercent { get; set; }
     public DateTime StartedAt    { get; set; }
     public DateTime? CompletedAt { get; set; }
+    public string TutorialTitle { get; set; } = string.Empty;
     public double ProgressPercent => TotalSteps == 0 ? 0 : (double)CurrentStep / TotalSteps * 100;
 }
 
@@ -50,4 +51,10 @@ public class LeaderboardEntry
     public string Title         { get; set; } = string.Empty;
     public int    XpPoints      { get; set; }
     public bool   IsCurrentUser { get; set; }
+
+    /// <summary>Computed initials from the entry's name.</summary>
+    public string Initials => string.IsNullOrWhiteSpace(Name)
+        ? "?"
+        : string.Concat(Name.Split(' ', StringSplitOptions.RemoveEmptyEntries)
+            .Take(2).Select(w => char.ToUpperInvariant(w[0])));
 }

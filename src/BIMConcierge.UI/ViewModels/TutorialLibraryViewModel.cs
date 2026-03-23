@@ -21,6 +21,11 @@ public partial class TutorialLibraryViewModel : ObservableObject, IDisposable
     [ObservableProperty] private string _searchQuery     = string.Empty;
     [ObservableProperty] private string _selectedCategory = "Todos";
 
+    // User profile for sidebar
+    [ObservableProperty] private string _userInitials = string.Empty;
+    [ObservableProperty] private string _userName     = string.Empty;
+    [ObservableProperty] private string _userRole     = string.Empty;
+
     /// <summary>All tutorials loaded from the API (unfiltered).</summary>
     private readonly List<Tutorial> _allTutorials = [];
 
@@ -40,6 +45,14 @@ public partial class TutorialLibraryViewModel : ObservableObject, IDisposable
         _progress   = progress;
         _auth       = auth;
         _navigation = navigation;
+
+        User? user = auth.CurrentUser;
+        if (user is not null)
+        {
+            UserInitials = user.Initials;
+            UserName     = user.Name;
+            UserRole     = user.Role;
+        }
     }
 
     // ── Load ────────────────────────────────────────────────────────────────

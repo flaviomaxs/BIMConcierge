@@ -83,12 +83,12 @@
                             </Grid.ColumnDefinitions>
 
                             <Border Grid.Column="0" Width="36" Height="36" Background="#6A7D90" CornerRadius="18" Margin="0,0,12,0">
-                                <TextBlock Text="FF" Foreground="White" FontWeight="Bold" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock Text="{Binding UserInitials, FallbackValue='?'}" Foreground="White" FontWeight="Bold" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
 
                             <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                <TextBlock Text="Fl&#225;vio Filho" Foreground="White" FontWeight="SemiBold" FontSize="13"/>
-                                <TextBlock Text="Arquiteto" Foreground="#94A3B8" FontSize="12"/>
+                                <TextBlock Text="{Binding UserName, FallbackValue=''}" Foreground="White" FontWeight="SemiBold" FontSize="13"/>
+                                <TextBlock Text="{Binding UserRole, FallbackValue=''}" Foreground="#94A3B8" FontSize="12"/>
                             </StackPanel>
 
                             <TextBlock Grid.Column="2" Text="&#x22EE;" Foreground="#94A3B8" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" Cursor="Hand"/>

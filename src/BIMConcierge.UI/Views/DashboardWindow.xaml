@@ -110,12 +110,12 @@
                             </Grid.ColumnDefinitions>
 
                             <Border Grid.Column="0" Width="36" Height="36" Background="#6A7D90" CornerRadius="18" Margin="0,0,12,0">
-                                <TextBlock Text="FF" Foreground="White" FontWeight="Bold" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock Text="{Binding UserInitials, FallbackValue='?'}" Foreground="White" FontWeight="Bold" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
 
                             <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                <TextBlock Text="Flávio Filho" Foreground="White" FontWeight="SemiBold" FontSize="13"/>
-                                <TextBlock Text="Arquiteto" Foreground="#94A3B8" FontSize="12"/>
+                                <TextBlock Text="{Binding UserName, FallbackValue=''}" Foreground="White" FontWeight="SemiBold" FontSize="13"/>
+                                <TextBlock Text="{Binding UserRole, FallbackValue=''}" Foreground="#94A3B8" FontSize="12"/>
                             </StackPanel>
 
                             <TextBlock Grid.Column="2" Text="⋮" Foreground="#94A3B8" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" Cursor="Hand"/>
@@ -167,8 +167,7 @@
                         <StackPanel>
                             <TextBlock Text="{loc:Loc DashboardItemsModeled}" Foreground="#94A3B8" FontSize="11" FontWeight="Bold" Margin="0,0,0,8"/>
                             <Grid>
-                                <TextBlock Text="142" FontSize="28" FontWeight="Bold" Foreground="White" HorizontalAlignment="Left"/>
-                                <TextBlock Text="+12%" FontSize="12" FontWeight="Bold" Foreground="#10B981" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,6"/>
+                                <TextBlock Text="{Binding CompletedTutorials, FallbackValue='0'}" FontSize="28" FontWeight="Bold" Foreground="White" HorizontalAlignment="Left"/>
                             </Grid>
                         </StackPanel>
                     </Border>
@@ -177,8 +176,7 @@
                         <StackPanel>
                             <TextBlock Text="{loc:Loc DashboardOperationsOnStandard}" Foreground="#94A3B8" FontSize="11" FontWeight="Bold" Margin="0,0,0,8"/>
                             <Grid>
-                                <TextBlock Text="98%" FontSize="28" FontWeight="Bold" Foreground="White" HorizontalAlignment="Left"/>
-                                <TextBlock Text="+2%" FontSize="12" FontWeight="Bold" Foreground="#10B981" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,6"/>
+                                <TextBlock Text="{Binding CompliancePercent, FallbackValue='0', StringFormat={}{0}%}" FontSize="28" FontWeight="Bold" Foreground="White" HorizontalAlignment="Left"/>
                             </Grid>
                         </StackPanel>
                     </Border>
@@ -187,7 +185,7 @@
                         <StackPanel>
                             <TextBlock Text="{loc:Loc DashboardWarningsCorrected}" Foreground="#94A3B8" FontSize="11" FontWeight="Bold" Margin="0,0,0,8"/>
                             <Grid>
-                                <TextBlock Text="12" FontSize="28" FontWeight="Bold" Foreground="White" HorizontalAlignment="Left"/>
+                                <TextBlock Text="{Binding ActiveCorrections, FallbackValue='0'}" FontSize="28" FontWeight="Bold" Foreground="White" HorizontalAlignment="Left"/>
                                 <TextBlock Text="{loc:Loc DashboardStable}" FontSize="12" FontWeight="Bold" Foreground="#6A7D90" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,6"/>
                             </Grid>
                         </StackPanel>
@@ -267,7 +265,7 @@
                                     </Grid.RowDefinitions>
                                     <TextBlock Grid.Row="0" Foreground="#10B981" FontSize="12" FontWeight="Bold" Margin="0,0,0,5">
                                         <TextBlock.Text>
-                                            <Binding Source="98" Converter="{StaticResource LocalizedStepsFormat}" ConverterParameter="DashboardCompleted"/>
+                                            <Binding Path="CompliancePercent" Converter="{StaticResource LocalizedStepsFormat}" ConverterParameter="DashboardCompleted" FallbackValue="0"/>
                                         </TextBlock.Text>
                                     </TextBlock>
                                     <Border Grid.Row="1" Height="6" Background="#1E293B" CornerRadius="3">

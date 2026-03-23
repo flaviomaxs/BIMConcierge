@@ -207,6 +207,7 @@
   <data name="AchievementsSearch" xml:space="preserve"><value>Buscar conquistas, missões ou padrões...</value></data>
   <data name="AchievementsProStatus" xml:space="preserve"><value>STATUS PRO</value></data>
   <data name="AchievementsActive" xml:space="preserve"><value>Ativo</value></data>
+  <data name="AchievementsProRenewal" xml:space="preserve"><value>Próxima Renovação: consulte sua licença</value></data>
   <data name="AchievementsProgressToLevel" xml:space="preserve"><value>PROGRESSO PARA NÍVEL {0}</value></data>
   <data name="AchievementsXpForNextRank" xml:space="preserve"><value>{0} XP PARA PRÓXIMO RANK: {1}</value></data>
   <data name="AchievementsDailyQuests" xml:space="preserve"><value>Missões Diárias</value></data>

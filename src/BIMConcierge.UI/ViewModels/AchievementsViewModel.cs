@@ -22,8 +22,17 @@ public partial class AchievementsViewModel : ObservableObject, IDisposable
     [ObservableProperty] private int    _currentXp;
     [ObservableProperty] private int    _xpForNextLevel;
     [ObservableProperty] private double _levelProgressPercent;
+    [ObservableProperty] private string _userInitials = string.Empty;
     [ObservableProperty] private string _userName = string.Empty;
     [ObservableProperty] private string _filterMode = "All";
+
+    /// <summary>Next level number for display.</summary>
+    public int NextLevel => UserLevel + 1;
+
+    partial void OnUserLevelChanged(int value)
+    {
+        OnPropertyChanged(nameof(NextLevel));
+    }
 
     public ObservableCollection<Achievement>     AllAchievements { get; } = [];
     public ObservableCollection<Achievement>     FilteredAchievements { get; } = [];
@@ -40,10 +49,11 @@ public partial class AchievementsViewModel : ObservableObject, IDisposable
         User? user = auth.CurrentUser;
         if (user is not null)
         {
-            UserName   = user.Name;
-            UserLevel  = user.Level;
-            CurrentXp  = user.XpPoints;
-            LevelTitle = $"Level {user.Level}";
+            UserInitials = user.Initials;
+            UserName     = user.Name;
+            UserLevel    = user.Level;
+            CurrentXp    = user.XpPoints;
+            LevelTitle   = $"Level {user.Level}";
             CalculateLevelProgress();
         }
     }

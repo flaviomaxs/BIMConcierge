@@ -23,14 +23,16 @@ public partial class StudentProgressViewModel : ObservableObject, IDisposable
     [ObservableProperty] private int    _xpPoints;
     [ObservableProperty] private int    _learningHours;
     [ObservableProperty] private int    _certificateCount;
+    [ObservableProperty] private string _userInitials = string.Empty;
     [ObservableProperty] private string _userName = string.Empty;
     [ObservableProperty] private string _userRole = string.Empty;
     [ObservableProperty] private int    _userLevel;
     [ObservableProperty] private double _nextLevelPercent;
 
-    public ObservableCollection<TutorialProgress> InProgressTutorials { get; } = [];
-    public ObservableCollection<Achievement>      RecentAchievements  { get; } = [];
-    public ObservableCollection<SkillProficiency>  Skills             { get; } = [];
+    public ObservableCollection<TutorialProgress> InProgressTutorials   { get; } = [];
+    public ObservableCollection<Tutorial>         RecommendedTutorials { get; } = [];
+    public ObservableCollection<Achievement>      RecentAchievements   { get; } = [];
+    public ObservableCollection<SkillProficiency>  Skills              { get; } = [];
 
     public StudentProgressViewModel(
         IProgressService progress, ITutorialService tutorials,
@@ -44,10 +46,11 @@ public partial class StudentProgressViewModel : ObservableObject, IDisposable
         User? user = auth.CurrentUser;
         if (user is not null)
         {
-            UserName  = user.Name;
-            UserRole  = user.Role;
-            UserLevel = user.Level;
-            XpPoints  = user.XpPoints;
+            UserInitials = user.Initials;
+            UserName     = user.Name;
+            UserRole     = user.Role;
+            UserLevel    = user.Level;
+            XpPoints     = user.XpPoints;
         }
     }
 
@@ -80,10 +83,21 @@ public partial class StudentProgressViewModel : ObservableObject, IDisposable
             LearningHours    = (int)allProgress.Sum(p => p.TotalSteps * 0.5); // ~30min per step
             CertificateCount = allProgress.Count(p => p.IsCompleted && p.ScorePercent >= 80);
 
-            // In-progress tutorials
+            // In-progress tutorials (populate titles from tutorial list)
+            Dictionary<string, string> tutorialTitles = tutorials.ToDictionary(t => t.Id, t => t.Title);
             InProgressTutorials.Clear();
             foreach (TutorialProgress p in allProgress.Where(p => !p.IsCompleted))
+            {
+                if (tutorialTitles.TryGetValue(p.TutorialId, out string? title))
+                    p.TutorialTitle = title;
                 InProgressTutorials.Add(p);
+            }
+
+            // Recommended tutorials (not started yet)
+            HashSet<string> startedIds = allProgress.Select(p => p.TutorialId).ToHashSet();
+            RecommendedTutorials.Clear();
+            foreach (Tutorial t in tutorials.Where(t => !startedIds.Contains(t.Id)).Take(4))
+                RecommendedTutorials.Add(t);
 
             // Recent achievements (unlocked)
             RecentAchievements.Clear();

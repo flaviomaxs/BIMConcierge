@@ -14,6 +14,7 @@ public partial class SettingsViewModel : ObservableObject
 
     [ObservableProperty] private string _selectedLanguage = "pt-BR";
     [ObservableProperty] private string _currentTheme     = "Dark";
+    [ObservableProperty] private string _userInitials     = string.Empty;
     [ObservableProperty] private string _userName         = string.Empty;
     [ObservableProperty] private string _userEmail        = string.Empty;
     [ObservableProperty] private string _userRole         = string.Empty;
@@ -35,9 +36,10 @@ public partial class SettingsViewModel : ObservableObject
         User? user = _auth.CurrentUser;
         if (user is not null)
         {
-            UserName  = user.Name;
-            UserEmail = user.Email;
-            UserRole  = user.Role;
+            UserInitials = user.Initials;
+            UserName     = user.Name;
+            UserEmail    = user.Email;
+            UserRole     = user.Role;
         }
 
         License? license = _auth.CurrentLicense;

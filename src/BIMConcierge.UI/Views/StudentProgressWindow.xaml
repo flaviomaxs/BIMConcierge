@@ -41,7 +41,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Border Grid.Column="0" Width="40" Height="40" Background="#6A7D90" CornerRadius="20" Margin="0,0,12,0">
-                                <TextBlock Text="FF" Foreground="White" FontWeight="Bold" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock Text="{Binding UserInitials, FallbackValue='?'}" Foreground="White" FontWeight="Bold" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
                             <StackPanel Grid.Column="1" VerticalAlignment="Center">
                                 <TextBlock Text="{Binding UserName, FallbackValue='Flávio Filho'}" Foreground="White" FontWeight="SemiBold" FontSize="13"/>
@@ -96,7 +96,7 @@
                         <Border Background="#17191B" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="16" Margin="0,0,0,12">
                             <StackPanel>
                                 <TextBlock Text="{loc:Loc ProgressNextMilestone}" Foreground="#6A7D90" FontSize="10" FontWeight="Bold" Margin="0,0,0,8"/>
-                                <TextBlock Text="Coordenador BIM I" Foreground="White" FontSize="13" FontWeight="Bold" Margin="0,0,0,8"/>
+                                <TextBlock Text="{Binding UserLevel, FallbackValue='', StringFormat='Level {0}'}" Foreground="White" FontSize="13" FontWeight="Bold" Margin="0,0,0,8"/>
                                 <Grid Margin="0,0,0,4">
                                     <Border Height="6" Background="#1E293B" CornerRadius="3">
                                         <Border Background="#6A7D90" CornerRadius="3" HorizontalAlignment="Left"
@@ -182,7 +182,7 @@
                                 <TextBlock Text="{loc:Loc ProgressCompleted}" Foreground="#94A3B8" FontSize="10" FontWeight="Bold" Margin="0,0,0,6"/>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="{Binding CompletedCount, FallbackValue='24'}" FontSize="28" FontWeight="Bold" Foreground="White"/>
-                                    <TextBlock Text=" / 50" FontSize="13" Foreground="#94A3B8" VerticalAlignment="Bottom" Margin="0,0,0,4"/>
+                                    <TextBlock Text="{Binding TotalCount, FallbackValue='0', StringFormat='/ {0}'}" FontSize="13" Foreground="#94A3B8" VerticalAlignment="Bottom" Margin="0,0,0,4"/>
                                 </StackPanel>
                             </StackPanel>
                         </Border>
@@ -257,69 +257,46 @@
                                 <StackPanel>
                                     <TextBlock Text="{loc:Loc ProgressInProgress}" FontSize="16" FontWeight="Bold" Foreground="White" Margin="0,0,0,16"/>
 
-                                    <!-- Tutorial 1 -->
-                                    <Border Background="#FFFFFF0A" BorderBrush="#FFFFFF0A" BorderThickness="1" CornerRadius="8" Padding="16" Margin="0,0,0,12">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Border Grid.Column="0" Width="48" Height="48" Background="#323639" CornerRadius="8" Margin="0,0,16,0">
-                                                <Path Data="M2,14 L2,2 L14,14Z M5,11 H11" Stroke="White" StrokeThickness="1.5" Fill="Transparent"
-                                                      Width="20" Height="20" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                            </Border>
-                                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                                <TextBlock Text="Famílias Paramétricas Avançadas" Foreground="White" FontSize="13" FontWeight="Bold" Margin="0,0,0,8"/>
-                                                <Grid>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="*"/>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                    </Grid.ColumnDefinitions>
-                                                    <Border Grid.Column="0" Height="6" Background="#323639" CornerRadius="3" Margin="0,0,12,0">
-                                                        <Border Background="#6A7D90" CornerRadius="3" HorizontalAlignment="Left" Width="180"/>
-                                                    </Border>
-                                                    <TextBlock Grid.Column="1" Text="65%" Foreground="#94A3B8" FontSize="10" FontWeight="Bold"/>
-                                                </Grid>
-                                            </StackPanel>
-                                            <Border Grid.Column="2" Width="32" Height="32" Background="#FFFFFF0A" CornerRadius="16" Margin="12,0,0,0" Cursor="Hand"
-                                                    MouseLeftButtonUp="PlayTutorial_Click">
-                                                <Path Data="M4,2 L13,8 L4,14Z" Fill="White" Width="12" Height="12" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                            </Border>
-                                        </Grid>
-                                    </Border>
-
-                                    <!-- Tutorial 2 -->
-                                    <Border Background="#FFFFFF0A" BorderBrush="#FFFFFF0A" BorderThickness="1" CornerRadius="8" Padding="16">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Border Grid.Column="0" Width="48" Height="48" Background="#323639" CornerRadius="8" Margin="0,0,16,0">
-                                                <Path Data="M6,10 L10,6 M5,7 L3,9 A3,3 0 0,0 7,13 L9,11 M11,9 L13,7 A3,3 0 0,0 9,3 L7,5" Stroke="White" StrokeThickness="1.5" Fill="Transparent"
-                                                      Width="20" Height="20" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                            </Border>
-                                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                                <TextBlock Text="Fluxos de Coordenação Estrutural" Foreground="White" FontSize="13" FontWeight="Bold" Margin="0,0,0,8"/>
-                                                <Grid>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="*"/>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                    </Grid.ColumnDefinitions>
-                                                    <Border Grid.Column="0" Height="6" Background="#323639" CornerRadius="3" Margin="0,0,12,0">
-                                                        <Border Background="#6A7D90" CornerRadius="3" HorizontalAlignment="Left" Width="42"/>
-                                                    </Border>
-                                                    <TextBlock Grid.Column="1" Text="15%" Foreground="#94A3B8" FontSize="10" FontWeight="Bold"/>
-                                                </Grid>
-                                            </StackPanel>
-                                            <Border Grid.Column="2" Width="32" Height="32" Background="#FFFFFF0A" CornerRadius="16" Margin="12,0,0,0" Cursor="Hand"
-                                                    MouseLeftButtonUp="PlayTutorial_Click">
-                                                <Path Data="M4,2 L13,8 L4,14Z" Fill="White" Width="12" Height="12" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                            </Border>
-                                        </Grid>
-                                    </Border>
+                                    <ItemsControl ItemsSource="{Binding InProgressTutorials}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Border Background="#FFFFFF0A" BorderBrush="#FFFFFF0A" BorderThickness="1" CornerRadius="8" Padding="16" Margin="0,0,0,12">
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="Auto"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                            <ColumnDefinition Width="Auto"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Border Grid.Column="0" Width="48" Height="48" Background="#323639" CornerRadius="8" Margin="0,0,16,0">
+                                                            <Path Data="M2,14 L2,2 L14,14Z M5,11 H11" Stroke="White" StrokeThickness="1.5" Fill="Transparent"
+                                                                  Width="20" Height="20" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                        </Border>
+                                                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                                            <TextBlock Text="{Binding TutorialTitle}" Foreground="White" FontSize="13" FontWeight="Bold" Margin="0,0,0,8"/>
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="Auto"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <Border Grid.Column="0" Height="6" Background="#323639" CornerRadius="3" Margin="0,0,12,0">
+                                                                    <Border Background="#6A7D90" CornerRadius="3" HorizontalAlignment="Left"
+                                                                            Width="{Binding ProgressPercent, Converter={StaticResource PctToWidth}, ConverterParameter=280}"/>
+                                                                </Border>
+                                                                <TextBlock Grid.Column="1" Foreground="#94A3B8" FontSize="10" FontWeight="Bold">
+                                                                    <TextBlock.Text>
+                                                                        <Binding Path="ProgressPercent" StringFormat="{}{0:F0}%"/>
+                                                                    </TextBlock.Text>
+                                                                </TextBlock>
+                                                            </Grid>
+                                                        </StackPanel>
+                                                        <Border Grid.Column="2" Width="32" Height="32" Background="#FFFFFF0A" CornerRadius="16" Margin="12,0,0,0" Cursor="Hand">
+                                                            <Path Data="M4,2 L13,8 L4,14Z" Fill="White" Width="12" Height="12" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                        </Border>
+                                                    </Grid>
+                                                </Border>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
                                 </StackPanel>
                             </Border>
 
@@ -327,39 +304,33 @@
                             <Border Background="#232629" BorderBrush="#323639" BorderThickness="1" CornerRadius="12" Padding="24">
                                 <StackPanel>
                                     <TextBlock Text="{loc:Loc ProgressNextLessons}" FontSize="16" FontWeight="Bold" Foreground="White" Margin="0,0,0,16"/>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="16"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-
-                                        <Border Grid.Column="0" Background="#17191B" BorderBrush="#323639" BorderThickness="1" CornerRadius="8" Padding="16" Cursor="Hand">
-                                            <StackPanel>
-                                                <Grid Margin="0,0,0,10">
-                                                    <Border Background="#6A7D9033" CornerRadius="4" Padding="8,3" HorizontalAlignment="Left">
-                                                        <TextBlock Text="Intermediário" Foreground="#6A7D90" FontSize="10" FontWeight="Bold"/>
-                                                    </Border>
-                                                    <TextBlock Text="15 min" Foreground="#94A3B8" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                                                </Grid>
-                                                <TextBlock Text="Fundamentos da API Revit para Modeladores" Foreground="White" FontSize="13" FontWeight="Bold" Margin="0,0,0,6"/>
-                                                <TextBlock Text="Desbloqueie o potencial de automação no seu fluxo BIM." Foreground="#94A3B8" FontSize="11" TextWrapping="Wrap"/>
-                                            </StackPanel>
-                                        </Border>
-
-                                        <Border Grid.Column="2" Background="#17191B" BorderBrush="#323639" BorderThickness="1" CornerRadius="8" Padding="16" Cursor="Hand">
-                                            <StackPanel>
-                                                <Grid Margin="0,0,0,10">
-                                                    <Border Background="#6A7D9033" CornerRadius="4" Padding="8,3" HorizontalAlignment="Left">
-                                                        <TextBlock Text="Avançado" Foreground="#6A7D90" FontSize="10" FontWeight="Bold"/>
-                                                    </Border>
-                                                    <TextBlock Text="45 min" Foreground="#94A3B8" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                                                </Grid>
-                                                <TextBlock Text="Padrões de Detalhamento LOD 400" Foreground="White" FontSize="13" FontWeight="Bold" Margin="0,0,0,6"/>
-                                                <TextBlock Text="Domine práticas de documentação em nível de construção." Foreground="#94A3B8" FontSize="11" TextWrapping="Wrap"/>
-                                            </StackPanel>
-                                        </Border>
-                                    </Grid>
+                                    <ItemsControl ItemsSource="{Binding RecommendedTutorials}">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <UniformGrid Columns="2" />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Border Background="#17191B" BorderBrush="#323639" BorderThickness="1" CornerRadius="8" Padding="16" Margin="0,0,8,0" Cursor="Hand">
+                                                    <StackPanel>
+                                                        <Grid Margin="0,0,0,10">
+                                                            <Border Background="#6A7D9033" CornerRadius="4" Padding="8,3" HorizontalAlignment="Left">
+                                                                <TextBlock Text="{Binding Difficulty}" Foreground="#6A7D90" FontSize="10" FontWeight="Bold"/>
+                                                            </Border>
+                                                            <TextBlock Foreground="#94A3B8" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                                                <TextBlock.Text>
+                                                                    <Binding Path="DurationMins" StringFormat="{}{0} min"/>
+                                                                </TextBlock.Text>
+                                                            </TextBlock>
+                                                        </Grid>
+                                                        <TextBlock Text="{Binding Title}" Foreground="White" FontSize="13" FontWeight="Bold" Margin="0,0,0,6"/>
+                                                        <TextBlock Text="{Binding Description}" Foreground="#94A3B8" FontSize="11" TextWrapping="Wrap"/>
+                                                    </StackPanel>
+                                                </Border>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
                                 </StackPanel>
                             </Border>
                         </StackPanel>
