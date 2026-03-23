@@ -6,12 +6,12 @@ using BIMConcierge.Infrastructure.Revit;
 
 namespace BIMConcierge.UI.ViewModels;
 
-public partial class TutorialViewModel : ObservableObject, IDisposable
+public partial class TutorialViewModel(ITutorialService service, IAuthService auth, IRevitEventDispatcher dispatcher, INavigationService navigation) : ObservableObject, IDisposable
 {
-    private readonly ITutorialService       _service;
-    private readonly IAuthService           _auth;
-    private readonly IRevitEventDispatcher  _dispatcher;
-    private readonly INavigationService    _navigation;
+    private readonly ITutorialService       _service = service;
+    private readonly IAuthService           _auth = auth;
+    private readonly IRevitEventDispatcher  _dispatcher = dispatcher;
+    private readonly INavigationService    _navigation = navigation;
 
     private CancellationTokenSource _cts = new();
 
@@ -42,14 +42,6 @@ public partial class TutorialViewModel : ObservableObject, IDisposable
 
     [ObservableProperty] private int     _completedSteps;
     [ObservableProperty] private double  _savedProgressPercent;
-
-    public TutorialViewModel(ITutorialService service, IAuthService auth, IRevitEventDispatcher dispatcher, INavigationService navigation)
-    {
-        _service    = service;
-        _auth       = auth;
-        _dispatcher = dispatcher;
-        _navigation = navigation;
-    }
 
     partial void OnCurrentStepIndexChanged(int value)
     {

@@ -9,11 +9,9 @@ namespace BIMConcierge.UI.Localization;
 /// Automatically updates when the language changes.
 /// </summary>
 [MarkupExtensionReturnType(typeof(string))]
-public sealed class LocExtension : MarkupExtension
+public sealed class LocExtension(string key) : MarkupExtension
 {
-    public string Key { get; }
-
-    public LocExtension(string key) => Key = key;
+    public string Key { get; } = key;
 
     public override object ProvideValue(IServiceProvider serviceProvider)
     {

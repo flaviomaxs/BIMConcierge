@@ -179,12 +179,12 @@ BIMCONCIERGE_API_URL=https://seu-servidor/api/v1/
 
 ## Roadmap
 
-- [ ] Implementar `SqliteDatabase` com SQLite-net-pcl (CRUD completo)
-- [ ] Construir `RevitEventDispatcher` com motor de regras de standards
-- [ ] Completar XAML das views: `TutorialWindow`, `CorrectionsView`, `StandardsView`, `ProgressView`, `AchievementsView`
-- [ ] Implementar `ExternalEvent` para aplicar correções automáticas via thread do Revit
-- [ ] Adicionar suporte a múltiplos idiomas (PT-BR / EN)
-- [ ] Testes de integração com Revit API (via `RevitTestFramework`)
+- [x] Implementar `SqliteDatabase` com SQLite-net-pcl (CRUD completo)
+- [x] Construir `RevitEventDispatcher` com motor de regras de standards
+- [x] Completar XAML das views: `TutorialWindow`, `CorrectionsView`, `StandardsView`, `ProgressView`, `AchievementsView`
+- [x] Implementar `ExternalEvent` para aplicar correções automáticas via thread do Revit
+- [x] Adicionar suporte a múltiplos idiomas (PT-BR / EN)
+- [x] Testes de integração com Revit API (via `RevitTestFramework`)
 - [ ] Pipeline CI/CD com GitHub Actions
 
 ---

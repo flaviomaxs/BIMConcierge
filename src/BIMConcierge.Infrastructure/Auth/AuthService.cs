@@ -14,13 +14,13 @@ namespace BIMConcierge.Infrastructure.Auth;
 /// Authenticates users against the BIMConcierge cloud API.
 /// Validates license, caches JWT + license locally for offline sessions.
 /// </summary>
-public class AuthService : IAuthService
+public class AuthService(IBimApiClient api, ITokenStore tokenStore, ILocalDatabase db, ILicenseService licenseService, IStringLocalizer loc) : IAuthService
 {
-    private readonly IBimApiClient _api;
-    private readonly ITokenStore _tokenStore;
-    private readonly ILocalDatabase _db;
-    private readonly ILicenseService _licenseService;
-    private readonly IStringLocalizer _loc;
+    private readonly IBimApiClient _api = api;
+    private readonly ITokenStore _tokenStore = tokenStore;
+    private readonly ILocalDatabase _db = db;
+    private readonly ILicenseService _licenseService = licenseService;
+    private readonly IStringLocalizer _loc = loc;
 
     // Static so state survives across transient resolutions
     private static User? _currentUser;
@@ -51,15 +51,6 @@ public class AuthService : IAuthService
         private set { lock (_lock) _currentLicense = value; }
     }
 
-    public AuthService(IBimApiClient api, ITokenStore tokenStore, ILocalDatabase db, ILicenseService licenseService, IStringLocalizer loc)
-    {
-        _api = api;
-        _tokenStore = tokenStore;
-        _db = db;
-        _licenseService = licenseService;
-        _loc = loc;
-    }
-
     public async Task<AuthResult> LoginAsync(string email, string password, string licenseKey)
     {
         // Dev login — bypass API for local testing (only when env var is set)
@@ -72,7 +63,7 @@ public class AuthService : IAuthService
 
         try
         {
-            var response = await _api.PostAsync<LoginRequest, LoginResponse>(
+            LoginResponse? response = await _api.PostAsync<LoginRequest, LoginResponse>(
                 "auth/login",
                 new LoginRequest(email, password, licenseKey));
 
@@ -84,8 +75,8 @@ public class AuthService : IAuthService
             CurrentUser = response.User;
 
             // Validate license
-            var license = await _licenseService.ValidateAsync(licenseKey);
-            var licenseResult = EnforceLicense(license);
+            License? license = await _licenseService.ValidateAsync(licenseKey);
+            AuthResult? licenseResult = EnforceLicense(license);
             if (licenseResult is not null) return licenseResult;
 
             CurrentLicense = license;
@@ -140,7 +131,7 @@ public class AuthService : IAuthService
         {
             try
             {
-                var license = await _licenseService.ValidateAsync(_lastLicenseKey);
+                License? license = await _licenseService.ValidateAsync(_lastLicenseKey);
                 if (license is not null)
                 {
                     CurrentLicense = license;
@@ -179,7 +170,7 @@ public class AuthService : IAuthService
         if (string.IsNullOrEmpty(_tokenStore.RefreshToken)) return false;
         try
         {
-            var response = await _api.PostAsync<RefreshRequest, LoginResponse>(
+            LoginResponse? response = await _api.PostAsync<RefreshRequest, LoginResponse>(
                 "auth/refresh",
                 new RefreshRequest(_tokenStore.RefreshToken));
 
@@ -240,11 +231,11 @@ public class AuthService : IAuthService
 
     private async Task<AuthResult> OfflineFallbackAsync()
     {
-        var cached = await _db.GetLastUserAsync();
+        User? cached = await _db.GetLastUserAsync();
         if (cached is null)
             return new AuthResult(false, null, _loc.GetString("AuthNoConnectionNoUser"));
 
-        var cachedLicense = await _db.GetCachedLicenseAsync(cached.CompanyId);
+        License? cachedLicense = await _db.GetCachedLicenseAsync(cached.CompanyId);
         if (cachedLicense is null)
             return new AuthResult(false, null, _loc.GetString("AuthNoConnectionNoLicense"));
 
@@ -300,7 +291,7 @@ public class AuthService : IAuthService
 
             var json = Encoding.UTF8.GetString(Convert.FromBase64String(payload));
             using var doc = JsonDocument.Parse(json);
-            if (doc.RootElement.TryGetProperty("exp", out var expProp))
+            if (doc.RootElement.TryGetProperty("exp", out JsonElement expProp))
             {
                 var exp = DateTimeOffset.FromUnixTimeSeconds(expProp.GetInt64());
                 return exp <= DateTimeOffset.UtcNow;
