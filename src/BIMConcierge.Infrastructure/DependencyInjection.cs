@@ -45,6 +45,7 @@ public static class DependencyInjection
 
         // Revit-specific
         services.AddSingleton<IRevitEventDispatcher, RevitEventDispatcher>();
+        services.AddSingleton<RevitEventDispatcher>(sp => (RevitEventDispatcher)sp.GetRequiredService<IRevitEventDispatcher>());
 
         // Local cache / offline persistence
         services.AddSingleton<ILocalDatabase, SqliteDatabase>();
