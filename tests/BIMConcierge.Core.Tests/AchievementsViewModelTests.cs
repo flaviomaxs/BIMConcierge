@@ -63,6 +63,12 @@ public class AchievementsViewModelTests
             new() { Id = "a2", Title = "Standard Master", IsUnlocked = false, XpReward = 100 }
         };
         _progressMock.Setup(p => p.GetAchievementsAsync("u1")).ReturnsAsync(achievements);
+        _progressMock.Setup(p => p.GetLeaderboardAsync(It.IsAny<string>())).ReturnsAsync(new List<LeaderboardEntry>
+        {
+            new() { Rank = 1, Name = "Ana", XpPoints = 2000 },
+            new() { Rank = 2, Name = "Bruno", XpPoints = 1800 },
+            new() { Rank = 3, Name = "Diana", XpPoints = 1600 }
+        });
 
         AchievementsViewModel sut = CreateSut();
         await sut.LoadCommand.ExecuteAsync(null);
@@ -70,7 +76,7 @@ public class AchievementsViewModelTests
         sut.AllAchievements.Should().HaveCount(2);
         sut.FilteredAchievements.Should().HaveCount(2); // Default filter = "All"
         sut.ActiveQuests.Should().HaveCount(2);
-        sut.Leaderboard.Should().HaveCount(4); // 3 seed + 1 current user
+        sut.Leaderboard.Should().HaveCount(4); // 3 from API + 1 current user
         sut.Rewards.Should().HaveCount(4);
         sut.IsBusy.Should().BeFalse();
     }

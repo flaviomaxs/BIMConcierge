@@ -10,9 +10,9 @@ public partial class CorrectionAlertViewModel : ObservableObject
 {
     private readonly IStandardsService _standards;
 
-    [ObservableProperty] private CorrectionEvent? correction;
-    [ObservableProperty] private bool isFixed;
-    [ObservableProperty] private bool isBusy;
+    [ObservableProperty] private CorrectionEvent? _correction;
+    [ObservableProperty] private bool _isFixed;
+    [ObservableProperty] private bool _isBusy;
 
     /// <summary>Invoked by the window to close itself after dismiss/fix.</summary>
     public Action? OnDismiss { get; set; }

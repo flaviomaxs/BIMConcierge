@@ -4,12 +4,10 @@ using Serilog;
 
 namespace BIMConcierge.Infrastructure.Api;
 
-public class ProgressService : IProgressService
+public class ProgressService(IBimApiClient api, ILocalDatabase db) : IProgressService
 {
-    private readonly IBimApiClient  _api;
-    private readonly ILocalDatabase _db;
-
-    public ProgressService(IBimApiClient api, ILocalDatabase db) { _api = api; _db = db; }
+    private readonly IBimApiClient  _api = api;
+    private readonly ILocalDatabase _db = db;
 
     public async Task<List<TutorialProgress>> GetUserProgressAsync(string userId)
     {
@@ -31,7 +29,7 @@ public class ProgressService : IProgressService
         catch (Exception ex)
         {
             Log.Warning(ex, "API call failed for achievements — falling back to local cache");
-            return await _db.GetAchievementsAsync(userId);
+            return await _db.GetAchievementsAsync(userId) ?? [];
         }
     }
 

@@ -17,10 +17,10 @@ public partial class CorrectionViewModel : ObservableObject, IDisposable
 
     private CancellationTokenSource _cts = new();
 
-    [ObservableProperty] private bool   isBusy;
-    [ObservableProperty] private string errorMessage      = string.Empty;
-    [ObservableProperty] private string selectedSeverity  = "Todos";
-    [ObservableProperty] private bool   isAutoFixEnabled;
+    [ObservableProperty] private bool   _isBusy;
+    [ObservableProperty] private string _errorMessage      = string.Empty;
+    [ObservableProperty] private string _selectedSeverity  = "Todos";
+    [ObservableProperty] private bool   _isAutoFixEnabled;
 
     /// <summary>All corrections loaded from the validation engine (unfiltered).</summary>
     private readonly List<CorrectionEvent> _allCorrections = [];
@@ -59,14 +59,14 @@ public partial class CorrectionViewModel : ObservableObject, IDisposable
     private async Task LoadAsync()
     {
         CancelPending();
-        var ct = _cts.Token;
+        CancellationToken ct = _cts.Token;
 
         IsBusy = true;
         try
         {
             ErrorMessage = string.Empty;
 
-            var corrections = await _standards.ValidateModelAsync();
+            List<CorrectionEvent> corrections = await _standards.ValidateModelAsync();
             ct.ThrowIfCancellationRequested();
 
             _allCorrections.Clear();
@@ -94,7 +94,7 @@ public partial class CorrectionViewModel : ObservableObject, IDisposable
 
     private void ApplyFilter()
     {
-        var filtered = _allCorrections.AsEnumerable();
+        IEnumerable<CorrectionEvent> filtered = _allCorrections.AsEnumerable();
 
         if (!string.IsNullOrEmpty(SelectedSeverity) && SelectedSeverity != "Todos")
         {
@@ -103,7 +103,7 @@ public partial class CorrectionViewModel : ObservableObject, IDisposable
         }
 
         Corrections.Clear();
-        foreach (var c in filtered)
+        foreach (CorrectionEvent c in filtered)
             Corrections.Add(c);
     }
 

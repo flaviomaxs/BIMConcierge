@@ -45,7 +45,7 @@ public partial class LoginViewModel : ObservableObject, IDisposable
         IsBusy = true;
         try
         {
-            var result = await _authService.LoginAsync(Email, Password, LicenseKey);
+            AuthResult result = await _authService.LoginAsync(Email, Password, LicenseKey);
 
             if (result.Success)
             {

@@ -16,17 +16,17 @@ public partial class StudentProgressViewModel : ObservableObject, IDisposable
 
     private CancellationTokenSource _cts = new();
 
-    [ObservableProperty] private bool   isBusy;
-    [ObservableProperty] private string errorMessage = string.Empty;
-    [ObservableProperty] private int    completedCount;
-    [ObservableProperty] private int    totalCount;
-    [ObservableProperty] private int    xpPoints;
-    [ObservableProperty] private int    learningHours;
-    [ObservableProperty] private int    certificateCount;
-    [ObservableProperty] private string userName = string.Empty;
-    [ObservableProperty] private string userRole = string.Empty;
-    [ObservableProperty] private int    userLevel;
-    [ObservableProperty] private double nextLevelPercent;
+    [ObservableProperty] private bool   _isBusy;
+    [ObservableProperty] private string _errorMessage = string.Empty;
+    [ObservableProperty] private int    _completedCount;
+    [ObservableProperty] private int    _totalCount;
+    [ObservableProperty] private int    _xpPoints;
+    [ObservableProperty] private int    _learningHours;
+    [ObservableProperty] private int    _certificateCount;
+    [ObservableProperty] private string _userName = string.Empty;
+    [ObservableProperty] private string _userRole = string.Empty;
+    [ObservableProperty] private int    _userLevel;
+    [ObservableProperty] private double _nextLevelPercent;
 
     public ObservableCollection<TutorialProgress> InProgressTutorials { get; } = [];
     public ObservableCollection<Achievement>      RecentAchievements  { get; } = [];
@@ -41,7 +41,7 @@ public partial class StudentProgressViewModel : ObservableObject, IDisposable
         _auth       = auth;
         _navigation = navigation;
 
-        var user = auth.CurrentUser;
+        User? user = auth.CurrentUser;
         if (user is not null)
         {
             UserName  = user.Name;
@@ -55,24 +55,24 @@ public partial class StudentProgressViewModel : ObservableObject, IDisposable
     private async Task LoadAsync()
     {
         CancelPending();
-        var ct = _cts.Token;
+        CancellationToken ct = _cts.Token;
 
         IsBusy = true;
         try
         {
             ErrorMessage = string.Empty;
-            var userId = _auth.CurrentUser?.Id ?? string.Empty;
+            string userId = _auth.CurrentUser?.Id ?? string.Empty;
 
-            var progressTask     = _progress.GetUserProgressAsync(userId);
-            var achievementsTask = _progress.GetAchievementsAsync(userId);
-            var tutorialsTask    = _tutorials.GetAllAsync();
+            Task<List<TutorialProgress>> progressTask     = _progress.GetUserProgressAsync(userId);
+            Task<List<Achievement>> achievementsTask = _progress.GetAchievementsAsync(userId);
+            Task<List<Tutorial>> tutorialsTask    = _tutorials.GetAllAsync();
 
             await Task.WhenAll(progressTask, achievementsTask, tutorialsTask);
             ct.ThrowIfCancellationRequested();
 
-            var allProgress = progressTask.Result;
-            var achievements = achievementsTask.Result;
-            var tutorials = tutorialsTask.Result;
+            List<TutorialProgress> allProgress = progressTask.Result;
+            List<Achievement> achievements = achievementsTask.Result;
+            List<Tutorial> tutorials = tutorialsTask.Result;
 
             // Stats
             CompletedCount   = allProgress.Count(p => p.IsCompleted);
@@ -108,8 +108,8 @@ public partial class StudentProgressViewModel : ObservableObject, IDisposable
         Skills.Clear();
 
         // Group tutorials by category, then calculate average progress per category
-        var progressByTutorial = allProgress.ToDictionary(p => p.TutorialId);
-        var categoryGroups = tutorials.GroupBy(t => t.Category);
+        Dictionary<string, TutorialProgress> progressByTutorial = allProgress.ToDictionary(p => p.TutorialId);
+        IEnumerable<IGrouping<string, Tutorial>> categoryGroups = tutorials.GroupBy(t => t.Category);
 
         foreach (IGrouping<string, Tutorial> group in categoryGroups)
         {

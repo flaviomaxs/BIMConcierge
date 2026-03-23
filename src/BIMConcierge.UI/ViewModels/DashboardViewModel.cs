@@ -17,19 +17,19 @@ public partial class DashboardViewModel : ObservableObject, IDisposable
     private CancellationTokenSource _cts = new();
 
     // ── Bound Properties ─────────────────────────────────────────────────────
-    [ObservableProperty] private User?   currentUser;
-    [ObservableProperty] private string  activeSection = "Dashboard";
-    [ObservableProperty] private bool    isBusy;
+    [ObservableProperty] private User?   _currentUser;
+    [ObservableProperty] private string  _activeSection = "Dashboard";
+    [ObservableProperty] private bool    _isBusy;
 
     // Dashboard summary
-    [ObservableProperty] private int  completedTutorials;
-    [ObservableProperty] private int  totalTutorials;
-    [ObservableProperty] private int  activeCorrections;
-    [ObservableProperty] private int  xpPoints;
+    [ObservableProperty] private int  _completedTutorials;
+    [ObservableProperty] private int  _totalTutorials;
+    [ObservableProperty] private int  _activeCorrections;
+    [ObservableProperty] private int  _xpPoints;
 
     // Tutorial library
-    [ObservableProperty] private Tutorial?  selectedTutorial;
-    [ObservableProperty] private string     searchQuery = string.Empty;
+    [ObservableProperty] private Tutorial?  _selectedTutorial;
+    [ObservableProperty] private string     _searchQuery = string.Empty;
 
     public ObservableCollection<Tutorial>         TutorialList  { get; } = [];
     public ObservableCollection<CorrectionEvent>  Corrections   { get; } = [];
@@ -56,7 +56,7 @@ public partial class DashboardViewModel : ObservableObject, IDisposable
     private async Task LoadAsync()
     {
         CancelPending();
-        var ct = _cts.Token;
+        CancellationToken ct = _cts.Token;
 
         IsBusy = true;
         try
@@ -81,11 +81,11 @@ public partial class DashboardViewModel : ObservableObject, IDisposable
 
     private async Task LoadTutorialsAsync(CancellationToken ct)
     {
-        var list = await _tutorials.GetAllAsync();
+        List<Tutorial> list = await _tutorials.GetAllAsync();
         ct.ThrowIfCancellationRequested();
 
         TutorialList.Clear();
-        foreach (var t in list) TutorialList.Add(t);
+        foreach (Tutorial t in list) TutorialList.Add(t);
         TotalTutorials = TutorialList.Count;
     }
 
@@ -93,6 +93,7 @@ public partial class DashboardViewModel : ObservableObject, IDisposable
     private void SelectTutorial(Tutorial t)
     {
         SelectedTutorial = t;
+        ActiveSection = "TutorialDetail";
         _navigation.NavigateTo("TutorialDetail", t.Id);
     }
 
@@ -107,11 +108,11 @@ public partial class DashboardViewModel : ObservableObject, IDisposable
     private async Task LoadProgressAsync(CancellationToken ct)
     {
         if (CurrentUser is null) return;
-        var list = await _progress.GetUserProgressAsync(CurrentUser.Id);
+        List<TutorialProgress> list = await _progress.GetUserProgressAsync(CurrentUser.Id);
         ct.ThrowIfCancellationRequested();
 
         ProgressList.Clear();
-        foreach (var p in list) ProgressList.Add(p);
+        foreach (TutorialProgress p in list) ProgressList.Add(p);
         CompletedTutorials = ProgressList.Count(p => p.IsCompleted);
     }
 
@@ -120,11 +121,11 @@ public partial class DashboardViewModel : ObservableObject, IDisposable
     private async Task LoadAchievementsAsync(CancellationToken ct)
     {
         if (CurrentUser is null) return;
-        var list = await _progress.GetAchievementsAsync(CurrentUser.Id);
+        List<Achievement> list = await _progress.GetAchievementsAsync(CurrentUser.Id);
         ct.ThrowIfCancellationRequested();
 
         Achievements.Clear();
-        foreach (var a in list) Achievements.Add(a);
+        foreach (Achievement a in list) Achievements.Add(a);
         XpPoints = CurrentUser.XpPoints;
     }
 
@@ -134,20 +135,20 @@ public partial class DashboardViewModel : ObservableObject, IDisposable
     private async Task LoadStandardsAsync()
     {
         if (CurrentUser is null) return;
-        var list = await _standards.GetStandardsAsync(CurrentUser.CompanyId);
+        List<CompanyStandard> list = await _standards.GetStandardsAsync(CurrentUser.CompanyId);
 
         Standards.Clear();
-        foreach (var s in list) Standards.Add(s);
+        foreach (CompanyStandard s in list) Standards.Add(s);
     }
 
     [RelayCommand]
     private async Task RunValidationAsync()
     {
         IsBusy = true;
-        var list = await _standards.ValidateModelAsync();
+        List<CorrectionEvent> list = await _standards.ValidateModelAsync();
 
         Corrections.Clear();
-        foreach (var c in list) Corrections.Add(c);
+        foreach (CorrectionEvent c in list) Corrections.Add(c);
         ActiveCorrections = Corrections.Count(c => !c.IsFixed);
         IsBusy = false;
     }

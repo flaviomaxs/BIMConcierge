@@ -15,15 +15,15 @@ public partial class AchievementsViewModel : ObservableObject, IDisposable
 
     private CancellationTokenSource _cts = new();
 
-    [ObservableProperty] private bool   isBusy;
-    [ObservableProperty] private string errorMessage = string.Empty;
-    [ObservableProperty] private int    userLevel;
-    [ObservableProperty] private string levelTitle = string.Empty;
-    [ObservableProperty] private int    currentXp;
-    [ObservableProperty] private int    xpForNextLevel;
-    [ObservableProperty] private double levelProgressPercent;
-    [ObservableProperty] private string userName = string.Empty;
-    [ObservableProperty] private string filterMode = "All";
+    [ObservableProperty] private bool   _isBusy;
+    [ObservableProperty] private string _errorMessage = string.Empty;
+    [ObservableProperty] private int    _userLevel;
+    [ObservableProperty] private string _levelTitle = string.Empty;
+    [ObservableProperty] private int    _currentXp;
+    [ObservableProperty] private int    _xpForNextLevel;
+    [ObservableProperty] private double _levelProgressPercent;
+    [ObservableProperty] private string _userName = string.Empty;
+    [ObservableProperty] private string _filterMode = "All";
 
     public ObservableCollection<Achievement>     AllAchievements { get; } = [];
     public ObservableCollection<Achievement>     FilteredAchievements { get; } = [];
@@ -37,7 +37,7 @@ public partial class AchievementsViewModel : ObservableObject, IDisposable
         _auth       = auth;
         _navigation = navigation;
 
-        var user = auth.CurrentUser;
+        User? user = auth.CurrentUser;
         if (user is not null)
         {
             UserName   = user.Name;
@@ -109,9 +109,9 @@ public partial class AchievementsViewModel : ObservableObject, IDisposable
         Leaderboard.Clear();
 
         string companyId = _auth.CurrentUser?.CompanyId ?? string.Empty;
-        var entries = await _progress.GetLeaderboardAsync(companyId);
+        List<LeaderboardEntry> entries = await _progress.GetLeaderboardAsync(companyId) ?? [];
 
-        foreach (var entry in entries)
+        foreach (LeaderboardEntry entry in entries)
             Leaderboard.Add(entry);
 
         // Ensure current user appears in the leaderboard
@@ -147,13 +147,13 @@ public partial class AchievementsViewModel : ObservableObject, IDisposable
     private void ApplyFilter()
     {
         FilteredAchievements.Clear();
-        var source = FilterMode switch
+        IEnumerable<Achievement> source = FilterMode switch
         {
             "Unlocked" => AllAchievements.Where(a => a.IsUnlocked),
             "Locked"   => AllAchievements.Where(a => !a.IsUnlocked),
             _          => AllAchievements.AsEnumerable()
         };
-        foreach (var a in source) FilteredAchievements.Add(a);
+        foreach (Achievement a in source) FilteredAchievements.Add(a);
     }
 
     [RelayCommand]

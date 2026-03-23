@@ -5,11 +5,9 @@ using Serilog;
 
 namespace BIMConcierge.Infrastructure.Licensing;
 
-public class LicenseService : ILicenseService
+public class LicenseService(IBimApiClient api) : ILicenseService
 {
-    private readonly IBimApiClient _api;
-
-    public LicenseService(IBimApiClient api) => _api = api;
+    private readonly IBimApiClient _api = api;
 
     public async Task<License?> ValidateAsync(string licenseKey)
     {

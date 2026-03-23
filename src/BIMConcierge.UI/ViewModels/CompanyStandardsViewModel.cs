@@ -15,11 +15,11 @@ public partial class CompanyStandardsViewModel : ObservableObject, IDisposable
 
     private CancellationTokenSource _cts = new();
 
-    [ObservableProperty] private bool    isBusy;
-    [ObservableProperty] private bool    isAutoCorrectionEnabled = true;
-    [ObservableProperty] private string  selectedCategory = "Naming Conventions";
-    [ObservableProperty] private CompanyStandard? selectedStandard;
-    [ObservableProperty] private string  errorMessage = string.Empty;
+    [ObservableProperty] private bool    _isBusy;
+    [ObservableProperty] private bool    _isAutoCorrectionEnabled = true;
+    [ObservableProperty] private string  _selectedCategory = "Naming Conventions";
+    [ObservableProperty] private CompanyStandard? _selectedStandard;
+    [ObservableProperty] private string  _errorMessage = string.Empty;
 
     public ObservableCollection<CompanyStandard> Standards  { get; } = [];
     public ObservableCollection<string>          Categories { get; } =
@@ -41,18 +41,18 @@ public partial class CompanyStandardsViewModel : ObservableObject, IDisposable
     private async Task LoadAsync()
     {
         CancelPending();
-        var ct = _cts.Token;
+        CancellationToken ct = _cts.Token;
 
         IsBusy = true;
         try
         {
             ErrorMessage = string.Empty;
-            var companyId = _auth.CurrentUser?.CompanyId ?? string.Empty;
-            var list = await _standards.GetStandardsAsync(companyId);
+            string companyId = _auth.CurrentUser?.CompanyId ?? string.Empty;
+            List<CompanyStandard> list = await _standards.GetStandardsAsync(companyId);
             ct.ThrowIfCancellationRequested();
 
             Standards.Clear();
-            foreach (var s in list) Standards.Add(s);
+            foreach (CompanyStandard s in list) Standards.Add(s);
         }
         catch (Exception ex)
         {

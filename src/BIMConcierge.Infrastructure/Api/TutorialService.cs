@@ -4,12 +4,10 @@ using Serilog;
 
 namespace BIMConcierge.Infrastructure.Api;
 
-public class TutorialService : ITutorialService
+public class TutorialService(IBimApiClient api, ILocalDatabase db) : ITutorialService
 {
-    private readonly IBimApiClient  _api;
-    private readonly ILocalDatabase _db;
-
-    public TutorialService(IBimApiClient api, ILocalDatabase db) { _api = api; _db = db; }
+    private readonly IBimApiClient  _api = api;
+    private readonly ILocalDatabase _db = db;
 
     public async Task<List<Tutorial>> GetAllAsync(string? category = null)
     {

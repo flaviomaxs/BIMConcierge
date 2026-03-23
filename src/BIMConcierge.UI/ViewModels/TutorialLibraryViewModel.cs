@@ -16,10 +16,10 @@ public partial class TutorialLibraryViewModel : ObservableObject, IDisposable
 
     private CancellationTokenSource _cts = new();
 
-    [ObservableProperty] private bool   isBusy;
-    [ObservableProperty] private string errorMessage    = string.Empty;
-    [ObservableProperty] private string searchQuery     = string.Empty;
-    [ObservableProperty] private string selectedCategory = "Todos";
+    [ObservableProperty] private bool   _isBusy;
+    [ObservableProperty] private string _errorMessage    = string.Empty;
+    [ObservableProperty] private string _searchQuery     = string.Empty;
+    [ObservableProperty] private string _selectedCategory = "Todos";
 
     /// <summary>All tutorials loaded from the API (unfiltered).</summary>
     private readonly List<Tutorial> _allTutorials = [];
@@ -48,16 +48,16 @@ public partial class TutorialLibraryViewModel : ObservableObject, IDisposable
     private async Task LoadAsync()
     {
         CancelPending();
-        var ct = _cts.Token;
+        CancellationToken ct = _cts.Token;
 
         IsBusy = true;
         try
         {
             ErrorMessage = string.Empty;
 
-            var tutorialsTask = _tutorials.GetAllAsync();
-            var userId = _auth.CurrentUser?.Id ?? string.Empty;
-            var progressTask = string.IsNullOrEmpty(userId)
+            Task<List<Tutorial>> tutorialsTask = _tutorials.GetAllAsync();
+            string userId = _auth.CurrentUser?.Id ?? string.Empty;
+            Task<List<TutorialProgress>> progressTask = string.IsNullOrEmpty(userId)
                 ? Task.FromResult(new List<TutorialProgress>())
                 : _progress.GetUserProgressAsync(userId);
 
@@ -68,7 +68,7 @@ public partial class TutorialLibraryViewModel : ObservableObject, IDisposable
             _allTutorials.AddRange(tutorialsTask.Result);
 
             ProgressMap.Clear();
-            foreach (var p in progressTask.Result)
+            foreach (TutorialProgress p in progressTask.Result)
                 ProgressMap[p.TutorialId] = p;
 
             ApplyFilter();
@@ -94,7 +94,7 @@ public partial class TutorialLibraryViewModel : ObservableObject, IDisposable
 
     private void ApplyFilter()
     {
-        var filtered = _allTutorials.AsEnumerable();
+        IEnumerable<Tutorial> filtered = _allTutorials.AsEnumerable();
 
         if (!string.IsNullOrEmpty(SelectedCategory) && SelectedCategory != "Todos")
         {
@@ -104,14 +104,14 @@ public partial class TutorialLibraryViewModel : ObservableObject, IDisposable
 
         if (!string.IsNullOrWhiteSpace(SearchQuery))
         {
-            var query = SearchQuery;
+            string query = SearchQuery;
             filtered = filtered.Where(t =>
                 t.Title.Contains(query, StringComparison.OrdinalIgnoreCase) ||
                 t.Description.Contains(query, StringComparison.OrdinalIgnoreCase));
         }
 
         Tutorials.Clear();
-        foreach (var t in filtered)
+        foreach (Tutorial t in filtered)
             Tutorials.Add(t);
     }
 
@@ -130,7 +130,7 @@ public partial class TutorialLibraryViewModel : ObservableObject, IDisposable
 
     public TutorialProgress? GetProgress(string tutorialId)
     {
-        ProgressMap.TryGetValue(tutorialId, out var p);
+        ProgressMap.TryGetValue(tutorialId, out TutorialProgress? p);
         return p;
     }
 

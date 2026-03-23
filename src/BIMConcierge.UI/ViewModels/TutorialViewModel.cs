@@ -15,12 +15,12 @@ public partial class TutorialViewModel : ObservableObject, IDisposable
 
     private CancellationTokenSource _cts = new();
 
-    [ObservableProperty] private Tutorial?      tutorial;
-    [ObservableProperty] private TutorialStep?  currentStep;
-    [ObservableProperty] private int            currentStepIndex;
-    [ObservableProperty] private double         progressPercent;
-    [ObservableProperty] private bool           isCompleted;
-    [ObservableProperty] private bool           isBusy;
+    [ObservableProperty] private Tutorial?      _tutorial;
+    [ObservableProperty] private TutorialStep?  _currentStep;
+    [ObservableProperty] private int            _currentStepIndex;
+    [ObservableProperty] private double         _progressPercent;
+    [ObservableProperty] private bool           _isCompleted;
+    [ObservableProperty] private bool           _isBusy;
 
     /// <summary>"Passo 2 de 8"</summary>
     public string StepLabel => $"Passo {CurrentStepIndex + 1} de {Tutorial?.StepCount ?? 0}";
@@ -40,8 +40,8 @@ public partial class TutorialViewModel : ObservableObject, IDisposable
     /// <summary>Computed: "8 PASSOS".</summary>
     public string StepCountLabel => $"{Tutorial?.StepCount ?? 0} PASSOS";
 
-    [ObservableProperty] private int     completedSteps;
-    [ObservableProperty] private double  savedProgressPercent;
+    [ObservableProperty] private int     _completedSteps;
+    [ObservableProperty] private double  _savedProgressPercent;
 
     public TutorialViewModel(ITutorialService service, IAuthService auth, IRevitEventDispatcher dispatcher, INavigationService navigation)
     {
@@ -73,7 +73,7 @@ public partial class TutorialViewModel : ObservableObject, IDisposable
     public async Task LoadTutorialAsync(string tutorialId)
     {
         CancelPending();
-        var ct = _cts.Token;
+        CancellationToken ct = _cts.Token;
 
         Tutorial = await _service.GetByIdAsync(tutorialId);
         if (Tutorial is null) return;
@@ -81,8 +81,8 @@ public partial class TutorialViewModel : ObservableObject, IDisposable
         ct.ThrowIfCancellationRequested();
 
         // Restore saved progress
-        var userId   = _auth.CurrentUser?.Id ?? string.Empty;
-        var progress = await _service.GetProgressAsync(userId, tutorialId);
+        string userId   = _auth.CurrentUser?.Id ?? string.Empty;
+        TutorialProgress? progress = await _service.GetProgressAsync(userId, tutorialId);
         CompletedSteps       = progress?.CurrentStep ?? 0;
         SavedProgressPercent = progress?.ProgressPercent ?? 0;
         CurrentStepIndex     = CompletedSteps;
@@ -106,7 +106,7 @@ public partial class TutorialViewModel : ObservableObject, IDisposable
         IsBusy = true;
         try
         {
-            var userId = _auth.CurrentUser?.Id ?? string.Empty;
+            string userId = _auth.CurrentUser?.Id ?? string.Empty;
             await _service.CompleteStepAsync(userId, Tutorial.Id, CurrentStepIndex);
             if (CurrentStepIndex >= Tutorial.StepCount - 1)
                 IsCompleted = true;
