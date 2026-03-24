@@ -41,7 +41,8 @@ builder.Services.AddAuthorization();
 // ── Services ────────────────────────────────────────────────────────────────
 builder.Services.AddSingleton<AuthTokenService>();
 builder.Services.AddScoped<ProvisioningService>();
-builder.Services.AddSingleton<IEmailSender, SmtpEmailSender>();
+builder.Services.AddHttpClient<ResendEmailSender>();
+builder.Services.AddSingleton<IEmailSender, ResendEmailSender>();
 
 // ── Swagger ─────────────────────────────────────────────────────────────────
 builder.Services.AddEndpointsApiExplorer();

@@ -1,52 +1,52 @@
-using System.Net;
-using System.Net.Mail;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Text.Json;
 
 namespace BIMConcierge.Api.Services;
 
-public class SmtpEmailSender : IEmailSender
+public class ResendEmailSender : IEmailSender
 {
+    private readonly HttpClient _httpClient;
     private readonly IConfiguration _config;
-    private readonly ILogger<SmtpEmailSender> _logger;
+    private readonly ILogger<ResendEmailSender> _logger;
 
-    public SmtpEmailSender(IConfiguration config, ILogger<SmtpEmailSender> logger)
+    public ResendEmailSender(HttpClient httpClient, IConfiguration config, ILogger<ResendEmailSender> logger)
     {
+        _httpClient = httpClient;
         _config = config;
         _logger = logger;
+
+        _httpClient.BaseAddress = new Uri("https://api.resend.com/");
+        _httpClient.DefaultRequestHeaders.Authorization =
+            new AuthenticationHeaderValue("Bearer", _config["Resend:ApiKey"]);
     }
 
     public async Task SendWelcomeEmailAsync(string toEmail, string customerName, string licenseKey, string plan)
     {
-        var emailSection = _config.GetSection("Email");
-        var host = emailSection["Host"] ?? "smtp.gmail.com";
-        var port = int.Parse(emailSection["Port"] ?? "587");
-        var username = emailSection["Username"] ?? "";
-        var password = emailSection["Password"] ?? "";
-        var fromAddress = emailSection["FromAddress"] ?? "noreply@bimconcierge.io";
-        var fromName = emailSection["FromName"] ?? "BIM Concierge";
+        var resendSection = _config.GetSection("Resend");
+        var fromAddress = resendSection["FromAddress"] ?? "noreply@bimconcierge.io";
+        var fromName = resendSection["FromName"] ?? "BIM Concierge";
 
-        using var client = new SmtpClient(host, port)
+        var payload = new
         {
-            Credentials = new NetworkCredential(username, password),
-            EnableSsl = true
+            from = $"{fromName} <{fromAddress}>",
+            to = new[] { toEmail },
+            subject = $"Bem-vindo ao BIM Concierge — Sua licença {plan}",
+            html = BuildWelcomeHtml(customerName, licenseKey, plan)
         };
 
-        var message = new MailMessage
-        {
-            From = new MailAddress(fromAddress, fromName),
-            Subject = $"Bem-vindo ao BIM Concierge — Sua licença {plan}",
-            IsBodyHtml = true,
-            Body = BuildWelcomeHtml(customerName, licenseKey, plan)
-        };
-        message.To.Add(toEmail);
+        var json = JsonSerializer.Serialize(payload);
+        var content = new StringContent(json, Encoding.UTF8, "application/json");
 
         try
         {
-            await client.SendMailAsync(message);
-            _logger.LogInformation("Welcome email sent to {Email}", toEmail);
+            var response = await _httpClient.PostAsync("emails", content);
+            response.EnsureSuccessStatusCode();
+            _logger.LogInformation("Welcome email sent to {Email} via Resend", toEmail);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Failed to send welcome email to {Email}", toEmail);
+            _logger.LogError(ex, "Failed to send welcome email to {Email} via Resend", toEmail);
             throw;
         }
     }
