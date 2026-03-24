@@ -18,11 +18,11 @@ namespace BIMConcierge.Api.Tests;
 /// </summary>
 public class FakeEmailSender : IEmailSender
 {
-    public List<(string Email, string Name, string Key, string Plan)> SentEmails { get; } = [];
+    public List<(string Email, string Name, string Key, string Plan, string? TempPassword)> SentEmails { get; } = [];
 
-    public Task SendWelcomeEmailAsync(string toEmail, string customerName, string licenseKey, string plan)
+    public Task SendWelcomeEmailAsync(string toEmail, string customerName, string licenseKey, string plan, string? tempPassword)
     {
-        SentEmails.Add((toEmail, customerName, licenseKey, plan));
+        SentEmails.Add((toEmail, customerName, licenseKey, plan, tempPassword));
         return Task.CompletedTask;
     }
 }

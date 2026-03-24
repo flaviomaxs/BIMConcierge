@@ -29,6 +29,7 @@ public class ProvisioningService
 
         string companyId;
         string userId;
+        string? tempPassword = null;
 
         if (existingUser is not null)
         {
@@ -47,7 +48,7 @@ public class ProvisioningService
             companyId = company.Id;
 
             // Create user with temporary password
-            var tempPassword = GenerateTempPassword();
+            tempPassword = GenerateTempPassword();
             var user = new UserEntity
             {
                 Email = email,
@@ -95,7 +96,7 @@ public class ProvisioningService
         // Send welcome email (best-effort — don't fail provisioning if email fails)
         try
         {
-            await _emailSender.SendWelcomeEmailAsync(email, name, license.Key, plan);
+            await _emailSender.SendWelcomeEmailAsync(email, name, license.Key, plan, tempPassword);
         }
         catch (Exception ex)
         {

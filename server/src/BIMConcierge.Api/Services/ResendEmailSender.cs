@@ -21,18 +21,18 @@ public class ResendEmailSender : IEmailSender
             new AuthenticationHeaderValue("Bearer", _config["Resend:ApiKey"]);
     }
 
-    public async Task SendWelcomeEmailAsync(string toEmail, string customerName, string licenseKey, string plan)
+    public async Task SendWelcomeEmailAsync(string toEmail, string customerName, string licenseKey, string plan, string? tempPassword)
     {
         var resendSection = _config.GetSection("Resend");
         var fromAddress = resendSection["FromAddress"] ?? "noreply@bimconcierge.io";
-        var fromName = resendSection["FromName"] ?? "BIM Concierge";
+        var fromName = resendSection["FromName"] ?? "BIMConcierge";
 
         var payload = new
         {
             from = $"{fromName} <{fromAddress}>",
             to = new[] { toEmail },
-            subject = $"Bem-vindo ao BIM Concierge — Sua licença {plan}",
-            html = BuildWelcomeHtml(customerName, licenseKey, plan)
+            subject = $"Bem-vindo ao BIMConcierge — Sua licença {plan}",
+            html = BuildWelcomeHtml(customerName, licenseKey, plan, tempPassword)
         };
 
         var json = JsonSerializer.Serialize(payload);
@@ -51,14 +51,30 @@ public class ResendEmailSender : IEmailSender
         }
     }
 
-    private static string BuildWelcomeHtml(string customerName, string licenseKey, string plan) => $"""
+    private static string BuildWelcomeHtml(string customerName, string licenseKey, string plan, string? tempPassword)
+    {
+        var passwordBlock = tempPassword is not null
+            ? $"""
+              <h3 style="color: #333;">Sua senha temporária:</h3>
+              <div style="background: #fff3e0; border: 2px dashed #ff9800; border-radius: 8px; padding: 20px; text-align: center; margin: 24px 0;">
+                <span style="font-size: 20px; font-weight: bold; letter-spacing: 2px; color: #e65100; font-family: 'Courier New', monospace;">
+                  {tempPassword}
+                </span>
+              </div>
+              <p style="color: #555; line-height: 1.6;">
+                <strong>Importante:</strong> altere sua senha após o primeiro login.
+              </p>
+              """
+            : "";
+
+        return $"""
         <!DOCTYPE html>
         <html>
         <head><meta charset="utf-8" /></head>
         <body style="font-family: 'Segoe UI', Arial, sans-serif; background: #f4f6f9; padding: 40px 0;">
           <div style="max-width: 600px; margin: 0 auto; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.08);">
             <div style="background: linear-gradient(135deg, #1a73e8, #0d47a1); padding: 32px; text-align: center;">
-              <h1 style="color: #fff; margin: 0; font-size: 28px;">BIM Concierge</h1>
+              <h1 style="color: #fff; margin: 0; font-size: 28px;">BIMConcierge</h1>
               <p style="color: #bbdefb; margin: 8px 0 0;">Seu assistente inteligente para Revit</p>
             </div>
             <div style="padding: 32px;">
@@ -71,10 +87,11 @@ public class ResendEmailSender : IEmailSender
                   {licenseKey}
                 </span>
               </div>
+              {passwordBlock}
               <h3 style="color: #333;">Como ativar:</h3>
               <ol style="color: #555; line-height: 1.8;">
                 <li>Abra o Revit 2026</li>
-                <li>Clique na aba <strong>BIM Concierge</strong> na Ribbon</li>
+                <li>Clique na aba <strong>BIMConcierge</strong> na Ribbon</li>
                 <li>Clique em <strong>Login</strong></li>
                 <li>Cole a chave acima no campo "Chave de Licença"</li>
                 <li>Pronto! Comece a usar.</li>
@@ -89,11 +106,12 @@ public class ResendEmailSender : IEmailSender
               </ul>
               <p style="color: #999; font-size: 13px; margin-top: 32px; border-top: 1px solid #eee; padding-top: 16px;">
                 Se precisar de ajuda, responda este e-mail ou acesse nosso suporte.<br/>
-                © {DateTime.UtcNow.Year} BIM Concierge. Todos os direitos reservados.
+                © {DateTime.UtcNow.Year} BIMConcierge. Todos os direitos reservados.
               </p>
             </div>
           </div>
         </body>
         </html>
         """;
+    }
 }
