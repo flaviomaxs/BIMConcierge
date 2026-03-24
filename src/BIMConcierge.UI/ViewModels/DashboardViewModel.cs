@@ -20,6 +20,7 @@ public partial class DashboardViewModel : ObservableObject, IDisposable
     [ObservableProperty] private User?   _currentUser;
     [ObservableProperty] private string  _activeSection = "Dashboard";
     [ObservableProperty] private bool    _isBusy;
+    [ObservableProperty] private bool    _sessionExpired;
 
     // User profile
     [ObservableProperty] private string _userInitials = string.Empty;
@@ -70,6 +71,21 @@ public partial class DashboardViewModel : ObservableObject, IDisposable
         IsBusy = true;
         try
         {
+            // Revalidate session (token expiry + license) — moved from OpenDashboardCommand
+            if (!await _auth.EnsureValidSessionAsync())
+            {
+                await _auth.LogoutAsync();
+                SessionExpired = true;
+                return;
+            }
+
+            // Load company standards into the rule engine
+            if (CurrentUser is not null && !string.IsNullOrEmpty(CurrentUser.CompanyId))
+            {
+                try { await _standards.GetStandardsAsync(CurrentUser.CompanyId); }
+                catch { /* best-effort — don't block dashboard */ }
+            }
+
             await Task.WhenAll(
                 LoadTutorialsAsync(ct),
                 LoadProgressAsync(ct),

@@ -25,14 +25,7 @@ public class OpenDashboardCommand : IExternalCommand
 
             var authService = sp.GetRequiredService<IAuthService>();
 
-            // Revalidate session (token expiry + license) before showing dashboard
-            if (authService.IsAuthenticated)
-            {
-                var valid = authService.EnsureValidSessionAsync().GetAwaiter().GetResult();
-                if (!valid)
-                    authService.LogoutAsync().GetAwaiter().GetResult();
-            }
-
+            // Check local state only (no HTTP calls) — keeps Execute() non-blocking
             if (!authService.IsAuthenticated)
             {
                 var loginWindow = sp.GetRequiredService<LoginWindow>();
@@ -47,17 +40,10 @@ public class OpenDashboardCommand : IExternalCommand
                 var bridge = sp.GetRequiredService<RevitEventBridge>();
                 bridge.AttachIfNeeded(commandData.Application);
 
-                // Load company standards into the rule engine
-                var dispatcher = sp.GetRequiredService<IRevitEventDispatcher>();
-                if (dispatcher is RevitEventDispatcher revitDispatcher && !revitDispatcher.StandardsLoaded)
-                {
-                    var companyId = authService.CurrentUser?.CompanyId ?? string.Empty;
-                    if (!string.IsNullOrEmpty(companyId))
-                        revitDispatcher.LoadStandardsAsync(companyId).GetAwaiter().GetResult();
-                }
-
                 var dashboard = sp.GetRequiredService<DashboardWindow>();
                 dashboard.Show();
+                // Session revalidation, standards loading, and data loading
+                // all happen asynchronously inside DashboardViewModel.LoadAsync()
             }
 
             return Result.Succeeded;

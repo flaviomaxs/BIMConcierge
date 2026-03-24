@@ -16,6 +16,7 @@ public partial class DashboardWindow : Window
         _vm = viewModel;
         DataContext = viewModel;
         UpdateLanguageButtons();
+        Loaded += (_, _) => _vm.LoadCommand.Execute(null);
     }
 
     private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

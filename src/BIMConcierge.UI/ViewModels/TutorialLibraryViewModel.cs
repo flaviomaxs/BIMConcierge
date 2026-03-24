@@ -78,10 +78,10 @@ public partial class TutorialLibraryViewModel : ObservableObject, IDisposable
             ct.ThrowIfCancellationRequested();
 
             _allTutorials.Clear();
-            _allTutorials.AddRange(tutorialsTask.Result);
+            _allTutorials.AddRange(await tutorialsTask);
 
             ProgressMap.Clear();
-            foreach (TutorialProgress p in progressTask.Result)
+            foreach (TutorialProgress p in await progressTask)
                 ProgressMap[p.TutorialId] = p;
 
             ApplyFilter();

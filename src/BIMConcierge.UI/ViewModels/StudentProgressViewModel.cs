@@ -73,9 +73,9 @@ public partial class StudentProgressViewModel : ObservableObject, IDisposable
             await Task.WhenAll(progressTask, achievementsTask, tutorialsTask);
             ct.ThrowIfCancellationRequested();
 
-            List<TutorialProgress> allProgress = progressTask.Result;
-            List<Achievement> achievements = achievementsTask.Result;
-            List<Tutorial> tutorials = tutorialsTask.Result;
+            List<TutorialProgress> allProgress = await progressTask;
+            List<Achievement> achievements = await achievementsTask;
+            List<Tutorial> tutorials = await tutorialsTask;
 
             // Stats
             CompletedCount   = allProgress.Count(p => p.IsCompleted);
