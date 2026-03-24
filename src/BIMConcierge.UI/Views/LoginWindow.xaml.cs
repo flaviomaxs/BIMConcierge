@@ -40,6 +40,7 @@ public partial class LoginWindow : Window
 
     private void ForgotPassword_Click(object sender, MouseButtonEventArgs e)
     {
+        e.Handled = true;
         MessageBox.Show(
             TranslationSource.GetString("ForgotPasswordMessage"),
             TranslationSource.GetString("LoginForgotPassword"),
@@ -49,11 +50,13 @@ public partial class LoginWindow : Window
 
     private void ContactSupport_Click(object sender, MouseButtonEventArgs e)
     {
+        e.Handled = true;
         Process.Start(new ProcessStartInfo("mailto:contato@bimconcierge.io") { UseShellExecute = true });
     }
 
     private void SignUp_Click(object sender, MouseButtonEventArgs e)
     {
+        e.Handled = true;
         Process.Start(new ProcessStartInfo("https://bimconcierge.onrender.com/#planos") { UseShellExecute = true });
     }
 }

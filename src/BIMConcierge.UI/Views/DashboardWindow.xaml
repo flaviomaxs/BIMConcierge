@@ -8,11 +8,13 @@
         xmlns:loc="clr-namespace:BIMConcierge.UI.Localization"
         mc:Ignorable="d"
         Title="{loc:Loc DashboardTitle}" Height="768" Width="1280"
-        WindowStartupLocation="CenterScreen" WindowStyle="None" 
+        WindowStartupLocation="CenterScreen" WindowStyle="None"
         AllowsTransparency="True" Background="Transparent" FontFamily="Segoe UI">
 
     <Window.Resources>
         <conv:LocalizedStringFormatConverter x:Key="LocalizedStepsFormat"/>
+        <conv:StringEqualsToVisibilityConverter x:Key="SectionVisibility"/>
+        <conv:PercentToWidthConverter x:Key="PercentToWidth"/>
     </Window.Resources>
 
     <Border CornerRadius="16" Background="#17191B" BorderBrush="#1E293B" BorderThickness="1" MouseLeftButtonDown="Border_MouseLeftButtonDown">
@@ -22,6 +24,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
+            <!-- ═══ SIDEBAR ═══ -->
             <Border Grid.Column="0" Background="#0F172A" CornerRadius="16,0,0,16" BorderBrush="#1E293B" BorderThickness="0,0,1,0" Padding="24">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -34,46 +37,171 @@
                         <Border Width="32" Height="32" Background="#1E293B" CornerRadius="8" Margin="0,0,12,0">
                             <TextBlock Text="BIM" Foreground="#6A7D90" FontWeight="Black" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
-                        <TextBlock Text="BIM CONCIERGE" FontSize="15" FontWeight="Bold" Foreground="#6A7D90" VerticalAlignment="Center"/>
+                        <TextBlock Text="BIMCONCIERGE" FontSize="15" FontWeight="Bold" Foreground="#6A7D90" VerticalAlignment="Center"/>
                     </StackPanel>
 
                     <StackPanel Grid.Row="1">
-                        <!-- Dashboard (active) -->
-                        <Border Background="#1E293B" CornerRadius="8" Padding="12,10" Margin="0,0,0,5" Cursor="Hand">
+                        <!-- Dashboard -->
+                        <Border CornerRadius="8" Padding="12,10" Margin="0,0,0,5" Cursor="Hand" MouseLeftButtonDown="SidebarDashboard_Click">
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ActiveSection}" Value="Dashboard">
+                                            <Setter Property="Background" Value="#1E293B"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
                             <StackPanel Orientation="Horizontal">
                                 <Path Data="M2,2 H7 V7 H2Z M9,2 H14 V7 H9Z M2,9 H7 V14 H2Z M9,9 H14 V14 H9Z"
-                                      Fill="#6A7D90" Width="16" Height="16" Stretch="Uniform" Margin="0,0,12,0" VerticalAlignment="Center"/>
-                                <TextBlock Text="{loc:Loc NavDashboard}" Foreground="White" FontWeight="SemiBold" FontSize="14" VerticalAlignment="Center"/>
+                                      Width="16" Height="16" Stretch="Uniform" Margin="0,0,12,0" VerticalAlignment="Center">
+                                    <Path.Style>
+                                        <Style TargetType="Path">
+                                            <Setter Property="Fill" Value="#94A3B8"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ActiveSection}" Value="Dashboard">
+                                                    <Setter Property="Fill" Value="#6A7D90"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Path.Style>
+                                </Path>
+                                <TextBlock Text="{loc:Loc NavDashboard}" FontWeight="SemiBold" FontSize="14" VerticalAlignment="Center">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Foreground" Value="#94A3B8"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ActiveSection}" Value="Dashboard">
+                                                    <Setter Property="Foreground" Value="White"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
                             </StackPanel>
                         </Border>
 
                         <!-- Tutorials -->
-                        <Border Background="Transparent" CornerRadius="8" Padding="12,10" Margin="0,0,0,5" Cursor="Hand"
-                                MouseLeftButtonUp="SidebarTutorials_Click">
+                        <Border CornerRadius="8" Padding="12,10" Margin="0,0,0,5" Cursor="Hand" MouseLeftButtonDown="SidebarTutorials_Click">
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ActiveSection}" Value="Tutorials">
+                                            <Setter Property="Background" Value="#1E293B"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
                             <StackPanel Orientation="Horizontal">
                                 <Path Data="M2,3 H10 V5 H2Z M2,7 H14 V9 H2Z M2,11 H12 V13 H2Z"
-                                      Fill="#94A3B8" Width="16" Height="16" Stretch="Uniform" Margin="0,0,12,0" VerticalAlignment="Center"/>
-                                <TextBlock Text="{loc:Loc NavTutorials}" Foreground="#94A3B8" FontWeight="Medium" FontSize="14" VerticalAlignment="Center"/>
+                                      Width="16" Height="16" Stretch="Uniform" Margin="0,0,12,0" VerticalAlignment="Center">
+                                    <Path.Style>
+                                        <Style TargetType="Path">
+                                            <Setter Property="Fill" Value="#94A3B8"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ActiveSection}" Value="Tutorials">
+                                                    <Setter Property="Fill" Value="#6A7D90"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Path.Style>
+                                </Path>
+                                <TextBlock Text="{loc:Loc NavTutorials}" FontWeight="Medium" FontSize="14" VerticalAlignment="Center">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Foreground" Value="#94A3B8"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ActiveSection}" Value="Tutorials">
+                                                    <Setter Property="Foreground" Value="White"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
                             </StackPanel>
                         </Border>
 
                         <!-- Corrections -->
-                        <Border Background="Transparent" CornerRadius="8" Padding="12,10" Margin="0,0,0,5" Cursor="Hand"
-                                MouseLeftButtonUp="SidebarCorrections_Click">
+                        <Border CornerRadius="8" Padding="12,10" Margin="0,0,0,5" Cursor="Hand" MouseLeftButtonDown="SidebarCorrections_Click">
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ActiveSection}" Value="Corrections">
+                                            <Setter Property="Background" Value="#1E293B"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
                             <StackPanel Orientation="Horizontal">
                                 <Path Data="M8,1 L15,13 H1Z M7,5 H9 V9 H7Z M7,10.5 H9 V12.5 H7Z"
-                                      Fill="#94A3B8" Width="16" Height="16" Stretch="Uniform" Margin="0,0,12,0" VerticalAlignment="Center"/>
-                                <TextBlock Text="{loc:Loc NavCorrections}" Foreground="#94A3B8" FontWeight="Medium" FontSize="14" VerticalAlignment="Center"/>
+                                      Width="16" Height="16" Stretch="Uniform" Margin="0,0,12,0" VerticalAlignment="Center">
+                                    <Path.Style>
+                                        <Style TargetType="Path">
+                                            <Setter Property="Fill" Value="#94A3B8"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ActiveSection}" Value="Corrections">
+                                                    <Setter Property="Fill" Value="#6A7D90"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Path.Style>
+                                </Path>
+                                <TextBlock Text="{loc:Loc NavCorrections}" FontWeight="Medium" FontSize="14" VerticalAlignment="Center">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Foreground" Value="#94A3B8"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ActiveSection}" Value="Corrections">
+                                                    <Setter Property="Foreground" Value="White"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
                             </StackPanel>
                         </Border>
 
                         <!-- Standards -->
-                        <Border Background="Transparent" CornerRadius="8" Padding="12,10" Margin="0,0,0,5" Cursor="Hand"
-                                MouseLeftButtonUp="SidebarStandards_Click">
+                        <Border CornerRadius="8" Padding="12,10" Margin="0,0,0,5" Cursor="Hand" MouseLeftButtonDown="SidebarStandards_Click">
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ActiveSection}" Value="Standards">
+                                            <Setter Property="Background" Value="#1E293B"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
                             <StackPanel Orientation="Horizontal">
                                 <Path Data="M8,1 L14,3.5 V8 C14,11.5 8,15 8,15 C8,15 2,11.5 2,8 V3.5Z"
-                                      Fill="#94A3B8" Width="16" Height="16" Stretch="Uniform" Margin="0,0,12,0" VerticalAlignment="Center"/>
-                                <TextBlock Text="{loc:Loc NavStandards}" Foreground="#94A3B8" FontWeight="Medium" FontSize="14" VerticalAlignment="Center"/>
+                                      Width="16" Height="16" Stretch="Uniform" Margin="0,0,12,0" VerticalAlignment="Center">
+                                    <Path.Style>
+                                        <Style TargetType="Path">
+                                            <Setter Property="Fill" Value="#94A3B8"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ActiveSection}" Value="Standards">
+                                                    <Setter Property="Fill" Value="#6A7D90"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Path.Style>
+                                </Path>
+                                <TextBlock Text="{loc:Loc NavStandards}" FontWeight="Medium" FontSize="14" VerticalAlignment="Center">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Foreground" Value="#94A3B8"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ActiveSection}" Value="Standards">
+                                                    <Setter Property="Foreground" Value="White"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
                             </StackPanel>
                         </Border>
 
@@ -81,26 +209,89 @@
                         <Border Height="1" Background="#1E293B" Margin="0,8,0,8"/>
 
                         <!-- Progress -->
-                        <Border Background="Transparent" CornerRadius="8" Padding="12,10" Margin="0,0,0,5" Cursor="Hand"
-                                MouseLeftButtonUp="SidebarProgress_Click">
+                        <Border CornerRadius="8" Padding="12,10" Margin="0,0,0,5" Cursor="Hand" MouseLeftButtonDown="SidebarProgress_Click">
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ActiveSection}" Value="Progress">
+                                            <Setter Property="Background" Value="#1E293B"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
                             <StackPanel Orientation="Horizontal">
                                 <Path Data="M2,14 V9 H5 V14Z M6.5,14 V6 H9.5 V14Z M11,14 V2 H14 V14Z"
-                                      Fill="#94A3B8" Width="16" Height="16" Stretch="Uniform" Margin="0,0,12,0" VerticalAlignment="Center"/>
-                                <TextBlock Text="{loc:Loc NavProgress}" Foreground="#94A3B8" FontWeight="Medium" FontSize="14" VerticalAlignment="Center"/>
+                                      Width="16" Height="16" Stretch="Uniform" Margin="0,0,12,0" VerticalAlignment="Center">
+                                    <Path.Style>
+                                        <Style TargetType="Path">
+                                            <Setter Property="Fill" Value="#94A3B8"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ActiveSection}" Value="Progress">
+                                                    <Setter Property="Fill" Value="#6A7D90"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Path.Style>
+                                </Path>
+                                <TextBlock Text="{loc:Loc NavProgress}" FontWeight="Medium" FontSize="14" VerticalAlignment="Center">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Foreground" Value="#94A3B8"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ActiveSection}" Value="Progress">
+                                                    <Setter Property="Foreground" Value="White"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
                             </StackPanel>
                         </Border>
 
                         <!-- Achievements -->
-                        <Border Background="Transparent" CornerRadius="8" Padding="12,10" Margin="0,0,0,5" Cursor="Hand"
-                                MouseLeftButtonUp="SidebarAchievements_Click">
+                        <Border CornerRadius="8" Padding="12,10" Margin="0,0,0,5" Cursor="Hand" MouseLeftButtonDown="SidebarAchievements_Click">
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ActiveSection}" Value="Achievements">
+                                            <Setter Property="Background" Value="#1E293B"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
                             <StackPanel Orientation="Horizontal">
                                 <Path Data="M5,1 H11 L12,5 L8,8 L4,5Z M6,9 H10 V11 H6Z M4,11.5 H12 V13 H4Z"
-                                      Fill="#94A3B8" Width="16" Height="16" Stretch="Uniform" Margin="0,0,12,0" VerticalAlignment="Center"/>
-                                <TextBlock Text="{loc:Loc NavAchievements}" Foreground="#94A3B8" FontWeight="Medium" FontSize="14" VerticalAlignment="Center"/>
+                                      Width="16" Height="16" Stretch="Uniform" Margin="0,0,12,0" VerticalAlignment="Center">
+                                    <Path.Style>
+                                        <Style TargetType="Path">
+                                            <Setter Property="Fill" Value="#94A3B8"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ActiveSection}" Value="Achievements">
+                                                    <Setter Property="Fill" Value="#6A7D90"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Path.Style>
+                                </Path>
+                                <TextBlock Text="{loc:Loc NavAchievements}" FontWeight="Medium" FontSize="14" VerticalAlignment="Center">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Foreground" Value="#94A3B8"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ActiveSection}" Value="Achievements">
+                                                    <Setter Property="Foreground" Value="White"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
                             </StackPanel>
                         </Border>
                     </StackPanel>
 
+                    <!-- User card -->
                     <Border Grid.Row="2" Background="#17191B" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="12">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -124,15 +315,10 @@
                 </Grid>
             </Border>
 
+            <!-- ═══ CONTENT AREA ═══ -->
             <Grid Grid.Column="1" Margin="40">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-
-                <StackPanel Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-20,-20,0" Orientation="Horizontal">
-                    <!-- Language selector -->
+                <!-- Top bar (language + close) — always visible -->
+                <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-20,-20,0" Orientation="Horizontal" Panel.ZIndex="10">
                     <Border Background="#1E293B" CornerRadius="6" Padding="2" Margin="0,0,12,0" VerticalAlignment="Center">
                         <StackPanel Orientation="Horizontal">
                             <Button Content="PT" FontSize="11" FontWeight="Bold" Padding="8,4" BorderThickness="0" Cursor="Hand"
@@ -149,143 +335,298 @@
                             Cursor="Hand" Click="BtnClose_Click"/>
                 </StackPanel>
 
-                <StackPanel Grid.Row="0" Margin="0,0,0,30">
-                    <TextBlock Text="{loc:Loc DashboardWelcome}" FontSize="28" FontWeight="Bold" Foreground="White" Margin="0,0,0,8"/>
-                    <TextBlock Text="{loc:Loc DashboardSubtitle}" FontSize="15" Foreground="#94A3B8"/>
+                <!-- ── Section: Dashboard ── -->
+                <Grid Visibility="{Binding ActiveSection, Converter={StaticResource SectionVisibility}, ConverterParameter=Dashboard}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Margin="0,0,0,30">
+                        <TextBlock Text="{loc:Loc DashboardWelcome}" FontSize="28" FontWeight="Bold" Foreground="White" Margin="0,0,0,8"/>
+                        <TextBlock Text="{loc:Loc DashboardSubtitle}" FontSize="15" Foreground="#94A3B8"/>
+                    </StackPanel>
+
+                    <Grid Grid.Row="1" Margin="0,0,0,30">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Grid.Column="0" Background="#232629" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="20">
+                            <StackPanel>
+                                <TextBlock Text="{loc:Loc DashboardItemsModeled}" Foreground="#94A3B8" FontSize="11" FontWeight="Bold" Margin="0,0,0,8"/>
+                                <TextBlock Text="{Binding CompletedTutorials, FallbackValue='0'}" FontSize="28" FontWeight="Bold" Foreground="White"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Grid.Column="2" Background="#232629" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="20">
+                            <StackPanel>
+                                <TextBlock Text="{loc:Loc DashboardOperationsOnStandard}" Foreground="#94A3B8" FontSize="11" FontWeight="Bold" Margin="0,0,0,8"/>
+                                <TextBlock Text="{Binding CompliancePercent, FallbackValue='0', StringFormat={}{0}%}" FontSize="28" FontWeight="Bold" Foreground="White"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Grid.Column="4" Background="#232629" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="20">
+                            <StackPanel>
+                                <TextBlock Text="{loc:Loc DashboardWarningsCorrected}" Foreground="#94A3B8" FontSize="11" FontWeight="Bold" Margin="0,0,0,8"/>
+                                <Grid>
+                                    <TextBlock Text="{Binding ActiveCorrections, FallbackValue='0'}" FontSize="28" FontWeight="Bold" Foreground="White" HorizontalAlignment="Left"/>
+                                    <TextBlock Text="{loc:Loc DashboardStable}" FontSize="12" FontWeight="Bold" Foreground="#6A7D90" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,6"/>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="{loc:Loc DashboardRecentActivity}" FontSize="18" FontWeight="SemiBold" Foreground="White" Margin="0,0,0,20"/>
+                            <Border Background="#17191B" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="0,10">
+                                <StackPanel>
+                                    <Border BorderBrush="#1E293B" BorderThickness="0,0,0,1" Padding="20,15">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Grid.Column="0" Width="10" Height="10" Fill="#6A7D90" VerticalAlignment="Center" Margin="0,0,15,0"/>
+                                            <TextBlock Grid.Column="1" Text="{loc:Loc DashboardModeledBasicWall}" Foreground="White" FontSize="14" FontWeight="Medium" VerticalAlignment="Center"/>
+                                            <TextBlock Grid.Column="2" Text="{loc:Loc DashboardTimeAgo2Min}" Foreground="#94A3B8" FontSize="12" VerticalAlignment="Center"/>
+                                        </Grid>
+                                    </Border>
+                                    <Border BorderBrush="#1E293B" BorderThickness="0,0,0,1" Padding="20,15">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Grid.Column="0" Width="10" Height="10" Fill="#10B981" VerticalAlignment="Center" Margin="0,0,15,0"/>
+                                            <TextBlock Grid.Column="1" Text="{loc:Loc DashboardFixedOverlapping}" Foreground="White" FontSize="14" FontWeight="Medium" VerticalAlignment="Center"/>
+                                            <TextBlock Grid.Column="2" Text="{loc:Loc DashboardTimeAgo15Min}" Foreground="#94A3B8" FontSize="12" VerticalAlignment="Center"/>
+                                        </Grid>
+                                    </Border>
+                                    <Border Padding="20,15">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Grid.Column="0" Width="10" Height="10" Fill="#F59E0B" VerticalAlignment="Center" Margin="0,0,15,0"/>
+                                            <TextBlock Grid.Column="1" Text="{loc:Loc DashboardStartedTutorial}" Foreground="White" FontSize="14" FontWeight="Medium" VerticalAlignment="Center"/>
+                                            <TextBlock Grid.Column="2" Text="{loc:Loc DashboardTimeAgo1Hour}" Foreground="#94A3B8" FontSize="12" VerticalAlignment="Center"/>
+                                        </Grid>
+                                    </Border>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="{loc:Loc DashboardStandardInFocus}" FontSize="18" FontWeight="SemiBold" Foreground="White" Margin="0,0,0,20"/>
+                            <Border Background="#0F172A" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="20">
+                                <StackPanel>
+                                    <Border Width="40" Height="40" Background="#1E293B" CornerRadius="8" HorizontalAlignment="Left" Margin="0,0,0,15">
+                                        <TextBlock Text="⚡" Foreground="#F59E0B" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                    <TextBlock Text="{loc:Loc DashboardNamingConvention}" Foreground="White" FontSize="15" FontWeight="SemiBold" Margin="0,0,0,5"/>
+                                    <TextBlock Text="{loc:Loc DashboardNamingDescription}"
+                                               Foreground="#94A3B8" FontSize="13" TextWrapping="Wrap" Margin="0,0,0,20" LineHeight="20"/>
+                                    <Grid Margin="0,0,0,20">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Row="0" Foreground="#10B981" FontSize="12" FontWeight="Bold" Margin="0,0,0,5">
+                                            <TextBlock.Text>
+                                                <Binding Path="CompliancePercent" Converter="{StaticResource LocalizedStepsFormat}" ConverterParameter="DashboardCompleted" FallbackValue="0"/>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                        <Border Grid.Row="1" Height="6" Background="#1E293B" CornerRadius="3">
+                                            <Border Width="180" Background="#10B981" CornerRadius="3" HorizontalAlignment="Left"/>
+                                        </Border>
+                                    </Grid>
+                                    <Button Content="{loc:Loc DashboardViewDetails}" Height="40" Background="#1E293B" Foreground="White"
+                                            FontSize="13" FontWeight="SemiBold" BorderThickness="0" Cursor="Hand"
+                                            Click="BtnViewDetails_Click">
+                                        <Button.Resources>
+                                            <Style TargetType="Border">
+                                                <Setter Property="CornerRadius" Value="6"/>
+                                            </Style>
+                                        </Button.Resources>
+                                    </Button>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+
+                <!-- ── Section: Tutorials ── -->
+                <StackPanel Visibility="{Binding ActiveSection, Converter={StaticResource SectionVisibility}, ConverterParameter=Tutorials}">
+                    <TextBlock Text="{loc:Loc NavTutorials}" FontSize="28" FontWeight="Bold" Foreground="White" Margin="0,0,0,20"/>
+                    <ItemsControl ItemsSource="{Binding TutorialList}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Background="#232629" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="20" Margin="0,0,0,12">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Grid.Column="0">
+                                            <TextBlock Text="{Binding Title}" Foreground="White" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                                            <TextBlock Text="{Binding Description}" Foreground="#94A3B8" FontSize="13" TextWrapping="Wrap"/>
+                                            <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                                                <Border Background="#1E293B" CornerRadius="4" Padding="8,3" Margin="0,0,8,0">
+                                                    <TextBlock Text="{Binding Category}" Foreground="#6A7D90" FontSize="11" FontWeight="SemiBold"/>
+                                                </Border>
+                                                <Border Background="#1E293B" CornerRadius="4" Padding="8,3">
+                                                    <TextBlock Text="{Binding Difficulty}" Foreground="#6A7D90" FontSize="11" FontWeight="SemiBold"/>
+                                                </Border>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <TextBlock Grid.Column="1" Text="{Binding DurationMins, StringFormat={}{0} min}" Foreground="#94A3B8" FontSize="13" VerticalAlignment="Center"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </StackPanel>
 
-                <Grid Grid.Row="1" Margin="0,0,0,30">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="20"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="20"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+                <!-- ── Section: Corrections ── -->
+                <StackPanel Visibility="{Binding ActiveSection, Converter={StaticResource SectionVisibility}, ConverterParameter=Corrections}">
+                    <TextBlock Text="{loc:Loc NavCorrections}" FontSize="28" FontWeight="Bold" Foreground="White" Margin="0,0,0,20"/>
+                    <TextBlock Text="{Binding ActiveCorrections, StringFormat='{}{0} active'}" Foreground="#94A3B8" FontSize="14" Margin="0,0,0,16"/>
+                    <ItemsControl ItemsSource="{Binding Corrections}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Background="#232629" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="20" Margin="0,0,0,12">
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Message}" Foreground="White" FontSize="14" FontWeight="SemiBold" TextWrapping="Wrap"/>
+                                        <TextBlock Text="{Binding ElementName}" Foreground="#94A3B8" FontSize="13" Margin="0,4,0,0"/>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
 
-                    <Border Grid.Column="0" Background="#232629" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="20">
-                        <StackPanel>
-                            <TextBlock Text="{loc:Loc DashboardItemsModeled}" Foreground="#94A3B8" FontSize="11" FontWeight="Bold" Margin="0,0,0,8"/>
-                            <Grid>
-                                <TextBlock Text="{Binding CompletedTutorials, FallbackValue='0'}" FontSize="28" FontWeight="Bold" Foreground="White" HorizontalAlignment="Left"/>
-                            </Grid>
-                        </StackPanel>
-                    </Border>
+                <!-- ── Section: Standards ── -->
+                <StackPanel Visibility="{Binding ActiveSection, Converter={StaticResource SectionVisibility}, ConverterParameter=Standards}">
+                    <TextBlock Text="{loc:Loc NavStandards}" FontSize="28" FontWeight="Bold" Foreground="White" Margin="0,0,0,20"/>
+                    <ItemsControl ItemsSource="{Binding Standards}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Background="#232629" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="20" Margin="0,0,0,12">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Grid.Column="0">
+                                            <TextBlock Text="{Binding Name}" Foreground="White" FontSize="15" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                                            <TextBlock Text="{Binding Description}" Foreground="#94A3B8" FontSize="13" TextWrapping="Wrap"/>
+                                            <Border Background="#1E293B" CornerRadius="4" Padding="8,3" Margin="0,8,0,0" HorizontalAlignment="Left">
+                                                <TextBlock Text="{Binding Category}" Foreground="#6A7D90" FontSize="11" FontWeight="SemiBold"/>
+                                            </Border>
+                                        </StackPanel>
+                                        <TextBlock Grid.Column="1" Text="{Binding AlertLevel}" Foreground="#F59E0B" FontSize="12" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
 
-                    <Border Grid.Column="2" Background="#232629" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="20">
-                        <StackPanel>
-                            <TextBlock Text="{loc:Loc DashboardOperationsOnStandard}" Foreground="#94A3B8" FontSize="11" FontWeight="Bold" Margin="0,0,0,8"/>
-                            <Grid>
-                                <TextBlock Text="{Binding CompliancePercent, FallbackValue='0', StringFormat={}{0}%}" FontSize="28" FontWeight="Bold" Foreground="White" HorizontalAlignment="Left"/>
-                            </Grid>
-                        </StackPanel>
-                    </Border>
-
-                    <Border Grid.Column="4" Background="#232629" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="20">
-                        <StackPanel>
-                            <TextBlock Text="{loc:Loc DashboardWarningsCorrected}" Foreground="#94A3B8" FontSize="11" FontWeight="Bold" Margin="0,0,0,8"/>
-                            <Grid>
-                                <TextBlock Text="{Binding ActiveCorrections, FallbackValue='0'}" FontSize="28" FontWeight="Bold" Foreground="White" HorizontalAlignment="Left"/>
-                                <TextBlock Text="{loc:Loc DashboardStable}" FontSize="12" FontWeight="Bold" Foreground="#6A7D90" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,6"/>
-                            </Grid>
-                        </StackPanel>
-                    </Border>
-                </Grid>
-
-                <Grid Grid.Row="2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition Width="40"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <StackPanel Grid.Column="0">
-                        <TextBlock Text="{loc:Loc DashboardRecentActivity}" FontSize="18" FontWeight="SemiBold" Foreground="White" Margin="0,0,0,20"/>
-
-                        <Border Background="#17191B" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="0,10">
+                <!-- ── Section: Progress ── -->
+                <StackPanel Visibility="{Binding ActiveSection, Converter={StaticResource SectionVisibility}, ConverterParameter=Progress}">
+                    <TextBlock Text="{loc:Loc NavProgress}" FontSize="28" FontWeight="Bold" Foreground="White" Margin="0,0,0,20"/>
+                    <Grid Margin="0,0,0,24">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0" Background="#232629" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="20">
                             <StackPanel>
-                                <Border BorderBrush="#1E293B" BorderThickness="0,0,0,1" Padding="20,15">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Ellipse Grid.Column="0" Width="10" Height="10" Fill="#6A7D90" VerticalAlignment="Center" Margin="0,0,15,0"/>
-                                        <TextBlock Grid.Column="1" Text="{loc:Loc DashboardModeledBasicWall}" Foreground="White" FontSize="14" FontWeight="Medium" VerticalAlignment="Center"/>
-                                        <TextBlock Grid.Column="2" Text="{loc:Loc DashboardTimeAgo2Min}" Foreground="#94A3B8" FontSize="12" VerticalAlignment="Center"/>
-                                    </Grid>
-                                </Border>
-
-                                <Border BorderBrush="#1E293B" BorderThickness="0,0,0,1" Padding="20,15">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Ellipse Grid.Column="0" Width="10" Height="10" Fill="#10B981" VerticalAlignment="Center" Margin="0,0,15,0"/>
-                                        <TextBlock Grid.Column="1" Text="{loc:Loc DashboardFixedOverlapping}" Foreground="White" FontSize="14" FontWeight="Medium" VerticalAlignment="Center"/>
-                                        <TextBlock Grid.Column="2" Text="{loc:Loc DashboardTimeAgo15Min}" Foreground="#94A3B8" FontSize="12" VerticalAlignment="Center"/>
-                                    </Grid>
-                                </Border>
-
-                                <Border Padding="20,15">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Ellipse Grid.Column="0" Width="10" Height="10" Fill="#F59E0B" VerticalAlignment="Center" Margin="0,0,15,0"/>
-                                        <TextBlock Grid.Column="1" Text="{loc:Loc DashboardStartedTutorial}" Foreground="White" FontSize="14" FontWeight="Medium" VerticalAlignment="Center"/>
-                                        <TextBlock Grid.Column="2" Text="{loc:Loc DashboardTimeAgo1Hour}" Foreground="#94A3B8" FontSize="12" VerticalAlignment="Center"/>
-                                    </Grid>
-                                </Border>
+                                <TextBlock Text="{loc:Loc DashboardItemsModeled}" Foreground="#94A3B8" FontSize="11" FontWeight="Bold" Margin="0,0,0,8"/>
+                                <TextBlock Text="{Binding CompletedTutorials, FallbackValue='0'}" FontSize="28" FontWeight="Bold" Foreground="White"/>
                             </StackPanel>
                         </Border>
-                    </StackPanel>
-
-                    <StackPanel Grid.Column="2">
-                        <TextBlock Text="{loc:Loc DashboardStandardInFocus}" FontSize="18" FontWeight="SemiBold" Foreground="White" Margin="0,0,0,20"/>
-
-                        <Border Background="#0F172A" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="20">
+                        <Border Grid.Column="2" Background="#232629" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="20">
                             <StackPanel>
-                                <Border Width="40" Height="40" Background="#1E293B" CornerRadius="8" HorizontalAlignment="Left" Margin="0,0,0,15">
-                                    <TextBlock Text="⚡" Foreground="#F59E0B" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                                <TextBlock Text="{loc:Loc DashboardNamingConvention}" Foreground="White" FontSize="15" FontWeight="SemiBold" Margin="0,0,0,5"/>
-                                <TextBlock Text="{loc:Loc DashboardNamingDescription}"
-                                           Foreground="#94A3B8" FontSize="13" TextWrapping="Wrap" Margin="0,0,0,20" LineHeight="20"/>
-
-                                <Grid Margin="0,0,0,20">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
-                                    <TextBlock Grid.Row="0" Foreground="#10B981" FontSize="12" FontWeight="Bold" Margin="0,0,0,5">
-                                        <TextBlock.Text>
-                                            <Binding Path="CompliancePercent" Converter="{StaticResource LocalizedStepsFormat}" ConverterParameter="DashboardCompleted" FallbackValue="0"/>
-                                        </TextBlock.Text>
-                                    </TextBlock>
-                                    <Border Grid.Row="1" Height="6" Background="#1E293B" CornerRadius="3">
-                                        <Border Width="180" Background="#10B981" CornerRadius="3" HorizontalAlignment="Left"/>
-                                    </Border>
-                                </Grid>
-
-                                <Button Content="{loc:Loc DashboardViewDetails}" Height="40" Background="#1E293B" Foreground="White"
-                                        FontSize="13" FontWeight="SemiBold" BorderThickness="0" Cursor="Hand"
-                                        Click="BtnViewDetails_Click">
-                                    <Button.Resources>
-                                        <Style TargetType="Border">
-                                            <Setter Property="CornerRadius" Value="6"/>
-                                        </Style>
-                                    </Button.Resources>
-                                </Button>
+                                <TextBlock Text="XP" Foreground="#94A3B8" FontSize="11" FontWeight="Bold" Margin="0,0,0,8"/>
+                                <TextBlock Text="{Binding XpPoints, FallbackValue='0'}" FontSize="28" FontWeight="Bold" Foreground="White"/>
                             </StackPanel>
                         </Border>
-                    </StackPanel>
-                </Grid>
+                    </Grid>
+                    <ItemsControl ItemsSource="{Binding ProgressList}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Background="#232629" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="20" Margin="0,0,0,12">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Grid.Column="0">
+                                            <TextBlock Text="{Binding TutorialTitle, FallbackValue='Tutorial'}" Foreground="White" FontSize="15" FontWeight="SemiBold" Margin="0,0,0,6"/>
+                                            <Border Height="6" Background="#1E293B" CornerRadius="3">
+                                                <Border Background="#6A7D90" CornerRadius="3" HorizontalAlignment="Left"
+                                                        Width="{Binding ScorePercent, Converter={StaticResource PercentToWidth}, ConverterParameter=250}"/>
+                                            </Border>
+                                        </StackPanel>
+                                        <TextBlock Grid.Column="1" Foreground="#94A3B8" FontSize="13" VerticalAlignment="Center" Margin="16,0,0,0">
+                                            <TextBlock.Text>
+                                                <MultiBinding StringFormat="{}{0}/{1}">
+                                                    <Binding Path="CurrentStep"/>
+                                                    <Binding Path="TotalSteps"/>
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+
+                <!-- ── Section: Achievements ── -->
+                <StackPanel Visibility="{Binding ActiveSection, Converter={StaticResource SectionVisibility}, ConverterParameter=Achievements}">
+                    <TextBlock Text="{loc:Loc NavAchievements}" FontSize="28" FontWeight="Bold" Foreground="White" Margin="0,0,0,20"/>
+                    <ItemsControl ItemsSource="{Binding Achievements}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Width="220" Background="#232629" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="20" Margin="0,0,16,16">
+                                    <StackPanel>
+                                        <Border Width="48" Height="48" Background="#1E293B" CornerRadius="24" HorizontalAlignment="Left" Margin="0,0,0,12">
+                                            <TextBlock Text="{Binding Icon}" Foreground="#6A7D90" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                        <TextBlock Text="{Binding Title}" Foreground="White" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                                        <TextBlock Text="{Binding Description}" Foreground="#94A3B8" FontSize="12" TextWrapping="Wrap" Margin="0,0,0,8"/>
+                                        <TextBlock Text="{Binding XpReward, StringFormat='+{0} XP'}" Foreground="#6A7D90" FontSize="12" FontWeight="Bold"/>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
             </Grid>
         </Grid>
     </Border>

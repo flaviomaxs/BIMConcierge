@@ -5,6 +5,17 @@ using System.Windows.Media;
 
 namespace BIMConcierge.UI.Converters;
 
+/// <summary>Compares string value to ConverterParameter → Visible if equal, Collapsed otherwise.</summary>
+public class StringEqualsToVisibilityConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture) =>
+        string.Equals(value?.ToString(), parameter?.ToString(), StringComparison.Ordinal)
+            ? Visibility.Visible : Visibility.Collapsed;
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) =>
+        throw new NotSupportedException();
+}
+
 /// <summary>True → Visible, False/null → Collapsed.</summary>
 public class BoolToVisibilityConverter : IValueConverter
 {
