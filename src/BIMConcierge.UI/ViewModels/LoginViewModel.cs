@@ -27,7 +27,11 @@ public partial class LoginViewModel : ObservableObject, IDisposable
         _authService = authService;
     }
 
-    [RelayCommand]
+    private bool CanLogin() => !IsBusy;
+
+    partial void OnIsBusyChanged(bool value) => LoginCommand.NotifyCanExecuteChanged();
+
+    [RelayCommand(CanExecute = nameof(CanLogin))]
     private async Task LoginAsync()
     {
         HasError = false;
@@ -45,7 +49,7 @@ public partial class LoginViewModel : ObservableObject, IDisposable
         IsBusy = true;
         try
         {
-            AuthResult result = await _authService.LoginAsync(Email, Password, LicenseKey);
+            AuthResult result = await _authService.LoginAsync(Email, Password, LicenseKey, _cts.Token);
 
             if (result.Success)
             {

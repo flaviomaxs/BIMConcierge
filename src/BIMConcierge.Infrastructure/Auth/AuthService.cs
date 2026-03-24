@@ -51,7 +51,7 @@ public class AuthService(IBimApiClient api, ITokenStore tokenStore, ILocalDataba
         private set { lock (_lock) _currentLicense = value; }
     }
 
-    public async Task<AuthResult> LoginAsync(string email, string password, string licenseKey)
+    public async Task<AuthResult> LoginAsync(string email, string password, string licenseKey, CancellationToken ct = default)
     {
         // Dev login — bypass API for local testing (only when env var is set)
         if (Environment.GetEnvironmentVariable("BIMCONCIERGE_DEV_MODE") == "true"
@@ -65,7 +65,7 @@ public class AuthService(IBimApiClient api, ITokenStore tokenStore, ILocalDataba
         {
             LoginResponse? response = await _api.PostAsync<LoginRequest, LoginResponse>(
                 "auth/login",
-                new LoginRequest(email, password, licenseKey));
+                new LoginRequest(email, password, licenseKey), ct).ConfigureAwait(false);
 
             if (response is null || !response.Success)
                 return new AuthResult(false, null, response?.Message ?? _loc.GetString("AuthInvalidCredentials"));

@@ -1,6 +1,7 @@
 using BIMConcierge.Core.Interfaces;
 using BIMConcierge.Core.Models;
 using BIMConcierge.Infrastructure.Auth;
+using System.Threading;
 
 namespace BIMConcierge.Infrastructure.Api;
 
@@ -11,16 +12,16 @@ namespace BIMConcierge.Infrastructure.Api;
 /// </summary>
 public sealed class DevBimApiClient : IBimApiClient
 {
-    public Task<TResponse?> GetAsync<TResponse>(string endpoint) =>
+    public Task<TResponse?> GetAsync<TResponse>(string endpoint, CancellationToken ct = default) =>
         Task.FromResult(Route<TResponse>(endpoint));
 
-    public Task<TResponse?> PostAsync<TRequest, TResponse>(string endpoint, TRequest body) =>
+    public Task<TResponse?> PostAsync<TRequest, TResponse>(string endpoint, TRequest body, CancellationToken ct = default) =>
         Task.FromResult(Route<TResponse>(endpoint));
 
-    public Task<TResponse?> PutAsync<TRequest, TResponse>(string endpoint, TRequest body) =>
+    public Task<TResponse?> PutAsync<TRequest, TResponse>(string endpoint, TRequest body, CancellationToken ct = default) =>
         Task.FromResult(Route<TResponse>(endpoint));
 
-    public Task DeleteAsync(string endpoint) =>
+    public Task DeleteAsync(string endpoint, CancellationToken ct = default) =>
         Task.CompletedTask;
 
     private static TResponse? Route<TResponse>(string endpoint)
