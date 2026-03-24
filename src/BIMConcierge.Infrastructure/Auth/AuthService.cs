@@ -65,7 +65,7 @@ public class AuthService(IBimApiClient api, ITokenStore tokenStore, ILocalDataba
         {
             LoginResponse? response = await _api.PostAsync<LoginRequest, LoginResponse>(
                 "auth/login",
-                new LoginRequest(email, password, licenseKey), ct).ConfigureAwait(false);
+                new LoginRequest(email, password, licenseKey), ct);
 
             if (response is null || !response.Success)
                 return new AuthResult(false, null, response?.Message ?? _loc.GetString("AuthInvalidCredentials"));
