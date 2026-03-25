@@ -83,7 +83,7 @@
                     <!-- Category Navigation -->
                     <StackPanel Grid.Row="2">
                         <Border CornerRadius="8" Padding="12,10" Margin="0,0,0,4" Cursor="Hand"
-                                MouseLeftButtonUp="CategoryNaming_Click">
+                                MouseLeftButtonDown="CategoryNaming_Click">
                             <Border.Style>
                                 <Style TargetType="Border">
                                     <Setter Property="Background" Value="Transparent"/>
@@ -125,7 +125,7 @@
                         </Border>
 
                         <Border CornerRadius="8" Padding="12,10" Margin="0,0,0,4" Cursor="Hand"
-                                MouseLeftButtonUp="CategoryLOD_Click">
+                                MouseLeftButtonDown="CategoryLOD_Click">
                             <Border.Style>
                                 <Style TargetType="Border">
                                     <Setter Property="Background" Value="Transparent"/>
@@ -167,7 +167,7 @@
                         </Border>
 
                         <Border CornerRadius="8" Padding="12,10" Margin="0,0,0,4" Cursor="Hand"
-                                MouseLeftButtonUp="CategoryWorkset_Click">
+                                MouseLeftButtonDown="CategoryWorkset_Click">
                             <Border.Style>
                                 <Style TargetType="Border">
                                     <Setter Property="Background" Value="Transparent"/>
@@ -209,7 +209,7 @@
                         </Border>
 
                         <Border CornerRadius="8" Padding="12,10" Margin="0,0,0,4" Cursor="Hand"
-                                MouseLeftButtonUp="CategoryBestPractices_Click">
+                                MouseLeftButtonDown="CategoryBestPractices_Click">
                             <Border.Style>
                                 <Style TargetType="Border">
                                     <Setter Property="Background" Value="Transparent"/>
@@ -432,7 +432,7 @@
                         <Grid Margin="0,0,0,16">
                             <TextBlock Text="{loc:Loc StandardsLODMatrix}" FontSize="20" FontWeight="Bold" Foreground="White" HorizontalAlignment="Left"/>
                             <TextBlock Text="{loc:Loc StandardsAddCategory}" FontSize="11" FontWeight="Bold" Foreground="#6A7D90" HorizontalAlignment="Right"
-                                       VerticalAlignment="Center" Cursor="Hand" MouseLeftButtonUp="AddCategory_Click"/>
+                                       VerticalAlignment="Center" Cursor="Hand" MouseLeftButtonDown="AddCategory_Click"/>
                         </Grid>
 
                         <Border Background="#232629" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12">
@@ -467,7 +467,7 @@
                                         <Border Grid.Column="2" Background="#0F172A" CornerRadius="6" Padding="10,4" HorizontalAlignment="Center">
                                             <TextBlock Text="LOD 300" Foreground="White" FontSize="11" FontWeight="Bold"/>
                                         </Border>
-                                        <TextBlock Grid.Column="3" Text="✕" Foreground="#64748B" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand"/>
+                                        <TextBlock Grid.Column="3" Text="✕" Foreground="#64748B" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                     </Grid>
                                 </Border>
 
@@ -485,7 +485,7 @@
                                         <Border Grid.Column="2" Background="#0F172A" CornerRadius="6" Padding="10,4" HorizontalAlignment="Center">
                                             <TextBlock Text="LOD 350" Foreground="White" FontSize="11" FontWeight="Bold"/>
                                         </Border>
-                                        <TextBlock Grid.Column="3" Text="✕" Foreground="#64748B" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand"/>
+                                        <TextBlock Grid.Column="3" Text="✕" Foreground="#64748B" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                     </Grid>
                                 </Border>
 
@@ -503,7 +503,7 @@
                                         <Border Grid.Column="2" Background="#0F172A" CornerRadius="6" Padding="10,4" HorizontalAlignment="Center">
                                             <TextBlock Text="LOD 400" Foreground="White" FontSize="11" FontWeight="Bold"/>
                                         </Border>
-                                        <TextBlock Grid.Column="3" Text="✕" Foreground="#64748B" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand"/>
+                                        <TextBlock Grid.Column="3" Text="✕" Foreground="#64748B" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                     </Grid>
                                 </Border>
 
@@ -521,7 +521,7 @@
                                         <Border Grid.Column="2" Background="#0F172A" CornerRadius="6" Padding="10,4" HorizontalAlignment="Center">
                                             <TextBlock Text="LOD 200" Foreground="White" FontSize="11" FontWeight="Bold"/>
                                         </Border>
-                                        <TextBlock Grid.Column="3" Text="✕" Foreground="#64748B" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand"/>
+                                        <TextBlock Grid.Column="3" Text="✕" Foreground="#64748B" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                     </Grid>
                                 </Border>
                             </StackPanel>

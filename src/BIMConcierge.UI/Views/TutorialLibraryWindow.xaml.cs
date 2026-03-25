@@ -24,14 +24,21 @@ public partial class TutorialLibraryWindow : Window
 
     private void BtnClose_Click(object sender, RoutedEventArgs e) => this.Close();
 
-    private void SidebarDashboard_Click(object sender, MouseButtonEventArgs e) =>
+    private void SidebarDashboard_Click(object sender, MouseButtonEventArgs e)
+    {
+        e.Handled = true;
         _vm.OpenWindowCommand.Execute("Dashboard");
+    }
 
-    private void SidebarStandards_Click(object sender, MouseButtonEventArgs e) =>
+    private void SidebarStandards_Click(object sender, MouseButtonEventArgs e)
+    {
+        e.Handled = true;
         _vm.OpenWindowCommand.Execute("CompanyStandards");
+    }
 
     private void SidebarSettings_Click(object sender, MouseButtonEventArgs e)
     {
+        e.Handled = true;
         _vm.OpenWindowCommand.Execute("Settings");
         this.Close();
     }

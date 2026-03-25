@@ -26,24 +26,28 @@ public partial class StudentProgressWindow : Window
 
     private void SidebarDashboard_Click(object sender, MouseButtonEventArgs e)
     {
+        e.Handled = true;
         _vm.OpenWindowCommand.Execute("Dashboard");
         this.Close();
     }
 
     private void SidebarStandards_Click(object sender, MouseButtonEventArgs e)
     {
+        e.Handled = true;
         _vm.OpenWindowCommand.Execute("CompanyStandards");
         this.Close();
     }
 
     private void SidebarTutorials_Click(object sender, MouseButtonEventArgs e)
     {
+        e.Handled = true;
         _vm.OpenWindowCommand.Execute("TutorialLibrary");
         this.Close();
     }
 
     private void SidebarAchievements_Click(object sender, MouseButtonEventArgs e)
     {
+        e.Handled = true;
         _vm.OpenWindowCommand.Execute("Achievements");
         this.Close();
     }
@@ -56,12 +60,14 @@ public partial class StudentProgressWindow : Window
 
     private void PlayTutorial_Click(object sender, MouseButtonEventArgs e)
     {
+        e.Handled = true;
         _vm.OpenWindowCommand.Execute("TutorialLibrary");
         this.Close();
     }
 
     private void ViewAllBadges_Click(object sender, MouseButtonEventArgs e)
     {
+        e.Handled = true;
         _vm.OpenWindowCommand.Execute("Achievements");
         this.Close();
     }

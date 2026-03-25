@@ -31,33 +31,48 @@ public partial class CompanyStandardsWindow : Window
 
     private void SidebarDashboard_Click(object sender, MouseButtonEventArgs e)
     {
+        e.Handled = true;
         _vm.OpenWindowCommand.Execute("Dashboard");
         this.Close();
     }
 
     private void SidebarProgress_Click(object sender, MouseButtonEventArgs e)
     {
+        e.Handled = true;
         _vm.OpenWindowCommand.Execute("StudentProgress");
         this.Close();
     }
 
     private void SidebarAchievements_Click(object sender, MouseButtonEventArgs e)
     {
+        e.Handled = true;
         _vm.OpenWindowCommand.Execute("Achievements");
         this.Close();
     }
 
-    private void CategoryNaming_Click(object sender, MouseButtonEventArgs e) =>
+    private void CategoryNaming_Click(object sender, MouseButtonEventArgs e)
+    {
+        e.Handled = true;
         _vm.SelectCategoryCommand.Execute("Naming Conventions");
+    }
 
-    private void CategoryLOD_Click(object sender, MouseButtonEventArgs e) =>
+    private void CategoryLOD_Click(object sender, MouseButtonEventArgs e)
+    {
+        e.Handled = true;
         _vm.SelectCategoryCommand.Execute("LOD Requirements");
+    }
 
-    private void CategoryWorkset_Click(object sender, MouseButtonEventArgs e) =>
+    private void CategoryWorkset_Click(object sender, MouseButtonEventArgs e)
+    {
+        e.Handled = true;
         _vm.SelectCategoryCommand.Execute("Workset Rules");
+    }
 
-    private void CategoryBestPractices_Click(object sender, MouseButtonEventArgs e) =>
+    private void CategoryBestPractices_Click(object sender, MouseButtonEventArgs e)
+    {
+        e.Handled = true;
         _vm.SelectCategoryCommand.Execute("Best Practices");
+    }
 
     private void BtnExportJson_Click(object sender, RoutedEventArgs e)
     {
@@ -81,6 +96,7 @@ public partial class CompanyStandardsWindow : Window
 
     private void AddCategory_Click(object sender, MouseButtonEventArgs e)
     {
+        e.Handled = true;
         MessageBox.Show(
             TranslationSource.GetString("StandardsAddCategoryMessage"),
             TranslationSource.GetString("StandardsAddCategory"),

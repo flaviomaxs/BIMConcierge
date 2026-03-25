@@ -49,7 +49,7 @@
                     <!-- Navigation -->
                     <StackPanel Grid.Row="1">
                         <Border Background="Transparent" CornerRadius="8" Padding="12,10" Margin="0,0,0,4" Cursor="Hand"
-                                MouseLeftButtonUp="SidebarDashboard_Click">
+                                MouseLeftButtonDown="SidebarDashboard_Click">
                             <StackPanel Orientation="Horizontal">
                                 <Path Data="M2,2 H7 V7 H2Z M9,2 H14 V7 H9Z M2,9 H7 V14 H2Z M9,9 H14 V14 H9Z"
                                       Fill="#94A3B8" Width="16" Height="16" Stretch="Uniform" Margin="0,0,12,0" VerticalAlignment="Center"/>
@@ -64,7 +64,7 @@
                             </StackPanel>
                         </Border>
                         <Border Background="Transparent" CornerRadius="8" Padding="12,10" Margin="0,0,0,4" Cursor="Hand"
-                                MouseLeftButtonUp="SidebarStandards_Click">
+                                MouseLeftButtonDown="SidebarStandards_Click">
                             <StackPanel Orientation="Horizontal">
                                 <Path Data="M8,1 L14,3.5 V8 C14,11.5 8,15 8,15 C8,15 2,11.5 2,8 V3.5Z"
                                       Fill="#94A3B8" Width="16" Height="16" Stretch="Uniform" Margin="0,0,12,0" VerticalAlignment="Center"/>
@@ -72,7 +72,7 @@
                             </StackPanel>
                         </Border>
                         <Border Background="Transparent" CornerRadius="8" Padding="12,10" Margin="0,0,0,4" Cursor="Hand"
-                                MouseLeftButtonUp="SidebarProgress_Click">
+                                MouseLeftButtonDown="SidebarProgress_Click">
                             <StackPanel Orientation="Horizontal">
                                 <Path Data="M2,14 V9 H5 V14Z M6.5,14 V6 H9.5 V14Z M11,14 V2 H14 V14Z"
                                       Fill="#94A3B8" Width="16" Height="16" Stretch="Uniform" Margin="0,0,12,0" VerticalAlignment="Center"/>
@@ -271,7 +271,7 @@
                                           Width="14" Height="14" Stretch="Uniform" Margin="0,0,8,0" VerticalAlignment="Center"/>
                                                 <TextBlock Text="{loc:Loc AchievementsLeaderboard}" FontSize="14" FontWeight="Bold" Foreground="White"/>
                                             </StackPanel>
-                                            <TextBlock Text="VER TODOS" FontSize="9" FontWeight="Bold" Foreground="#6A7D90" HorizontalAlignment="Right" VerticalAlignment="Center" Cursor="Hand"/>
+                                            <TextBlock Text="VER TODOS" FontSize="9" FontWeight="Bold" Foreground="#6A7D90" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                                         </Grid>
 
                                         <ItemsControl ItemsSource="{Binding Leaderboard}">
@@ -318,13 +318,13 @@
                                                 <TextBlock Text="{loc:Loc AchievementsGallery}" FontSize="18" FontWeight="Bold" Foreground="White"/>
                                             </StackPanel>
                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                                <Border Background="#6A7D90" CornerRadius="4" Padding="8,4" Margin="0,0,6,0" Cursor="Hand">
+                                                <Border Background="#6A7D90" CornerRadius="4" Padding="8,4" Margin="0,0,6,0">
                                                     <TextBlock Text="TODOS" Foreground="White" FontSize="9" FontWeight="Bold"/>
                                                 </Border>
-                                                <Border Background="#232629" CornerRadius="4" Padding="8,4" Margin="0,0,6,0" Cursor="Hand">
+                                                <Border Background="#232629" CornerRadius="4" Padding="8,4" Margin="0,0,6,0">
                                                     <TextBlock Text="DESBLOQUEADOS" Foreground="#94A3B8" FontSize="9" FontWeight="Bold"/>
                                                 </Border>
-                                                <Border Background="#232629" CornerRadius="4" Padding="8,4" Cursor="Hand">
+                                                <Border Background="#232629" CornerRadius="4" Padding="8,4">
                                                     <TextBlock Text="BLOQUEADOS" Foreground="#94A3B8" FontSize="9" FontWeight="Bold"/>
                                                 </Border>
                                             </StackPanel>

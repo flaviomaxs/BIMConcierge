@@ -309,7 +309,7 @@
                                 <TextBlock Text="{Binding UserRole, FallbackValue=''}" Foreground="#94A3B8" FontSize="12"/>
                             </StackPanel>
 
-                            <TextBlock Grid.Column="2" Text="⋮" Foreground="#94A3B8" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" Cursor="Hand"/>
+                            <TextBlock Grid.Column="2" Text="⋮" Foreground="#94A3B8" FontSize="18" FontWeight="Bold" VerticalAlignment="Center"/>
                         </Grid>
                     </Border>
                 </Grid>

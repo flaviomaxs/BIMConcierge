@@ -41,7 +41,7 @@
 
                     <StackPanel Grid.Row="1">
                         <Border Background="Transparent" CornerRadius="8" Padding="12,10" Margin="0,0,0,5" Cursor="Hand"
-                                MouseLeftButtonUp="SidebarDashboard_Click">
+                                MouseLeftButtonDown="SidebarDashboard_Click">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="&#x229E;" Foreground="#94A3B8" FontSize="18" Margin="0,0,12,0" VerticalAlignment="Center"/>
                                 <TextBlock Text="{loc:Loc NavDashboard}" Foreground="#94A3B8" FontWeight="Medium" FontSize="14" VerticalAlignment="Center"/>
@@ -49,7 +49,7 @@
                         </Border>
 
                         <Border Background="Transparent" CornerRadius="8" Padding="12,10" Margin="0,0,0,5" Cursor="Hand"
-                                MouseLeftButtonUp="SidebarTutorials_Click">
+                                MouseLeftButtonDown="SidebarTutorials_Click">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="&#x25B6;" Foreground="#94A3B8" FontSize="16" Margin="0,0,12,0" VerticalAlignment="Center"/>
                                 <TextBlock Text="{loc:Loc NavTutorials}" Foreground="#94A3B8" FontWeight="Medium" FontSize="14" VerticalAlignment="Center"/>
@@ -73,7 +73,7 @@
                         </Border>
 
                         <Border Background="Transparent" CornerRadius="8" Padding="12,10" Margin="0,0,0,5" Cursor="Hand"
-                                MouseLeftButtonUp="SidebarStandards_Click">
+                                MouseLeftButtonDown="SidebarStandards_Click">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="&#x2605;" Foreground="#94A3B8" FontSize="18" Margin="0,0,12,0" VerticalAlignment="Center"/>
                                 <TextBlock Text="{loc:Loc NavStandards}" Foreground="#94A3B8" FontWeight="Medium" FontSize="14" VerticalAlignment="Center"/>
@@ -81,7 +81,7 @@
                         </Border>
 
                         <Border Background="Transparent" CornerRadius="8" Padding="12,10" Margin="0,0,0,5" Cursor="Hand"
-                                MouseLeftButtonUp="SidebarProgress_Click">
+                                MouseLeftButtonDown="SidebarProgress_Click">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="&#x1F4CA;" Foreground="#94A3B8" FontSize="18" Margin="0,0,12,0" VerticalAlignment="Center"/>
                                 <TextBlock Text="{loc:Loc NavProgress}" Foreground="#94A3B8" FontWeight="Medium" FontSize="14" VerticalAlignment="Center"/>
@@ -89,7 +89,7 @@
                         </Border>
 
                         <Border Background="Transparent" CornerRadius="8" Padding="12,10" Margin="0,0,0,5" Cursor="Hand"
-                                MouseLeftButtonUp="SidebarAchievements_Click">
+                                MouseLeftButtonDown="SidebarAchievements_Click">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="&#x1F3C6;" Foreground="#94A3B8" FontSize="18" Margin="0,0,12,0" VerticalAlignment="Center"/>
                                 <TextBlock Text="{loc:Loc NavAchievements}" Foreground="#94A3B8" FontWeight="Medium" FontSize="14" VerticalAlignment="Center"/>

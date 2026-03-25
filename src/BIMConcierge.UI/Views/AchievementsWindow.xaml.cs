@@ -26,18 +26,21 @@ public partial class AchievementsWindow : Window
 
     private void SidebarDashboard_Click(object sender, MouseButtonEventArgs e)
     {
+        e.Handled = true;
         _vm.OpenWindowCommand.Execute("Dashboard");
         this.Close();
     }
 
     private void SidebarStandards_Click(object sender, MouseButtonEventArgs e)
     {
+        e.Handled = true;
         _vm.OpenWindowCommand.Execute("CompanyStandards");
         this.Close();
     }
 
     private void SidebarProgress_Click(object sender, MouseButtonEventArgs e)
     {
+        e.Handled = true;
         _vm.OpenWindowCommand.Execute("StudentProgress");
         this.Close();
     }

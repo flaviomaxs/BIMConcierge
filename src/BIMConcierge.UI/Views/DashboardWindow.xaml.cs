@@ -27,23 +27,41 @@ public partial class DashboardWindow : Window
 
     private void BtnClose_Click(object sender, RoutedEventArgs e) => this.Close();
 
-    private void SidebarDashboard_Click(object sender, MouseButtonEventArgs e) =>
+    private void SidebarDashboard_Click(object sender, MouseButtonEventArgs e)
+    {
+        e.Handled = true;
         _vm.NavigateToCommand.Execute("Dashboard");
+    }
 
-    private void SidebarTutorials_Click(object sender, MouseButtonEventArgs e) =>
+    private void SidebarTutorials_Click(object sender, MouseButtonEventArgs e)
+    {
+        e.Handled = true;
         _vm.NavigateToCommand.Execute("Tutorials");
+    }
 
-    private void SidebarCorrections_Click(object sender, MouseButtonEventArgs e) =>
+    private void SidebarCorrections_Click(object sender, MouseButtonEventArgs e)
+    {
+        e.Handled = true;
         _vm.NavigateToCommand.Execute("Corrections");
+    }
 
-    private void SidebarStandards_Click(object sender, MouseButtonEventArgs e) =>
+    private void SidebarStandards_Click(object sender, MouseButtonEventArgs e)
+    {
+        e.Handled = true;
         _vm.NavigateToCommand.Execute("Standards");
+    }
 
-    private void SidebarProgress_Click(object sender, MouseButtonEventArgs e) =>
+    private void SidebarProgress_Click(object sender, MouseButtonEventArgs e)
+    {
+        e.Handled = true;
         _vm.NavigateToCommand.Execute("Progress");
+    }
 
-    private void SidebarAchievements_Click(object sender, MouseButtonEventArgs e) =>
+    private void SidebarAchievements_Click(object sender, MouseButtonEventArgs e)
+    {
+        e.Handled = true;
         _vm.NavigateToCommand.Execute("Achievements");
+    }
 
     private void BtnViewDetails_Click(object sender, RoutedEventArgs e) =>
         _vm.NavigateToCommand.Execute("Standards");

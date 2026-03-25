@@ -26,37 +26,48 @@ public partial class SettingsWindow : Window
 
     private void SidebarDashboard_Click(object sender, MouseButtonEventArgs e)
     {
+        e.Handled = true;
         _vm.OpenWindowCommand.Execute("Dashboard");
         this.Close();
     }
 
     private void SidebarTutorials_Click(object sender, MouseButtonEventArgs e)
     {
+        e.Handled = true;
         _vm.OpenWindowCommand.Execute("TutorialLibrary");
         this.Close();
     }
 
     private void SidebarStandards_Click(object sender, MouseButtonEventArgs e)
     {
+        e.Handled = true;
         _vm.OpenWindowCommand.Execute("CompanyStandards");
         this.Close();
     }
 
     private void SidebarProgress_Click(object sender, MouseButtonEventArgs e)
     {
+        e.Handled = true;
         _vm.OpenWindowCommand.Execute("StudentProgress");
         this.Close();
     }
 
     private void SidebarAchievements_Click(object sender, MouseButtonEventArgs e)
     {
+        e.Handled = true;
         _vm.OpenWindowCommand.Execute("Achievements");
         this.Close();
     }
 
-    private void LangPtBr_Click(object sender, MouseButtonEventArgs e) =>
+    private void LangPtBr_Click(object sender, MouseButtonEventArgs e)
+    {
+        e.Handled = true;
         _vm.ChangeLanguageCommand.Execute("pt-BR");
+    }
 
-    private void LangEn_Click(object sender, MouseButtonEventArgs e) =>
+    private void LangEn_Click(object sender, MouseButtonEventArgs e)
+    {
+        e.Handled = true;
         _vm.ChangeLanguageCommand.Execute("en");
+    }
 }
