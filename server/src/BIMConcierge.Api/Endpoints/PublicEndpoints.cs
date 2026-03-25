@@ -105,7 +105,7 @@ public static class PublicEndpoints
 
         var formData = new Dictionary<string, string>
         {
-            ["mode"] = "payment",
+            ["mode"] = "subscription",
             ["customer_email"] = request.Email,
             ["line_items[0][price]"] = priceId,
             ["line_items[0][quantity]"] = "1",
