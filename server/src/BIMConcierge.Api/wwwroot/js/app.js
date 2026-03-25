@@ -22,10 +22,14 @@ async function loadPlans() {
 function renderPlanCard(plan) {
     const isFeatured = plan.Plan === 'Professional';
     const isFree = plan.Price === 0;
+    const originalPriceDisplay = plan.OriginalPrice
+        ? `<span class="plan-original-price">De <s>R$ ${formatPrice(plan.OriginalPrice)}</s>/ano</span>`
+        : '';
     const priceDisplay = isFree
         ? '<span class="plan-price">Grátis</span>'
-        : `<span class="plan-price">
-            <span class="currency">R$</span>${formatPrice(plan.Price)}<span class="period">/ano</span>
+        : `${originalPriceDisplay}
+           <span class="plan-price">
+            <span class="plan-launch-label">Por</span> <span class="currency">R$</span>${formatPrice(plan.Price)}<span class="period">/ano</span>
            </span>`;
 
     const buttonText = isFree ? 'Começar Grátis' : 'Assinar Agora';

@@ -27,21 +27,33 @@ public static class PublicEndpoints
                 "5 padrões da empresa",
                 "Dashboard de progresso"
             ]),
-            new PlanInfo("Professional", 149.90m, "BRL", 5, 365, [
+            new PlanInfo("Solo", 79.90m, "BRL", 1, 365, [
                 "Tudo do Trial",
                 "Padrões ilimitados da empresa",
                 "Dashboard de progresso completo",
+                "Suporte por email"
+            ], 297.90m),
+            new PlanInfo("Team", 149.90m, "BRL", 3, 365, [
+                "Tudo do Solo",
+                "Até 3 seats",
                 "Gamificação + conquistas",
                 "Suporte prioritário"
-            ]),
-            new PlanInfo("Enterprise", 499.90m, "BRL", 50, 365, [
+            ], 697.90m),
+            new PlanInfo("Professional", 249.90m, "BRL", 5, 365, [
+                "Tudo do Team",
+                "Até 5 seats",
+                "Dashboard de progresso completo",
+                "Gamificação + conquistas",
+                "Suporte prioritário"
+            ], 997.90m),
+            new PlanInfo("Enterprise", 699.90m, "BRL", 50, 365, [
                 "Tudo do Professional",
                 "Até 50 seats",
                 "Gamificação + ranking entre equipes",
                 "API customizada",
                 "Onboarding dedicado",
                 "Suporte 24/7"
-            ])
+            ], 4997.90m)
         };
 
         return Results.Ok(plans);
@@ -70,16 +82,17 @@ public static class PublicEndpoints
         if (string.IsNullOrEmpty(request.Plan))
             return Results.BadRequest(new { error = "Plan is required" });
 
-        // Map plan to Stripe price (in centavos)
-        var (priceAmount, seats) = request.Plan.ToLowerInvariant() switch
+        // Map plan to Stripe Price ID (production)
+        var (priceId, seats) = request.Plan.ToLowerInvariant() switch
         {
-            "trial" => (0, 1),
-            "enterprise" => (49990, 50),
-            _ => (14990, 5) // Professional
+            "solo" => ("price_1TEuQmFFewmBK9f2YQ9hkwYV", 1),
+            "team" => ("price_1TEuROFFewmBK9f2r5ona8ZJ", 3),
+            "enterprise" => ("price_1TEaKjFFewmBK9f2ubTUNSza", 50),
+            _ => ("price_1TEaK2FFewmBK9f22AXDAMe5", 5) // Professional
         };
 
         // Trial doesn't need payment
-        if (priceAmount == 0)
+        if (request.Plan.Equals("trial", StringComparison.OrdinalIgnoreCase))
             return Results.BadRequest(new { error = "Trial plan does not require payment" });
 
         var origin = $"{context.Request.Scheme}://{context.Request.Host}";
@@ -94,10 +107,7 @@ public static class PublicEndpoints
         {
             ["mode"] = "payment",
             ["customer_email"] = request.Email,
-            ["line_items[0][price_data][currency]"] = "brl",
-            ["line_items[0][price_data][product_data][name]"] = $"BIM Concierge {request.Plan}",
-            ["line_items[0][price_data][product_data][description]"] = $"Licença {request.Plan} — {seats} seats, 1 ano",
-            ["line_items[0][price_data][unit_amount]"] = priceAmount.ToString(),
+            ["line_items[0][price]"] = priceId,
             ["line_items[0][quantity]"] = "1",
             ["metadata[plan]"] = request.Plan,
             ["metadata[max_seats]"] = seats.ToString(),
@@ -154,7 +164,7 @@ public static class PublicEndpoints
     }
 }
 
-public record PlanInfo(string Plan, decimal Price, string Currency, int Seats, int DurationDays, string[] Features);
+public record PlanInfo(string Plan, decimal Price, string Currency, int Seats, int DurationDays, string[] Features, decimal? OriginalPrice = null);
 public record CheckoutRequest(string Plan, string Email);
 public record TrialRequest(string Email, string? Name);
 

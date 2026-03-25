@@ -198,7 +198,7 @@ a:hover { color: var(--text); }
 }
 
 /* ── Plans ───────────────────────────────────────────────────────────────── */
-.plans-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.plans-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
 .plans-loading { grid-column: 1 / -1; color: var(--text-secondary); padding: 40px; }
 .plan-card {
     background: var(--bg-surface); border: 1px solid var(--border);
@@ -226,6 +226,11 @@ a:hover { color: var(--text); }
 .plan-features li::before {
     content: "✓"; position: absolute; left: 0; color: var(--success); font-weight: 700;
 }
+.plan-original-price {
+    display: block; font-size: 14px; color: var(--text-muted); margin-bottom: 4px;
+}
+.plan-original-price s { color: var(--error); }
+.plan-launch-label { font-size: 14px; font-weight: 600; color: var(--success); }
 .plan-btn { margin-top: auto; }
 
 /* ── FAQ ─────────────────────────────────────────────────────────────────── */
@@ -329,7 +334,8 @@ a:hover { color: var(--text); }
     .hero-content { grid-template-columns: 1fr; }
     .hero h1 { font-size: 36px; }
     .hero-visual { display: none; }
-    .problems-grid, .features-grid, .plans-grid { grid-template-columns: 1fr; }
+    .problems-grid, .features-grid { grid-template-columns: 1fr; }
+    .plans-grid { grid-template-columns: 1fr; }
     .steps-grid { flex-direction: column; align-items: center; }
     .step-arrow { transform: rotate(90deg); }
     .step { max-width: 100%; }
