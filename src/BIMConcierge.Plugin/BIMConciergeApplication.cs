@@ -27,6 +27,7 @@ public class BIMConciergeApplication : IExternalApplication
             Log.Information("BIMConcierge starting up — Revit {RevitVersion}", revitVersion);
 
             ServiceProvider = BuildServiceProvider();
+            BIMConcierge.UI.ServiceLocator.ServiceProvider = ServiceProvider;
             RibbonBuilder.Build(application);
 
             // Enable/disable ribbon buttons based on auth state

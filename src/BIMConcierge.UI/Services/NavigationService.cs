@@ -1,12 +1,12 @@
 using BIMConcierge.Core.Interfaces;
-using BIMConcierge.UI.Views;
+using BIMConcierge.UI.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BIMConcierge.UI.Services;
 
 /// <summary>
-/// Resolves and shows windows from the DI container by name.
-/// Registered as singleton since it holds the IServiceProvider reference.
+/// Navigates between sections inside DashboardWindow by updating
+/// DashboardViewModel.ActiveSection. No more standalone windows.
 /// </summary>
 public sealed class NavigationService : INavigationService
 {
@@ -17,37 +17,41 @@ public sealed class NavigationService : INavigationService
         _serviceProvider = serviceProvider;
     }
 
-    public void NavigateTo(string windowName) => NavigateTo(windowName, null);
+    public void NavigateTo(string section) => NavigateTo(section, null);
 
-    public void NavigateTo(string windowName, object? parameter)
+    public void NavigateTo(string section, object? parameter)
     {
-        System.Windows.Window? window = windowName switch
+        var dashboardVm = _serviceProvider.GetRequiredService<DashboardViewModel>();
+
+        // Map old window names to new section names for backwards compatibility
+        string targetSection = section switch
         {
-            "Dashboard"         => _serviceProvider.GetRequiredService<DashboardWindow>(),
-            "CompanyStandards"  => _serviceProvider.GetRequiredService<CompanyStandardsWindow>(),
-            "StudentProgress"   => _serviceProvider.GetRequiredService<StudentProgressWindow>(),
-            "Achievements"      => _serviceProvider.GetRequiredService<AchievementsWindow>(),
-            "Corrections"       => _serviceProvider.GetRequiredService<CorrectionWindow>(),
-            "Tutorials"         => _serviceProvider.GetRequiredService<TutorialWindow>(),
-            "TutorialLibrary"   => _serviceProvider.GetRequiredService<TutorialLibraryWindow>(),
-            "Settings"          => _serviceProvider.GetRequiredService<SettingsWindow>(),
-            "GuidedTutorial"    => CreateWindowWithTutorial<GuidedTutorialWindow>(parameter as string),
-            "TutorialDetail"    => CreateWindowWithTutorial<TutorialDetailWindow>(parameter as string),
-            _ => null
+            "CompanyStandards"  => "Standards",
+            "StudentProgress"   => "Progress",
+            "TutorialLibrary"   => "Tutorials",
+            "Corrections"       => "Corrections",
+            "Settings"          => "Settings",
+            "GuidedTutorial"    => HandleGuidedTutorial(dashboardVm, parameter as string),
+            "TutorialDetail"    => HandleTutorialDetail(dashboardVm, parameter as string),
+            _                   => section // Dashboard, Tutorials, Standards, Progress, Achievements, etc.
         };
-        window?.Show();
+
+        dashboardVm.NavigateToCommand.Execute(targetSection);
     }
 
-    private T CreateWindowWithTutorial<T>(string? tutorialId) where T : System.Windows.Window
+    private static string HandleGuidedTutorial(DashboardViewModel vm, string? tutorialId)
     {
-        var window = _serviceProvider.GetRequiredService<T>();
         if (!string.IsNullOrEmpty(tutorialId))
         {
-            if (window is GuidedTutorialWindow guided)
-                guided.InitializeTutorial(tutorialId);
-            else if (window is TutorialDetailWindow detail)
-                detail.InitializeTutorial(tutorialId);
+            vm.GuidedTutorialId = tutorialId;
+            vm.IsGuidedTutorialOpen = true;
         }
-        return window;
+        return vm.ActiveSection; // Don't change active section
+    }
+
+    private static string HandleTutorialDetail(DashboardViewModel vm, string? tutorialId)
+    {
+        // The TutorialDetailSectionView will pick up the selected tutorial
+        return "TutorialDetail";
     }
 }

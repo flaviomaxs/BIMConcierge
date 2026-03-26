@@ -1,0 +1,184 @@
+<UserControl x:Class="BIMConcierge.UI.Views.Sections.SettingsSectionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:loc="clr-namespace:BIMConcierge.UI.Localization"
+             FontFamily="Segoe UI">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Margin="40">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header -->
+            <StackPanel Grid.Row="0" Margin="0,0,0,30">
+                <TextBlock Text="{loc:Loc NavSettings}" FontSize="28" FontWeight="Bold" Foreground="White" Margin="0,0,0,6"/>
+                <TextBlock Text="{loc:Loc SettingsSubtitle}" FontSize="14" Foreground="#94A3B8"/>
+            </StackPanel>
+
+            <!-- Language Section -->
+            <Border Grid.Row="1" Background="#232629" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="24" Margin="0,0,0,20">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
+                        <Path Data="M8,1 A7,7 0 1,0 8,15 A7,7 0 1,0 8,1Z M1,8 H15 M8,1 C5,4 5,12 8,15 M8,1 C11,4 11,12 8,15"
+                              Stroke="#6A7D90" StrokeThickness="1.2" Fill="Transparent" Width="20" Height="20" Stretch="Uniform" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                        <TextBlock Text="{loc:Loc SettingsLanguage}" FontSize="16" FontWeight="Bold" Foreground="White"/>
+                    </StackPanel>
+                    <TextBlock Text="{loc:Loc SettingsLanguageDesc}" Foreground="#94A3B8" FontSize="12" Margin="0,0,0,16"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Border CornerRadius="8" Padding="16,10" Margin="0,0,12,0" Cursor="Hand"
+                                MouseLeftButtonDown="LangPtBr_Click">
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Background" Value="#1E293B"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding SelectedLanguage}" Value="pt-BR">
+                                            <Setter Property="Background" Value="#6A7D90"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <TextBlock FontSize="13" FontWeight="SemiBold">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Foreground" Value="#94A3B8"/>
+                                        <Setter Property="Text" Value="Portugu&#234;s (BR)"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding SelectedLanguage}" Value="pt-BR">
+                                                <Setter Property="Foreground" Value="White"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Border>
+                        <Border CornerRadius="8" Padding="16,10" Cursor="Hand"
+                                MouseLeftButtonDown="LangEn_Click">
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Background" Value="#1E293B"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding SelectedLanguage}" Value="en">
+                                            <Setter Property="Background" Value="#6A7D90"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <TextBlock Text="English" FontSize="13" FontWeight="SemiBold">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Foreground" Value="#94A3B8"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding SelectedLanguage}" Value="en">
+                                                <Setter Property="Foreground" Value="White"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Border>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Theme Section -->
+            <Border Grid.Row="2" Background="#232629" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="24" Margin="0,0,0,20">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
+                        <Path Data="M8,1 A7,7 0 0,0 8,15 A4,4 0 0,1 8,1Z"
+                              Fill="#6A7D90" Width="20" Height="20" Stretch="Uniform" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                        <TextBlock Text="{loc:Loc SettingsTheme}" FontSize="16" FontWeight="Bold" Foreground="White"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Border Background="#6A7D90" CornerRadius="8" Padding="16,10" Margin="0,0,12,0">
+                            <TextBlock Text="Dark" Foreground="White" FontSize="13" FontWeight="SemiBold"/>
+                        </Border>
+                        <Border Background="#1E293B" CornerRadius="8" Padding="16,10" Opacity="0.5">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Light" Foreground="#64748B" FontSize="13" FontWeight="SemiBold"/>
+                                <TextBlock Text=" (em breve)" Foreground="#64748B" FontSize="11" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Account Section -->
+            <Border Grid.Row="3" Background="#232629" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="24" Margin="0,0,0,20">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                        <Path Data="M8,1 A3,3 0 1,0 8,7 A3,3 0 1,0 8,1Z M2,14 C2,11 5,9 8,9 C11,9 14,11 14,14"
+                              Stroke="#6A7D90" StrokeThickness="1.5" Fill="Transparent" Width="20" Height="20" Stretch="Uniform" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                        <TextBlock Text="{loc:Loc SettingsAccount}" FontSize="16" FontWeight="Bold" Foreground="White"/>
+                    </StackPanel>
+
+                    <Grid Margin="0,0,0,14">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="{loc:Loc SettingsName}" Foreground="#94A3B8" FontSize="12" FontWeight="Bold" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Column="1" Text="{Binding UserName, FallbackValue='&#x2014;'}" Foreground="White" FontSize="13" VerticalAlignment="Center"/>
+                    </Grid>
+                    <Grid Margin="0,0,0,14">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="Email" Foreground="#94A3B8" FontSize="12" FontWeight="Bold" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Column="1" Text="{Binding UserEmail, FallbackValue='&#x2014;'}" Foreground="White" FontSize="13" VerticalAlignment="Center"/>
+                    </Grid>
+                    <Grid Margin="0,0,0,14">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="{loc:Loc SettingsRole}" Foreground="#94A3B8" FontSize="12" FontWeight="Bold" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Column="1" Text="{Binding UserRole, FallbackValue='&#x2014;'}" Foreground="White" FontSize="13" VerticalAlignment="Center"/>
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="{loc:Loc SettingsPlan}" Foreground="#94A3B8" FontSize="12" FontWeight="Bold" VerticalAlignment="Center"/>
+                        <Border Grid.Column="1" Background="#6A7D9033" CornerRadius="4" Padding="8,3" HorizontalAlignment="Left">
+                            <TextBlock Text="{Binding PlanName, FallbackValue='&#x2014;'}" Foreground="#6A7D90" FontSize="12" FontWeight="Bold"/>
+                        </Border>
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <!-- About Section -->
+            <Border Grid.Row="4" Background="#232629" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="12" Padding="24">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
+                        <Path Data="M8,1 A7,7 0 1,0 8,15 A7,7 0 1,0 8,1Z M7.5,6 H8.5 V7 H7.5Z M7.5,8.5 H8.5 V12 H7.5Z"
+                              Stroke="#6A7D90" StrokeThickness="1.2" Fill="Transparent" Width="20" Height="20" Stretch="Uniform" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                        <TextBlock Text="{loc:Loc SettingsAbout}" FontSize="16" FontWeight="Bold" Foreground="White"/>
+                    </StackPanel>
+                    <Grid Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="{loc:Loc SettingsVersion}" Foreground="#94A3B8" FontSize="12" FontWeight="Bold" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Column="1" Text="{Binding AppVersion}" Foreground="White" FontSize="13" FontFamily="Consolas" VerticalAlignment="Center"/>
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="{loc:Loc SettingsSupport}" Foreground="#94A3B8" FontSize="12" FontWeight="Bold" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Column="1" Text="contato@bimconcierge.io" Foreground="#6A7D90" FontSize="13" VerticalAlignment="Center"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

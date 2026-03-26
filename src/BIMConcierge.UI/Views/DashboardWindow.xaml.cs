@@ -16,8 +16,19 @@ public partial class DashboardWindow : Window
         _vm = viewModel;
         DataContext = viewModel;
         UpdateLanguageButtons();
-        Loaded += (_, _) => _vm.LoadCommand.Execute(null);
+
+        // When LoginSectionView reports success, notify the ViewModel
+        LoginOverlay.LoginSucceeded += () => _vm.OnLoginSucceeded();
+
+        // If already logged in, load data immediately
+        Loaded += (_, _) =>
+        {
+            if (_vm.IsLoggedIn)
+                _vm.LoadCommand.Execute(null);
+        };
     }
+
+    // ── Window chrome ──────────────────────────────────────────────────────
 
     private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
@@ -26,6 +37,8 @@ public partial class DashboardWindow : Window
     }
 
     private void BtnClose_Click(object sender, RoutedEventArgs e) => this.Close();
+
+    // ── Sidebar navigation ─────────────────────────────────────────────────
 
     private void SidebarDashboard_Click(object sender, MouseButtonEventArgs e)
     {
@@ -63,8 +76,16 @@ public partial class DashboardWindow : Window
         _vm.NavigateToCommand.Execute("Achievements");
     }
 
+    private void SidebarSettings_Click(object sender, MouseButtonEventArgs e)
+    {
+        e.Handled = true;
+        _vm.NavigateToCommand.Execute("Settings");
+    }
+
     private void BtnViewDetails_Click(object sender, RoutedEventArgs e) =>
         _vm.NavigateToCommand.Execute("Standards");
+
+    // ── Language toggle ────────────────────────────────────────────────────
 
     private void BtnLangPt_Click(object sender, RoutedEventArgs e)
     {

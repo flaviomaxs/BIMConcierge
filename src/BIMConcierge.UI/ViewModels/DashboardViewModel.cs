@@ -12,7 +12,6 @@ public partial class DashboardViewModel : ObservableObject, IDisposable
     private readonly ITutorialService    _tutorials;
     private readonly IProgressService    _progress;
     private readonly IStandardsService   _standards;
-    private readonly INavigationService  _navigation;
 
     private CancellationTokenSource _cts = new();
 
@@ -21,6 +20,15 @@ public partial class DashboardViewModel : ObservableObject, IDisposable
     [ObservableProperty] private string  _activeSection = "Dashboard";
     [ObservableProperty] private bool    _isBusy;
     [ObservableProperty] private bool    _sessionExpired;
+
+    // Login state — controls overlay visibility
+    [ObservableProperty] private bool _isLoggedIn;
+
+    // Overlay states
+    [ObservableProperty] private bool _isGuidedTutorialOpen;
+    [ObservableProperty] private bool _isCorrectionAlertVisible;
+    [ObservableProperty] private CorrectionEvent? _currentCorrectionAlert;
+    [ObservableProperty] private string? _guidedTutorialId;
 
     // User profile
     [ObservableProperty] private string _userInitials = string.Empty;
@@ -46,18 +54,37 @@ public partial class DashboardViewModel : ObservableObject, IDisposable
 
     public DashboardViewModel(
         IAuthService auth, ITutorialService tutorials,
-        IProgressService progress, IStandardsService standards,
-        INavigationService navigation)
+        IProgressService progress, IStandardsService standards)
     {
         _auth       = auth;
         _tutorials  = tutorials;
         _progress   = progress;
         _standards  = standards;
-        _navigation = navigation;
-        CurrentUser  = auth.CurrentUser;
-        UserInitials = auth.CurrentUser?.Initials ?? string.Empty;
-        UserName     = auth.CurrentUser?.Name ?? string.Empty;
-        UserRole     = auth.CurrentUser?.Role ?? string.Empty;
+
+        // Check if already authenticated (e.g. persisted session)
+        IsLoggedIn = auth.IsAuthenticated;
+        if (IsLoggedIn)
+            SetUserProfile();
+    }
+
+    private void SetUserProfile()
+    {
+        CurrentUser  = _auth.CurrentUser;
+        UserInitials = _auth.CurrentUser?.Initials ?? string.Empty;
+        UserName     = _auth.CurrentUser?.Name ?? string.Empty;
+        UserRole     = _auth.CurrentUser?.Role ?? string.Empty;
+    }
+
+    // ── Login Success ──────────────────────────────────────────────────────
+
+    /// <summary>
+    /// Called by DashboardWindow when LoginSectionView reports successful login.
+    /// </summary>
+    public void OnLoginSucceeded()
+    {
+        IsLoggedIn = true;
+        SetUserProfile();
+        LoadCommand.Execute(null);
     }
 
     // ── Startup ──────────────────────────────────────────────────────────────
@@ -71,11 +98,12 @@ public partial class DashboardViewModel : ObservableObject, IDisposable
         IsBusy = true;
         try
         {
-            // Revalidate session (token expiry + license) — moved from OpenDashboardCommand
+            // Revalidate session (token expiry + license)
             if (!await _auth.EnsureValidSessionAsync())
             {
                 await _auth.LogoutAsync();
                 SessionExpired = true;
+                IsLoggedIn = false;
                 return;
             }
 
@@ -98,9 +126,37 @@ public partial class DashboardViewModel : ObservableObject, IDisposable
 
     [RelayCommand] private void NavigateTo(string section) => ActiveSection = section;
 
-    /// <summary>Opens a window via the navigation service. Called from sidebar buttons.</summary>
+    // ── Guided Tutorial Overlay ──────────────────────────────────────────────
+
     [RelayCommand]
-    private void OpenWindow(string windowName) => _navigation.NavigateTo(windowName);
+    private void OpenGuidedTutorial(Tutorial t)
+    {
+        GuidedTutorialId = t.Id;
+        IsGuidedTutorialOpen = true;
+    }
+
+    [RelayCommand]
+    private void CloseGuidedTutorial()
+    {
+        IsGuidedTutorialOpen = false;
+        GuidedTutorialId = null;
+    }
+
+    // ── Correction Alert Overlay ─────────────────────────────────────────────
+
+    [RelayCommand]
+    private void ShowCorrectionAlert(CorrectionEvent ev)
+    {
+        CurrentCorrectionAlert = ev;
+        IsCorrectionAlertVisible = true;
+    }
+
+    [RelayCommand]
+    private void DismissCorrectionAlert()
+    {
+        IsCorrectionAlertVisible = false;
+        CurrentCorrectionAlert = null;
+    }
 
     // ── Tutorial Library ─────────────────────────────────────────────────────
 
@@ -119,13 +175,6 @@ public partial class DashboardViewModel : ObservableObject, IDisposable
     {
         SelectedTutorial = t;
         ActiveSection = "TutorialDetail";
-        _navigation.NavigateTo("TutorialDetail", t.Id);
-    }
-
-    [RelayCommand]
-    private void OpenGuidedTutorial(Tutorial t)
-    {
-        _navigation.NavigateTo("GuidedTutorial", t.Id);
     }
 
     // ── Progress ─────────────────────────────────────────────────────────────
@@ -192,6 +241,8 @@ public partial class DashboardViewModel : ObservableObject, IDisposable
     {
         CancelPending();
         await _auth.LogoutAsync();
+        IsLoggedIn = false;
+        ActiveSection = "Dashboard";
     }
 
     // ── Helpers ──────────────────────────────────────────────────────────────
