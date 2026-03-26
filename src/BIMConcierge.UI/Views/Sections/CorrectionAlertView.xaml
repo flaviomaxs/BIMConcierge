@@ -52,7 +52,9 @@
 
                 <TextBlock Margin="0,8,0,0" Foreground="#64748B" FontSize="12"
                            Visibility="{Binding Correction.ElementId, Converter={StaticResource BoolToVis}, FallbackValue=Collapsed}">
-                    <Run Text="Elemento ID: "/><Run Text="{Binding ElementId, Mode=OneWay}"/>
+                    <TextBlock.Text>
+                        <Binding Path="ElementId" Mode="OneWay" StringFormat="Elemento ID: {0}"/>
+                    </TextBlock.Text>
                 </TextBlock>
             </StackPanel>
 
@@ -92,9 +94,7 @@
                             IsEnabled="{Binding CanAutoFix}"
                             Background="#F59E0B" Foreground="White" FontSize="13" FontWeight="Bold" BorderThickness="0" Cursor="Hand">
                         <Button.Content>
-                            <TextBlock>
-                                <Run Text="&#x26A1; "/><Run Text="{Binding [AlertAutoFix], Source={x:Static loc:TranslationSource.Instance}}"/>
-                            </TextBlock>
+                            <TextBlock Text="{Binding [AlertAutoFix], Source={x:Static loc:TranslationSource.Instance}, StringFormat='&#x26A1; {0}'}"/>
                         </Button.Content>
                         <Button.Resources>
                             <Style TargetType="Border">

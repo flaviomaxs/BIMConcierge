@@ -27,9 +27,13 @@
             </Grid.RowDefinitions>
 
             <!-- Breadcrumb -->
-            <TextBlock Grid.Row="0" Foreground="#6A7D90" FontSize="13" FontWeight="SemiBold" Margin="0,0,0,20">
-                <Run Text="Biblioteca"/><Run Text=" ❯ " Foreground="#334155"/><Run Text="{Binding Tutorial.Category, FallbackValue='...'}" Foreground="#6A7D90"/><Run Text=" ❯ " Foreground="#334155"/><Run Text="{Binding Tutorial.Title, Mode=OneWay, FallbackValue='...'}" Foreground="#94A3B8"/>
-            </TextBlock>
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,20">
+                <TextBlock Text="Biblioteca" Foreground="#6A7D90" FontSize="13" FontWeight="SemiBold"/>
+                <TextBlock Text=" ❯ " Foreground="#334155" FontSize="13" FontWeight="SemiBold"/>
+                <TextBlock Text="{Binding Tutorial.Category, FallbackValue='...'}" Foreground="#6A7D90" FontSize="13" FontWeight="SemiBold"/>
+                <TextBlock Text=" ❯ " Foreground="#334155" FontSize="13" FontWeight="SemiBold"/>
+                <TextBlock Text="{Binding Tutorial.Title, Mode=OneWay, FallbackValue='...'}" Foreground="#94A3B8" FontSize="13" FontWeight="SemiBold"/>
+            </StackPanel>
 
             <!-- Title + badges -->
             <StackPanel Grid.Row="1" Margin="0,0,0,30">
@@ -114,9 +118,12 @@
                     <TextBlock Text="{loc:Loc TutorialDetailTrackContent}" FontSize="20" FontWeight="Bold" Foreground="White" Margin="0,0,0,15"/>
 
                     <Grid Margin="0,0,0,8">
-                        <TextBlock Foreground="#94A3B8" FontSize="13" FontWeight="SemiBold" HorizontalAlignment="Left">
-                            <Run Text="{Binding CompletedSteps, Mode=OneWay, FallbackValue='0'}"/><Run Text="/"/><Run Text="{Binding Tutorial.StepCount, Mode=OneWay, FallbackValue='0'}"/><Run Text=" Passos Concluídos"/>
-                        </TextBlock>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                            <TextBlock Text="{Binding CompletedSteps, Mode=OneWay, FallbackValue='0'}" Foreground="#94A3B8" FontSize="13" FontWeight="SemiBold"/>
+                            <TextBlock Text="/" Foreground="#94A3B8" FontSize="13" FontWeight="SemiBold"/>
+                            <TextBlock Text="{Binding Tutorial.StepCount, Mode=OneWay, FallbackValue='0'}" Foreground="#94A3B8" FontSize="13" FontWeight="SemiBold"/>
+                            <TextBlock Text=" Passos Concluídos" Foreground="#94A3B8" FontSize="13" FontWeight="SemiBold"/>
+                        </StackPanel>
                         <TextBlock Foreground="#10B981" FontSize="13" FontWeight="Bold" HorizontalAlignment="Right"
                                    Text="{Binding ProgressLabel, FallbackValue='0%'}"/>
                     </Grid>

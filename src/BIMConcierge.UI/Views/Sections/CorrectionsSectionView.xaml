@@ -80,7 +80,7 @@
                         FontSize="12" FontWeight="SemiBold" BorderThickness="0" Cursor="Hand"
                         Command="{Binding SetFilterCommand}" CommandParameter="Error">
                     <Button.Content>
-                        <TextBlock><Run Text="&#x1F6D1; "/><Run Text="{Binding [CorrectionsFilterError], Source={x:Static loc:TranslationSource.Instance}}"/></TextBlock>
+                        <TextBlock Text="{Binding [CorrectionsFilterError], Source={x:Static loc:TranslationSource.Instance}, StringFormat='&#x1F6D1; {0}'}"/>
                     </Button.Content>
                     <Button.Style>
                         <Style TargetType="Button">
@@ -109,7 +109,7 @@
                         FontSize="12" FontWeight="SemiBold" BorderThickness="0" Cursor="Hand"
                         Command="{Binding SetFilterCommand}" CommandParameter="Warning">
                     <Button.Content>
-                        <TextBlock><Run Text="&#x26A0;&#xFE0F; "/><Run Text="{Binding [CorrectionsFilterWarning], Source={x:Static loc:TranslationSource.Instance}}"/></TextBlock>
+                        <TextBlock Text="{Binding [CorrectionsFilterWarning], Source={x:Static loc:TranslationSource.Instance}, StringFormat='&#x26A0;&#xFE0F; {0}'}"/>
                     </Button.Content>
                     <Button.Style>
                         <Style TargetType="Button">
@@ -138,7 +138,7 @@
                         FontSize="12" FontWeight="SemiBold" BorderThickness="0" Cursor="Hand"
                         Command="{Binding SetFilterCommand}" CommandParameter="Info">
                     <Button.Content>
-                        <TextBlock><Run Text="&#x2139;&#xFE0F; "/><Run Text="{Binding [CorrectionsFilterInfo], Source={x:Static loc:TranslationSource.Instance}}"/></TextBlock>
+                        <TextBlock Text="{Binding [CorrectionsFilterInfo], Source={x:Static loc:TranslationSource.Instance}, StringFormat='&#x2139;&#xFE0F; {0}'}"/>
                     </Button.Content>
                     <Button.Style>
                         <Style TargetType="Button">
@@ -168,12 +168,10 @@
         <!-- Summary bar -->
         <Border Grid.Row="2" Background="#232629" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="8" Padding="20,12" Margin="0,0,0,20">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Foreground="#94A3B8" FontSize="13" VerticalAlignment="Center" Margin="0,0,20,0">
-                    <Run Text="{Binding [CorrectionsActive], Source={x:Static loc:TranslationSource.Instance}}"/><Run Text="{Binding ActiveCount, Mode=OneWay}" Foreground="#EF4444" FontWeight="Bold"/>
-                </TextBlock>
-                <TextBlock Foreground="#94A3B8" FontSize="13" VerticalAlignment="Center">
-                    <Run Text="{Binding [CorrectionsCorrected], Source={x:Static loc:TranslationSource.Instance}}"/><Run Text="{Binding FixedCount, Mode=OneWay}" Foreground="#22C55E" FontWeight="Bold"/>
-                </TextBlock>
+                <TextBlock Text="{Binding [CorrectionsActive], Source={x:Static loc:TranslationSource.Instance}}" Foreground="#94A3B8" FontSize="13" VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding ActiveCount, Mode=OneWay}" Foreground="#EF4444" FontWeight="Bold" FontSize="13" VerticalAlignment="Center" Margin="0,0,20,0"/>
+                <TextBlock Text="{Binding [CorrectionsCorrected], Source={x:Static loc:TranslationSource.Instance}}" Foreground="#94A3B8" FontSize="13" VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding FixedCount, Mode=OneWay}" Foreground="#22C55E" FontWeight="Bold" FontSize="13" VerticalAlignment="Center"/>
             </StackPanel>
         </Border>
 
@@ -244,9 +242,9 @@
                                     <TextBlock Text="{Binding Description}" Foreground="#94A3B8" FontSize="13" TextWrapping="Wrap" LineHeight="18" Margin="0,0,0,10"/>
 
                                     <!-- Element ID -->
-                                    <TextBlock Foreground="#64748B" FontSize="11" Margin="0,0,0,10">
-                                        <TextBlock.Style>
-                                            <Style TargetType="TextBlock">
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                        <StackPanel.Style>
+                                            <Style TargetType="StackPanel">
                                                 <Setter Property="Visibility" Value="Collapsed"/>
                                                 <Style.Triggers>
                                                     <DataTrigger Binding="{Binding ElementId}" Value="{x:Null}">
@@ -254,9 +252,10 @@
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
-                                        </TextBlock.Style>
-                                        <Run Text="{Binding [CorrectionsElement], Source={x:Static loc:TranslationSource.Instance}}"/><Run Text="{Binding ElementId, Mode=OneWay}" FontFamily="Consolas" Foreground="#6A7D90"/>
-                                    </TextBlock>
+                                        </StackPanel.Style>
+                                        <TextBlock Text="{Binding [CorrectionsElement], Source={x:Static loc:TranslationSource.Instance}}" Foreground="#64748B" FontSize="11"/>
+                                        <TextBlock Text="{Binding ElementId, Mode=OneWay}" FontFamily="Consolas" Foreground="#6A7D90" FontSize="11"/>
+                                    </StackPanel>
 
                                     <!-- Rule info box -->
                                     <Border Background="#0F172A" CornerRadius="6" Padding="12,8" Margin="0,0,0,12"
@@ -287,9 +286,7 @@
                                             Command="{Binding DataContext.AutoFixCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                             CommandParameter="{Binding}">
                                         <Button.Content>
-                                            <TextBlock>
-                                                <Run Text="&#x26A1; "/><Run Text="Auto-Fix"/>
-                                            </TextBlock>
+                                            <TextBlock Text="&#x26A1; Auto-Fix"/>
                                         </Button.Content>
                                         <Button.Style>
                                             <Style TargetType="Button">
