@@ -55,6 +55,7 @@
   <data name="LoginSignUp" xml:space="preserve"><value>Sign up here</value></data>
   <data name="LoginAllFieldsRequired" xml:space="preserve"><value>Please fill in all fields.</value></data>
   <data name="LoginFailed" xml:space="preserve"><value>Login failed.</value></data>
+  <data name="LoginLoading" xml:space="preserve"><value>Signing in...</value></data>
 
   <!-- ══ Sidebar Navigation ══════════════════════════════════════════════ -->
   <data name="NavDashboard" xml:space="preserve"><value>Dashboard</value></data>

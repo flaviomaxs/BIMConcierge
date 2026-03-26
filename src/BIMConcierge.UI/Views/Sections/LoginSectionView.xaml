@@ -95,13 +95,29 @@
                              Background="Transparent" MouseLeftButtonDown="ForgotPassword_Click"/>
                 </Grid>
 
-                <Button Command="{Binding LoginCommand}" Content="{loc:Loc LoginButton}" Height="50"
-                        Background="#6A7D90" Foreground="White" FontSize="15" FontWeight="Bold" BorderThickness="0" Cursor="Hand">
-                    <Button.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="8"/>
+                <Button Command="{Binding LoginCommand}" Content="{Binding ButtonLabel}" Height="50"
+                        FontSize="15" FontWeight="Bold" BorderThickness="0" Cursor="Hand">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#6A7D90"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}" CornerRadius="8">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Background" Value="#4A5568"/>
+                                    <Setter Property="Foreground" Value="#94A3B8"/>
+                                </Trigger>
+                            </Style.Triggers>
                         </Style>
-                    </Button.Resources>
+                    </Button.Style>
                 </Button>
             </StackPanel>
 

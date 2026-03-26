@@ -5,6 +5,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using BIMConcierge.Core.Interfaces;
 using BIMConcierge.UI.Localization;
+using Serilog;
 
 namespace BIMConcierge.UI.ViewModels;
 
@@ -27,9 +28,17 @@ public partial class LoginViewModel : ObservableObject, IDisposable
         _authService = authService;
     }
 
+    public string ButtonLabel => IsBusy
+        ? (TranslationSource.GetString("LoginLoading") ?? "Entrando...")
+        : (TranslationSource.GetString("LoginButton") ?? "Entrar");
+
     private bool CanLogin() => !IsBusy;
 
-    partial void OnIsBusyChanged(bool value) => LoginCommand.NotifyCanExecuteChanged();
+    partial void OnIsBusyChanged(bool value)
+    {
+        LoginCommand.NotifyCanExecuteChanged();
+        OnPropertyChanged(nameof(ButtonLabel));
+    }
 
     [RelayCommand(CanExecute = nameof(CanLogin))]
     private async Task LoginAsync()
@@ -60,6 +69,13 @@ public partial class LoginViewModel : ObservableObject, IDisposable
                 ErrorMessage = result.ErrorMessage ?? TranslationSource.GetString("LoginFailed");
                 HasError = true;
             }
+        }
+        catch (OperationCanceledException) { /* user navigated away or cancelled */ }
+        catch (Exception ex)
+        {
+            ErrorMessage = TranslationSource.GetString("LoginFailed") ?? "Falha no login.";
+            HasError = true;
+            Log.Error(ex, "Login failed unexpectedly");
         }
         finally { IsBusy = false; }
     }
