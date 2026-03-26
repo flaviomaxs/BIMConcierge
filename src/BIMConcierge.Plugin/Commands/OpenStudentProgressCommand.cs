@@ -1,15 +1,12 @@
 using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
-using BIMConcierge.Core.Interfaces;
-using BIMConcierge.UI.Views;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace BIMConcierge.Plugin.Commands;
 
 /// <summary>
-/// Opens the Student Progress tracking window.
-/// Requires the user to be authenticated first.
+/// Opens the DashboardWindow and navigates to the Progress section.
+/// If the user is not logged in, the login overlay will appear first.
 /// </summary>
 [Transaction(TransactionMode.Manual)]
 [Regeneration(RegenerationOption.Manual)]
@@ -19,21 +16,7 @@ public class OpenStudentProgressCommand : IExternalCommand
     {
         try
         {
-            IServiceProvider sp = BIMConciergeApplication.ServiceProvider
-                     ?? throw new InvalidOperationException("ServiceProvider não inicializado.");
-
-            IAuthService authService = sp.GetRequiredService<IAuthService>();
-
-            if (!authService.IsAuthenticated)
-            {
-                TaskDialog.Show("BIMConcierge",
-                    "Você precisa fazer login antes de acessar o Progresso do Aluno.\n" +
-                    "Clique em 'Abrir Concierge' para acessar a tela de login.");
-                return Result.Cancelled;
-            }
-
-            StudentProgressWindow window = sp.GetRequiredService<StudentProgressWindow>();
-            window.Show();
+            DashboardWindowHelper.ShowAndNavigate(commandData, "Progress");
             return Result.Succeeded;
         }
         catch (Exception ex)

@@ -66,20 +66,6 @@ public class BIMConciergeApplication : IExternalApplication
         // Revit event bridge — singleton so it persists across commands
         services.AddSingleton<RevitEventBridge>();
 
-        // Views (require IServiceProvider-free constructors after refactor)
-        services.AddTransient<BIMConcierge.UI.Views.LoginWindow>();
-        services.AddTransient<BIMConcierge.UI.Views.DashboardWindow>();
-        services.AddTransient<BIMConcierge.UI.Views.GuidedTutorialWindow>();
-        services.AddTransient<BIMConcierge.UI.Views.TutorialWindow>();
-        services.AddTransient<BIMConcierge.UI.Views.TutorialDetailWindow>();
-        services.AddTransient<BIMConcierge.UI.Views.CompanyStandardsWindow>();
-        services.AddTransient<BIMConcierge.UI.Views.StudentProgressWindow>();
-        services.AddTransient<BIMConcierge.UI.Views.AchievementsWindow>();
-        services.AddTransient<BIMConcierge.UI.Views.CorrectionAlertWindow>();
-        services.AddTransient<BIMConcierge.UI.Views.CorrectionWindow>();
-        services.AddTransient<BIMConcierge.UI.Views.TutorialLibraryWindow>();
-        services.AddTransient<BIMConcierge.UI.Views.SettingsWindow>();
-
         return services.BuildServiceProvider();
     }
 

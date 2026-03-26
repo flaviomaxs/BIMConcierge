@@ -21,7 +21,7 @@ public static class UIDependencyInjection
 
         // ViewModels
         services.AddTransient<LoginViewModel>();
-        services.AddTransient<DashboardViewModel>();
+        services.AddSingleton<DashboardViewModel>();
         services.AddTransient<TutorialViewModel>();
         services.AddTransient<CompanyStandardsViewModel>();
         services.AddTransient<StudentProgressViewModel>();

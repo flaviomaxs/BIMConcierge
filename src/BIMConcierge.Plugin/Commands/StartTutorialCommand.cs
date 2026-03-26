@@ -1,15 +1,12 @@
 using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
-using BIMConcierge.Core.Interfaces;
-using BIMConcierge.UI.Views;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace BIMConcierge.Plugin.Commands;
 
 /// <summary>
-/// Directly opens the Guided Tutorial window.
-/// Requires the user to be authenticated first.
+/// Opens the DashboardWindow and navigates to the Tutorials section.
+/// If the user is not logged in, the login overlay will appear first.
 /// </summary>
 [Transaction(TransactionMode.Manual)]
 [Regeneration(RegenerationOption.Manual)]
@@ -19,21 +16,7 @@ public class StartTutorialCommand : IExternalCommand
     {
         try
         {
-            var sp = BIMConciergeApplication.ServiceProvider
-                     ?? throw new InvalidOperationException("ServiceProvider não inicializado.");
-
-            var authService = sp.GetRequiredService<IAuthService>();
-
-            if (!authService.IsAuthenticated)
-            {
-                TaskDialog.Show("BIMConcierge",
-                    "Você precisa fazer login antes de iniciar um tutorial.\n" +
-                    "Clique em 'Abrir Concierge' para acessar a tela de login.");
-                return Result.Cancelled;
-            }
-
-            var tutorialWindow = sp.GetRequiredService<TutorialWindow>();
-            tutorialWindow.Show();
+            DashboardWindowHelper.ShowAndNavigate(commandData, "Tutorials");
             return Result.Succeeded;
         }
         catch (Exception ex)

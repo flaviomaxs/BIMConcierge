@@ -6,52 +6,54 @@ namespace BIMConcierge.UI.Services;
 
 /// <summary>
 /// Navigates between sections inside DashboardWindow by updating
-/// DashboardViewModel.ActiveSection. No more standalone windows.
+/// DashboardViewModel.ActiveSection. Resolves the singleton ViewModel lazily
+/// to avoid circular DI issues at startup.
 /// </summary>
 public sealed class NavigationService : INavigationService
 {
     private readonly IServiceProvider _serviceProvider;
+    private DashboardViewModel? _dashboardVm;
 
     public NavigationService(IServiceProvider serviceProvider)
     {
         _serviceProvider = serviceProvider;
     }
 
+    private DashboardViewModel DashboardVm =>
+        _dashboardVm ??= _serviceProvider.GetRequiredService<DashboardViewModel>();
+
     public void NavigateTo(string section) => NavigateTo(section, null);
 
     public void NavigateTo(string section, object? parameter)
     {
-        var dashboardVm = _serviceProvider.GetRequiredService<DashboardViewModel>();
-
-        // Map old window names to new section names for backwards compatibility
-        string targetSection = section switch
+        switch (section)
         {
-            "CompanyStandards"  => "Standards",
-            "StudentProgress"   => "Progress",
-            "TutorialLibrary"   => "Tutorials",
-            "Corrections"       => "Corrections",
-            "Settings"          => "Settings",
-            "GuidedTutorial"    => HandleGuidedTutorial(dashboardVm, parameter as string),
-            "TutorialDetail"    => HandleTutorialDetail(dashboardVm, parameter as string),
-            _                   => section // Dashboard, Tutorials, Standards, Progress, Achievements, etc.
-        };
+            case "GuidedTutorial":
+                if (parameter is string tutorialId && !string.IsNullOrEmpty(tutorialId))
+                {
+                    DashboardVm.GuidedTutorialId = tutorialId;
+                    DashboardVm.IsGuidedTutorialOpen = true;
+                }
+                break; // Don't change active section
 
-        dashboardVm.NavigateToCommand.Execute(targetSection);
-    }
+            case "TutorialDetail":
+                DashboardVm.NavigateToCommand.Execute("TutorialDetail");
+                break;
 
-    private static string HandleGuidedTutorial(DashboardViewModel vm, string? tutorialId)
-    {
-        if (!string.IsNullOrEmpty(tutorialId))
-        {
-            vm.GuidedTutorialId = tutorialId;
-            vm.IsGuidedTutorialOpen = true;
+            // Map legacy window names to section names
+            case "CompanyStandards":
+                DashboardVm.NavigateToCommand.Execute("Standards");
+                break;
+            case "StudentProgress":
+                DashboardVm.NavigateToCommand.Execute("Progress");
+                break;
+            case "TutorialLibrary":
+                DashboardVm.NavigateToCommand.Execute("Tutorials");
+                break;
+
+            default:
+                DashboardVm.NavigateToCommand.Execute(section);
+                break;
         }
-        return vm.ActiveSection; // Don't change active section
-    }
-
-    private static string HandleTutorialDetail(DashboardViewModel vm, string? tutorialId)
-    {
-        // The TutorialDetailSectionView will pick up the selected tutorial
-        return "TutorialDetail";
     }
 }

@@ -45,15 +45,15 @@ internal static class RibbonBuilder
             Image      = RibbonIcons.Tutorial(16),
         };
 
-        // ── Company Standards button ───────────────────────────────────────
+        // ── Validate Model button ────────────────────────────────────────
         var standardsData = new PushButtonData(
             "OpenCompanyStandards",
-            "Padrões da\nEmpresa",
+            "Validar\nModelo",
             typeof(OpenCompanyStandardsCommand).Assembly.Location,
             typeof(OpenCompanyStandardsCommand).FullName!)
         {
-            ToolTip        = "Abre a tela de padrões BIM da empresa",
-            LongDescription = "Gerencie regras de nomenclatura, LOD, worksets e boas práticas do seu projeto.",
+            ToolTip        = "Valida o modelo aberto contra os padrões BIM da empresa",
+            LongDescription = "Executa a validação do modelo Revit e exibe as correções encontradas com base nas regras de nomenclatura, LOD, worksets e boas práticas.",
             LargeImage      = RibbonIcons.Standards(32),
             Image            = RibbonIcons.Standards(16),
         };

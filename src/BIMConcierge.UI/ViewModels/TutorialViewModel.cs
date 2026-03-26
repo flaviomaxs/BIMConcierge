@@ -131,7 +131,7 @@ public partial class TutorialViewModel(ITutorialService service, IAuthService au
         }
     }
 
-    /// <summary>Opens the GuidedTutorialWindow for the currently loaded tutorial.</summary>
+    /// <summary>Opens the guided tutorial overlay panel for the currently loaded tutorial.</summary>
     [RelayCommand]
     private void StartTutorial()
     {
