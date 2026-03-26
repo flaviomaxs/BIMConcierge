@@ -80,7 +80,7 @@
                         FontSize="12" FontWeight="SemiBold" BorderThickness="0" Cursor="Hand"
                         Command="{Binding SetFilterCommand}" CommandParameter="Error">
                     <Button.Content>
-                        <TextBlock><Run Text="&#x1F6D1; "/><Run Text="{loc:Loc CorrectionsFilterError}"/></TextBlock>
+                        <TextBlock><Run Text="&#x1F6D1; "/><Run Text="{Binding [CorrectionsFilterError], Source={x:Static loc:TranslationSource.Instance}}"/></TextBlock>
                     </Button.Content>
                     <Button.Style>
                         <Style TargetType="Button">
@@ -109,7 +109,7 @@
                         FontSize="12" FontWeight="SemiBold" BorderThickness="0" Cursor="Hand"
                         Command="{Binding SetFilterCommand}" CommandParameter="Warning">
                     <Button.Content>
-                        <TextBlock><Run Text="&#x26A0;&#xFE0F; "/><Run Text="{loc:Loc CorrectionsFilterWarning}"/></TextBlock>
+                        <TextBlock><Run Text="&#x26A0;&#xFE0F; "/><Run Text="{Binding [CorrectionsFilterWarning], Source={x:Static loc:TranslationSource.Instance}}"/></TextBlock>
                     </Button.Content>
                     <Button.Style>
                         <Style TargetType="Button">
@@ -138,7 +138,7 @@
                         FontSize="12" FontWeight="SemiBold" BorderThickness="0" Cursor="Hand"
                         Command="{Binding SetFilterCommand}" CommandParameter="Info">
                     <Button.Content>
-                        <TextBlock><Run Text="&#x2139;&#xFE0F; "/><Run Text="{loc:Loc CorrectionsFilterInfo}"/></TextBlock>
+                        <TextBlock><Run Text="&#x2139;&#xFE0F; "/><Run Text="{Binding [CorrectionsFilterInfo], Source={x:Static loc:TranslationSource.Instance}}"/></TextBlock>
                     </Button.Content>
                     <Button.Style>
                         <Style TargetType="Button">
@@ -169,10 +169,10 @@
         <Border Grid.Row="2" Background="#232629" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="8" Padding="20,12" Margin="0,0,0,20">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Foreground="#94A3B8" FontSize="13" VerticalAlignment="Center" Margin="0,0,20,0">
-                    <Run Text="{loc:Loc CorrectionsActive}"/><Run Text="{Binding ActiveCount, Mode=OneWay}" Foreground="#EF4444" FontWeight="Bold"/>
+                    <Run Text="{Binding [CorrectionsActive], Source={x:Static loc:TranslationSource.Instance}}"/><Run Text="{Binding ActiveCount, Mode=OneWay}" Foreground="#EF4444" FontWeight="Bold"/>
                 </TextBlock>
                 <TextBlock Foreground="#94A3B8" FontSize="13" VerticalAlignment="Center">
-                    <Run Text="{loc:Loc CorrectionsCorrected}"/><Run Text="{Binding FixedCount, Mode=OneWay}" Foreground="#22C55E" FontWeight="Bold"/>
+                    <Run Text="{Binding [CorrectionsCorrected], Source={x:Static loc:TranslationSource.Instance}}"/><Run Text="{Binding FixedCount, Mode=OneWay}" Foreground="#22C55E" FontWeight="Bold"/>
                 </TextBlock>
             </StackPanel>
         </Border>
@@ -255,7 +255,7 @@
                                                 </Style.Triggers>
                                             </Style>
                                         </TextBlock.Style>
-                                        <Run Text="{loc:Loc CorrectionsElement}"/><Run Text="{Binding ElementId, Mode=OneWay}" FontFamily="Consolas" Foreground="#6A7D90"/>
+                                        <Run Text="{Binding [CorrectionsElement], Source={x:Static loc:TranslationSource.Instance}}"/><Run Text="{Binding ElementId, Mode=OneWay}" FontFamily="Consolas" Foreground="#6A7D90"/>
                                     </TextBlock>
 
                                     <!-- Rule info box -->
