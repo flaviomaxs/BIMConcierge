@@ -563,7 +563,9 @@
             <!-- ═══ LAYER 0: Login Overlay (above everything when not logged in) ═══ -->
             <sections:LoginSectionView
                 x:Name="LoginOverlay"
-                Visibility="{Binding IsLoggedIn, Converter={StaticResource InverseBoolToVis}}"
+                Visibility="{Binding DataContext.IsLoggedIn,
+                             RelativeSource={RelativeSource AncestorType=Window},
+                             Converter={StaticResource InverseBoolToVis}}"
                 Panel.ZIndex="100"/>
         </Grid>
     </Border>
