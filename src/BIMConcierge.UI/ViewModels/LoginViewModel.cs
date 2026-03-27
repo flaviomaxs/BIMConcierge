@@ -70,7 +70,11 @@ public partial class LoginViewModel : ObservableObject, IDisposable
                 HasError = true;
             }
         }
-        catch (OperationCanceledException) { /* user navigated away or cancelled */ }
+        catch (OperationCanceledException) when (_cts.IsCancellationRequested)
+        {
+            // Only swallow if WE triggered cancellation (e.g. user navigated away).
+            // HTTP timeouts also throw OperationCanceledException but must surface.
+        }
         catch (Exception ex)
         {
             ErrorMessage = TranslationSource.GetString("LoginFailed") ?? "Falha no login.";

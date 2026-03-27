@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Threading;
 using BIMConcierge.UI.Localization;
 using BIMConcierge.UI.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,7 +24,10 @@ public partial class LoginSectionView : UserControl
             .GetRequiredService<LoginViewModel>();
         DataContext = vm;
 
-        vm.OnLoginSuccess = () => LoginSucceeded?.Invoke();
+        // Marshal onto the UI thread — the async login chain may resume
+        // on a thread-pool thread due to ConfigureAwait(false) in BimApiClient.
+        vm.OnLoginSuccess = () =>
+            Dispatcher.BeginInvoke(() => LoginSucceeded?.Invoke());
     }
 
     private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)

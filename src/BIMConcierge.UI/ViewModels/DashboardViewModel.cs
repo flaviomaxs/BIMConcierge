@@ -83,7 +83,13 @@ public partial class DashboardViewModel : ObservableObject, IDisposable
     public void OnLoginSucceeded()
     {
         IsLoggedIn = true;
-        SetUserProfile();
+
+        try { SetUserProfile(); }
+        catch (Exception ex)
+        {
+            Serilog.Log.Error(ex, "SetUserProfile failed after login");
+        }
+
         _ = LoadDataAsync(skipSessionCheck: true);
     }
 
