@@ -53,14 +53,6 @@ public class AuthService(IBimApiClient api, ITokenStore tokenStore, ILocalDataba
 
     public async Task<AuthResult> LoginAsync(string email, string password, string licenseKey, CancellationToken ct = default)
     {
-        // Dev login — bypass API for local testing (only when env var is set)
-        if (Environment.GetEnvironmentVariable("BIMCONCIERGE_DEV_MODE") == "true"
-            && email.Trim().Equals("dev@bimconcierge.com", StringComparison.OrdinalIgnoreCase)
-            && password.Trim() == "dev")
-        {
-            return await DevLoginAsync(licenseKey);
-        }
-
         try
         {
             LoginResponse? response = await _api.PostAsync<LoginRequest, LoginResponse>(
@@ -188,46 +180,6 @@ public class AuthService(IBimApiClient api, ITokenStore tokenStore, ILocalDataba
     }
 
     // ── Private helpers ──────────────────────────────────────────────────────
-
-    private async Task<AuthResult> DevLoginAsync(string licenseKey)
-    {
-        var devUser = new User
-        {
-            Id = "dev-001",
-            Name = "Dev User",
-            Email = "dev@bimconcierge.com",
-            Role = "Admin",
-            CompanyId = "dev-company",
-            XpPoints = 2500,
-            Level = 12
-        };
-        var devLicense = new License
-        {
-            Key = string.IsNullOrWhiteSpace(licenseKey) ? "DEV-LICENSE" : licenseKey,
-            CompanyId = "dev-company",
-            MaxSeats = 999,
-            UsedSeats = 1,
-            Type = LicenseType.Enterprise,
-            ExpiresAt = DateTime.UtcNow.AddYears(1)
-        };
-
-        _tokenStore.AccessToken = "dev-token";
-        _tokenStore.RefreshToken = "dev-refresh";
-        CurrentUser = devUser;
-        CurrentLicense = devLicense;
-        _lastLicenseKey = devLicense.Key;
-
-        try
-        {
-            await _db.SaveUserAsync(devUser);
-            await _db.SaveLicenseAsync(devLicense);
-        }
-        catch (Exception ex) { Log.Warning(ex, "Failed to cache dev data — continuing"); }
-
-        Log.Information("Dev login activated — bypassing API");
-        _authStateChanged?.Invoke(true);
-        return new AuthResult(true, "dev-token", null, devUser, devLicense);
-    }
 
     private async Task<AuthResult> OfflineFallbackAsync()
     {

@@ -16,22 +16,14 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services)
     {
-        // In dev mode, use a fake API client that returns mock data (no HTTP calls)
-        if (Environment.GetEnvironmentVariable("BIMCONCIERGE_DEV_MODE") == "true")
+        // HTTP client with Polly retry + circuit breaker
+        services.AddHttpClient<IBimApiClient, BimApiClient>(client =>
         {
-            services.AddSingleton<IBimApiClient, DevBimApiClient>();
-        }
-        else
-        {
-            // HTTP client with Polly retry + circuit breaker
-            services.AddHttpClient<IBimApiClient, BimApiClient>(client =>
-            {
-                client.BaseAddress = new Uri(ApiSettings.BaseUrl);
-                client.Timeout = TimeSpan.FromSeconds(90);
-            })
-            .AddPolicyHandler(GetRetryPolicy())
-            .AddPolicyHandler(GetCircuitBreakerPolicy());
-        }
+            client.BaseAddress = new Uri(ApiSettings.BaseUrl);
+            client.Timeout = TimeSpan.FromSeconds(90);
+        })
+        .AddPolicyHandler(GetRetryPolicy())
+        .AddPolicyHandler(GetCircuitBreakerPolicy());
         
         // Auth & License — transient so each resolution gets a fresh BimApiClient from the factory
         services.AddSingleton<ITokenStore, TokenStore>();

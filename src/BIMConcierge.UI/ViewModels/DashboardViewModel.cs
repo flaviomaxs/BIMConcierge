@@ -84,13 +84,15 @@ public partial class DashboardViewModel : ObservableObject, IDisposable
     {
         IsLoggedIn = true;
         SetUserProfile();
-        LoadCommand.Execute(null);
+        _ = LoadDataAsync(skipSessionCheck: true);
     }
 
     // ── Startup ──────────────────────────────────────────────────────────────
 
     [RelayCommand]
-    private async Task LoadAsync()
+    private Task LoadAsync() => LoadDataAsync(skipSessionCheck: false);
+
+    private async Task LoadDataAsync(bool skipSessionCheck)
     {
         CancelPending();
         CancellationToken ct = _cts.Token;
@@ -99,7 +101,8 @@ public partial class DashboardViewModel : ObservableObject, IDisposable
         try
         {
             // Revalidate session (token expiry + license)
-            if (!await _auth.EnsureValidSessionAsync())
+            // Skip when called right after login — the token was just issued.
+            if (!skipSessionCheck && !await _auth.EnsureValidSessionAsync())
             {
                 await _auth.LogoutAsync();
                 SessionExpired = true;

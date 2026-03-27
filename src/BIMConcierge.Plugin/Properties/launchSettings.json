@@ -7,8 +7,7 @@
       "workingDirectory": "$(ProjectDir)",
       "environmentVariables": {
         "REVIT_API_PATH": "C:\\Program Files\\Autodesk\\Revit 2026",
-        "BIMCONCIERGE_API_URL": "https://bimconcierge.onrender.com/v1/",
-        "BIMCONCIERGE_DEV_MODE": "false"
+        "BIMCONCIERGE_API_URL": "https://bimconcierge.onrender.com/v1/"
       },
       "nativeDebugging": false
     }
